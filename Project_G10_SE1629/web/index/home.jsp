@@ -10,6 +10,7 @@
 <!doctype html>
 <html lang="en">
     <head>
+        
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <title>FPT University Academic Portal</title>
@@ -37,6 +38,7 @@
     </head>
 
     <body>
+        them dong moi
         <div class="image-container set-full-height" style="background-image: url('https://i.imgur.com/duhzz35.jpeg')">
             <!--   Creative Tim Branding   -->
             <a href="home">
