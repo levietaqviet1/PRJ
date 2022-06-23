@@ -38,7 +38,6 @@
     </head>
 
     <body>
-        them dong moi
         <div class="image-container set-full-height" style="background-image: url('https://i.imgur.com/duhzz35.jpeg')">
             <!--   Creative Tim Branding   -->
             <a href="home">
