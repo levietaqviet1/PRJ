@@ -39,6 +39,22 @@ public class Student {
         this.imgStudent = imgStudent;
     }
 
+    public Student(int id, String firstName, String lastName, boolean gender, String dateOfBirth, String phone, String gmail, String address, String dateOfStart, String dateOfEnd, Specializedin specializedin, Campus campus, Status status) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+        this.phone = phone;
+        this.gmail = gmail;
+        this.address = address;
+        this.dateOfStart = dateOfStart;
+        this.dateOfEnd = dateOfEnd;
+        this.specializedin = specializedin;
+        this.campus = campus;
+        this.status = status;
+    }
+
     public Status getStatus() {
         return status;
     }

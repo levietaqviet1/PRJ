@@ -25,7 +25,7 @@ public class StudentDao {
         }
     }
 
-    public Student getStudent(int checkU,String campusup_login) {
+    public Student getStudent(int checkU, String campusup_login) {
         try {
             String sql = "SELECT *\n"
                     + "  FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId \n"
@@ -47,6 +47,48 @@ public class StudentDao {
             System.out.println("Loi StudentDao " + ex);
         }
         return null;
+    }
+
+    public int checkMailExit(String maill) {
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [PRJ_G10].[dbo].[sinhVien]\n"
+                    + "  WHERE gmail = ? ";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            stm.setString(1, maill);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return 1;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Loi StudentDao " + ex);
+        }
+        return -1;
+    }
+
+    public int checkPhoneExit(String phone) {
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [PRJ_G10].[dbo].[sinhVien]\n"
+                    + "  WHERE soDienThoai = ? OR soDienThoai = ?";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            stm.setString(1, phone);
+            stm.setString(2, "+84"+phone.substring(1,phone.length()));
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return 1;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Loi StudentDao " + ex);
+        }
+        return -1;
+    }
+
+    public static void main(String[] args) {
+        StudentDao s = new StudentDao();
+
     }
 
 }

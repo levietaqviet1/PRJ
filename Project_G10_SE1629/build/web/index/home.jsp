@@ -71,8 +71,12 @@
                                     </div>
                                     <div class="wizard-navigation">
                                         <ul>
-                                            <c:choose>
-                                                <c:when test="${requestScope.messUp != null}">
+                                             <c:choose>
+                                                <c:when test="${requestScope.messIn != null}">
+                                                    <li><a href="#captain"  data-toggle="tab">Đăng nhập</a></li>
+                                                    <li><a href="#details"  data-toggle="tab">Đăng ký</a></li>
+                                                    </c:when>
+                                                    <c:when test="${requestScope.messUp != null}">
                                                     <li><a href="#details"  data-toggle="tab">Đăng ký</a></li>
                                                     <li><a href="#captain"  data-toggle="tab">Đăng nhập</a></li>
                                                     </c:when>
@@ -97,9 +101,9 @@
                                                     <div class="input-group">
                                                         <span class="input-group-addon">
                                                             <i class="material-icons">person</i>
-                                                        </span>
+                                                        </span><span id = "message" style="color:red">${requestScope.firstNamein_mess} </span> 
+                                                        </span><span id = "message" style="color:red">${requestScope.tessssst} </span> 
                                                         <div class="form-group label-floating" >
-                                                            <span id = "message" style="color:red">${requestScope.firstNamein_mess} </span> 
                                                             <label class="control-label">First Name</label>
                                                             <input name="firstNamein" value="${requestScope.firstNamein_signup}"  type="text" class="form-control">
                                                         </div>
@@ -108,10 +112,10 @@
                                                     <div class="input-group">
                                                         <span class="input-group-addon">
                                                             <i class="material-icons">person</i>
-                                                        </span>
+                                                        </span> <span id = "message" style="color:red">${requestScope.lastNamein_mess} </span> 
                                                         <div class="form-group label-floating" >
                                                             <label class="control-label">Last Name</label>
-                                                            <span id = "message" style="color:red">${requestScope.lastNamein_mess} </span> 
+
                                                             <input name="lastNamein" value="${requestScope.lastNamein_signup}" type="text" class="form-control">
                                                         </div>
                                                     </div> 
@@ -119,19 +123,19 @@
                                                     <div class="input-group">
                                                         <span class="input-group-addon">
                                                             <i class="material-icons">lock_outline</i>
-                                                        </span>
+                                                        </span><span id = "message" style="color:red">${requestScope.passwordup_mess} </span> 
                                                         <div class="form-group label-floating" >
                                                             <label class="control-label">Your Password</label>
-                                                            <input id="clear" name="passin" value="${requestScope.password_signup}" type="password" class="form-control">
+                                                            <input id="clear" name="passin2" value="${requestScope.password_signup2}" type="password" class="form-control">
                                                         </div>
                                                     </div>
 
                                                     <div class="input-group">
                                                         <span class="input-group-addon">
                                                             <i class="material-icons">lock_outline</i>
-                                                        </span>
+                                                        </span><span id = "message" style="color:red">${requestScope.conpassup_mess} </span> 
                                                         <div class="form-group label-floating">
-                                                            <span id = "message" style="color:red">${requestScope.conpassup_mess} </span> 
+
                                                             <label class="control-label">Confirm your password</label>
                                                             <input id="clear1" name="conpassin" value="${requestScope.conpass_signup}" type="password" class="form-control">
                                                         </div>
@@ -140,11 +144,11 @@
                                                     <div class="input-group">
                                                         <span class="input-group-addon">
                                                             <i class="material-icons">date_range</i>
-                                                        </span>
+                                                        </span><span id = "message" style="color:red">${requestScope.ageup_mess}<br/>${requestScope.notAgeup_mess} </span> 
                                                         <div class="form-group label-floating" >
-                                                            <span id = "message" style="color:red">${requestScope.ageup_mess}<br/>${requestScope.notAgeup_mess} </span> 
+
                                                             <label class=" ">Date Of Birth</label>
-                                                            <input name="dateOfBirthin" type="date" class="form-control">
+                                                            <input name="dateOfBirthin"  value="${requestScope.dateOfBirthup_mess}"  type="date" class="form-control">
                                                         </div>
                                                     </div> 
 
@@ -162,7 +166,7 @@
                                                                         for="Female"> Female </label>
                                                                 </c:when>
                                                                 <c:otherwise>
-                                                                    <input type="radio" name="genderin" value="1" id="Male" checked > <label
+                                                                    <input type="radio" name="genderin" value="1" checked id="Male"  > <label
                                                                         for="Male"> Male </label>
                                                                     <input type="radio" name="genderin" value="0" id="Female" ><label
                                                                         for="Female"> Female </label>
@@ -176,9 +180,8 @@
                                                     <div class="input-group">
                                                         <span class="input-group-addon">
                                                             <i class="material-icons">location_on</i>
-                                                        </span>
+                                                        </span><span id = "message" style="color:red">${requestScope.addressup_mess}</span> 
                                                         <div class="form-group label-floating" >
-                                                            <span id = "message" style="color:red">${requestScope.addressup_mess}</span> 
                                                             <label class="control-label">Address</label>
                                                             <input name="addressin" type="text" value="${requestScope.addressin_signup}" id="address" class="form-control">
                                                         </div>
@@ -187,9 +190,8 @@
                                                     <div class="input-group">
                                                         <span class="input-group-addon">
                                                             <i class="material-icons">call</i>
-                                                        </span>
+                                                        </span><span id = "message" style="color:red">${requestScope.telephoneup_mess}</span> 
                                                         <div class="form-group label-floating" >
-                                                            <span id = "message" style="color:red">${requestScope.telephoneup_mess}</span> 
                                                             <label class="control-label">Telephone</label>
                                                             <input  type="text"  name="telephonein" value="${requestScope.telephonein_signup}"  id="telephone"  class="form-control">
                                                         </div>
@@ -198,9 +200,8 @@
                                                     <div class="input-group">
                                                         <span class="input-group-addon">
                                                             <i class="material-icons">email</i>
-                                                        </span>
+                                                        </span> <span id = "message" style="color:red">${requestScope.emailin_signup_mess}</span> 
                                                         <div class="form-group label-floating" >
-                                                            <span id = "message" style="color:red">${requestScope.emailin_signup_mess}</span> 
                                                             <label class="control-label">Email</label>
                                                             <input type="text" name="emailin" value="${requestScope.emailin_signup}"  class="form-control">
                                                         </div>
@@ -214,10 +215,10 @@
                                                             <label class="control-label">Specialized</label>
                                                             <select style=" width: 100%;" class="" name="specializedin">
                                                                 <c:forEach var="t" items="${listSpecializedin}">
-                                                                    <option value="${t.id}">${t.name} 
-                                                                        <c:if test="${specializedin_signup == t.id}" >
-                                                                            selected
-                                                                        </c:if>
+                                                                    <option value="${t.id}"
+                                                                            <c:if test="${specializedin_signup == t.id}" >
+                                                                                selected
+                                                                            </c:if>>${t.name} 
                                                                     </option>
                                                                 </c:forEach>
                                                             </select>
@@ -232,10 +233,10 @@
                                                             <label class="control-label">Select Campus</label>
                                                             <select style="width: 100%;" class="" name="campusin">
                                                                 <c:forEach var="t" items="${listCampus}">
-                                                                    <option value="${t.id}">FU-${t.name}
-                                                                        <c:if test="${campusin_signup == t.id}" >
-                                                                            selected
-                                                                        </c:if>
+                                                                    <option value="${t.id}"
+                                                                            <c:if test="${campusin_signup == t.id}" >
+                                                                                selected
+                                                                            </c:if>>FU-${t.name}
                                                                     </option>
                                                                 </c:forEach>
                                                             </select>
