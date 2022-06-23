@@ -14,6 +14,9 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import model.Student;
 import model.User;
 
@@ -75,7 +78,7 @@ public class AuthenticationController extends HttpServlet {
         response.addCookie(c_userd);
         response.addCookie(c_passd);
         Validate validate = new Validate();
-
+        PrintWriter out = response.getWriter();
         String login = request.getParameter("login");
         if (login != null && login != "") {
             String usernameup_login = request.getParameter("usernameup").trim();
@@ -91,8 +94,9 @@ public class AuthenticationController extends HttpServlet {
                     StudentDao studentDao = new StudentDao();
                     Student student = studentDao.getStudent(checkU, campusup_login);
                     if (student != null) {
-                        PrintWriter out = response.getWriter();
+
                         out.print(student.getStatus());
+                        return;
                     }
                 }
 
@@ -105,44 +109,103 @@ public class AuthenticationController extends HttpServlet {
                 if (roleup_login.equals("4")) {
 
                 }
-            }String mess = "Thông tin đăng nhập sai, hãy đăng nhập lại!";
-            if (!validate.checkInputStringEmail(usernameup_login)) {
-                 mess = "sai";
             }
-            
-
+            String mess = "Thông tin đăng nhập sai, hãy đăng nhập lại!";
             request.setAttribute("usernameup", usernameup_login);
             request.setAttribute("passup", passup_login);
             request.setAttribute("campusup", campusup_login);
             request.setAttribute("roleup", roleup_login);
-            
+
             request.setAttribute("messIn", mess);
 
-//            request.getRequestDispatcher("index/home.jsp").forward(request, response);
-
+            request.getRequestDispatcher("index/home.jsp").forward(request, response);
         }
 
         String signup = request.getParameter("signup");
         if (signup != null && signup != "") {
-            String username_signup = request.getParameter("usernamein").trim();
+            String firstNamein_signup = request.getParameter("firstNamein").trim().toLowerCase();
+            String lastNamein_signup = request.getParameter("lastNamein").trim().toLowerCase();
             String password_signup = request.getParameter("passin").trim();
             String conpass_signup = request.getParameter("conpassin").trim();
-            String firstNamein_signup = request.getParameter("firstNamein").trim();
-            String lastNamein_signup = request.getParameter("lastNamein").trim();
             String dateOfBirthin_signup = request.getParameter("dateOfBirthin").trim();
-            String addressin_signup = request.getParameter("addressin").trim();
+            String genderin_signup = request.getParameter("genderin").trim();
+            String addressin_signup = request.getParameter("addressin").trim().toLowerCase();
             String telephonein_signup = request.getParameter("telephonein").trim();
-            String emailin_signup = request.getParameter("emailin").trim();
+            String emailin_signup = request.getParameter("emailin").trim().toLowerCase();
             String specializedin_signup = request.getParameter("specializedin").trim();
             String campusin_signup = request.getParameter("campusin").trim();
+
+            String mess = "";
+            int countCheck = 0;
+            if (!validate.checkInputStringNotEmail(firstNamein_signup)) {
+                mess = "First Name không hợp lệ  !!!";
+                request.setAttribute("firstNamein_mess", mess);
+                countCheck++;
+            }
+            if (!validate.checkInputStringNotEmail(lastNamein_signup)) {
+                mess = "Last Name không hợp lệ  !!!";
+                request.setAttribute("lastNamein_mess", mess);
+                countCheck++;
+            }
+            if (password_signup != conpass_signup) {
+                mess = "Mật khẩu xác nhận không khớp !!!";
+                request.setAttribute("conpassup_mess", mess);
+                countCheck++;
+            }
+            if (dateOfBirthin_signup != null && dateOfBirthin_signup != "") {
+                Calendar c = Calendar.getInstance();
+                int y = c.get(Calendar.YEAR);
+                String[] dateArr = dateOfBirthin_signup.split("-");
+                int age = y - Integer.parseInt(dateArr[0]);
+                if (age <= 18) {
+                    mess = "Chưa đủ tuổi đi học !!!";
+                    request.setAttribute("ageup_mess", mess);
+                    countCheck++;
+                } else if (age > 60) {
+                    mess = "Quá 60 tuổi không được học !!!";
+                    request.setAttribute("ageup_mess", mess);
+                    countCheck++;
+                }
+            } else {
+                mess = "Vui lòng nhập tuổi !!!";
+                request.setAttribute("notAgeup_mess", mess);
+                countCheck++;
+            }
+
+            if (!validate.checkInputStringNotEmail(addressin_signup)) {
+                mess = "Địa chỉ không hợp lệ. VD: 123 ba đình hà nội !!!";
+                request.setAttribute("addressup_mess", mess);
+                countCheck++;
+            }
+            if (!validate.checkPhone(telephonein_signup)) {
+                mess = "Phone không hợp lệ chỉ nhận số ở Việt Nam !!!";
+                request.setAttribute("telephoneup_mess", mess);
+                countCheck++;
+            }
+            if (!validate.checkInputStringEmail(emailin_signup)) {
+                mess = "Email không hợp lệ !!!";
+                request.setAttribute("emailin_signup_mess", mess);
+                countCheck++;
+            }
+            if (countCheck != 0) {
+                request.setAttribute("firstNamein_signup", firstNamein_signup);
+                request.setAttribute("lastNamein_signup", lastNamein_signup);
+                request.setAttribute("password_signup", password_signup);
+                request.setAttribute("conpass_signup", conpass_signup);
+                //date
+                request.setAttribute("addressin_signup", addressin_signup);
+                request.setAttribute("telephonein_signup", telephonein_signup);
+                request.setAttribute("emailin_signup", emailin_signup);
+                request.setAttribute("genderin_signup", genderin_signup);
+                request.setAttribute("specializedin_signup", specializedin_signup);
+                 request.setAttribute("messUp", mess);
+                request.getRequestDispatcher("index/home.jsp").forward(request, response);
+
+            }
+
             
            
-            
-            
-            
-            String mess = "Thông tin đăng nhập sai, hãy đăng nhập lại!";
-            request.setAttribute("messUp", mess);
-            request.getRequestDispatcher("index/home.jsp").forward(request, response);
+//            request.getRequestDispatcher("index/home.jsp").forward(request, response);
         }
 //        request.getRequestDispatcher("index/home.jsp").forward(request, response);
     }
