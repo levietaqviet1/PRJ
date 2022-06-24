@@ -10,7 +10,6 @@
 <!doctype html>
 <html lang="en">
     <head>
-
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <title>FPT University Academic Portal</title>
@@ -40,7 +39,7 @@
     <body>
         <div class="image-container set-full-height" style="background-image: url('https://i.imgur.com/duhzz35.jpeg')">
             <!--   Creative Tim Branding   -->
-            <a href="home">
+            <a href="#">
                 <div class="logo-container">
                     <div class="logo">
                         <img src="https://s3.ap-northeast-1.amazonaws.com/h.files/images/1655654596490_Cn6PveFXv2.png">

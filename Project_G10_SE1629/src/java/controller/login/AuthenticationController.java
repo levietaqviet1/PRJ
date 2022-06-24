@@ -196,7 +196,7 @@ public class AuthenticationController extends HttpServlet {
                 request.setAttribute("emailin_signup_mess", mess);
                 countCheck++;
             }
-            if (studentDao.checkMailExit(emailin_signup) == -1) {
+            if (studentDao.checkMailExit(emailin_signup) == 1) {
                 mess = "Email đã tồn tại !!!";
                 request.setAttribute("emailin_signup_mess", mess);
                 countCheck++;
@@ -240,7 +240,7 @@ public class AuthenticationController extends HttpServlet {
                         dateOfBirthin_signup, telephonein_signup, emailin_signup, addressin_signup, specializedin_signup, campusin_signup, specializedin, campus, status);
                 request.getSession().setAttribute("account_session_student", student);
                 request.getSession().setAttribute("account_session_user", user);
-                response.sendRedirect("home");
+                response.sendRedirect("NextConfirmEmail");
             }
 
 //            request.getRequestDispatcher("index/home.jsp").forward(request, response);

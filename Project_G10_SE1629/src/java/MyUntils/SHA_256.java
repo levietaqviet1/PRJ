@@ -1,5 +1,4 @@
 package MyUntils;
-import core.RandomString;
 import java.math.BigInteger;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
@@ -70,7 +69,7 @@ public class SHA_256 {
 
     public static void main(String[] args) throws Exception {
         for (int i = 0; i < 1000; i++) {
-           String random = new RandomString().RandomString();
+           String random = new RandomString().RandomStringg();
 //            System.out.println(MySHA256(random));
 //            System.out.println(EncryptSHA256(random));
             if (MySHA256(random).equals(SAMPLEsha256ver1(random))) {
