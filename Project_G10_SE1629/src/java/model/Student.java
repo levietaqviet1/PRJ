@@ -18,11 +18,13 @@ public class Student {
     private Campus campus;
     private Status status;
     private byte[] imgStudent;
+    private String codeStudent;
+    private User user;
 
     public Student() {
     }
 
-    public Student(int id, String firstName, String lastName, boolean gender, String dateOfBirth, String phone, String gmail, String address, String dateOfStart, String dateOfEnd, Specializedin specializedin, Campus campus, Status status, byte[] imgStudent) {
+    public Student(int id, String firstName, String lastName, boolean gender, String dateOfBirth, String phone, String gmail, String address, String dateOfStart, String dateOfEnd, Specializedin specializedin, Campus campus, Status status, byte[] imgStudent, String codeStudent, User user) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -37,9 +39,11 @@ public class Student {
         this.campus = campus;
         this.status = status;
         this.imgStudent = imgStudent;
+        this.codeStudent = codeStudent;
+        this.user = user;
     }
 
-    public Student(int id, String firstName, String lastName, boolean gender, String dateOfBirth, String phone, String gmail, String address, String dateOfStart, String dateOfEnd, Specializedin specializedin, Campus campus, Status status) {
+    public Student(int id, String firstName, String lastName, boolean gender, String dateOfBirth, String phone, String gmail, String address, String dateOfStart, String dateOfEnd, Specializedin specializedin, Campus campus, Status status, String codeStudent) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -53,6 +57,43 @@ public class Student {
         this.specializedin = specializedin;
         this.campus = campus;
         this.status = status;
+        this.codeStudent = codeStudent;
+    }
+
+    public Student(int id, String firstName, String lastName, boolean gender, String dateOfBirth, String phone, String gmail, String address, String dateOfStart, String dateOfEnd, Specializedin specializedin, Campus campus, Status status, String codeStudent, User user) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+        this.phone = phone;
+        this.gmail = gmail;
+        this.address = address;
+        this.dateOfStart = dateOfStart;
+        this.dateOfEnd = dateOfEnd;
+        this.specializedin = specializedin;
+        this.campus = campus;
+        this.status = status;
+        this.codeStudent = codeStudent;
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    
+
+    public String getCodeStudent() {
+        return codeStudent;
+    }
+
+    public void setCodeStudent(String codeStudent) {
+        this.codeStudent = codeStudent;
     }
 
     public Status getStatus() {
@@ -62,7 +103,6 @@ public class Student {
     public void setStatus(Status status) {
         this.status = status;
     }
-
 
     public int getId() {
         return id;
@@ -170,8 +210,9 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", phone=" + phone + ", gmail=" + gmail + ", address=" + address + ", dateOfStart=" + dateOfStart + ", dateOfEnd=" + dateOfEnd + ", specializedin=" + specializedin.toString() + ", campus=" + campus.toString() + ", status=" + status.toString() + ", imgStudent=" + imgStudent + '}';
+        return "Student{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", phone=" + phone + ", gmail=" + gmail + ", address=" + address + ", dateOfStart=" + dateOfStart + ", dateOfEnd=" + dateOfEnd + ", specializedin=" + specializedin.toString() + ", campus=" + campus.toString() + ", status=" + status.toString() + ", imgStudent=" + imgStudent + ", codeStudent=" + codeStudent.toString() + ", user=" + user.toString() + '}';
     }
+
     
 
 }

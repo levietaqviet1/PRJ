@@ -38,27 +38,11 @@ public class NextConfirmEmail extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             if (request.getSession().getAttribute("account_session_student") != null) {
                 Student student = (Student) request.getSession().getAttribute("account_session_student");
-                User user = (User) request.getSession().getAttribute("account_session_user");
+                
 
-                String code = RandomString.RandomStringg();
+                String code = RandomString.RandomStringg(6);
                 String topic = "FPT-Xác minh Email";
-                String content = "<!DOCTYPE html>\n<html lang=\"en\">\n"
-                        + "<head>\n"
-                        + "    <title></title>\n"
-                        + "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n"
-                        + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
-                        + "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n"
-                        + "</head>\n"
-                        + "<body>\n"
-                        + "    Chào " + student.getFirstName() + " " + student.getLastName() + " !  Bạn vui lòng bấm vào đường dẫn dưới đây để kích hoạt Email:\n"
-                        + "    <a href='http://localhost:8080/Project_G10_SE1629/ConfirmEmail?id=" + code + "'>http://localhost:8080/Project_G10_SE1629/ConfirmEmail</a> <br/>\n"
-                        + "   Lưu ý: Link kích hoạt chỉ có thời hạn trong 1 ngày. Thanks !\n"
-                        + "</body>\n"
-                        + "</html>";
-
-                String acc_TK_Mail_Send = "bachjavaweb@gmail.com";
-                String acc_MK_Mail_Send = "tntkcpodwlcmddjo";
-                SendMail.SendMail(student.getGmail(), topic, "<html lang=\"en\">\n"
+                String content = "<html lang=\"en\">\n"
                         + "<head>\n"
                         + "    <title></title>\n"
                         + "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n"
@@ -67,14 +51,19 @@ public class NextConfirmEmail extends HttpServlet {
                         + "</head>\n"
                         + "<body>\n"
                         + "    Hello " + student.getFirstName() + " " + student.getLastName() + " !  Please click on the link below to activate Email:\n"
-                        + "    <a href='http://localhost:8080/Project_G10_SE1629/ConfirmEmail?id=" + code + "'>http://localhost:8080/Project_G10_SE1629/ConfirmEmail</a> <br/>\n"
+                        + "    <a href='http://localhost:9999/Project_G10_SE1629/ConfirmEmail?id=" + code + "'>http://localhost:9999/Project_G10_SE1629/ConfirmEmail</a> <br/>\n"
                         + "   Note: The activation link is only valid for 1 day. Thanks !\n"
                         + "</body>\n"
-                        + "</html>", acc_TK_Mail_Send, acc_MK_Mail_Send);
+                        + "</html>";
+
+                String acc_TK_Mail_Send = "phongdaotaofbt@gmail.com";
+                String acc_MK_Mail_Send = "npmgjujnxbtswmit";
+                SendMail.SendMail(student.getGmail(), topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
                 HttpSession session = request.getSession();
                 session.setAttribute("confirmEmail_st", code);
                 session.setMaxInactiveInterval(60 * 60 * 24);
                 response.sendRedirect("sendEmaillSu");
+               
             }
             
             

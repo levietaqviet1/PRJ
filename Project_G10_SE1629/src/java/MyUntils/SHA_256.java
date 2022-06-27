@@ -67,19 +67,19 @@ public class SHA_256 {
         return hexString.toString(); 
     }
 
-    public static void main(String[] args) throws Exception {
-        for (int i = 0; i < 1000; i++) {
-           String random = new RandomString().RandomStringg();
-//            System.out.println(MySHA256(random));
-//            System.out.println(EncryptSHA256(random));
-            if (MySHA256(random).equals(SAMPLEsha256ver1(random))) {
-                System.out.println("True");
-                continue;
-            } else {
-                System.out.println("False");System.out.println(random);
-                break;
-            }
-        }
+//    public static void main(String[] args) throws Exception {
+//        for (int i = 0; i < 1000; i++) {
+////           String random = new RandomString().RandomStringg();
+////            System.out.println(MySHA256(random));
+////            System.out.println(EncryptSHA256(random));
+//            if (MySHA256(random).equals(SAMPLEsha256ver1(random))) {
+//                System.out.println("True");
+//                continue;
+//            } else {
+//                System.out.println("False");System.out.println(random);
+//                break;
+//            }
+//        }
 //                
 //        
 //        String str = "hello";
@@ -119,6 +119,6 @@ public class SHA_256 {
 //            String formathex = crhex[crhex.length - 2] + crhex[crhex.length - 1];
 //            System.out.println(formathex);
 //        }
-    }
+//    }
 
 }

@@ -26,7 +26,15 @@
     </servlet>
     <servlet>
         <servlet-name>sendEmaillSu</servlet-name>
-        <servlet-class>controller.sendEmaillSu</servlet-class>
+        <servlet-class>controller.sendEmail.sendEmaillSu</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>print</servlet-name>
+        <servlet-class>testBlaBla.print</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>index</servlet-name>
+        <servlet-class>controller.index</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>testAdd</servlet-name>
@@ -55,6 +63,14 @@
     <servlet-mapping>
         <servlet-name>sendEmaillSu</servlet-name>
         <url-pattern>/sendEmaillSu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>print</servlet-name>
+        <url-pattern>/print</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/index</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

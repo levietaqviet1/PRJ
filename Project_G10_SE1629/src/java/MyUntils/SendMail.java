@@ -42,7 +42,7 @@ public class SendMail {
         String message = "This is your Code:" + 123;
         for (int i = 0; i < 1; i++) {
             SendMail.SendMail("levietaqviet2001@gmail.com", subject, "<!DOCTYPE html>\n"
-                    + "viet", "bachjavaweb@gmail.com", "tntkcpodwlcmddjo");
+                    + "viet", "phongdaotaofbt@gmail.com", "npmgjujnxbtswmit");
 //            SendMail.SendMail("bsd03rd@gmail.com", subject, message, "bachjavaweb@gmail.com", "Songduc&*78");
         }
     }

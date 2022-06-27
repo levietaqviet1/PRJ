@@ -40,7 +40,26 @@ public class SpecializedinDao {
             while (rs.next()) {
                 list.add(new Specializedin(rs.getInt(1), rs.getString(2), rs.getString(3), String.valueOf(rs.getDate(4)), String.valueOf(rs.getDate(5))));
             }
-return list;
+            return list;
+        } catch (SQLException ex) {
+            System.out.println("Loi SpecializedinDao " + ex);
+        }
+        return null;
+
+    }
+
+    public String getCodeSpecializedin(String t) {
+        try {
+            String sql = "SELECT [codeChuyenNganh] \n"
+                    + "  FROM [PRJ_G10].[dbo].[chuyenNganh]\n"
+                    + "  WHERE [idChuyenNganh] = ?";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            stm.setString(1, t);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+
         } catch (SQLException ex) {
             System.out.println("Loi SpecializedinDao " + ex);
         }

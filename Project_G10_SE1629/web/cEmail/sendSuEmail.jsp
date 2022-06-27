@@ -4,7 +4,8 @@
     Author     : NCC
 --%>
 <%
-    if (session.getAttribute("confirmEmail_st") != null) {
+    if (request.getAttribute("nextAdd") != null) {
+     
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -68,7 +69,7 @@
                             <div class="card wizard-card" style="padding-bottom: 0;" data-color="red" id="wizard">
                                 <div class="wizard-header" style="padding-bottom: 0;">
                                     <h3 class="wizard-title">
-                                        Đã Gửi Email Xác Minh Thành Công
+                                        ${title}
                                     </h3>
                                     <h5>Lưu ý: Thư có thể nằm trong Thư rác (Junk Mail). Chức năng có hiệu lực trong vòng 1 ngày</h5>
                                     <div id='imgEmail'>
@@ -78,11 +79,28 @@
 
                             </div>
                         </div>
+                        <div class="wizard-footer" style="text-align: center">
+                            <a href="https://mail.google.com/mail/u/1/?pli=1#all"><button type='button' class='btn btn-next btn-fill btn-danger btn-wd' name='login' value='' >Move Email</button></a>
+                            <a href="http://localhost:9999/Project_G10_SE1629/home"><button type='button' id="signup"  class='btn btn-finish  btn-fill btn-danger btn-wd' name='signup' >Move Home</button></a>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </body>
+    <!--   Core JS Files   -->
+    <!--<script src="assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>-->
+    <script src="js/login/jquery-2.2.4.min.js" type="text/javascript"></script>
+    <script src="js/login/bootstrap.min.js" type="text/javascript"></script>
+    <!--<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>-->
+    <script src="js/login/jquery.bootstrap.js" type="text/javascript"></script>
+
+    <!--  Plugin for the Wizard -->
+    <script src="js/login/material-bootstrap-wizard.js"></script>
+
+    <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
+    <script src="js/login/jquery.validate.min.js"></script>
 </html>
 <%}else{
         response.sendRedirect("home");

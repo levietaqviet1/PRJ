@@ -115,30 +115,11 @@
                                                         <div class="form-group label-floating" >
                                                             <label class="control-label">Last Name</label>
 
-                                                            <input name="lastNamein" value="${requestScope.lastNamein_signup}" type="text" class="form-control">
+                                                            <input id="clear" name="lastNamein" value="${requestScope.lastNamein_signup}" type="text" class="form-control">
                                                         </div>
                                                     </div> 
 
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="material-icons">lock_outline</i>
-                                                        </span><span id = "message" style="color:red">${requestScope.passwordup_mess} </span> 
-                                                        <div class="form-group label-floating" >
-                                                            <label class="control-label">Your Password</label>
-                                                            <input id="clear" name="passin2" value="${requestScope.password_signup2}" type="password" class="form-control">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="material-icons">lock_outline</i>
-                                                        </span><span id = "message" style="color:red">${requestScope.conpassup_mess} </span> 
-                                                        <div class="form-group label-floating">
-
-                                                            <label class="control-label">Confirm your password</label>
-                                                            <input id="clear1" name="conpassin" value="${requestScope.conpass_signup}" type="password" class="form-control">
-                                                        </div>
-                                                    </div>
+                                                    
 
                                                     <div class="input-group">
                                                         <span class="input-group-addon">
@@ -147,7 +128,7 @@
                                                         <div class="form-group label-floating" >
 
                                                             <label class=" ">Date Of Birth</label>
-                                                            <input name="dateOfBirthin"  value="${requestScope.dateOfBirthup_mess}"  type="date" class="form-control">
+                                                            <input  id="clear1"  name="dateOfBirthin"  value="${requestScope.dateOfBirthup_mess}"  type="date" class="form-control">
                                                         </div>
                                                     </div> 
 

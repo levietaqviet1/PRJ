@@ -11,10 +11,10 @@ import java.util.Random;
  * @author BachDuc
  */
 public class RandomString {
-    public static String RandomStringg() {
+    public static String RandomStringg(int s) {
         String randomString = "";
         Random random = new Random();
-        while (randomString.length() != 6) {
+        while (randomString.length() != s) {
             char randomizedCharacter = (char) (random.nextInt(26) + 'a');
             randomString += randomizedCharacter;
         }
