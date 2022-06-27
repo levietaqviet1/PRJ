@@ -1,0 +1,207 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : Jun 3, 2022, 9:01:23 PM
+    Author     : NCC
+*/
+html,
+body,
+.backGroup {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    background-image: url('https://cdn1.tuoitre.vn/zoom/600_315/2021/1/31/truong-dh-fpt-1612099495143566902187-crop-16124111807451181983261.jpg');
+    background-size: cover;
+}
+
+.backGroup::before {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background-image: url('https://cdn1.tuoitre.vn/zoom/600_315/2021/1/31/truong-dh-fpt-1612099495143566902187-crop-16124111807451181983261.jpg');
+    background-size: cover;
+    content: ' ';
+    opacity: 0.7;
+
+}
+
+.backGroup {
+    background-color: rgb(234, 122, 82);
+    position: absolute;
+}
+
+.fo {
+    position: relative;
+}
+
+.modal {
+    display: none;
+    /* Hidden by default */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1;
+    /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%;
+    /* Full width */
+    height: 100%;
+    /* Full height */
+    overflow: auto;
+    /* Enable scroll if needed */
+    background-color: rgb(0, 0, 0);
+    /* Fallback color */
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto;
+    /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 80%;
+    /* Could be more or less, depending on screen size */
+}
+
+input[type=text],
+input[type=password],
+input[type=date] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=radio] {
+    display: inline-block;
+    padding: 12px 20px;
+    box-sizing: border-box;
+}
+
+.gen {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+button {
+    background-color: #04AA6D;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.cancelbtn {
+    width: auto;
+    padding: 10px 18px;
+    background-color: #f44336;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.container {
+    padding: 16px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #f44336;
+    font-size: 35px;
+    font-weight: bold;
+
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+.animate {
+    -webkit-animation: alternate-reverse 0.6s;
+    animation: backwards 0.6s;
+}
+
+@-webkit-keyframes animatezoom {
+    from {
+        -webkit-transform: scale(0)
+    }
+
+    to {
+        -webkit-transform: scale(1)
+    }
+}
+
+#id02 .registerbtn {
+    background-color: #04AA6D;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+#id02 .container {
+    padding: 16px;
+    background-color: white;
+    width: 30%;
+    margin: auto;
+}
+
+#id02 hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+#id02 .registerbtn:hover {
+    opacity: 1;
+}
+
+/* Add a blue text color to links */
+#id02 a {
+    color: dodgerblue;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+#id02 .signin {
+    background-color: #f1f1f1;
+    text-align: center;
+}
+
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+
+    .cancelbtn {
+        width: 100%;
+    }
+}
