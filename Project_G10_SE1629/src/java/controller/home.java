@@ -33,6 +33,9 @@ public class home extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (request.getSession().getAttribute("dalogin") != null) {
+            response.sendRedirect("index");
+        }
         if (request.getSession().getAttribute("listCampus") == null) {
             CampusDao campusDao = new CampusDao();
             SpecializedinDao specializedinDao = new SpecializedinDao();
@@ -40,29 +43,28 @@ public class home extends HttpServlet {
             ArrayList<Specializedin> listSpecializedin = specializedinDao.getAll();
             request.getSession().setAttribute("listCampus", listCampus);
             request.getSession().setAttribute("listSpecializedin", listSpecializedin);
-        }
+            if (request.getSession().getAttribute("account_session_student") != null) {
+                Student student = (Student) request.getSession().getAttribute("account_session_student");
+                User user = (User) request.getSession().getAttribute("account_session_user");
+                request.setAttribute("firstNamein_signup", student.getFirstName());
+                request.setAttribute("lastNamein_signup", student.getLastName());
 
-        if (request.getSession().getAttribute("account_session_student") != null) {
-            Student student = (Student) request.getSession().getAttribute("account_session_student");
-            User user = (User) request.getSession().getAttribute("account_session_user");
-            request.setAttribute("firstNamein_signup", student.getFirstName());
-            request.setAttribute("lastNamein_signup", student.getLastName());
-            
 //            request.setAttribute("password_signup2", user.getPassword());
 //            request.setAttribute("conpass_signup", user.getPassword());
-            
-            request.setAttribute("addressin_signup", student.getAddress());
-            request.setAttribute("telephonein_signup", student.getPhone());
-            request.setAttribute("emailin_signup", student.getGmail());
-            request.setAttribute("genderin_signup", student.isGender() ? "1" : "0");
-            request.setAttribute("specializedin_signup", student.getDateOfStart());
-            request.setAttribute("campusin_signup", student.getDateOfEnd());
-            request.setAttribute("messUp", "123");
-            request.setAttribute("dateOfBirthup_mess", student.getDateOfBirth());
-            request.setAttribute("tessssst", "aaaaaaaaaaaaaaaaaaaaaa");
-           
+                request.setAttribute("addressin_signup", student.getAddress());
+                request.setAttribute("telephonein_signup", student.getPhone());
+                request.setAttribute("emailin_signup", student.getGmail());
+                request.setAttribute("genderin_signup", student.isGender() ? "1" : "0");
+                request.setAttribute("specializedin_signup", student.getDateOfStart());
+                request.setAttribute("campusin_signup", student.getDateOfEnd());
+                request.setAttribute("messUp", "123");
+                request.setAttribute("dateOfBirthup_mess", student.getDateOfBirth());
+                request.setAttribute("tessssst", "aaaaaaaaaaaaaaaaaaaaaa");
+
+            }
+            request.getRequestDispatcher("index/home.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("index/home.jsp").forward(request, response);
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

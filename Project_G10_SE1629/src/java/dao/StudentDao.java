@@ -71,10 +71,15 @@ public class StudentDao {
 
     public int checkPhoneExit(String phone) {
         try {
+            
             String sql = "SELECT *\n"
                     + "  FROM [PRJ_G10].[dbo].[sinhVien]\n"
                     + "  WHERE soDienThoai = ? OR soDienThoai = ?";
-            PreparedStatement stm = cnn.prepareStatement(sql);
+          PreparedStatement stm = cnn.prepareStatement(sql);
+            if (String.valueOf(phone.charAt(0)).equals("+")) {
+                phone = "0"+phone.substring(3,phone.length());
+            }
+            
             stm.setString(1, phone);
             stm.setString(2, "+84" + phone.substring(1, phone.length()));
             ResultSet rs = stm.executeQuery();
@@ -120,6 +125,7 @@ public class StudentDao {
     public static void main(String[] args) {
         StudentDao s = new StudentDao();
         System.out.println(s.getMssv("SE"));
+        
 
     }
 

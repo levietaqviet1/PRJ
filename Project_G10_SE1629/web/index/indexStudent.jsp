@@ -4,7 +4,14 @@
     Created on : Jun 26, 2022, 5:32:32 PM
     Author     : Viet
 --%>
-
+<%
+if (request.getSession().getAttribute("dalogin") == null) {
+            response.sendRedirect("home");
+        }
+if (request.getSession().getAttribute("st_login_successful") == null) {
+            response.sendRedirect("index");
+        }
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">

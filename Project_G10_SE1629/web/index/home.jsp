@@ -102,13 +102,13 @@
                                                 <div class="col-sm-6" >
 
                                                     <div class="input-group">
-                                                        <span class="input-group-addon">
+                                                        <span id="clear" class="input-group-addon">
                                                             <i class="material-icons">person</i>
                                                         </span><span id = "message" style="color:red">${requestScope.firstNamein_mess} </span> 
                                                     </span><span id = "message" style="color:red">${requestScope.tessssst} </span> 
                                                 <div class="form-group label-floating" >
                                                     <label class="control-label">First Name</label>
-                                                    <input name="firstNamein" value="${requestScope.firstNamein_signup}"  type="text" class="form-control">
+                                                    <input name="firstNamein"  value="${requestScope.firstNamein_signup}"  type="text" class="form-control">
                                                 </div>
                                             </div>
 
@@ -119,7 +119,7 @@
                                                 <div class="form-group label-floating" >
                                                     <label class="control-label">Last Name</label>
 
-                                                    <input id="clear" name="lastNamein" value="${requestScope.lastNamein_signup}" type="text" class="form-control">
+                                                    <input  name="lastNamein" value="${requestScope.lastNameins_signup}" type="text" class="form-control">
                                                 </div>
                                             </div> 
 
@@ -239,7 +239,7 @@
                                     <div class="row">
                                         <div class="col-sm-12">
                                             <h4 class="info-text"> Hãy điền thông tin đăng nhập của bạn.</h4>
-                                            <span id = "messageIn"class="info-text" style="color:red"> <h4>${requestScope.messIn} </h4> </span> 
+                                            <span id = "messageIn"class="info-text" > <h4 style="color: red">${requestScope.messIn} </h4> </span> 
                                         </div>
                                         <div class="col-sm-3" ></div>
                                         <div class="col-sm-6" > 

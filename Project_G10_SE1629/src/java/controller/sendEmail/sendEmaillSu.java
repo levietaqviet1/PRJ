@@ -31,18 +31,18 @@ public class sendEmaillSu extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
+           
             /* TODO output your page here. You may use following sample code. */
             request.setAttribute("nextAdd", "a");
             if (request.getSession().getAttribute("confirmEmail_st") != null) {
                 request.setAttribute("title", "Đã Gửi Email Xác Minh");
             }
-             HttpSession session = request.getSession();
+            HttpSession session = request.getSession();
             if (request.getSession().getAttribute("confirmEmail_succ") != null) {
                 request.setAttribute("title", "Đã Gửi Email, Xác Minh Thành Công");
                 session.removeAttribute("confirmEmail_succ");
             }
-           
-            
+
             request.getRequestDispatcher("cEmail/sendSuEmail.jsp").forward(request, response);
         }
     }

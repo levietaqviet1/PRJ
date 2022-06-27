@@ -59,6 +59,9 @@ public class index extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
+        if (request.getSession().getAttribute("dalogin") == null) {
+            response.sendRedirect("home");
+        }
         if (session.getAttribute("st_login_successful") != null) {
             Student student = (Student) session.getAttribute("st_login_successful");
             int giaodien = 1;

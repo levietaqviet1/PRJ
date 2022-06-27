@@ -9,6 +9,7 @@
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="location.locationHot" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -33,7 +34,7 @@
         <link href="css/login/material-bootstrap-wizard.css" rel="stylesheet" type="text/css"/>
         <!-- CSS Just for demo purpose, don't include it in your project -->
         <link href="css/login/demo.css" rel="stylesheet" type="text/css"/>
-         <link href="css/load/loadCss.css" rel="stylesheet" type="text/css"/>
+        <link href="css/load/loadCss.css" rel="stylesheet" type="text/css"/>
         <style>
             #imgEmail {
                 width: 100%;
@@ -84,8 +85,13 @@
                             </div>
                         </div>
                         <div class="wizard-footer" style="text-align: center">
+                            <%
+                            locationHot location = new locationHot();
+                            
+                            %>
+                           
                             <a href="https://mail.google.com/mail/u/1/?pli=1#all"><button type='button' class='btn btn-next btn-fill btn-danger btn-wd' name='login' value='' >Move Email</button></a>
-                            <a href="http://localhost:9999/Project_G10_SE1629/home"><button type='button' id="signup"  class='btn btn-finish  btn-fill btn-danger btn-wd' name='signup' >Move Home</button></a>
+                            <a href="http://localhost:<%=location.getLocal()%>/Project_G10_SE1629/home"><button type='button' id="signup"  class='btn btn-finish  btn-fill btn-danger btn-wd' name='signup' >Move Home</button></a>
 
                         </div>
                     </div>
@@ -105,7 +111,7 @@
 
     <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
     <script src="js/login/jquery.validate.min.js"></script>
-     <script src="js/login/main.js"></script>
+    <script src="js/login/main.js"></script>
 </html>
 <%}else{
         response.sendRedirect("home");

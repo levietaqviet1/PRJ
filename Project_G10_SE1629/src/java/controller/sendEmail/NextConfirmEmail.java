@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import location.locationHot;
 import model.Student;
 import model.User;
 
@@ -39,7 +40,7 @@ public class NextConfirmEmail extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             if (request.getSession().getAttribute("account_session_student") != null) {
                 Student student = (Student) request.getSession().getAttribute("account_session_student");
-
+                locationHot location = new locationHot();
                 String code = RandomString.RandomStringg(6);
                 String topic = "FPT-Xác minh Email";
                 String content = "<html lang=\"en\">\n"
@@ -51,7 +52,7 @@ public class NextConfirmEmail extends HttpServlet {
                         + "</head>\n"
                         + "<body>\n"
                         + "    Hello " + student.getFirstName() + " " + student.getLastName() + " !  Please click on the link below to activate Email:\n"
-                        + "     <a href='http://localhost:9999/Project_G10_SE1629/ConfirmEmail?id=\" + code + \"'><span style=\"color: red ;\">Click here</span></a> <br/>\n"
+                        + "     <a href='http://localhost:"+String.valueOf(location.getLocal())+"/Project_G10_SE1629/ConfirmEmail?id=" + code + "'><span style=\"color: red ;\">Click here</span></a> <br/>\n"
                         + "   Note: The activation link is only valid for 1 day. Thanks !\n"
                         + "</body>\n"
                         + "</html>";
