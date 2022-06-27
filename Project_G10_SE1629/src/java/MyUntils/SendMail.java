@@ -4,6 +4,8 @@
  */
 package MyUntils;
 
+
+import java.io.PrintWriter;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -25,6 +27,7 @@ public class SendMail {
                 return new PasswordAuthentication(user, pass);
             }
         });
+       
         try {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));

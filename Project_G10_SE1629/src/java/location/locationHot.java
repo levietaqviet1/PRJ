@@ -17,24 +17,24 @@ public class locationHot {
     private String password;
     private String local;
 
-    public locationHot() {
-        // laptop
-        this.serverName = "localhost";
-        this.dbName = "PRJ_G10";
-        this.portNumber = "1433";
-        this.userID = "sa";
-        this.password = "123";
-        this.local = "9999";
-    }
 //    public locationHot() {
-//        // PC
-//        this.serverName = "DESKTOP-FOIPU4I";
+//        // laptop
+//        this.serverName = "localhost";
 //        this.dbName = "PRJ_G10";
 //        this.portNumber = "1433";
 //        this.userID = "sa";
-//        this.password = "Viet2001";
-//        this.local = "8080";
+//        this.password = "123";
+//        this.local = "9999";
 //    }
+    public locationHot() {
+        // PC
+        this.serverName = "DESKTOP-FOIPU4I";
+        this.dbName = "PRJ_G10";
+        this.portNumber = "1433";
+        this.userID = "sa";
+        this.password = "Viet2001";
+        this.local = "8080";
+    }
 
     public String getLocal() {
         return local;

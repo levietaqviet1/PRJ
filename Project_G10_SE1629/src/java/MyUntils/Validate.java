@@ -26,10 +26,10 @@ public class Validate {
      public static void main(String[] args) {
          Scanner sc = new Scanner(System.in);
          String s = "0858050379";
-        
+        Validate v = new Validate();
          int cou =0;
          while (cou ==0) {             
-//              System.out.println(checkPhone(sc.nextLine()));
+              System.out.println(v.checkPhone(sc.nextLine()));
          }
     }
     
