@@ -16,6 +16,26 @@
         <servlet-name>AuthenticationController</servlet-name>
         <servlet-class>controller.login.AuthenticationController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ConfirmEmail</servlet-name>
+        <servlet-class>controller.sendEmail.ConfirmEmail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NextConfirmEmail</servlet-name>
+        <servlet-class>controller.sendEmail.NextConfirmEmail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sendEmaillSu</servlet-name>
+        <servlet-class>controller.sendEmail.sendEmaillSu</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>print</servlet-name>
+        <servlet-class>testBlaBla.print</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>index</servlet-name>
+        <servlet-class>controller.index</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>testAdd</servlet-name>
         <url-pattern>/testAdd</url-pattern>
@@ -31,6 +51,26 @@
     <servlet-mapping>
         <servlet-name>AuthenticationController</servlet-name>
         <url-pattern>/AuthenticationController</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmEmail</servlet-name>
+        <url-pattern>/ConfirmEmail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NextConfirmEmail</servlet-name>
+        <url-pattern>/NextConfirmEmail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sendEmaillSu</servlet-name>
+        <url-pattern>/sendEmaillSu</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>print</servlet-name>
+        <url-pattern>/print</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>index</servlet-name>
+        <url-pattern>/index</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

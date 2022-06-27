@@ -10,7 +10,6 @@
 <!doctype html>
 <html lang="en">
     <head>
-        
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
         <title>FPT University Academic Portal</title>
@@ -32,16 +31,19 @@
         <link href="css/login/material-bootstrap-wizard.css" rel="stylesheet" type="text/css"/>
         <!-- CSS Just for demo purpose, don't include it in your project -->
         <link href="css/login/demo.css" rel="stylesheet" type="text/css"/>
+        <link href="css/load/loadCss.css" rel="stylesheet" type="text/css"/>
         <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-
+        
     </head>
 
     <body>
-        them dong moi
+        <div id="preloder">
+            <div class="loader"></div>
+        </div>
         <div class="image-container set-full-height" style="background-image: url('https://i.imgur.com/duhzz35.jpeg')">
             <!--   Creative Tim Branding   -->
-            <a href="home">
+            <a href="#">
                 <div class="logo-container">
                     <div class="logo">
                         <img src="https://s3.ap-northeast-1.amazonaws.com/h.files/images/1655654596490_Cn6PveFXv2.png">
@@ -102,272 +104,269 @@
                                                     <div class="input-group">
                                                         <span class="input-group-addon">
                                                             <i class="material-icons">person</i>
-                                                        </span>
-                                                        <div class="form-group label-floating" >
-                                                            <label class="control-label">Username</label>
-                                                            <input name="usernamein" type="text"  class="form-control">
-                                                        </div>
-                                                    </div>
+                                                        </span><span id = "message" style="color:red">${requestScope.firstNamein_mess} </span> 
+                                                    </span><span id = "message" style="color:red">${requestScope.tessssst} </span> 
+                                                <div class="form-group label-floating" >
+                                                    <label class="control-label">First Name</label>
+                                                    <input name="firstNamein" value="${requestScope.firstNamein_signup}"  type="text" class="form-control">
+                                                </div>
+                                            </div>
 
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="material-icons">lock_outline</i>
-                                                        </span>
-                                                        <div class="form-group label-floating" >
-                                                            <label class="control-label">Your Password</label>
-                                                            <input id="clear" name="passin" type="password" class="form-control">
-                                                        </div>
-                                                    </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="material-icons">person</i>
+                                                </span> <span id = "message" style="color:red">${requestScope.lastNamein_mess} </span> 
+                                                <div class="form-group label-floating" >
+                                                    <label class="control-label">Last Name</label>
 
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="material-icons">lock_outline</i>
-                                                        </span>
-                                                        <div class="form-group label-floating">
-                                                            <label class="control-label">Confirm your password</label>
-                                                            <input id="clear1" name="conpassin" type="password" class="form-control">
-                                                        </div>
-                                                    </div>
+                                                    <input id="clear" name="lastNamein" value="${requestScope.lastNamein_signup}" type="text" class="form-control">
+                                                </div>
+                                            </div> 
 
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="material-icons">person</i>
-                                                        </span>
-                                                        <div class="form-group label-floating" >
-                                                            <label class="control-label">First Name</label>
-                                                            <input name="firstNamein"  type="text" class="form-control">
-                                                        </div>
-                                                    </div>
 
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="material-icons">person</i>
-                                                        </span>
-                                                        <div class="form-group label-floating" >
-                                                            <label class="control-label">Last Name</label>
-                                                            <input name="lastNamein" type="text" class="form-control">
-                                                        </div>
-                                                    </div> 
 
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="material-icons">date_range</i>
-                                                        </span>
-                                                        <div class="form-group label-floating" >
-                                                            <label class=" ">Date Of Birth</label>
-                                                            <input name="dateOfBirthin" type="date" class="form-control">
-                                                        </div>
-                                                    </div> 
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="material-icons">date_range</i>
+                                                </span><span id = "message" style="color:red">${requestScope.ageup_mess}<br/>${requestScope.notAgeup_mess} </span> 
+                                                <div class="form-group label-floating" >
 
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="material-icons">person</i>
-                                                        </span>
-                                                        <div class="form-group label-floating" >
-                                                            <label class="control-label">Gender</label>
-                                                            <input type="radio" name="genderin" value="1" id="Male" checked > <label
+                                                    <label class=" ">Date Of Birth</label>
+                                                    <input  id="clear1"  name="dateOfBirthin"  value="${requestScope.dateOfBirthup_mess}"  type="date" class="form-control">
+                                                </div>
+                                            </div> 
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="material-icons">person</i>
+                                                </span>
+                                                <div class="form-group label-floating" >
+                                                    <label class="control-label">Gender</label>
+                                                    <c:choose>
+                                                        <c:when test="${requestScope.genderin_signup ==0}">
+                                                            <input type="radio" name="genderin" value="1" id="Male"  > <label
+                                                                for="Male"> Male </label>
+                                                            <input type="radio" name="genderin" value="0"checked id="Female" ><label
+                                                                for="Female"> Female </label>
+                                                        </c:when>
+                                                        <c:otherwise>
+                                                            <input type="radio" name="genderin" value="1" checked id="Male"  > <label
                                                                 for="Male"> Male </label>
                                                             <input type="radio" name="genderin" value="0" id="Female" ><label
                                                                 for="Female"> Female </label>
-                                                        </div>
-                                                    </div> 
+                                                        </c:otherwise>
+                                                    </c:choose>
 
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="material-icons">location_on</i>
-                                                        </span>
-                                                        <div class="form-group label-floating" >
-                                                            <label class="control-label">Address</label>
-                                                            <input name="addressin" type="text" id="address" class="form-control">
-                                                        </div>
-                                                    </div> 
-
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="material-icons">call</i>
-                                                        </span>
-                                                        <div class="form-group label-floating" >
-                                                            <label class="control-label">Telephone</label>
-                                                            <input  type="text"  name="telephonein" id="telephone"  class="form-control">
-                                                        </div>
-                                                    </div> 
-
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="material-icons">email</i>
-                                                        </span>
-                                                        <div class="form-group label-floating" >
-                                                            <label class="control-label">Email</label>
-                                                            <input type="text" name="emailin"  class="form-control">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="material-icons">touch_app</i>
-                                                        </span>
-                                                        <div class="form-group label-floating" >
-                                                            <label class="control-label">Specialized</label>
-                                                            <select style=" width: 100%;" class="" name="specializedin">
-                                                                <c:forEach var="t" items="${listSpecializedin}">
-                                                                    <option value="${t.id}">${t.name}</option>
-                                                                </c:forEach>
-                                                            </select>
-                                                        </div>
-                                                    </div>  
-
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="material-icons">touch_app</i>
-                                                        </span>
-                                                        <div class="form-group label-floating" >
-                                                            <label class="control-label">Select Campus</label>
-                                                            <select style="width: 100%;" class="" name="campusin">
-                                                                <c:forEach var="t" items="${listCampus}">
-                                                                    <option value="${t.id}">FU-${t.name}</option>
-                                                                </c:forEach>
-                                                            </select>
-                                                            <span id = "message" style="color:red">${requestScope.mess} </span> 
-                                                        </div>
-                                                    </div>  
 
                                                 </div>
-                                                <div class="col-sm-3" ></div>
+                                            </div> 
 
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="material-icons">location_on</i>
+                                                </span><span id = "message" style="color:red">${requestScope.addressup_mess}</span> 
+                                                <div class="form-group label-floating" >
+                                                    <label class="control-label">Address</label>
+                                                    <input name="addressin" type="text" value="${requestScope.addressin_signup}" id="address" class="form-control">
+                                                </div>
+                                            </div> 
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="material-icons">call</i>
+                                                </span><span id = "message" style="color:red">${requestScope.telephoneup_mess}</span> 
+                                                <div class="form-group label-floating" >
+                                                    <label class="control-label">Telephone</label>
+                                                    <input  type="text"  name="telephonein" value="${requestScope.telephonein_signup}"  id="telephone"  class="form-control">
+                                                </div>
+                                            </div> 
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="material-icons">email</i>
+                                                </span> <span id = "message" style="color:red">${requestScope.emailin_signup_mess}</span> 
+                                                <div class="form-group label-floating" >
+                                                    <label class="control-label">Email</label>
+                                                    <input type="text" name="emailin" value="${requestScope.emailin_signup}"  class="form-control">
+                                                </div>
                                             </div>
 
-                                        </div>
-
-                                        <div class="tab-pane" id="captain">
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <h4 class="info-text"> Hãy điền thông tin đăng nhập của bạn.</h4>
-                                                    <span id = "messageIn"class="info-text" style="color:red"> <h4>${requestScope.messIn} </h4> </span> 
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="material-icons">touch_app</i>
+                                                </span>
+                                                <div class="form-group label-floating" >
+                                                    <label class="control-label">Specialized</label>
+                                                    <select style=" width: 100%;" class="" name="specializedin">
+                                                        <c:forEach var="t" items="${listSpecializedin}">
+                                                            <option value="${t.id}"
+                                                                    <c:if test="${specializedin_signup == t.id}" >
+                                                                        selected
+                                                                    </c:if>>${t.name} 
+                                                            </option>
+                                                        </c:forEach>
+                                                    </select>
                                                 </div>
-                                                <div class="col-sm-3" ></div>
-                                                <div class="col-sm-6" > 
+                                            </div>  
 
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="material-icons">person</i>
-                                                        </span>
-                                                        <div class="form-group label-floating" >
-                                                            <label class="control-label">Username</label>
-                                                            <input name="usernameup" type="text" value="${usernameup}" class="form-control">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="material-icons">lock_outline</i>
-                                                        </span>
-                                                        <div class="form-group label-floating" >
-                                                            <label class="control-label">Your Password</label>
-                                                            <input name="passup" type="passwordup" value="${passup}" class="form-control">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="material-icons">touch_app</i>
-                                                        </span>
-                                                        <div class="form-group label-floating" >
-                                                            <label class="control-label">Select Role</label>
-                                                            <select name="roleup" id="" style="width: 100%;" >
-                                                                <option value="1"  
-                                                                        <c:if test="${roleup == 1}" >
-                                                                            selected
-                                                                        </c:if>
-                                                                        >Sinh viên</option>
-                                                                <option value="2"  
-                                                                        <c:if test="${roleup == 2}" >
-                                                                            selected
-                                                                        </c:if>
-                                                                        >Giảng viên</option>
-                                                                <option value="3"
-                                                                        <c:if test="${roleup == 3}" >
-                                                                            selected
-                                                                        </c:if>
-                                                                        >Cán bộ ĐH-FPT</option>
-                                                                <option value="4"
-                                                                        <c:if test="${roleup == 4}" >
-                                                                            selected
-                                                                        </c:if>
-                                                                        >Phụ huynh</option>
-                                                            </select>
-                                                        </div>
-                                                    </div>  
-
-                                                    <div class="input-group">
-                                                        <span class="input-group-addon">
-                                                            <i class="material-icons">touch_app</i>
-                                                        </span>
-                                                        <div class="form-group label-floating" >
-                                                            <label class="control-label">Select Campus</label>
-                                                            <select style="width: 100%;" class="" name="campusup">
-                                                                <c:forEach var="t" items="${listCampus}">
-                                                                    <option value="${t.id}"
-                                                                            <c:if test="${campusup == t.id}" >
-                                                                                selected
-                                                                            </c:if>
-                                                                            >FU-${t.name}</option>
-                                                                </c:forEach>
-
-                                                            </select>
-
-                                                        </div>
-                                                    </div>  
-
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="material-icons">touch_app</i>
+                                                </span>
+                                                <div class="form-group label-floating" >
+                                                    <label class="control-label">Select Campus</label>
+                                                    <select style="width: 100%;" class="" name="campusin">
+                                                        <c:forEach var="t" items="${listCampus}">
+                                                            <option value="${t.id}"
+                                                                    <c:if test="${campusin_signup == t.id}" >
+                                                                        selected
+                                                                    </c:if>>FU-${t.name}
+                                                            </option>
+                                                        </c:forEach>
+                                                    </select>
+                                                    <span id = "message" style="color:red">${requestScope.mess} </span> 
                                                 </div>
-
-                                                <div class="col-sm-3" ></div>
-
-                                            </div>
+                                            </div>  
 
                                         </div>
+                                        <div class="col-sm-3" ></div>
 
                                     </div>
 
-                                    <div class="wizard-footer" style="text-align: center">
-                                        <c:choose>
-                                            <c:when test="${requestScope.messIn != null}">
-                                                <input type='submit' class='btn btn-next btn-fill btn-danger btn-wd' name='login' value='Đăng nhập' />
-                                                <input type='submit' id="signup"  class='btn btn-finish  btn-fill btn-danger btn-wd' name='signup' value='Đăng ký' />
-                                            </c:when>
-                                            <c:when test="${requestScope.messUp != null}">
-                                                <input type='submit' class='btn btn-finish btn-fill btn-danger btn-wd' name='login' value='Đăng nhập' />
-                                                <input type='submit' id="signup"  class='btn btn-next  btn-fill btn-danger btn-wd' name='signup' value='Đăng ký' />
-                                            </c:when>
-                                            <c:otherwise>
-                                                <input type='submit' class='btn btn-next btn-fill btn-danger btn-wd' name='login' value='Đăng nhập' />
-                                                <input type='submit' id="signup"  class='btn btn-finish  btn-fill btn-danger btn-wd' name='signup' value='Đăng ký' />
-                                            </c:otherwise>
-                                        </c:choose>
-                                        <div class="clearfix"></div>
+                                </div>
+
+                                <div class="tab-pane" id="captain">
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <h4 class="info-text"> Hãy điền thông tin đăng nhập của bạn.</h4>
+                                            <span id = "messageIn"class="info-text" style="color:red"> <h4>${requestScope.messIn} </h4> </span> 
+                                        </div>
+                                        <div class="col-sm-3" ></div>
+                                        <div class="col-sm-6" > 
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="material-icons">person</i>
+                                                </span>
+                                                <div class="form-group label-floating" >
+                                                    <label class="control-label">Account</label>
+                                                    <input name="usernameup" type="text" value="${usernameup}" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="material-icons">lock_outline</i>
+                                                </span>
+                                                <div class="form-group label-floating" >
+                                                    <label class="control-label">Your Password</label>
+                                                    <input name="passup" type="password" value="${passup}" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="material-icons">touch_app</i>
+                                                </span>
+                                                <div class="form-group label-floating" >
+                                                    <label class="control-label">Select Role</label>
+                                                    <select name="roleup" id="" style="width: 100%;" >
+                                                        <option value="1"  
+                                                                <c:if test="${roleup == 1}" >
+                                                                    selected
+                                                                </c:if>
+                                                                >Sinh viên</option>
+                                                        <option value="2"  
+                                                                <c:if test="${roleup == 2}" >
+                                                                    selected
+                                                                </c:if>
+                                                                >Giảng viên</option>
+                                                        <option value="3"
+                                                                <c:if test="${roleup == 3}" >
+                                                                    selected
+                                                                </c:if>
+                                                                >Cán bộ ĐH-FPT</option>
+                                                        <option value="4"
+                                                                <c:if test="${roleup == 4}" >
+                                                                    selected
+                                                                </c:if>
+                                                                >Phụ huynh</option>
+                                                    </select>
+                                                </div>
+                                            </div>  
+
+                                            <div class="input-group">
+                                                <span class="input-group-addon">
+                                                    <i class="material-icons">touch_app</i>
+                                                </span>
+                                                <div class="form-group label-floating" >
+                                                    <label class="control-label">Select Campus</label>
+                                                    <select style="width: 100%;" class="" name="campusup">
+                                                        <c:forEach var="t" items="${listCampus}">
+                                                            <option value="${t.id}"
+                                                                    <c:if test="${campusup == t.id}" >
+                                                                        selected
+                                                                    </c:if>
+                                                                    >FU-${t.name}</option>
+                                                        </c:forEach>
+
+                                                    </select>
+
+                                                </div>
+                                            </div>  
+
+                                        </div>
+
+                                        <div class="col-sm-3" ></div>
+
                                     </div>
-                                </form>
+
+                                </div>
+
                             </div>
-                        </div> <!-- wizard container -->
+
+                            <div class="wizard-footer" style="text-align: center">
+                                <c:choose>
+                                    <c:when test="${requestScope.messIn != null}">
+                                        <input type='submit' class='btn btn-next btn-fill btn-danger btn-wd' name='login' value='Đăng nhập' />
+                                        <input type='submit' id="signup"  class='btn btn-finish  btn-fill btn-danger btn-wd' name='signup' value='Đăng ký' />
+                                    </c:when>
+                                    <c:when test="${requestScope.messUp != null}">
+                                        <input type='submit' class='btn btn-finish btn-fill btn-danger btn-wd' name='login' value='Đăng nhập' />
+                                        <input type='submit' id="signup"  class='btn btn-next  btn-fill btn-danger btn-wd' name='signup' value='Đăng ký' />
+                                    </c:when>
+                                    <c:otherwise>
+                                        <input type='submit' class='btn btn-next btn-fill btn-danger btn-wd' name='login' value='Đăng nhập' />
+                                        <input type='submit' id="signup"  class='btn btn-finish  btn-fill btn-danger btn-wd' name='signup' value='Đăng ký' />
+                                    </c:otherwise>
+                                </c:choose>
+                                <div class="clearfix"></div>
+                            </div>
+                        </form>
                     </div>
-                </div> <!-- row -->
-            </div> <!--  big container -->
+                </div> <!-- wizard container -->
+            </div>
+        </div> <!-- row -->
+    </div> <!--  big container -->
 
 
-        </div>
+</div>
 
-    </body>
-    <!--   Core JS Files   -->
-    <!--<script src="assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>-->
-    <script src="js/login/jquery-2.2.4.min.js" type="text/javascript"></script>
-    <script src="js/login/bootstrap.min.js" type="text/javascript"></script>
-    <!--<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>-->
-    <script src="js/login/jquery.bootstrap.js" type="text/javascript"></script>
+</body>
+<!--   Core JS Files   -->
+<!--<script src="assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>-->
+<script src="js/login/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="js/login/bootstrap.min.js" type="text/javascript"></script>
+<!--<script src="assets/js/bootstrap.min.js" type="text/javascript"></script>-->
+<script src="js/login/jquery.bootstrap.js" type="text/javascript"></script>
 
-    <!--  Plugin for the Wizard -->
-    <script src="js/login/material-bootstrap-wizard.js"></script>
+<!--  Plugin for the Wizard -->
+<script src="js/login/material-bootstrap-wizard.js"></script>
 
-    <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
-    <script src="js/login/jquery.validate.min.js"></script>
+<!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
+<script src="js/login/jquery.validate.min.js"></script>
+ 
+      <script src="js/login/main.js"></script>
 
 
 </html>
