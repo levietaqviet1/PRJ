@@ -49,8 +49,9 @@ public class home extends HttpServlet {
                 request.setAttribute("firstNamein_signup", student.getFirstName());
                 request.setAttribute("lastNamein_signup", student.getLastName());
 
-//            request.setAttribute("password_signup2", user.getPassword());
-//            request.setAttribute("conpass_signup", user.getPassword());
+//                request.setAttribute("password_signup2", user.getPassword());
+//                request.setAttribute("conpass_signup", user.getPassword());
+                
                 request.setAttribute("addressin_signup", student.getAddress());
                 request.setAttribute("telephonein_signup", student.getPhone());
                 request.setAttribute("emailin_signup", student.getGmail());
