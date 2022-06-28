@@ -91,7 +91,7 @@
             </div>
             <div>
                 <input style="margin-left: 230px;background-color: beige;border-radius: 10px; padding: 5px" type="submit" name="OK" value="Change"> 
-                <input style="background-color:gainsboro;border-radius: 10px; padding: 5px " type="reset" name="cancel" value="Cancel">  
+                
             </div>
         </div>
     </body>
