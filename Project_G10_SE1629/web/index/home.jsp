@@ -22,7 +22,7 @@
 
         <!--     Fonts and icons     -->
         <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />-->
 
         <!-- CSS Files -->
         <!--<link href="assets/css/bootstrap.min.css" rel="stylesheet" />-->
@@ -34,7 +34,7 @@
         <link href="css/load/loadCss.css" rel="stylesheet" type="text/css"/>
         <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
-        
+
     </head>
 
     <body>
@@ -64,7 +64,7 @@
 
 
 
-                                <form id="myform" action="AuthenticationController" method="POST" onsubmit ="return verifyPassword()">
+                                <form id="myform" action="AuthenticationController" method="POST" >
                                     <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
                                     <div class="wizard-header">
                                         <h3 class="wizard-title">
@@ -314,7 +314,6 @@
 
                                                 </div>
                                             </div>  
-
                                         </div>
 
                                         <div class="col-sm-3" ></div>
@@ -339,15 +338,24 @@
                                         <input type='submit' class='btn btn-next btn-fill btn-danger btn-wd' name='login' value='Đăng nhập' />
                                         <input type='submit' id="signup"  class='btn btn-finish  btn-fill btn-danger btn-wd' name='signup' value='Đăng ký' />
                                     </c:otherwise>
-                                </c:choose>
-                                <div class="clearfix"></div>
-                            </div>
+                                </c:choose> 
                         </form>
+                        <form action="nextForgotPass" method="Get">
+                            <br/>
+                            <input type='submit' class='btn btn-next btn-fill btn-danger btn-wd' name='login' value='Forgot Passwood' />
+
+                        </form>
+
+
+                        <div class="clearfix"></div>
                     </div>
-                </div> <!-- wizard container -->
-            </div>
-        </div> <!-- row -->
-    </div> <!--  big container -->
+
+
+                </div>
+            </div> <!-- wizard container -->
+        </div>
+    </div> <!-- row -->
+</div> <!--  big container -->
 
 
 </div>
@@ -365,8 +373,8 @@
 
 <!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
 <script src="js/login/jquery.validate.min.js"></script>
- 
-      <script src="js/login/main.js"></script>
+
+<script src="js/login/main.js"></script>
 
 
 </html>
