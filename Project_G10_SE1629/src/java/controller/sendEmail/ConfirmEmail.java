@@ -95,6 +95,7 @@ public class ConfirmEmail extends HttpServlet {
                     String acc_MK_Mail_Send = "npmgjujnxbtswmit";
                     SendMail.SendMail(student.getGmail(), topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
                     HttpSession session = request.getSession();
+                    session.setAttribute("suDungsendMall", "aa");
                     session.removeAttribute("confirmEmail_st");
                     session.removeAttribute("account_session_student");
                     session.setAttribute("confirmEmail_succ", "aa");

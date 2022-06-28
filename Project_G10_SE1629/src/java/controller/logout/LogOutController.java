@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-package controller.sendEmail;
+package controller.logout;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,7 +16,7 @@ import jakarta.servlet.http.HttpSession;
  *
  * @author NCC
  */
-public class sendEmaillSu extends HttpServlet {
+public class LogOutController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,19 +31,17 @@ public class sendEmaillSu extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
-            if (request.getSession().getAttribute("suDungsendMall") != null) {
-                request.setAttribute("nextAdd", "a");
-                if (request.getSession().getAttribute("confirmEmail_st") != null) {
-                    request.setAttribute("title", "Đã Gửi Email Xác Minh");
+            /* TODO output your page here. You may use following sample code. */
+            if (request.getSession().getAttribute("dalogin") != null) {
+                if (request.getParameter("LogId") != null) {
+                    HttpSession session = request.getSession();
+                    session.removeAttribute("dalogin");
+                    if (request.getSession().getAttribute("st_login_successful") != null) {
+                        session.removeAttribute("st_login_successful");
+                    }
+                      response.sendRedirect("home");
                 }
-                HttpSession session = request.getSession();
-                if (request.getSession().getAttribute("confirmEmail_succ") != null) {
-                    request.setAttribute("title", "Đã Gửi Email, Xác Minh Thành Công");
-                    session.removeAttribute("confirmEmail_succ");
-                }
-                session.removeAttribute("suDungsendMall");
-                request.getRequestDispatcher("cEmail/sendSuEmail.jsp").forward(request, response);
-            }else{
+            } else {
                 response.sendRedirect("home");
             }
 

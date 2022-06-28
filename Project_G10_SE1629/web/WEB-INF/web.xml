@@ -36,6 +36,10 @@
         <servlet-name>index</servlet-name>
         <servlet-class>controller.index</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LogOutController</servlet-name>
+        <servlet-class>controller.logout.LogOutController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>testAdd</servlet-name>
         <url-pattern>/testAdd</url-pattern>
@@ -71,6 +75,10 @@
     <servlet-mapping>
         <servlet-name>index</servlet-name>
         <url-pattern>/index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogOutController</servlet-name>
+        <url-pattern>/LogOutController</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

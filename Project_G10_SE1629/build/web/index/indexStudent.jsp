@@ -111,7 +111,13 @@ if (request.getSession().getAttribute("st_login_successful") == null) {
             .clear {
                 clear: both;
             }
+
+            .sidenav .closebtn{
+                padding: 1px !important;
+                margin: 5px;
+            }
         </style>
+         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
     </head>
 
     <body>
@@ -125,6 +131,10 @@ if (request.getSession().getAttribute("st_login_successful") == null) {
                 <a class="" href="index?sid=4">RegisterExtraCourses</a>
                 <a class="" href="index?sid=5">RegisterImproveMark</a>
                 <a class="" href="index?sid=6">SendApplication</a>
+                <a href="LogOutController?LogId=${giaoDien}">
+                    <i class="uil uil-signout"></i>
+                    <span class="link-name">Logout</span>
+                </a>
             </form>
 
 

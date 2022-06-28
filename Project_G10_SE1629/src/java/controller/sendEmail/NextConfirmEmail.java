@@ -62,6 +62,7 @@ public class NextConfirmEmail extends HttpServlet {
                 SendMail.SendMail(student.getGmail(), topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
 
                 HttpSession session = request.getSession();
+                session.setAttribute("suDungsendMall", code);
                 session.setAttribute("confirmEmail_st", code);
                 session.setMaxInactiveInterval(60 * 60 * 24);
                 response.sendRedirect("sendEmaillSu");

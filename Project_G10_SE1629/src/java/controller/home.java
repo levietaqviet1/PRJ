@@ -35,8 +35,8 @@ public class home extends HttpServlet {
             throws ServletException, IOException {
         if (request.getSession().getAttribute("dalogin") != null) {
             response.sendRedirect("index");
-        }
-        if (request.getSession().getAttribute("listCampus") == null) {
+        }else{
+            if (request.getSession().getAttribute("listCampus") == null) {
             CampusDao campusDao = new CampusDao();
             SpecializedinDao specializedinDao = new SpecializedinDao();
             ArrayList<Campus> listCampus = campusDao.getAll();
@@ -63,8 +63,11 @@ public class home extends HttpServlet {
                 request.setAttribute("tessssst", "aaaaaaaaaaaaaaaaaaaaaa");
 
             }
-            request.getRequestDispatcher("index/home.jsp").forward(request, response);
+           
         }
+             request.getRequestDispatcher("index/home.jsp").forward(request, response);
+        }
+        
 
     }
 
