@@ -67,7 +67,15 @@
                                 Campus:
                             </td>
                             <td>
-                                <select style="border-radius: 10px; padding: 5px"><option>FU-HL</option></select>
+                                <select style="border-radius: 10px; padding: 5px">
+                                    <c:forEach var="t" items="${listCampus}">
+                                    <option value="${t.id}"
+                                            <c:if test="${campusin_signup == t.id}" >
+                                        selected
+                                        </c:if>>FU-${t.name}
+                                    </option>
+                                </c:forEach>
+                                </select>
                             </td>
                         </tr>
                         <tr>

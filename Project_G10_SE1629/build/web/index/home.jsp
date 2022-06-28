@@ -38,7 +38,7 @@
     </head>
 
     <body>
-       
+
         <div id="preloder">
             <div class="loader"></div>
         </div>
@@ -330,22 +330,36 @@
                                     <c:when test="${requestScope.messIn != null}">
                                         <input type='submit' class='btn btn-next btn-fill btn-danger btn-wd' name='login' value='Đăng nhập' />
                                         <input type='submit' id="signup"  class='btn btn-finish  btn-fill btn-danger btn-wd' name='signup' value='Đăng ký' />
-                                    </c:when>
-                                    <c:when test="${requestScope.messUp != null}">
-                                        <input type='submit' class='btn btn-finish btn-fill btn-danger btn-wd' name='login' value='Đăng nhập' />
-                                        <input type='submit' id="signup"  class='btn btn-next  btn-fill btn-danger btn-wd' name='signup' value='Đăng ký' />
-                                    </c:when>
-                                    <c:otherwise>
-                                        <input type='submit' class='btn btn-next btn-fill btn-danger btn-wd' name='login' value='Đăng nhập' />
-                                        <input type='submit' id="signup"  class='btn btn-finish  btn-fill btn-danger btn-wd' name='signup' value='Đăng ký' />
-                                    </c:otherwise>
-                                </c:choose> 
-                        </form>
-                        <form action="nextForgotPass" method="Get">
-                            <br/>
-                            <input type='submit' class='btn btn-next btn-fill btn-danger btn-wd' name='forPass' value='Forgot Passwood' />
+                                </form>
+                                <form action="nextForgotPass" method="Get">
+                                    <br/>
+                                    <input type='submit' class='btn btn-next btn-fill btn-danger btn-wd' name='forPass' value='Forgot Passwood' />
 
-                        </form>
+                                </form>
+                            </c:when>
+                            <c:when test="${requestScope.messUp != null}">
+                                <input type='submit' class='btn btn-finish btn-fill btn-danger btn-wd' name='login' value='Đăng nhập' />
+                                <input type='submit' id="signup"  class='btn btn-next  btn-fill btn-danger btn-wd' name='signup' value='Đăng ký' />
+                                </form>
+                                <form action="nextForgotPass" method="Get">
+                                    <br/>
+                                    <input type='submit' class='btn btn-finish btn-fill btn-danger btn-wd' name='forPass' value='Forgot Passwood' />
+
+                                </form>
+                            </c:when>
+                            <c:otherwise>
+                                <input type='submit' class='btn btn-next btn-fill btn-danger btn-wd' name='login' value='Đăng nhập' />
+                                <input type='submit' id="signup"  class='btn btn-finish  btn-fill btn-danger btn-wd' name='signup' value='Đăng ký' />
+                                </form>      
+
+                                <form action="nextForgotPass" method="Get">
+                                    <br/>
+                                    <input type='submit' class='btn btn-next btn-fill btn-danger btn-wd' name='forPass' value='Forgot Passwood' />
+
+                                </form>
+                            </c:otherwise>
+                        </c:choose> 
+
 
 
                         <div class="clearfix"></div>

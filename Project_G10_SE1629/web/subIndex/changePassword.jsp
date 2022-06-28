@@ -1,7 +1,7 @@
 <%-- 
-    Document   : RegisterImproveMark
-    Created on : Jun 24, 2022, 3:18:07 PM
-    Author     : 84399
+   Document   : ForgotPassword
+   Created on : Jun 28, 2022, 9:42:21 PM
+   Author     : 84399
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,7 +9,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Register To Improve Mark</title>
+        <title>Forgot Password</title>
         <style>
             *{
                 font-family: "Verdana",sans-serif;
@@ -48,68 +48,51 @@
                 align-items: center;
                 justify-content: center;
             }
-         
         </style>
     </head>
     <body>
         <div class="regis">
             <div class="title">
 
-                <h1> Register To Improve Mark </h1>
+                <h1> Forgot Passwor </h1>
             </div>
             <div class="table">
 
                 <table>
                     <div class="input">
-                        
+
                         <tr>
                             <td>
-                                Campus:
+                                Old Password:
                             </td>
                             <td>
-                                <select style="border-radius: 10px; padding: 5px">
-                                    <c:forEach var="t" items="${listCampus}">
-                                    <option value="${t.id}"
-                                            <c:if test="${campusin_signup == t.id}" >
-                                        selected
-                                        </c:if>>FU-${t.name}
-                                    </option>
-                                </c:forEach>
-                                </select>
+                                <input type="text" name="oldpass" style="border-radius: 10px; padding: 5px">
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Subject Code:
+                                New Password:
                             </td>
                             <td>
-                                <input style="border-radius: 10px; padding: 5px" type="text" name="subject">  
+                                <input type="text" name="newpass" style="border-radius: 10px; padding: 5px"> 
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                Class:
+                                Confirm Password:
                             </td>
                             <td>
-                                <input style="border-radius: 10px; padding: 5px" type="text" name="class">
+                                <input style="border-radius: 10px; padding: 5px" type="text" name="confirm">
                             </td>
                         </tr>
-                        <tr>
-                            <td>
-                                Thời gian học:
-                            </td>
-                            <td>
-                                <input style="border-radius: 10px; padding: 5px" type="date" name="time">
-                            </td>
-                        </tr>
-                        
+
                     </div>
                 </table>
             </div>
             <div>
-                    <input style="margin-left: 230px;background-color: beige;border-radius: 10px; padding: 5px" type="submit" name="OK" value="Send"> 
-                    <input style="background-color:gainsboro;border-radius: 10px; padding: 5px " type="reset" name="cancel" value="Cancel">  
-                </div>
+                <input style="margin-left: 230px;background-color: beige;border-radius: 10px; padding: 5px" type="submit" name="OK" value="Change"> 
+                <input style="background-color:gainsboro;border-radius: 10px; padding: 5px " type="reset" name="cancel" value="Cancel">  
+            </div>
         </div>
     </body>
 </html>

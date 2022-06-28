@@ -58,7 +58,7 @@ public class index extends HttpServlet {
             if (request.getParameter("sid") != null) {
                 try {
                     giaodien = Integer.parseInt((String) request.getParameter("sid"));
-                    if (giaodien > 6) {
+                    if (giaodien > 7) {
                         giaodien = 1;
                     }
                 } catch (Exception e) {
