@@ -16,6 +16,10 @@ public class Specializedin {
     public Specializedin() {
     }
 
+    public Specializedin(int id) {
+        this.id = id;
+    }
+
     public Specializedin(int id, String name, String codeName, String dateOfStart, String dateOfEnd) {
         this.id = id;
         this.name = name;

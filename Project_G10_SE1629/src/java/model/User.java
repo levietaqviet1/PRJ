@@ -18,6 +18,10 @@ public class User {
         this.username = username;
         this.password = password;
     }
+
+    public User(String id) {
+        this.id = id;
+    }
     
 
     public User(String id, String username, String password) {

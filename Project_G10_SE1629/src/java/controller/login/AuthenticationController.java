@@ -190,7 +190,7 @@ public class AuthenticationController extends HttpServlet {
                     request.setAttribute("addressup_mess", mess);
                     countCheck++;
                 }
-                if (!validate.checkPhone(telephonein_signup) || telephonein_signup.length() < 6) {
+                if (!validate.checkPhone(telephonein_signup) || telephonein_signup.length() < 10) {
                     mess = "Phone không hợp lệ chỉ nhận số ở Việt Nam !!!";
                     request.setAttribute("telephoneup_mess", mess);
 
@@ -257,7 +257,7 @@ public class AuthenticationController extends HttpServlet {
                     Specializedin specializedin = new Specializedin(Integer.parseInt(specializedin_signup), "", "", "", "");
                     Campus campus = new Campus(Integer.parseInt(campusin_signup), "", "", "", "");
                     Status status = new Status(1, "");
-                    Student student = new Student(-1, firstNamein_signup, lastNamein_signup, Integer.parseInt(genderin_signup) == 0 ? true : false,
+                    Student student = new Student(-1, firstNamein_signup, lastNamein_signup, Integer.parseInt(genderin_signup) == 1 ? true : false,
                             dateOfBirthin_signup, telephonein_signup, emailin_signup, addressin_signup, specializedin_signup,
                             campusin_signup, specializedin, campus, status, "", user);
                     request.getSession().setAttribute("account_session_student", student);

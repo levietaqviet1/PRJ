@@ -85,13 +85,10 @@
                             </div>
                         </div>
                         <div class="wizard-footer" style="text-align: center">
-                            <%
-                            locationHot location = new locationHot();
-                            
-                            %>
+                           
                            
                             <a href="https://mail.google.com/mail/u/1/?pli=1#all"><button type='button' class='btn btn-next btn-fill btn-danger btn-wd' name='login' value='' >Move Email</button></a>
-                            <a href="http://localhost:<%=location.getLocal()%>/Project_G10_SE1629/home"><button type='button' id="signup"  class='btn btn-finish  btn-fill btn-danger btn-wd' name='signup' >Move Home</button></a>
+                            <a href="home"><button type='button' id="signup"  class='btn btn-finish  btn-fill btn-danger btn-wd' name='signup' >Move Home</button></a>
 
                         </div>
                     </div>

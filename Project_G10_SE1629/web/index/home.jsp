@@ -38,6 +38,7 @@
     </head>
 
     <body>
+       
         <div id="preloder">
             <div class="loader"></div>
         </div>
@@ -342,7 +343,7 @@
                         </form>
                         <form action="nextForgotPass" method="Get">
                             <br/>
-                            <input type='submit' class='btn btn-next btn-fill btn-danger btn-wd' name='login' value='Forgot Passwood' />
+                            <input type='submit' class='btn btn-next btn-fill btn-danger btn-wd' name='forPass' value='Forgot Passwood' />
 
                         </form>
 

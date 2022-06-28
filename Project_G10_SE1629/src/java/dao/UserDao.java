@@ -51,6 +51,28 @@ public class UserDao {
 
     }
 
+    public int checkAccountUser(String account) {
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [PRJ_G10].[dbo].[taiKhoan]\n"
+                    + "  WHERE taiKhoan = ? ";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            try {
+                stm.setString(1, SHA_256.MySHA256(account));
+            } catch (Exception e) {
+            }
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Loi UserDao " + ex);
+        }
+        return -1;
+
+    }
+
     public void insertUserStudent(User user) {
         String sql = "INSERT INTO taiKhoan(taiKhoan,matKhau,vaiTroId)\n"
                 + "  VALUES	(?, ?,2)";
@@ -59,6 +81,23 @@ public class UserDao {
             try {
                 stm.setString(1, SHA_256.MySHA256(user.getUsername()));
                 stm.setString(2, SHA_256.MySHA256(user.getUsername() + user.getPassword()));
+            } catch (Exception e) {
+            }
+            stm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Loi UserDao " + e);
+        }
+    }
+
+    public void updateUserPass(User user) {
+        String sql = "UPDATE taiKhoan\n"
+                + "SET matKhau = ? \n"
+                + "WHERE [taiKhoanId] = ? ";
+        try {
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            try {
+                stm.setString(1, SHA_256.MySHA256(user.getUsername() + user.getPassword()));
+                stm.setString(2, user.getId());
             } catch (Exception e) {
             }
             stm.executeUpdate();
@@ -87,11 +126,10 @@ public class UserDao {
     }
 
     public static void main(String[] args) {
-//        UserDao u = new UserDao();
+        UserDao u = new UserDao();
 //        User us = new User("admin", "123789");
 //        u.insertUserStudent(us);
-        String name = "viet";
-        System.out.println(name.charAt(0));
+        System.out.println(u.checkAccountUser("vietlSE1115"));
 
     }
 }

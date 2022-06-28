@@ -43,6 +43,20 @@ public class Student {
         this.user = user;
     }
 
+    public Student(String firstName, String lastName, boolean gender, String dateOfBirth, String phone, String gmail, Specializedin specializedin, Campus campus, User user) {
+        this.id = 0;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+        this.phone = phone;
+        this.gmail = gmail;
+        this.specializedin = specializedin;
+        this.campus = campus;
+        this.user = user;
+
+    }
+
     public Student(int id, String firstName, String lastName, boolean gender, String dateOfBirth, String phone, String gmail, String address, String dateOfStart, String dateOfEnd, Specializedin specializedin, Campus campus, Status status, String codeStudent) {
         this.id = id;
         this.firstName = firstName;
@@ -85,8 +99,6 @@ public class Student {
     public void setUser(User user) {
         this.user = user;
     }
-
-    
 
     public String getCodeStudent() {
         return codeStudent;
@@ -210,9 +222,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", phone=" + phone + ", gmail=" + gmail + ", address=" + address + ", dateOfStart=" + dateOfStart + ", dateOfEnd=" + dateOfEnd + ", specializedin=" + specializedin.toString() + ", campus=" + campus.toString() + ", status=" + status.toString() + ", imgStudent=" + imgStudent + ", codeStudent=" + codeStudent.toString() + ", user=" + user.toString() + '}';
+        return "Student{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", phone=" + phone + ", gmail=" + gmail + ", address=" + address + ", dateOfStart=" + dateOfStart + ", dateOfEnd=" + dateOfEnd + ", specializedin=" + specializedin.toString() + ", campus=" + campus.toString() +  ", user=" + user.toString() + '}';
     }
-
-    
 
 }

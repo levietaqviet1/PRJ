@@ -66,11 +66,8 @@ public class ConfirmEmail extends HttpServlet {
                    
                     
                     userDao.insertUserStudent(user); // insert user vao datase
-
-                    
                     studentDao.insertStudent(student); // insert student cao database
-                    out.print(student.toString()+"<br/>");
-                    out.print(user.toString());
+                    
 
                     String topic = "FPT-University";
                     String content = "<html lang=\"en\">\n"

@@ -41,9 +41,13 @@ public class sendEmaillSu extends HttpServlet {
                     request.setAttribute("title", "Đã Gửi Email, Xác Minh Thành Công");
                     session.removeAttribute("confirmEmail_succ");
                 }
+                if (request.getSession().getAttribute("confirmEmail_forPass") != null) {
+                    request.setAttribute("title", "Đã Gửi Email, Khôi Phục Mật Khẩu Thành Công");
+                    session.removeAttribute("confirmEmail_forPass");
+                }
                 session.removeAttribute("suDungsendMall");
                 request.getRequestDispatcher("cEmail/sendSuEmail.jsp").forward(request, response);
-            }else{
+            } else {
                 response.sendRedirect("home");
             }
 

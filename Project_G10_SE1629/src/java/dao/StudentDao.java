@@ -71,15 +71,15 @@ public class StudentDao {
 
     public int checkPhoneExit(String phone) {
         try {
-            
+
             String sql = "SELECT *\n"
                     + "  FROM [PRJ_G10].[dbo].[sinhVien]\n"
                     + "  WHERE soDienThoai = ? OR soDienThoai = ?";
-          PreparedStatement stm = cnn.prepareStatement(sql);
+            PreparedStatement stm = cnn.prepareStatement(sql);
             if (String.valueOf(phone.charAt(0)).equals("+")) {
-                phone = "0"+phone.substring(3,phone.length());
+                phone = "0" + phone.substring(3, phone.length());
             }
-            
+
             stm.setString(1, phone);
             stm.setString(2, "+84" + phone.substring(1, phone.length()));
             ResultSet rs = stm.executeQuery();
@@ -90,6 +90,34 @@ public class StudentDao {
         } catch (SQLException ex) {
             System.out.println("Loi StudentDao " + ex);
         }
+        return -1;
+    }
+
+    public int checkInforStudent(Student s) {
+        try {
+            String gen = s.isGender()?"1":"0";
+            String sql = "SELECT *\n"
+                    + "FROM [PRJ_G10].[dbo].[sinhVien]\n"
+                    + "WHERE \n"
+                    + "firstName = '"+s.getFirstName()+"' AND lastName = '"+s.getLastName()+"'\n"
+                    + "AND ngaySinh = '"+s.getDateOfBirth()+"' \n"
+                    + "AND gioiTinh = "+gen+" \n"
+                    + "AND gmail = '"+s.getGmail()+"' \n"
+                    + "AND idChuyenNganh = "+s.getSpecializedin().getId()+" \n"
+                    + "AND idCoSo = "+s.getCampus().getId()+" \n"
+                    + "AND taiKhoanId = "+s.getUser().getId()+" \n";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            
+            ResultSet rs = stm.executeQuery();
+            System.out.println(sql);
+            while (rs.next()) {
+                return 1;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Loi StudentDao " + ex);
+        }
+        System.out.println();
         return -1;
     }
 
@@ -112,7 +140,7 @@ public class StudentDao {
             } else {
                 int i = Integer.parseInt(relust.substring(2, relust.length()));
                 i++;
-                return t + String.valueOf(i) ;
+                return t + String.valueOf(i);
             }
 
         } catch (SQLException ex) {
@@ -125,7 +153,6 @@ public class StudentDao {
     public static void main(String[] args) {
         StudentDao s = new StudentDao();
         System.out.println(s.getMssv("SE"));
-        
 
     }
 
