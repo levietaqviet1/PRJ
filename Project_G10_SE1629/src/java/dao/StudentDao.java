@@ -29,7 +29,8 @@ public class StudentDao {
     public Student getStudent(int checkU, String campusup_login) {
         try {
             String sql = "SELECT *\n"
-                    + "  FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId \n"
+                    + "  FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn "
+                    + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId \n"
                     + "  WHERE s.taiKhoanId = ? AND cs.idCoSo = ? ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             stm.setInt(1, checkU);
@@ -95,19 +96,19 @@ public class StudentDao {
 
     public int checkInforStudent(Student s) {
         try {
-            String gen = s.isGender()?"1":"0";
+            String gen = s.isGender() ? "1" : "0";
             String sql = "SELECT *\n"
                     + "FROM [PRJ_G10].[dbo].[sinhVien]\n"
                     + "WHERE \n"
-                    + "firstName = '"+s.getFirstName()+"' AND lastName = '"+s.getLastName()+"'\n"
-                    + "AND ngaySinh = '"+s.getDateOfBirth()+"' \n"
-                    + "AND gioiTinh = "+gen+" \n"
-                    + "AND gmail = '"+s.getGmail()+"' \n"
-                    + "AND idChuyenNganh = "+s.getSpecializedin().getId()+" \n"
-                    + "AND idCoSo = "+s.getCampus().getId()+" \n"
-                    + "AND taiKhoanId = "+s.getUser().getId()+" \n";
+                    + "firstName = '" + s.getFirstName() + "' AND lastName = '" + s.getLastName() + "'\n"
+                    + "AND ngaySinh = '" + s.getDateOfBirth() + "' \n"
+                    + "AND gioiTinh = " + gen + " \n"
+                    + "AND gmail = '" + s.getGmail() + "' \n"
+                    + "AND idChuyenNganh = " + s.getSpecializedin().getId() + " \n"
+                    + "AND idCoSo = " + s.getCampus().getId() + " \n"
+                    + "AND taiKhoanId = " + s.getUser().getId() + " \n";
             PreparedStatement stm = cnn.prepareStatement(sql);
-            
+
             ResultSet rs = stm.executeQuery();
             System.out.println(sql);
             while (rs.next()) {

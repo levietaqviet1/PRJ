@@ -11,37 +11,34 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Send an application</title>
         <style>
+            *{
+                font-family: "Verdana",sans-serif;
+            }
             body{
-                width: 100%;
-                height: 100vh;
-                background-image: linear-gradient(to right top,#d7e6f9,#f3d3b4,#ffffff);
-                display: flex;
+                margin: auto;
                 align-items: center;
                 justify-content: center;
             }
-            *{
-                font-family: "Verdana",sans-serif;
-                padding: 0;
-            }
+
             table{
                 font-size: 18px;
                 border: 0.1px solid #917881;
                 margin-bottom: 10px;
                 border-radius: 10px;
-                display: flex;
                 justify-content: space-between;
-                border-spacing: 15px;
-
+                border-spacing: 20px;
+                padding: 1rem;
             }
             td{
                 justify-content: space-between;
             }
             .move{
                 width: 100%;
-                max-width: 40rem;
+                max-width: 80%;
                 background-color: #fff;
                 border-radius: 10px;
-                padding: 4rem 2rem;
+                padding: 2rem 1rem;
+                margin: auto;
             }
             .title{
                 text-align: center;
@@ -78,7 +75,7 @@
                                 Purpose:
                             </td>
                             <td>
-                                <textarea style="border-radius: 10px; padding: 5px" id="id" name="purpose" rows="10" cols="40"></textarea>
+                                <textarea style="border-radius: 10px; padding: 5px" id="id" name="purpose" rows="25" cols="100"></textarea>
                             </td>
                         </tr>
                     </table>

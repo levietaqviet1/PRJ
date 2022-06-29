@@ -17,10 +17,12 @@ if (request.getSession().getAttribute("st_login_successful") == null) {
 <html lang="en">
 
     <head>
+        <title>FPT University Academic Portal</title>
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="icon" type="image/png" href="https://s3.ap-northeast-1.amazonaws.com/h.files/images/1655654596490_Cn6PveFXv2.png" />
         <style>
             body {
-                font-family: "Lato", sans-serif;
+                font-family: "Verdana",sans-serif;
                 transition: background-color .5s;
             }
 
@@ -97,8 +99,8 @@ if (request.getSession().getAttribute("st_login_successful") == null) {
                 .sidenav a {
                     font-size: 18px;
                 }
-                
-              
+
+
             }
 
 
@@ -119,21 +121,38 @@ if (request.getSession().getAttribute("st_login_successful") == null) {
                 margin: 5px;
             }
         </style>
-        <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+        
+
     </head>
 
     <body>
+       
 
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br /><br /><br />
             <form>
-                <a class="acti10" href="index?sid=1">Home</a>
-                <a class="" href="index?sid=2">MoveClass</a>
-                <a class="" href="index?sid=3">MoveClassWithOther</a>
-                <a class="" href="index?sid=4">RegisterExtraCourses</a>
-                <a class="" href="index?sid=5">RegisterImproveMark</a>
-                <a class="" href="index?sid=6">SendApplication</a>
-                <a class="" href="index?sid=7">Change Password</a>
+                <a <c:if test="${giaoDien == 1}" var="t">
+                        class="acti10"
+                    </c:if> href="index?sid=1">Home</a>
+                <a <c:if test="${giaoDien == 2}" var="t">
+                        class="acti10"
+                    </c:if> href="index?sid=2">MoveClass
+                </a>
+                <a <c:if test="${giaoDien == 3}" var="t">
+                        class="acti10"
+                    </c:if> href="index?sid=3">MoveClassWithOther</a>
+                <a <c:if test="${giaoDien == 4}" var="t">
+                        class="acti10"
+                    </c:if> href="index?sid=4">RegisterExtraCourses</a>
+                <a <c:if test="${giaoDien == 5}" var="t">
+                        class="acti10"
+                    </c:if> href="index?sid=5">RegisterImproveMark</a>
+                <a <c:if test="${giaoDien == 6}" var="t">
+                        class="acti10"
+                    </c:if> href="index?sid=6">SendApplication</a>
+                <a <c:if test="${giaoDien == 7}" var="t">
+                        class="acti10"
+                    </c:if> href="index?sid=7">Change Password</a>
                 <a href="LogOutController?LogId=${giaoDien}">
                     <i class="uil uil-signout"></i>
                     <span class="link-name">Logout</span>
@@ -180,7 +199,9 @@ if (request.getSession().getAttribute("st_login_successful") == null) {
 
 
         <script>
+            
             function openNav() {
+               
                 document.getElementById("mySidenav").style.width = "20%";
                 document.getElementById("main").style.marginLeft = "18%";
                 document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
@@ -189,6 +210,7 @@ if (request.getSession().getAttribute("st_login_successful") == null) {
             }
 
             function closeNav() {
+                
                 document.getElementById("mySidenav").style.width = "0";
                 document.getElementById("main").style.marginLeft = "0px";
                 document.body.style.backgroundColor = "white";
@@ -196,6 +218,7 @@ if (request.getSession().getAttribute("st_login_successful") == null) {
                 document.getElementById("right").style.width = "89%";
             }
         </script>
+        <!--   Core JS Files   -->
 
     </body>
 

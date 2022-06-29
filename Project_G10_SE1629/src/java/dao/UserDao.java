@@ -73,6 +73,30 @@ public class UserDao {
 
     }
 
+    public int checkPassWordById(User user) {
+        try {
+            String sql = "SELECT *\n"
+                    + "FROM [PRJ_G10].[dbo].[taiKhoan]\n"
+                    + "WHERE taiKhoanId = ? \n"
+                    + "AND matKhau = ? ";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            try {
+                 stm.setString(1, user.getId());
+                stm.setString(2, SHA_256.MySHA256(user.getUsername()+user.getPassword()));
+            } catch (Exception e) {
+            }
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return 1;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Loi UserDao " + ex);
+        }
+        return -1;
+
+    }
+
     public void insertUserStudent(User user) {
         String sql = "INSERT INTO taiKhoan(taiKhoan,matKhau,vaiTroId)\n"
                 + "  VALUES	(?, ?,2)";

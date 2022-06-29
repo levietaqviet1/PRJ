@@ -15,12 +15,11 @@
                 font-family: "Verdana",sans-serif;
             }
             body{
-               
-                background-image: linear-gradient(to right top,#d7e6f9,#f3d3b4,#ffffff);
-                display: flex;
+                margin: auto;
                 align-items: center;
                 justify-content: center;
             }
+
             table{
                 font-size: 18px;
                 border: 0.1px solid #917881;
@@ -29,16 +28,16 @@
                 justify-content: space-between;
                 border-spacing: 20px;
                 padding: 1rem;
-
-
             }
             .move{
                 width: 100%;
-                max-width: 50rem;
+                max-width: 55rem;
                 background-color: #fff;
                 border-radius: 10px;
                 padding: 2rem 1rem;
+                margin: auto;
             }
+
             .title{
                 text-align: center;
             }
@@ -55,8 +54,8 @@
             <div class="title">
                 <h1> Move Class </h1>
             </div>
-            <div class="table">
 
+            <div class="table">
                 <table>
                     <tr>
                         <td>
@@ -96,13 +95,12 @@
                             <input style="border-radius: 10px; padding: 5px" type="text" name="ClassB">
                         </td>
                     </tr>
-
-                </table>
+                </table>                
             </div>
-            <div>
+                <div class="textA" style="text-align: center">
                 <input style="margin-left: 350px;background-color: beige;border-radius: 10px; padding: 5px" type="submit" name="OK" value="Send"> 
                 <input style="background-color:gainsboro;border-radius: 10px; padding: 5px " type="reset" name="cancel" value="Cancel">  
-            </div>
+            </div>               
         </div>
     </body>
 </html>

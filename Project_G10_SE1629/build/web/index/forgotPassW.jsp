@@ -78,7 +78,7 @@
                                             <div class="row">
                                                 <div class="col-sm-3" ></div>
                                                 <div class="col-sm-6" >
-                                                    
+
                                                     <div class="input-group">
                                                         <span  class="input-group-addon">
                                                             <i class="material-icons">person</i>
@@ -89,12 +89,12 @@
                                                     <input name="accountFor"  value="${requestScope.accountFor}"  type="text" class="form-control">
                                                 </div>
                                             </div>
-                                                
-                                                <div class="input-group">
-                                                        <span  class="input-group-addon">
-                                                            <i class="material-icons">person</i>
-                                                        </span> 
-                                                    </span>
+
+                                            <div class="input-group">
+                                                <span  class="input-group-addon">
+                                                    <i class="material-icons">person</i>
+                                                </span> 
+                                                </span>
                                                 <div class="form-group label-floating" >
                                                     <label class="control-label">First Name</label>
                                                     <input name="firstNameFor"  value="${requestScope.firstNameFor}"  type="text" class="form-control">

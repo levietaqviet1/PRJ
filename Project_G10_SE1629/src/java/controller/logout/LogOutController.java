@@ -36,6 +36,9 @@ public class LogOutController extends HttpServlet {
                 if (request.getParameter("LogId") != null) {
                     HttpSession session = request.getSession();
                     session.removeAttribute("dalogin");
+                    if (request.getSession().getAttribute("session")!=null) {
+                        session.removeAttribute("session");
+                    }
                     if (request.getSession().getAttribute("st_login_successful") != null) {
                         session.removeAttribute("st_login_successful");
                     }

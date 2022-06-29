@@ -15,10 +15,7 @@
                 font-family: "Verdana",sans-serif;
             }
             body{
-                width: 100%;
-                height: 100vh;
-                background-image: linear-gradient(to right top,#d7e6f9,#f3d3b4,#ffffff);
-                display: flex;
+               margin: auto;
                 align-items: center;
                 justify-content: center;
             }
@@ -30,15 +27,14 @@
                 justify-content: space-between;
                 border-spacing: 20px;
                 padding: 1rem;
-
-
             }
             .regis{
                 width: 100%;
-                max-width: 35rem;
+                max-width: 80%;
                 background-color: #fff;
                 border-radius: 10px;
                 padding: 2rem 1rem;
+                  margin: auto;
             }
             .title{
                 text-align: center;

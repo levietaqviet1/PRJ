@@ -66,7 +66,7 @@ public class index extends HttpServlet {
                 }
 
             }
-            request.setAttribute("giaoDien", giaodien);
+            session.setAttribute("giaoDien", giaodien);
             request.getRequestDispatcher("index/indexStudent.jsp").forward(request, response);
         }
 

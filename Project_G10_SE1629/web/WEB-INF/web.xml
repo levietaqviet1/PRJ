@@ -42,7 +42,11 @@
     </servlet>
     <servlet>
         <servlet-name>nextForgotPass</servlet-name>
-        <servlet-class>controller.fogotPass.nextForgotPass</servlet-class>
+        <servlet-class>controller.Passwor.nextForgotPass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>changePasswor</servlet-name>
+        <servlet-class>controller.Passwor.changePasswor</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>testAdd</servlet-name>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>nextForgotPass</servlet-name>
         <url-pattern>/nextForgotPass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>changePasswor</servlet-name>
+        <url-pattern>/changePasswor</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
