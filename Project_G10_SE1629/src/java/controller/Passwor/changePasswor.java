@@ -82,7 +82,9 @@ public class changePasswor extends HttpServlet {
                 Student student = (Student) request.getSession().getAttribute("st_login_successful");
                 UserDao userDao = new UserDao();
                 User user = student.getUser();
-                if (userDao.checkPassWordById(user) == -1) {
+                user.setPassword(oldpass);
+                int checkExit = userDao.checkPassWordById(user);
+                if (checkExit == -1) {
                     countCheck++;
                     request.setAttribute("oldPass_mess", "Mật khẩu cũ bị sai nếu quên vui lòng lấy lại mật khẩu");
                 }
@@ -90,13 +92,14 @@ public class changePasswor extends HttpServlet {
                     request.setAttribute("oldpass", oldpass);
                     request.setAttribute("newpass", newpass);
                     request.setAttribute("confirm", confirm);
-                }else{
+                }
+                if(countCheck == 0){
                     user.setPassword(confirm);
                     userDao.updateUserPass(user);
                     request.setAttribute("change_pass_succ", "Đã thay mật khẩu thành công");
                 }
                 
-
+               
                 request.getRequestDispatcher("index/indexStudent.jsp").forward(request, response);
 
             }

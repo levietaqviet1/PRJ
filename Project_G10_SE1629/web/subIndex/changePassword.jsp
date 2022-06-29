@@ -58,7 +58,7 @@
                 <form action="changePasswor" method="Post">
                     <table>
                         <div class="input">
-                            <c:if test="${oldPass_mess}" >
+                            <c:if test="${oldPass_mess != null}" >
                                 <tr>
                                     <td></td>
                                     <td><span style="color: red">${oldPass_mess}</span></td>
@@ -82,10 +82,10 @@
                                     <input type="text" name="newpass" value="${newpass}" required style="border-radius: 10px; padding: 5px"> 
                                 </td>
                             </tr>
-                            <c:if test="${confirm_mess}" >
+                            <c:if test="${requestScope.confirm_mess != null}" >
                                 <tr>
                                     <td></td>
-                                    <td><span style="color: red">${confirm_mess}</span></td>
+                                    <td><span style="color: red">${requestScope.confirm_mess}</span></td>
                                 </tr>
                             </c:if>
                             <tr>
@@ -96,7 +96,7 @@
                                     <input style="border-radius: 10px; padding: 5px" value="${confirm}" required type="text" name="confirm">
                                 </td>
                             </tr>
-                            <c:if test="${change_pass_succ}" >
+                            <c:if test="${change_pass_succ != null}" >
                                 <tr>
                                     <td></td>
                                     <td><span style="color: blue">${change_pass_succ}</span></td>
