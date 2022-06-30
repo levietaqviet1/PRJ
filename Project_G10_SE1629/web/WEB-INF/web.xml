@@ -48,6 +48,10 @@
         <servlet-name>changePasswor</servlet-name>
         <servlet-class>controller.Passwor.changePasswor</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>homeBQT</servlet-name>
+        <servlet-class>controller.homeBQT</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>testAdd</servlet-name>
         <url-pattern>/testAdd</url-pattern>
@@ -95,6 +99,10 @@
     <servlet-mapping>
         <servlet-name>changePasswor</servlet-name>
         <url-pattern>/changePasswor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>homeBQT</servlet-name>
+        <url-pattern>/homeBQT</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

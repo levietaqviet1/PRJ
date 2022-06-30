@@ -26,7 +26,7 @@ public class nextForgotPass extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (request.getParameter("forPass") != null) {
-            request.getRequestDispatcher("index/forgotPassW.jsp").forward(request, response);
+            request.getRequestDispatcher("student/index/forgotPassW.jsp").forward(request, response);
         } else {
             response.sendRedirect("home");
         }
@@ -95,7 +95,7 @@ public class nextForgotPass extends HttpServlet {
                                             + "We have received your password reset request.<br/>\n"
                                             + "Account: <span style='color: green;'> " + accountFor + "</span><br/>\n"
                                             + "Password: <span style='color: green;'> " + user.getPassword() + "</span><br/>\n"
-                                            + "You can follow up through FPT University's website or wait for the next email to respond to your application<br/>"
+                                            + "You can change your password after logging in<br/>"
                                             + "</body>\n"
                                             + "</html>";
 
@@ -127,12 +127,12 @@ public class nextForgotPass extends HttpServlet {
                     request.setAttribute("specializedFor", specializedFor);
                     request.setAttribute("campusFor", campusFor);
                     request.setAttribute("accountFor_mess", "Sai thông tin hoặc account không tồn tại");
-                    request.getRequestDispatcher("index/forgotPassW.jsp").forward(request, response);
+                    request.getRequestDispatcher("student/index/forgotPassW.jsp").forward(request, response);
 
                 }
 
             } else {
-                request.getRequestDispatcher("index/forgotPassW.jsp").forward(request, response);
+                request.getRequestDispatcher("student/index/forgotPassW.jsp").forward(request, response);
             }
         }
 

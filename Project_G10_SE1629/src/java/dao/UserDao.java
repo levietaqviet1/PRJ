@@ -32,11 +32,12 @@ public class UserDao {
         try {
             String sql = "SELECT *\n"
                     + "  FROM [PRJ_G10].[dbo].[taiKhoan]\n"
-                    + "  WHERE taiKhoan = ? AND matKhau = ?";
+                    + "  WHERE taiKhoan = ? AND matKhau = ?  AND vaiTroId = ? ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             try {
                 stm.setString(1, SHA_256.MySHA256(user.getUsername()));
                 stm.setString(2, SHA_256.MySHA256(user.getUsername() + user.getPassword()));
+                stm.setInt(3, user.getRole().getId());
             } catch (Exception e) {
             }
             ResultSet rs = stm.executeQuery();

@@ -100,7 +100,7 @@ public class changePasswor extends HttpServlet {
                 }
                 
                
-                request.getRequestDispatcher("index/indexStudent.jsp").forward(request, response);
+                request.getRequestDispatcher("student/index/indexStudent.jsp").forward(request, response);
 
             }
         } else {

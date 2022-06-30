@@ -31,8 +31,7 @@ public class index extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-       
-        
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -54,20 +53,32 @@ public class index extends HttpServlet {
         }
         if (session.getAttribute("st_login_successful") != null) {
             Student student = (Student) session.getAttribute("st_login_successful");
+
             int giaodien = 1;
             if (request.getParameter("sid") != null) {
                 try {
                     giaodien = Integer.parseInt((String) request.getParameter("sid"));
+                    if (student.getStatus().getId() == 1 || student.getStatus().getId() == 3) {
+                        if (giaodien != 1 && giaodien != 7) {
+                            giaodien = 1;
+                        }
+                    }
                     if (giaodien > 7) {
                         giaodien = 1;
                     }
                 } catch (Exception e) {
-                    request.getRequestDispatcher("index/home.jsp").forward(request, response);
+                    request.getRequestDispatcher("student/index/home.jsp").forward(request, response);
                 }
 
             }
             session.setAttribute("giaoDien", giaodien);
-            request.getRequestDispatcher("index/indexStudent.jsp").forward(request, response);
+            request.getRequestDispatcher("student/index/indexStudent.jsp").forward(request, response);
+        }
+
+        if (session.getAttribute("bqt_login_successful") != null) {
+            BQT bQT = (BQT) session.getAttribute("bqt_login_successful");
+            
+            request.getRequestDispatcher("bqt/indexBQT.jsp").forward(request, response);
         }
 
     }

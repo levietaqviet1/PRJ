@@ -10,6 +10,7 @@ package model;
  */
 public class User {
     private String id,username,password;
+    private Role role;
 
     public User() {
     }
@@ -29,6 +30,22 @@ public class User {
         this.username = username;
         this.password = password;
     }
+
+    public User( String username, String password, Role role) {
+    
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+    
 
     public String getId() {
         return id;
@@ -56,7 +73,10 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + '}';
+        return "User{" + "id=" + id + ", username=" + username + ", password=" + password +  '}';
     }
+
+    
+     
     
 }
