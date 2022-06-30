@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dao.RoleDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,6 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.util.ArrayList;
 import model.*;
 
 /**
@@ -19,38 +21,16 @@ import model.*;
  */
 public class index extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         if (request.getSession().getAttribute("dalogin") == null) {
-            response.sendRedirect("home");
+            response.sendRedirect("homeBQT");
         }
+        // student
         if (session.getAttribute("st_login_successful") != null) {
             Student student = (Student) session.getAttribute("st_login_successful");
 
@@ -74,11 +54,18 @@ public class index extends HttpServlet {
             session.setAttribute("giaoDien", giaodien);
             request.getRequestDispatcher("student/index/indexStudent.jsp").forward(request, response);
         }
-
+        
+        // BQT
         if (session.getAttribute("bqt_login_successful") != null) {
             BQT bQT = (BQT) session.getAttribute("bqt_login_successful");
-            
-            request.getRequestDispatcher("bqt/indexBQT.jsp").forward(request, response);
+            Teacher teacher = new Teacher();
+            TeacherDao teacherDao = new TeacherDao();
+            RoleDao roleDao = new RoleDao();
+            ArrayList<Teacher> listTeacher = teacherDao.getAll();
+            ArrayList<Role> listRole = roleDao.getAll();
+            request.setAttribute("listTeacher", listTeacher);
+            request.setAttribute("listRole", listRole);
+            request.getRequestDispatcher("bqt/index/indexBQT.jsp").forward(request, response);
         }
 
     }
@@ -94,7 +81,7 @@ public class index extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       
     }
 
     /**

@@ -20,6 +20,14 @@ public class Campus {
         this.id = id;
     }
 
+    public Campus(int id, String name, String address) {
+        this.id = id;
+        this.name = name;
+        this.address = address;
+    }
+    
+    
+
     public Campus(int id, String name, String address, String dateOfStart, String dateOfEnd) {
         this.id = id;
         this.name = name;

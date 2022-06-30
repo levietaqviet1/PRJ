@@ -9,10 +9,21 @@ package model;
  * @author NCC
  */
 public class User {
-    private String id,username,password;
+
+    private String id, username, password;
     private Role role;
 
     public User() {
+        this.id = "";
+        this.username = "";
+        this.password = "";
+        Role role = new Role();
+        this.role = role ;
+    }
+
+    public User(String id, Role role) {
+        this.id = id;
+        this.role = role;
     }
 
     public User(String username, String password) {
@@ -23,7 +34,6 @@ public class User {
     public User(String id) {
         this.id = id;
     }
-    
 
     public User(String id, String username, String password) {
         this.id = id;
@@ -31,8 +41,8 @@ public class User {
         this.password = password;
     }
 
-    public User( String username, String password, Role role) {
-    
+    public User(String username, String password, Role role) {
+
         this.username = username;
         this.password = password;
         this.role = role;
@@ -45,7 +55,6 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
-    
 
     public String getId() {
         return id;
@@ -73,10 +82,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", username=" + username + ", password=" + password +  '}';
+        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + '}';
     }
 
-    
-     
-    
 }

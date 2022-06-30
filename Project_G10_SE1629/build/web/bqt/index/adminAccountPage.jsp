@@ -18,9 +18,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!----======== CSS ======== -->
-        <link rel="stylesheet" href="css/style.css">
-        <link rel="stylesheet" href="boot/bootstrap.min.css">
-        <link rel="stylesheet" href="boot/bootstrap.css">
+        <link rel="stylesheet" href="cssBQT/style.css">
+        <link rel="stylesheet" href="cssBQT/boot/bootstrap.min.css">
+        <link rel="stylesheet" href="cssBQT/boot/bootstrap.css">
         <!----===== Iconscout CSS ===== -->
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
@@ -32,20 +32,20 @@
             <nav>
                 <div class="logo-name">
                     <div class="logo-image">
-                        <img src="images/logo.jpg" alt="">
+                         <img src="https://s3.ap-northeast-1.amazonaws.com/h.files/images/1655654596490_Cn6PveFXv2.png">
                     </div>
 
-                    <span class="logo_name"><a href="AdminPage" style="text-decoration: none;color: black">Admin Page</a></span>
+                    <span class="logo_name"><a href="index" style="text-decoration: none;color: black">BQT FPT</a></span>
                 </div>
 
                 <div class="menu-items">
                     <ul class="nav-links">
-                        <li><a href="AdminPage">
+                        <li><a href="#">
                                 <i class="uil uil-estate"></i>
                                 <span class="link-name">Account</span>
                             </a></li>
 
-                        <li><a href="adminKinderPageHome">
+<!--                        <li><a href="adminKinderPageHome">
                                 <i class="uil uil-chart"></i>
                                 <span class="link-name">Kindergartner</span>
                             </a></li>
@@ -60,11 +60,11 @@
                         <li><a href="#">
                                 <i class="uil uil-share"></i>
                                 <span class="link-name">Attendance</span>
-                            </a></li>
+                            </a></li>-->
                     </ul>
 
                     <ul class="logout-mode">
-                        <li><a href="#">
+                        <li><a href="LogOutController?LogId=1">
                                 <i class="uil uil-signout"></i>
                                 <span class="link-name">Logout</span>
                             </a></li>
@@ -75,9 +75,8 @@
 
             <div class="dashboard">
 
-                <div class="dash-lefttop">
-                    <img src="https://i.pinimg.com/originals/72/45/fb/7245fb0ca786bb4a98fb8465e437c5bb.jpg" alt="">
-                    <a href="#" style="text-decoration: none">User</a>
+                <div class="dash-lefttop" >
+                    <h3 style="color: green ;margin: auto" >Xin chào Quản Trị Viên ${bqt_login_successful.firstName}</h3>
                 </div>
 
                 <div class="dash-bottom">
@@ -88,20 +87,11 @@
 
                 </div>
                 <div class="sl-id" style="display: flex;">
-                    <!--                    <div>
-                                            <select name="slL"  style="width: auto;margin-left: 70px;margin-top: 20px;">
-                                                <option selected>All</option>
-                                                <option value="1">One</option>
-                                                <option value="2">Two</option>
-                                                <option value="3">Three</option>
-                                            </select>
-                    
-                                        </div>-->
                     <div>
                         <select name="slRole"  style="width: auto;margin-left: 70px;margin-top: 20px;">
                             <option value="0" selected>All</option>
-                            <c:forEach items="${requestScope.roles}" var="roles">
-                                <option value="${roles.role_id}">${roles.role_name}</option>
+                            <c:forEach items="${requestScope.listRole}" var="roles">
+                                <option value="${roles.id}">${roles.name}</option>
                             </c:forEach>
                         </select>
 
@@ -124,11 +114,11 @@
                                 <th scope="col">Name</th>
                                 <th scope="col">Gender</th>
                                 <th scope="col">Email</th>
-                                <th scope="col">Password</th>
+<!--                                <th scope="col">Password</th>-->
                                 <th scope="col">Dob</th>
                                 <th scope="col">Phone Number</th>
                                 <th scope="col">Address</th>
-                                <th scope="col">Img</th>
+                                <!--<th scope="col">Img</th>-->
                                 <th scope="col">Role_id</th>
                                 <th scope="col">Update</th>
                                 <th scope="col">Delete</th>
@@ -136,9 +126,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <c:forEach items="${requestScope.ac}" var="t" >
+                            <c:forEach items="${requestScope.listTeacher}" var="t" >
                                 <tr>
-                                    <th scope="row">${t.accountID}</th>
+                                    <th scope="row">${t.id}</th>
                                     <td>${t.firstName}</td>
                                     <td>${t.lastName}</td>
                                     <td>${t.firstName} ${t.lastName}</td>
@@ -151,25 +141,17 @@
                                             FeMale
                                         </c:if>  
                                     </td>
-                                    <td>${t.email}</td>
-                                    <td>${t.password}</td>
-                                    <td>${t.dob}</td>
-                                    <td>${t.phoneNumber}</td>
+                                    <td>${t.gmail}</td>
+                                    <!--<td>${t.dateOfStart}</td>-->
+                                    <td>${t.date}</td>
+                                    <td>${t.phone}</td>
                                     <td>${t.address}</td>
-                                    <td>${t.image}</td>
+                                    <!--<td>${t.dateOfEnd}</td>-->
                                     <td>
-                                        <c:if test="${t.roleId == 1}" >
-                                            Admin
-                                        </c:if> 
-                                        <c:if test="${t.roleId == 2}" >
-                                            Teacher
-                                        </c:if> 
-                                        <c:if test="${t.roleId == 3}" >
-                                            Parent
-                                        </c:if> 
+                                        ${t.user.role.name}
                                     </td>
-                                    <td><a href="updateAccountController?sid=${t.accountID}">Update</a></td>
-                                    <td><a href="deleteAccount?sid=${t.accountID}">Delete</a></td>
+                                    <td><a href="updateAccountController?sid=${t.id}">Update</a></td>
+                                    <td><a href="deleteAccount?sid=${t.id}">Delete</a></td>
                                 </tr>
                             </c:forEach>
 

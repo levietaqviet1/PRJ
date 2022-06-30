@@ -30,7 +30,7 @@ public class RoleDao {
     }
 
     public ArrayList<Role> getAll() {
-        ArrayList<Role> listRole = new ArrayList<>();
+        ArrayList<Role> listRole = new ArrayList<Role>();
         try {
             String sql = "SELECT  [vaiTroId]\n"
                     + "      ,[tenVaiTro]\n"

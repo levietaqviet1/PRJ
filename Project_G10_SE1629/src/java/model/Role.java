@@ -13,6 +13,7 @@ public class Role {
     private String name;
 
     public Role() {
+        
     }
 
     public Role(int id) {

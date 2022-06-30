@@ -42,10 +42,13 @@ public class LogOutController extends HttpServlet {
                     if (request.getSession().getAttribute("st_login_successful") != null) {
                         session.removeAttribute("st_login_successful");
                     }
-                      response.sendRedirect("home");
+                    if (request.getSession().getAttribute("bqt_login_successful") != null) {
+                        session.removeAttribute("bqt_login_successful");
+                    }
+                      response.sendRedirect("index");
                 }
             } else {
-                response.sendRedirect("home");
+                response.sendRedirect("index");
             }
 
         }
