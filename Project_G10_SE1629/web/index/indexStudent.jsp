@@ -121,35 +121,38 @@ if (request.getSession().getAttribute("st_login_successful") == null) {
                 margin: 5px;
             }
         </style>
-        
+
 
     </head>
 
     <body>
-       
+
 
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br /><br /><br />
             <form>
+
                 <a <c:if test="${giaoDien == 1}" var="t">
                         class="acti10"
                     </c:if> href="index?sid=1">Home</a>
-                <a <c:if test="${giaoDien == 2}" var="t">
-                        class="acti10"
-                    </c:if> href="index?sid=2">MoveClass
-                </a>
-                <a <c:if test="${giaoDien == 3}" var="t">
-                        class="acti10"
-                    </c:if> href="index?sid=3">MoveClassWithOther</a>
-                <a <c:if test="${giaoDien == 4}" var="t">
-                        class="acti10"
-                    </c:if> href="index?sid=4">RegisterExtraCourses</a>
-                <a <c:if test="${giaoDien == 5}" var="t">
-                        class="acti10"
-                    </c:if> href="index?sid=5">RegisterImproveMark</a>
-                <a <c:if test="${giaoDien == 6}" var="t">
-                        class="acti10"
-                    </c:if> href="index?sid=6">SendApplication</a>
+                <c:if test="${st_login_successful.getStatus().id!=1}" var="t">
+                    <a <c:if test="${giaoDien == 2}" var="t">
+                            class="acti10"
+                        </c:if> href="index?sid=2">MoveClass
+                    </a>
+                    <a <c:if test="${giaoDien == 3}" var="t">
+                            class="acti10"
+                        </c:if> href="index?sid=3">MoveClassWithOther</a>
+                    <a <c:if test="${giaoDien == 4}" var="t">
+                            class="acti10"
+                        </c:if> href="index?sid=4">RegisterExtraCourses</a>
+                    <a <c:if test="${giaoDien == 5}" var="t">
+                            class="acti10"
+                        </c:if> href="index?sid=5">RegisterImproveMark</a>
+                    <a <c:if test="${giaoDien == 6}" var="t">
+                            class="acti10"
+                        </c:if> href="index?sid=6">SendApplication</a>
+                </c:if>
                 <a <c:if test="${giaoDien == 7}" var="t">
                         class="acti10"
                     </c:if> href="index?sid=7">Change Password</a>
@@ -199,9 +202,9 @@ if (request.getSession().getAttribute("st_login_successful") == null) {
 
 
         <script>
-            
+
             function openNav() {
-               
+
                 document.getElementById("mySidenav").style.width = "20%";
                 document.getElementById("main").style.marginLeft = "18%";
                 document.body.style.backgroundColor = "rgba(0,0,0,0.4)";
@@ -210,7 +213,7 @@ if (request.getSession().getAttribute("st_login_successful") == null) {
             }
 
             function closeNav() {
-                
+
                 document.getElementById("mySidenav").style.width = "0";
                 document.getElementById("main").style.marginLeft = "0px";
                 document.body.style.backgroundColor = "white";
