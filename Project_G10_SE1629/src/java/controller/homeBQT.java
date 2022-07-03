@@ -29,8 +29,8 @@ public class homeBQT extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getSession().getAttribute("dalogin") != null) {
-            response.sendRedirect("index");
+        if (request.getSession().getAttribute("dalogin_bqt") != null) {
+            response.sendRedirect("indexBQT");
         } else {
             if (request.getSession().getAttribute("listCampus") == null) {
                 CampusDao campusDao = new CampusDao();

@@ -199,7 +199,13 @@ public class StudentDao {
             } else {
                 int i = Integer.parseInt(relust.substring(2, relust.length()));
                 i++;
-                return t + String.valueOf(i);
+                String iN = String.valueOf(i);
+                count = iN.length();
+                while (count < 6) {
+                    iN = "0" + iN;
+                    count = iN.length();
+                }
+                return t += iN;
             }
 
         } catch (SQLException ex) {
@@ -211,14 +217,14 @@ public class StudentDao {
 
     public static void main(String[] args) {
         StudentDao s = new StudentDao();
-        System.out.println(s.getMssv("SE"));
+        System.out.println(s.getMssv("QT"));
 
     }
 
     public void insertStudent(Student s) {
         String sql = "INSERT INTO [dbo].[sinhVien] "
                 + "( [firstName], [lastName], [gioiTinh], [ngaySinh], [soDienThoai], [gmail], "
-                + "[diaChi], [idChuyenNganh], [idCoSo], [trangThaiId], [taiKhoanId], [batDauTu], [ketThucNgay], [imgData], [MSSV]) \n"
+                + "[diaChiSV], [idChuyenNganh], [idCoSo], [trangThaiId], [taiKhoanId], [batDauTuSV], [ketThucNgaySV], [imgData], [MSSV]) \n"
                 + "   VALUES "
                 + "( ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, GETDATE(), ?, ?, ?)";
         try {
@@ -237,10 +243,9 @@ public class StudentDao {
             stm.setString(11, s.getDateOfEnd());
             stm.setBytes(12, s.getImgStudent());
             stm.setString(13, s.getCodeStudent());
-
             stm.executeUpdate();
         } catch (Exception e) {
-            System.out.println("Loi UserDao " + e);
+            System.out.println("Loi StudentDao insertStudent(Student s)  " + e);
         }
     }
 
@@ -249,10 +254,10 @@ public class StudentDao {
     }
 
     public void deleteByid(String id) {
-         try {
+        try {
             String sql = "DELETE \n"
                     + "FROM sinhVien \n"
-                    + "WHERE sinhVienId = "+id+"";
+                    + "WHERE sinhVienId = " + id + "";
             PreparedStatement stm = cnn.prepareStatement(sql);
             stm.executeUpdate();
         } catch (SQLException ex) {

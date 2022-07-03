@@ -42,21 +42,35 @@ public class indexBQT extends HttpServlet {
         if (request.getParameter("sid") != null) {
             UserDao userDao = new UserDao();
             //gv-canbo
-            if (request.getParameter("update")!=null &&request.getParameter("update").equals("gv_cb")) {
+            if (request.getParameter("update") != null && request.getParameter("update").equals("gv_cb")) {
                 teacherDao.updateById(request.getParameter("sid"));
             }
-            if (request.getParameter("delete") !=null && request.getParameter("delete").equals("gv_cb")) {
+            if (request.getParameter("delete") != null && request.getParameter("delete").equals("gv_cb")) {
                 teacherDao.deleteByid(request.getParameter("sid"));
                 userDao.deleteByid(request.getParameter("tkid"));
+                if (session.getAttribute("session_roleId") == null) {
+                    session.setAttribute("session_roleId", "3");
+                } else if (!session.getAttribute("session_roleId").equals("3")) {
+                    session.setAttribute("session_roleId", "3");
+                }
+                {
+
+                }
             }
             //sv
             StudentDao studentDao = new StudentDao();
-             if (request.getParameter("update")!=null &&request.getParameter("update").equals("sv")) {
+            if (request.getParameter("update") != null && request.getParameter("update").equals("sv")) {
                 studentDao.updateById(request.getParameter("sid"));
             }
-            if (request.getParameter("delete") !=null && request.getParameter("delete").equals("sv")) {
+            if (request.getParameter("delete") != null && request.getParameter("delete").equals("sv")) {
                 studentDao.deleteByid(request.getParameter("sid"));
                 userDao.deleteByid(request.getParameter("tkid"));
+                if (session.getAttribute("session_roleId") == null) {
+                    session.setAttribute("session_roleId", "2");
+                } else if (!session.getAttribute("session_roleId").equals("2")) {
+                    session.setAttribute("session_roleId", "2");
+                }
+
             }
             response.sendRedirect("indexBQT");
         } else {
@@ -65,6 +79,10 @@ public class indexBQT extends HttpServlet {
                 Teacher teacher = new Teacher();
                 RoleDao roleDao = new RoleDao();
                 int roleId = 3;
+                if (session.getAttribute("roleId") != null) {
+                    roleId = Integer.parseInt(String.valueOf(session.getAttribute("session_roleId")));
+                }
+
                 ArrayList<Teacher> listTeacher = teacherDao.getAll(roleId);
                 ArrayList<Role> listRole = roleDao.getAll();
                 request.setAttribute("listTeacher", listTeacher);
@@ -125,21 +143,21 @@ public class indexBQT extends HttpServlet {
             // sinh vien
             if (roleId == 2) {
                 String slStatus = "";
-                if (request.getParameter("slStatus")!= null && !request.getParameter("slStatus").equals("0")) {
+                if (request.getParameter("slStatus") != null && !request.getParameter("slStatus").equals("0")) {
                     slStatus = request.getParameter("slStatus");
                 }
-              
+
                 StudentDao studentDao = new StudentDao();
                 ArrayList<Student> listStudent;
                 if (checkSearch != 0) {
                     if (searchArr.length == 1) {
-                        listStudent = studentDao.getAllByInfo(searchArr[0], "",slStatus);
+                        listStudent = studentDao.getAllByInfo(searchArr[0], "", slStatus);
                     } else {
                         String lastN = "";
                         for (int i = 1; i < searchArr.length; i++) {
                             lastN += searchArr[i];
                         }
-                        listStudent = studentDao.getAllByInfo(searchArr[0], lastN,slStatus);
+                        listStudent = studentDao.getAllByInfo(searchArr[0], lastN, slStatus);
                     }
                 } else {
                     listStudent = studentDao.getAll(slStatus);
@@ -148,7 +166,7 @@ public class indexBQT extends HttpServlet {
                 ArrayList<Status> listStatus = statusDao.getAll();
                 if (session.getAttribute("session_listStatusBQT") == null) {
                     session.setAttribute("session_listStatusBQT", listStatus);
-                    session.setMaxInactiveInterval(60*60*60);
+                    session.setMaxInactiveInterval(60 * 60 * 60);
                 }
                 request.setAttribute("slStatus", slStatus);
                 request.setAttribute("listStudent", listStudent);
