@@ -36,14 +36,7 @@ public class AuthenticationController extends HttpServlet {
         }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+  
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -110,9 +103,6 @@ public class AuthenticationController extends HttpServlet {
                 if (signup != null && signup != "") {
                     String firstNamein_signup = request.getParameter("firstNamein").trim().toLowerCase();
                     String lastNamein_signup = request.getParameter("lastNamein").trim().toLowerCase();
-
-//            String password_signup = request.getParameter("passin2").trim();
-//            String conpass_signup = request.getParameter("conpassin").trim();
                     String dateOfBirthin_signup = request.getParameter("dateOfBirthin").trim();
                     String genderin_signup = request.getParameter("genderin").trim();
                     String addressin_signup = request.getParameter("addressin").trim().toLowerCase();
@@ -133,11 +123,6 @@ public class AuthenticationController extends HttpServlet {
                         request.setAttribute("lastNamein_mess", mess);
                         countCheck++;
                     }
-//            if (!password_signup.equals(conpass_signup)) {
-//                mess = "Mật khẩu xác nhận không khớp !!!";
-//                request.setAttribute("conpassup_mess", mess);
-//                countCheck++;
-//            }
                     if (dateOfBirthin_signup != null && dateOfBirthin_signup != "") {
                         Calendar c = Calendar.getInstance();
                         int y = c.get(Calendar.YEAR);
@@ -187,27 +172,9 @@ public class AuthenticationController extends HttpServlet {
                         request.setAttribute("emailin_signup_mess", mess);
                         countCheck++;
                     }
-
-//            if (password_signup.length() < 7) {
-//                mess = "Mật khẩu tối thiếu 6 ký tự !!!";
-//                request.setAttribute("passwordup_mess", mess);
-//                countCheck++;
-//            }
-//            if (password_signup == null || password_signup.equals("")) {
-//                mess = "Vui lòng nhập mật khẩu!!!";
-//                request.setAttribute("passwordup_mess", mess);
-//                countCheck++;
-//            } else if (password_signup.length() < 6) {
-//                mess = "Mật khẩu tối thiếu 6 ký tự !!!";
-//                request.setAttribute("passwordup_mess", mess);
-//                countCheck++;
-//            }
                     if (countCheck != 0) {
                         request.setAttribute("firstNamein_signup", firstNamein_signup);
                         request.setAttribute("lastNameins_signup", lastNamein_signup);
-
-//                request.setAttribute("password_signup2", password_signup);
-//                request.setAttribute("conpass_signup", conpass_signup);
                         request.setAttribute("addressin_signup", addressin_signup);
                         request.setAttribute("telephonein_signup", telephonein_signup);
                         request.setAttribute("emailin_signup", emailin_signup);
@@ -218,14 +185,6 @@ public class AuthenticationController extends HttpServlet {
                         request.setAttribute("dateOfBirthup_mess", dateOfBirthin_signup);
                         request.getRequestDispatcher("student/index/home.jsp").forward(request, response);
                     } else {
-
-//                try {
-//                    Cookie cookie = new Cookie("cookie_firstNamein_signup", firstNamein_signup);
-//                    cookie.setMaxAge(6000);
-//                    response.addCookie(cookie);
-//                } catch (Exception e) {
-//                }
-//              response.sendRedirect("home");
                         User user = new User("", "");
                         Specializedin specializedin = new Specializedin(Integer.parseInt(specializedin_signup), "", "", "", "");
                         Campus campus = new Campus(Integer.parseInt(campusin_signup), "", "", "", "");
@@ -240,6 +199,7 @@ public class AuthenticationController extends HttpServlet {
 
                 }
             }
+            
             //BQT
             if (request.getParameter("loginBQT") != null) {
                 String loginBQT = request.getParameter("loginBQT");
@@ -260,9 +220,9 @@ public class AuthenticationController extends HttpServlet {
                             bqt.setUser(user);
                             countCheck++;
                             session.setAttribute("bqt_login_successful", bqt);
-                            session.setAttribute("dalogin", bqt);
+                            session.setAttribute("dalogin_bqt", bqt);
                             session.setMaxInactiveInterval(60 * 60 * 60);
-                            response.sendRedirect("index");
+                            response.sendRedirect("indexBQT");
                         }
                     }
                     if (countCheck == 0) {

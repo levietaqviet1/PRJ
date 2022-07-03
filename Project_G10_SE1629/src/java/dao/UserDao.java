@@ -82,8 +82,8 @@ public class UserDao {
                     + "AND matKhau = ? ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             try {
-                 stm.setString(1, user.getId());
-                stm.setString(2, SHA_256.MySHA256(user.getUsername()+user.getPassword()));
+                stm.setString(1, user.getId());
+                stm.setString(2, SHA_256.MySHA256(user.getUsername() + user.getPassword()));
             } catch (Exception e) {
             }
             ResultSet rs = stm.executeQuery();
@@ -156,5 +156,17 @@ public class UserDao {
 //        u.insertUserStudent(us);
         System.out.println(u.checkAccountUser("vietlSE1115"));
 
+    }
+
+    public void deleteByid(String id) {
+        try {
+            String sql = "DELETE \n"
+                    + "FROM taiKhoan \n"
+                    + "WHERE taiKhoanId = " + id + " ";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Loi TeacherDao  deleteByid(String parameter) " + ex);
+        }
     }
 }

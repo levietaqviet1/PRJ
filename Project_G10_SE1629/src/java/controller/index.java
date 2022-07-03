@@ -49,25 +49,10 @@ public class index extends HttpServlet {
                 } catch (Exception e) {
                     request.getRequestDispatcher("student/index/home.jsp").forward(request, response);
                 }
-
             }
             session.setAttribute("giaoDien", giaodien);
             request.getRequestDispatcher("student/index/indexStudent.jsp").forward(request, response);
         }
-        
-        // BQT
-        if (session.getAttribute("bqt_login_successful") != null) {
-            BQT bQT = (BQT) session.getAttribute("bqt_login_successful");
-            Teacher teacher = new Teacher();
-            TeacherDao teacherDao = new TeacherDao();
-            RoleDao roleDao = new RoleDao();
-            ArrayList<Teacher> listTeacher = teacherDao.getAll();
-            ArrayList<Role> listRole = roleDao.getAll();
-            request.setAttribute("listTeacher", listTeacher);
-            request.setAttribute("listRole", listRole);
-            request.getRequestDispatcher("bqt/index/indexBQT.jsp").forward(request, response);
-        }
-
     }
 
     /**

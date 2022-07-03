@@ -32,23 +32,28 @@ public class LogOutController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
+            HttpSession session = request.getSession();
             if (request.getSession().getAttribute("dalogin") != null) {
                 if (request.getParameter("LogId") != null) {
-                    HttpSession session = request.getSession();
                     session.removeAttribute("dalogin");
-                    if (request.getSession().getAttribute("giaoDien")!=null) {
+                    if (request.getSession().getAttribute("giaoDien") != null) {
                         session.removeAttribute("giaoDien");
                     }
                     if (request.getSession().getAttribute("st_login_successful") != null) {
                         session.removeAttribute("st_login_successful");
-                    }
+                    } 
+                    response.sendRedirect("index");
+                }
+            }
+            
+            if (request.getSession().getAttribute("dalogin_bqt") != null) {
+                if (request.getParameter("LogId") != null) {
+                    session.removeAttribute("dalogin_bqt"); 
                     if (request.getSession().getAttribute("bqt_login_successful") != null) {
                         session.removeAttribute("bqt_login_successful");
                     }
-                      response.sendRedirect("index");
+                    response.sendRedirect("index");
                 }
-            } else {
-                response.sendRedirect("index");
             }
 
         }

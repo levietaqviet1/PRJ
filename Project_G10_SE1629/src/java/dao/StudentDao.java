@@ -7,6 +7,7 @@ package dao;
 import MyUntils.SHA_256;
 import connect.*;
 import java.sql.*;
+import java.util.ArrayList;
 import model.*;
 
 /**
@@ -31,7 +32,7 @@ public class StudentDao {
             String sql = "SELECT *\n"
                     + "  FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn "
                     + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId \n"
-                    + "  WHERE s.taiKhoanId = ? AND cs.idCoSo = ? ";
+                    + "WHERE s.taiKhoanId = ? AND cs.idCoSo = ? ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             stm.setInt(1, checkU);
             stm.setString(2, campusup_login);
@@ -52,6 +53,63 @@ public class StudentDao {
         return null;
     }
 
+    public ArrayList<Student> getAll(String st) {
+        ArrayList<Student> listStudent = new ArrayList<Student>();
+        try {
+            String sql = " SELECT *\n"
+                    + "FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn \n"
+                    + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId "
+                    + "WHERE  s.trangThaiId like '%" + st + "%' ";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Specializedin specializedin = new Specializedin(rs.getInt("idChuyenNganh"), rs.getNString("tenChuyenNganh"), rs.getString("codeChuyenNganh"),
+                        rs.getDate("dateStartCN") == null ? "null" : String.valueOf(rs.getDate("dateStartCN")), rs.getDate("dateEndCN") == null ? "null" : String.valueOf(rs.getDate("dateEndCN")));
+                Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"),
+                        rs.getDate("dateStartCS") == null ? "null" : String.valueOf(rs.getDate("dateStartCS")), rs.getDate("dateEndCS") == null ? "null" : String.valueOf(rs.getDate("dateEndCS")));
+                Status status = new Status(rs.getInt("trangThaiId"), rs.getNString("tenTrangThai"));
+                Student student = new Student(rs.getInt("sinhVienId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
+                        rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChiSV"),
+                        rs.getDate("batDauTuSV") == null ? "null" : String.valueOf(rs.getDate("batDauTuSV")), rs.getString("ketThucNgaySV"),
+                        specializedin, campus, status, rs.getString("MSSV"));
+                listStudent.add(student);
+            }
+            return listStudent;
+        } catch (SQLException ex) {
+            System.err.println("Loi StudentDao getAll() " + ex);
+        }
+        return null;
+    }
+
+    public ArrayList<Student> getAllByInfo(String frist, String last, String st) {
+        ArrayList<Student> listStudent = new ArrayList<Student>();
+        try {
+            String sql = " SELECT *\n"
+                    + "FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn \n"
+                    + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId "
+                    + "WHERE s.firstName like '%" + frist + "%' AND s.lastName like '%" + last + "%'  AND s.trangThaiId like '%" + st + "%' ";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Specializedin specializedin = new Specializedin(rs.getInt("idChuyenNganh"), rs.getNString("tenChuyenNganh"), rs.getString("codeChuyenNganh"),
+                        rs.getDate("dateStartCN") == null ? "null" : String.valueOf(rs.getDate("dateStartCN")), rs.getDate("dateEndCN") == null ? "null" : String.valueOf(rs.getDate("dateEndCN")));
+                Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"),
+                        rs.getDate("dateStartCS") == null ? "null" : String.valueOf(rs.getDate("dateStartCS")), rs.getDate("dateEndCS") == null ? "null" : String.valueOf(rs.getDate("dateEndCS")));
+                Status status = new Status(rs.getInt("trangThaiId"), rs.getNString("tenTrangThai"));
+                Student student = new Student(rs.getInt("sinhVienId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
+                        rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChiSV"),
+                        rs.getDate("batDauTuSV") == null ? "null" : String.valueOf(rs.getDate("batDauTuSV")), rs.getString("ketThucNgaySV"),
+                        specializedin, campus, status, rs.getString("MSSV"));
+                listStudent.add(student);
+            }
+            System.out.println(sql);
+            return listStudent;
+        } catch (SQLException ex) {
+            System.err.println("Loi StudentDao getAllByInfo(String frist, String last) " + ex);
+        }
+        return null;
+    }
+
     public int checkMailExit(String maill) {
         try {
             String sql = "SELECT *\n"
@@ -65,7 +123,7 @@ public class StudentDao {
             }
 
         } catch (SQLException ex) {
-            System.out.println("Loi StudentDao " + ex);
+            System.err.println("Loi StudentDao checkMailExit(String maill) " + ex);
         }
         return -1;
     }
@@ -89,7 +147,7 @@ public class StudentDao {
             }
 
         } catch (SQLException ex) {
-            System.out.println("Loi StudentDao " + ex);
+            System.err.println("Loi StudentDao  checkPhoneExit(String phone) " + ex);
         }
         return -1;
     }
@@ -183,6 +241,22 @@ public class StudentDao {
             stm.executeUpdate();
         } catch (Exception e) {
             System.out.println("Loi UserDao " + e);
+        }
+    }
+
+    public void updateById(String parameter) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public void deleteByid(String id) {
+         try {
+            String sql = "DELETE \n"
+                    + "FROM sinhVien \n"
+                    + "WHERE sinhVienId = "+id+"";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            System.out.println("Loi StudentDao  deleteByid(String parameter) " + ex);
         }
     }
 
