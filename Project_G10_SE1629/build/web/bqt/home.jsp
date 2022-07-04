@@ -144,9 +144,9 @@
                                         <input type='submit' class='btn btn-finish btn-fill btn-danger btn-wd' name='loginBQT' value='Đăng nhập' />
                                 </form>      
 
-                                <form action="nextForgotPass" method="Get">
+                                <form action="nextForgotPass?bqt=1" method="Get">
                                     <br/>
-                                    <input type='submit' class='btn btn-finish btn-fill btn-danger btn-wd' name='forPass' value='Forgot Passwood' />
+                                    <input type='submit' class='btn btn-finish btn-fill btn-danger btn-wd' name='forPassBQT' value='Forgot Passwood' />
                                 </form>
                                 <div class="clearfix"></div>
                             </div>

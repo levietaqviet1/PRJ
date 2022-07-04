@@ -41,13 +41,64 @@ public class BqtDao {
             while (rs.next()) {
                 Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), "", "", "");
                 User user = new User(String.valueOf(rs.getInt("taiKhoanId")));
-                return  new BQT(rs.getInt("quanTriId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh") , rs.getNString("ngaySinh")
-                        , rs.getNString("soDienThoai"), rs.getNString("gmail"), rs.getNString("diaChi"), campus, user);
+                return new BQT(rs.getInt("quanTriId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"), rs.getNString("ngaySinh"),
+                         rs.getNString("soDienThoai"), rs.getNString("gmail"), rs.getNString("diaChi"), campus, user);
             }
 
         } catch (SQLException ex) {
-            System.out.println("Loi StudentDao " + ex);
+            System.out.println("Loi BqtDao " + ex);
         }
         return null;
+    }
+    
+       public int checkInforBQT(BQT b) {
+        try {
+            String gen = b.isGender() ? "1" : "0";
+            String sql = "SELECT *\n"
+                    + "FROM [PRJ_G10].[dbo].[quanTri]\n"
+                    + "WHERE \n"
+                    + "firstName = '" + b.getFirstName() + "' AND lastName = '" + b.getLastName() + "'\n"
+                    + "AND ngaySinh = '" + b.getDate() + "' \n"
+                    + "AND gioiTinh = " + gen + " \n"
+                    + "AND gmail = '" + b.getGmail() + "' \n"
+                    + "AND idCoSo = " + b.getCampus().getId() + " \n"
+                    + "AND taiKhoanId = " + b.getUser().getId() + " \n";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+
+            ResultSet rs = stm.executeQuery();
+            System.out.println(sql);
+            while (rs.next()) {
+                return 1;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Loi BqtDao checkInforBQT(BQT b) " + ex);
+        }
+        System.out.println();
+        return -1;
+    }
+
+    public int checkPhoneExit(String phone) {
+        try {
+
+            String sql = "SELECT *\n"
+                    + "  FROM [PRJ_G10].[dbo].[quanTri]\n"
+                    + "  WHERE soDienThoai = ? OR soDienThoai = ?";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            if (String.valueOf(phone.charAt(0)).equals("+")) {
+                phone = "0" + phone.substring(3, phone.length());
+            }
+
+            stm.setString(1, phone);
+            stm.setString(2, "+84" + phone.substring(1, phone.length()));
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                return 1;
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("Loi BqtDao  checkPhoneExit(String phone) " + ex);
+        }
+        return -1;
     }
 }

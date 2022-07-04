@@ -90,8 +90,53 @@
 
                 <div class="dash-bottomtable">
                     <table class="table" >
-                        <!--gv vs can bo-->
-                        <c:if test="${roleId == 3 || roleId == 4}">
+                        <!--canbo-->
+                        <c:if test="${roleId == 4}">
+                            <thead>
+                                <tr> 
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Gender</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Dob</th>
+                                    <th scope="col">Phone Number</th>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">Role</th>
+                                    <th scope="col">Update</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${requestScope.listOfficerFU}" var="t"  >
+                                    <tr>
+                                        <td>${t.firstName}</td>
+                                        <td>${t.lastName}</td>
+                                        <td>${t.lastName} ${t.firstName} </td>
+                                        <td>
+                                            <c:if test="${t.gender == true}" >
+                                                Male
+                                            </c:if>    
+                                            <c:if test="${t.gender == false}" >
+                                                FeMale
+                                            </c:if>  
+                                        </td>
+                                        <td>${t.gmail}</td>
+
+                                        <td>${t.date}</td>
+                                        <td>${t.phone}</td>
+                                        <td>${t.address}</td>
+                                        <td>
+                                            ${t.user.role.name}
+                                        </td>
+                                        <td><a href="indexBQT?sid=${t.id}&update=4&tkid=${t.user.id}">Update</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&delete=4&tkid=${t.user.id}">Delete</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </c:if>
+                        <!--gv-->
+                        <c:if test="${roleId == 3}">
                             <thead>
                                 <tr> 
                                     <th scope="col">First Name</th>
@@ -129,8 +174,8 @@
                                         <td>
                                             ${t.user.role.name}
                                         </td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=gv_cb&tkid=${t.user.id}">Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=gv_cb&tkid=${t.user.id}">Delete</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&update=3&tkid=${t.user.id}">Update</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&delete=3&tkid=${t.user.id}">Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -182,8 +227,8 @@
                                         <td>${t.phone}</td>
                                         <td>${t.address}</td>
                                         <td>${t.status.name}</td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=sv">Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=sv">Delete</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&update=2">Update</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&delete=2">Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

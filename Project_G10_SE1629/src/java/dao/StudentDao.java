@@ -52,6 +52,32 @@ public class StudentDao {
         }
         return null;
     }
+       public ArrayList<Student> getAll() {
+        ArrayList<Student> listStudent = new ArrayList<Student>();
+        try {
+            String sql = " SELECT *\n"
+                    + "FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn \n"
+                    + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId ";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Specializedin specializedin = new Specializedin(rs.getInt("idChuyenNganh"), rs.getNString("tenChuyenNganh"), rs.getString("codeChuyenNganh"),
+                        rs.getDate("dateStartCN") == null ? "null" : String.valueOf(rs.getDate("dateStartCN")), rs.getDate("dateEndCN") == null ? "null" : String.valueOf(rs.getDate("dateEndCN")));
+                Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"),
+                        rs.getDate("dateStartCS") == null ? "null" : String.valueOf(rs.getDate("dateStartCS")), rs.getDate("dateEndCS") == null ? "null" : String.valueOf(rs.getDate("dateEndCS")));
+                Status status = new Status(rs.getInt("trangThaiId"), rs.getNString("tenTrangThai"));
+                Student student = new Student(rs.getInt("sinhVienId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
+                        rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChiSV"),
+                        rs.getDate("batDauTuSV") == null ? "null" : String.valueOf(rs.getDate("batDauTuSV")), rs.getString("ketThucNgaySV"),
+                        specializedin, campus, status, rs.getString("MSSV"));
+                listStudent.add(student);
+            }
+            return listStudent;
+        } catch (SQLException ex) {
+            System.err.println("Loi StudentDao getAll() " + ex);
+        }
+        return null;
+    }
 
     public ArrayList<Student> getAll(String st) {
         ArrayList<Student> listStudent = new ArrayList<Student>();

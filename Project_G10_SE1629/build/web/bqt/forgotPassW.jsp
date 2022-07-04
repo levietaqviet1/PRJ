@@ -173,25 +173,6 @@
                                                         <input type="text" name="emailFor" value="${requestScope.emailFor}"  class="form-control">
                                                     </div>
                                                 </div>
-
-                                                <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="material-icons">touch_app</i>
-                                                    </span>
-                                                    <div class="form-group label-floating" >
-                                                        <label class="control-label">Specialized</label>
-                                                        <select style=" width: 100%;" class="" name="specializedFor">
-                                                            <c:forEach var="t" items="${listSpecializedin}">
-                                                                <option value="${t.id}"
-                                                                        <c:if test="${specializedFor == t.id}" >
-                                                                            selected
-                                                                        </c:if>>${t.name} 
-                                                                </option>
-                                                            </c:forEach>
-                                                        </select>
-                                                    </div>
-                                                </div>  
-
                                                 <div class="input-group">
                                                     <span class="input-group-addon">
                                                         <i class="material-icons">touch_app</i>
@@ -213,9 +194,9 @@
                                                     </div> 
                                         </div>
                                         <div class="wizard-footer" style="text-align: center">
-                                            <input type='submit' id="signup" class='btn   btn-fill btn-danger btn-wd' name='forgot' value='Gửi Đơn' />
+                                            <input type='submit' id="signup" class='btn   btn-fill btn-danger btn-wd' name='forPassBQT' value='Gửi Đơn' />
                                             </form>    
-                                            <a href="home"><button type='button' id="signup"  class='btn   btn-fill btn-danger btn-wd' name='signup' >Move Home</button></a>
+                                            <a href="homeBQT"><button type='button' id="signup"  class='btn   btn-fill btn-danger btn-wd' name='signup' >Move Home</button></a>
                                         </div>
                                         <div class="col-sm-3" ></div>
 

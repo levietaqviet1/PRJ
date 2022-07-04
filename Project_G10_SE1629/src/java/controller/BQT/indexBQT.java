@@ -4,6 +4,7 @@
  */
 package controller.BQT;
 
+import dao.OfficerFUDao;
 import dao.RoleDao;
 import dao.StatusDao;
 import dao.StudentDao;
@@ -20,8 +21,7 @@ import model.Role;
 import model.Teacher;
 import dao.TeacherDao;
 import dao.UserDao;
-import model.Status;
-import model.Student;
+import model.*;
 
 /**
  *
@@ -35,57 +35,76 @@ public class indexBQT extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         TeacherDao teacherDao = new TeacherDao();
+        StudentDao studentDao = new StudentDao();
         if (session.getAttribute("dalogin_bqt") == null) {
             response.sendRedirect("homeBQT");
         }
         // BQT
         if (request.getParameter("sid") != null) {
             UserDao userDao = new UserDao();
-            //gv-canbo
-            if (request.getParameter("update") != null && request.getParameter("update").equals("gv_cb")) {
-                teacherDao.updateById(request.getParameter("sid"));
-            }
-            if (request.getParameter("delete") != null && request.getParameter("delete").equals("gv_cb")) {
-                teacherDao.deleteByid(request.getParameter("sid"));
-                userDao.deleteByid(request.getParameter("tkid"));
-                if (session.getAttribute("session_roleId") == null) {
-                    session.setAttribute("session_roleId", "3");
-                } else if (!session.getAttribute("session_roleId").equals("3")) {
-                    session.setAttribute("session_roleId", "3");
+            OfficerFUDao OfficerFUDao = new OfficerFUDao();
+            String roleId = "";
+            if (request.getParameter("update") != null) {
+                //gv
+                if (request.getParameter("update").equals("3")) {
+                    teacherDao.updateById(request.getParameter("sid"));
                 }
-                {
+                //sv
+                if (request.getParameter("update").equals("2")) {
+                    studentDao.updateById(request.getParameter("sid"));
+                }
+                //can-bo
+                if (request.getParameter("update").equals("4")) {
+                    OfficerFUDao.updateById(request.getParameter("sid"));
+                }
+                roleId = request.getParameter("update");
+            }
 
+            if (request.getParameter("delete") != null) {
+                //gv
+                if (request.getParameter("delete").equals("3")) {
+                    teacherDao.deleteByid(request.getParameter("sid"));
+                    userDao.deleteByid(request.getParameter("tkid"));
                 }
+                //sv
+                if (request.getParameter("delete").equals("2")) {
+                    studentDao.deleteByid(request.getParameter("sid"));
+                    userDao.deleteByid(request.getParameter("tkid"));
+                }
+                //can-bo
+                if (request.getParameter("delete").equals("4")) {
+                    OfficerFUDao.deleteByid(request.getParameter("sid"));
+                    userDao.deleteByid(request.getParameter("tkid"));
+                }
+
+                roleId = request.getParameter("delete");
             }
+
             //sv
-            StudentDao studentDao = new StudentDao();
-            if (request.getParameter("update") != null && request.getParameter("update").equals("sv")) {
-                studentDao.updateById(request.getParameter("sid"));
-            }
-            if (request.getParameter("delete") != null && request.getParameter("delete").equals("sv")) {
-                studentDao.deleteByid(request.getParameter("sid"));
-                userDao.deleteByid(request.getParameter("tkid"));
-                if (session.getAttribute("session_roleId") == null) {
-                    session.setAttribute("session_roleId", "2");
-                } else if (!session.getAttribute("session_roleId").equals("2")) {
-                    session.setAttribute("session_roleId", "2");
-                }
-
-            }
-            response.sendRedirect("indexBQT");
+            response.sendRedirect("indexBQT?slRole=" + roleId);
         } else {
             if (session.getAttribute("bqt_login_successful") != null) {
                 BQT bQT = (BQT) session.getAttribute("bqt_login_successful");
                 Teacher teacher = new Teacher();
                 RoleDao roleDao = new RoleDao();
                 int roleId = 3;
-                if (session.getAttribute("roleId") != null) {
-                    roleId = Integer.parseInt(String.valueOf(session.getAttribute("session_roleId")));
+                if (request.getParameter("slRole") != null) {
+                    roleId = Integer.parseInt(request.getParameter("slRole"));
                 }
-
-                ArrayList<Teacher> listTeacher = teacherDao.getAll(roleId);
+                if (roleId == 2) {
+                    ArrayList<Student> listStudent = studentDao.getAll();
+                    request.setAttribute("listStudent", listStudent);
+                }
+                if (roleId == 3) {
+                    ArrayList<Teacher> listTeacher = teacherDao.getAll();
+                    request.setAttribute("listTeacher", listTeacher);
+                }
+                if (roleId == 4) {
+                    OfficerFUDao OfficerFUDao = new OfficerFUDao();
+                    ArrayList<OfficerFU> listOfficerFU = OfficerFUDao.getAll();
+                    request.setAttribute("listOfficerFU", listOfficerFU);
+                }
                 ArrayList<Role> listRole = roleDao.getAll();
-                request.setAttribute("listTeacher", listTeacher);
                 session.setAttribute("session_listRoleBQT", listRole);
                 session.setMaxInactiveInterval(60 * 60 * 60);
                 request.setAttribute("roleId", roleId);
@@ -121,25 +140,7 @@ public class indexBQT extends HttpServlet {
                 searchArr = search.split(" ");
                 checkSearch++;
             }
-            //gv-can bo
-            if (roleId == 3 || roleId == 4) {
-                TeacherDao teacherDao = new TeacherDao();
-                ArrayList<Teacher> listTeacher;
-                if (checkSearch != 0) {
-                    if (searchArr.length == 1) {
-                        listTeacher = teacherDao.getAllByInfo(roleId, searchArr[0], "");
-                    } else {
-                        String lastN = "";
-                        for (int i = 1; i < searchArr.length; i++) {
-                            lastN += searchArr[i];
-                        }
-                        listTeacher = teacherDao.getAllByInfo(roleId, searchArr[0], lastN);
-                    }
-                } else {
-                    listTeacher = teacherDao.getAll(roleId);
-                }
-                request.setAttribute("listTeacher", listTeacher);
-            }
+
             // sinh vien
             if (roleId == 2) {
                 String slStatus = "";
@@ -172,6 +173,47 @@ public class indexBQT extends HttpServlet {
                 request.setAttribute("listStudent", listStudent);
 
             }
+
+            //gv
+            if (roleId == 3) {
+                TeacherDao teacherDao = new TeacherDao();
+                ArrayList<Teacher> listTeacher;
+                if (checkSearch != 0) {
+                    if (searchArr.length == 1) {
+                        listTeacher = teacherDao.getAllByInfo(searchArr[0], "");
+                    } else {
+                        String lastN = "";
+                        for (int i = 1; i < searchArr.length; i++) {
+                            lastN += searchArr[i];
+                        }
+                        listTeacher = teacherDao.getAllByInfo(searchArr[0], lastN);
+                    }
+                } else {
+                    listTeacher = teacherDao.getAll();
+                }
+                request.setAttribute("listTeacher", listTeacher);
+            }
+
+            //canbo
+            if (roleId == 4) {
+                OfficerFUDao OfficerFUDao = new OfficerFUDao();
+                ArrayList<OfficerFU> listOfficerFU;
+                if (checkSearch != 0) {
+                    if (searchArr.length == 1) {
+                        listOfficerFU = OfficerFUDao.getAllByInfo(searchArr[0], "");
+                    } else {
+                        String lastN = "";
+                        for (int i = 1; i < searchArr.length; i++) {
+                            lastN += searchArr[i];
+                        }
+                        listOfficerFU = OfficerFUDao.getAllByInfo(searchArr[0], lastN);
+                    }
+                } else {
+                    listOfficerFU = OfficerFUDao.getAll();
+                }
+                request.setAttribute("listOfficerFU", listOfficerFU);
+            }
+
             request.setAttribute("Tsearch", search);
             request.setAttribute("roleId", roleId);
             request.getRequestDispatcher("bqt/index/indexBQT.jsp").forward(request, response);

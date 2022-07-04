@@ -32,17 +32,15 @@ public class TeacherDao {
         }
     }
 
-    public ArrayList<Teacher> getAll(int i) {
+    public ArrayList<Teacher> getAll() {
         ArrayList<Teacher> listTeacher = new ArrayList<Teacher>();
         try {
             String sql = "SELECT * \n"
                     + "FROM [PRJ_G10].[dbo].[giangVien] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
-                    + "ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
-                    + "WHERE vt.vaiTroId = " + i + "";
+                    + "ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-
                 Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"));
                 Role role = new Role(rs.getInt("vaiTroId"), rs.getNString("tenVaiTro"));
                 User user = new User(String.valueOf(rs.getInt("taiKhoanId")), role);
@@ -54,24 +52,22 @@ public class TeacherDao {
             }
 
         } catch (SQLException ex) {
-            System.out.println("Loi TeacherDao " + ex);
+            System.out.println("Loi TeacherDao getAll(int i) " + ex);
         }
         return listTeacher;
 
     }
 
-    public ArrayList<Teacher> getAllByInfo(int i, String firt, String last) {
+    public ArrayList<Teacher> getAllByInfo( String firt, String last) {
         ArrayList<Teacher> listTeacher = new ArrayList<Teacher>();
         try {
-            String sql = "SELECT cs.idCoSo,cs.tenCoSo,cs.diaChi AS diachiCoSo , vt.vaiTroId,vt.tenVaiTro,tk.taiKhoanId,gv.giangVienId,gv.firstName,gv.lastName,\n"
-                    + "gv.gioiTinh,gv.ngaySinh,gv.ngayBatDauLamViec,gv.ngayNghiLam,gv.soDienThoai,gv.gmail,gv.diaChi\n"
+            String sql = "SELECT * \n"
                     + "FROM [PRJ_G10].[dbo].[giangVien] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
                     + "ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
-                    + "WHERE vt.vaiTroId = " + i + "  AND gv.firstName like '%" + firt + "%' AND lastName like '%" + last + "%' ";
+                    + "WHERE gv.firstName like '%" + firt + "%' AND lastName like '%" + last + "%' ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-
                 Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"));
                 Role role = new Role(rs.getInt("vaiTroId"), rs.getNString("tenVaiTro"));
                 User user = new User(String.valueOf(rs.getInt("taiKhoanId")), role);
@@ -83,7 +79,7 @@ public class TeacherDao {
             }
 
         } catch (SQLException ex) {
-            System.out.println("Loi TeacherDao " + ex);
+            System.out.println("Loi TeacherDao getAllByInfo(int i, String firt, String last) " + ex);
         }
         return listTeacher;
 
@@ -97,7 +93,7 @@ public class TeacherDao {
         try {
             String sql = "DELETE \n"
                     + "FROM giangVien \n"
-                    + "WHERE giangVienId = "+id+"";
+                    + "WHERE giangVienId = " + id + "";
             PreparedStatement stm = cnn.prepareStatement(sql);
             stm.executeUpdate();
         } catch (SQLException ex) {
