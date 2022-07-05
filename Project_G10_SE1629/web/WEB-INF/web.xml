@@ -56,6 +56,10 @@
         <servlet-name>indexBQT</servlet-name>
         <servlet-class>controller.BQT.indexBQT</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>updateAccount</servlet-name>
+        <servlet-class>controller.BQT.updateAccount</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>testAdd</servlet-name>
         <url-pattern>/testAdd</url-pattern>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>indexBQT</servlet-name>
         <url-pattern>/indexBQT</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateAccount</servlet-name>
+        <url-pattern>/updateAccount</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

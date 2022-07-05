@@ -58,7 +58,7 @@ public class AuthenticationController extends HttpServlet {
                 int checkU = userDao.checkUser(user); // check tai khoan 
                 if (checkU != -1) {
                     if (roleup_login.equals("2")) {
-                        Student student = studentDao.getStudent(checkU, campusup_login);
+                        Student student = studentDao.getStudentByidUser(checkU, campusup_login);
                         if (student != null) {
                             user = new User(student.getUser().getId(), usernameup_login, passup_login);
                             student.setUser(user);

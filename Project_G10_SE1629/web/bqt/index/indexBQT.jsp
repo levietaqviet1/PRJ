@@ -26,6 +26,43 @@
         <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
 
         <!--<title>Admin Dashboard Panel</title>-->
+        <style>
+            b {
+                position: absolute;
+                background-color: red;
+                width: 10px;
+                height: 10px;
+                pointer-events: none;
+                border-radius: 90%;
+            }
+
+            b::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: #00bcd4;
+                border-radius: 50%;
+                animation: moveParticles 2s linear infinite;
+            }
+
+            @keyframes moveParticles {
+                0%
+                {
+                    transform: translate(0);
+                }
+                100%
+                {
+                    transform: translate(300px);
+                }
+            }
+            a:hover {
+                color: #255784;
+                background: #2196f3;
+                box-shadow: 0 0 10px #2196f3, 0 0 40px #2196f3, 0 0 80px #2196f3;
+            }
+
+        </style>
     </head>
 
     <body>
@@ -36,12 +73,12 @@
                     <img src="https://s3.ap-northeast-1.amazonaws.com/h.files/images/1655654596490_Cn6PveFXv2.png" alt="khong co internet">
                 </div>
 
-                <span class="logo_name"><a href="AdminPage" style="text-decoration: none;color: black">BQT FPT</a></span>
+                <span class="logo_name"><a href="#" style="text-decoration: none;color: black">BQT FPT</a></span>
             </div>
 
             <div class="menu-items">
                 <ul class="nav-links">
-                    <li><a href="AdminPage">
+                    <li><a href="indexBQT">
                             <i class="uil uil-estate"></i>
                             <span class="link-name">Account</span>
                         </a></li>
@@ -72,21 +109,14 @@
                 <div class="sl-id" style="display: flex;">
                     <div>
                         <select name="slRole"  style="width: auto;margin-left: 70px;margin-top: 20px;">
-                            <c:forEach items="${session_listRoleBQT}"  var="roles">
+                            <c:forEach items="${listRole}"  var="roles">
                                 <option value="${roles.id}" 
                                         <c:if test="${roleId == roles.id }" >selected</c:if>
                                         >${roles.name}</option>
                             </c:forEach>
                         </select>
                     </div>
-
-
-                    <!--                    <div>
-                                            <button  type="submit" style="width: 40%;margin-left: 70px;margin-top: 20px;"><a href="addAccountController" style="text-decoration: none">Add</a> </button> 
-                                        </div>-->
-
                 </div>
-
 
                 <div class="dash-bottomtable">
                     <table class="table" >
@@ -227,20 +257,43 @@
                                         <td>${t.phone}</td>
                                         <td>${t.address}</td>
                                         <td>${t.status.name}</td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=2">Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=2">Delete</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&update=2&campusId=${t.campus.id}"><span></span><span></span><span></span><span></span>
+                                                Update</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&delete=2"><span></span><span></span><span></span><span></span>Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
                         </c:if>
                     </table>
-                </div>
 
+                </div>
             </form>
         </div>
 
+        <script>
+            document.addEventListener('mousemove', function (e) {
+                let body = document.querySelector('body');
+                let particles = document.createElement('b');
+                let x = e.offsetX;
+                let y = e.offsetY;
 
+                particles.style.left = x + 'px';
+                particles.style.top = y + 'px';
+                body.appendChild(particles);
 
+                let size = Math.random() * 8;
+                particles.style.width = 2 + size + 'px';
+                particles.style.height = 2 + size + 'px';
+
+                let transformValue = Math.random() * 3600;
+                particles.style.transform = 'rotate(' + transformValue + 'deg)';
+
+                setTimeout(function () {
+                    particles.remove()
+                }, 200)
+
+            })
+        </script>
 
         <!-- <script src="agu.js"></script> -->
     </body>

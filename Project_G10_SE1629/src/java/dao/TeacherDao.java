@@ -58,7 +58,7 @@ public class TeacherDao {
 
     }
 
-    public ArrayList<Teacher> getAllByInfo( String firt, String last) {
+    public ArrayList<Teacher> getAllByInfo(String firt, String last) {
         ArrayList<Teacher> listTeacher = new ArrayList<Teacher>();
         try {
             String sql = "SELECT * \n"
@@ -85,10 +85,6 @@ public class TeacherDao {
 
     }
 
-    public void updateById(String parameter) {
-
-    }
-
     public void deleteByid(String id) {
         try {
             String sql = "DELETE \n"
@@ -98,6 +94,84 @@ public class TeacherDao {
             stm.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("Loi TeacherDao  deleteByid(String parameter) " + ex);
+        }
+    }
+
+    public Teacher getTeacherById(String id) {
+        Teacher teacher = new Teacher();
+        try {
+            String sql = "SELECT * \n"
+                    + "FROM [PRJ_G10].[dbo].[giangVien] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
+                    + "ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
+                    + "WHERE gv.giangVienId = " + id + " ";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"));
+                Role role = new Role(rs.getInt("vaiTroId"), rs.getNString("tenVaiTro"));
+                User user = new User(String.valueOf(rs.getInt("taiKhoanId")), role);
+                teacher = new Teacher(rs.getInt("giangVienId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
+                        rs.getNString("ngaySinh"), rs.getNString("ngayBatDauLamViec"), rs.getNString("ngayNghiLam"),
+                        rs.getNString("soDienThoai"), rs.getNString("gmail"), rs.getNString("diaChi"),
+                        campus, user);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Loi TeacherDao getAll(int i) " + ex);
+        }
+        return teacher;
+    }
+
+    public void insert(Teacher s) {
+        String sql = "INSERT INTO [dbo].[giangVien] "
+                + "([firstName] ,[lastName] ,[gioiTinh] ,[ngaySinh] ,[ngayBatDauLamViec] ,[soDienThoai] ,[gmail] ,[diaChi] ,[idCoSo] ,[taiKhoanId])\n"
+                + "     VALUES(?,?,?,?,?,?,?,?,?,?);";
+        try {
+            PreparedStatement stm = cnn.prepareStatement(sql);
+
+            stm.setString(1, s.getFirstName());
+            stm.setString(2, s.getLastName());
+            stm.setBoolean(3, s.isGender());
+            stm.setString(4, s.getDate());
+            stm.setString(5, String.valueOf(java.time.LocalDate.now()));
+            stm.setString(6, s.getPhone());
+            stm.setString(7, s.getGmail());
+            stm.setString(8, s.getAddress());
+            stm.setInt(9, s.getCampus().getId());
+            stm.setInt(10, Integer.parseInt(s.getUser().getId()));
+            stm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Loi TeacherDao insert(Teacher s)  " + e);
+        }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(String.valueOf(java.time.LocalDate.now()));
+
+    }
+
+    public void update(Teacher teacher) {
+        try {
+            String sql = "UPDATE [dbo].[giangVien]\n"
+                    + "   SET [firstName] = '" + teacher.getFirstName() + "' \n"
+                    + "      ,[lastName] =  '" + teacher.getLastName() + "' \n"
+                    + "      ,[gioiTinh] =  ? \n"
+                    + "      ,[ngaySinh] =  '" + teacher.getDate() + "' \n"
+                    + "      ,[ngayBatDauLamViec] =  '" + teacher.getDateOfStart() + "' \n"
+                    + "      ,[ngayNghiLam] =  '" + teacher.getDateOfEnd() + "' \n"
+                    + "      ,[soDienThoai] = '" + teacher.getPhone() + "' \n"
+                    + "      ,[gmail] =  '" + teacher.getGmail() + "' \n"
+                    + "      ,[diaChi] =  '" + teacher.getAddress() + "' \n"
+                    + "      ,[idCoSo] =  '" + teacher.getCampus().getId() + "' \n"
+                    + "      ,[taiKhoanId] =  " + teacher.getUser().getId() + " \n"
+                    + " WHERE [giangVienId] = " + teacher.getId() + " ";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            stm.setBoolean(1, teacher.isGender());
+            System.out.println(sql);
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("Loi TeacherDao   update(Teacher teacher)  " + ex);
         }
     }
 }

@@ -45,19 +45,27 @@ public class indexBQT extends HttpServlet {
             OfficerFUDao OfficerFUDao = new OfficerFUDao();
             String roleId = "";
             if (request.getParameter("update") != null) {
+                request.setAttribute("updateID", request.getParameter("update"));
+                request.setAttribute("sid", request.getParameter("sid"));
                 //gv
                 if (request.getParameter("update").equals("3")) {
-                    teacherDao.updateById(request.getParameter("sid"));
+                    Teacher teacher = teacherDao.getTeacherById(request.getParameter("sid"));
+                    request.setAttribute("teacherBQT", teacher);
+                    request.setAttribute("userId", teacher.getUser().getId());
                 }
                 //sv
                 if (request.getParameter("update").equals("2")) {
-                    studentDao.updateById(request.getParameter("sid"));
+                    Student student = studentDao.getStudent(Integer.parseInt(request.getParameter("sid")), request.getParameter("campusId"));
+                    request.setAttribute("studentBQT", student);
+                    request.setAttribute("userId", student.getUser().getId());
                 }
                 //can-bo
                 if (request.getParameter("update").equals("4")) {
-                    OfficerFUDao.updateById(request.getParameter("sid"));
+                   OfficerFU oficerFU = OfficerFUDao.getOfficerByID(request.getParameter("sid"));
+                   request.setAttribute("oficerFUBQT", oficerFU);
+                   request.setAttribute("userId", oficerFU.getUser().getId());
                 }
-                roleId = request.getParameter("update");
+                request.getRequestDispatcher("bqt/index/AccountUpdate.jsp").forward(request, response);
             }
 
             if (request.getParameter("delete") != null) {
@@ -78,10 +86,10 @@ public class indexBQT extends HttpServlet {
                 }
 
                 roleId = request.getParameter("delete");
+                response.sendRedirect("indexBQT?slRole=" + roleId);
             }
 
             //sv
-            response.sendRedirect("indexBQT?slRole=" + roleId);
         } else {
             if (session.getAttribute("bqt_login_successful") != null) {
                 BQT bQT = (BQT) session.getAttribute("bqt_login_successful");
@@ -104,9 +112,6 @@ public class indexBQT extends HttpServlet {
                     ArrayList<OfficerFU> listOfficerFU = OfficerFUDao.getAll();
                     request.setAttribute("listOfficerFU", listOfficerFU);
                 }
-                ArrayList<Role> listRole = roleDao.getAll();
-                session.setAttribute("session_listRoleBQT", listRole);
-                session.setMaxInactiveInterval(60 * 60 * 60);
                 request.setAttribute("roleId", roleId);
                 request.getRequestDispatcher("bqt/index/indexBQT.jsp").forward(request, response);
             }

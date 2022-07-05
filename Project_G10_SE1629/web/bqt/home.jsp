@@ -34,6 +34,39 @@
         <link href="css/load/loadCss.css" rel="stylesheet" type="text/css"/>
         <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
         <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+        <style>
+            
+            b {
+                position: absolute;
+                background-color: red;
+                width: 10px;
+                height: 10px;
+                pointer-events: none;
+                border-radius: 90%;
+            }
+
+            b::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background: #fff;
+                border-radius: 50%;
+                animation: moveParticles 2s linear infinite;
+            }
+
+            @keyframes moveParticles {
+                0%
+                {
+                    transform: translate(0);
+                }
+                100%
+                {
+                    transform: translate(300px);
+                }
+            }
+             
+        </style>
 
     </head>
 
@@ -160,6 +193,30 @@
 
 
     </div>
+    <script>
+        document.addEventListener('mousemove', function (e) {
+            let body = document.querySelector('body');
+            let particles = document.createElement('b');
+            let x = e.offsetX;
+            let y = e.offsetY;
+
+            particles.style.left = x + 'px';
+            particles.style.top = y + 'px';
+            body.appendChild(particles);
+
+            let size = Math.random() * 8;
+            particles.style.width = 2 + size + 'px';
+            particles.style.height = 2 + size + 'px';
+
+            let transformValue = Math.random() * 3600;
+            particles.style.transform = 'rotate(' + transformValue + 'deg)';
+
+            setTimeout(function () {
+                particles.remove()
+            }, 100)
+
+        })
+    </script>
 
 </body>
 <!--   Core JS Files   -->

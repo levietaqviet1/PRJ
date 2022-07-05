@@ -44,12 +44,12 @@ public class ConfirmEmail extends HttpServlet {
 
             if (request.getSession().getAttribute("confirmEmail_st").equals(id)) {
                 if (request.getSession().getAttribute("account_session_student") != null) {
-                    Student student = (Student) request.getSession().getAttribute("account_session_student");
+                    Student student = (Student) request.getSession().getAttribute("account_session_student"); // hung lai dữ liệu
                     User user = new User();
                     UserDao userDao = new UserDao();
                     StudentDao studentDao = new StudentDao();
                     SpecializedinDao specializedinDao = new SpecializedinDao();
-                    String[] userNameLast = student.getLastName().split(" ");
+                    String[] userNameLast = student.getLastName().split(" "); // tach chuỗi
                     String userName = student.getFirstName();
                     for (String name : userNameLast) {
                         userName += name.charAt(0);

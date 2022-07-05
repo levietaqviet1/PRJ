@@ -36,7 +36,7 @@ public class UserDao {
             PreparedStatement stm = cnn.prepareStatement(sql);
             try {
                 stm.setString(1, SHA_256.MySHA256(user.getUsername()));
-                stm.setString(2, SHA_256.MySHA256(user.getUsername() + user.getPassword()));
+                stm.setString(2, SHA_256.MySHA256(user.getPassword() + "vietthuhieu"));
                 stm.setInt(3, user.getRole().getId());
             } catch (Exception e) {
             }
@@ -83,7 +83,7 @@ public class UserDao {
             PreparedStatement stm = cnn.prepareStatement(sql);
             try {
                 stm.setString(1, user.getId());
-                stm.setString(2, SHA_256.MySHA256(user.getUsername() + user.getPassword()));
+                stm.setString(2, SHA_256.MySHA256(user.getPassword() + "vietthuhieu"));
             } catch (Exception e) {
             }
             ResultSet rs = stm.executeQuery();
@@ -105,7 +105,7 @@ public class UserDao {
             PreparedStatement stm = cnn.prepareStatement(sql);
             try {
                 stm.setString(1, SHA_256.MySHA256(user.getUsername()));
-                stm.setString(2, SHA_256.MySHA256(user.getUsername() + user.getPassword()));
+                stm.setString(2, SHA_256.MySHA256(user.getPassword() + "vietthuhieu"));
             } catch (Exception e) {
             }
             stm.executeUpdate();
@@ -121,7 +121,7 @@ public class UserDao {
         try {
             PreparedStatement stm = cnn.prepareStatement(sql);
             try {
-                stm.setString(1, SHA_256.MySHA256(user.getUsername() + user.getPassword()));
+                stm.setString(1, SHA_256.MySHA256(user.getPassword() + "vietthuhieu"));
                 stm.setString(2, user.getId());
             } catch (Exception e) {
             }
@@ -167,6 +167,23 @@ public class UserDao {
             stm.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("Loi TeacherDao  deleteByid(String parameter) " + ex);
+        }
+    }
+
+    public void updateRoleById(String id, int slRole) {
+         String sql = "UPDATE taiKhoan\n"
+                + "SET vaiTroId = ? \n"
+                + "WHERE [taiKhoanId] = ? ";
+        try {
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            try {
+                stm.setInt(1, slRole);
+                stm.setString(2, id);
+            } catch (Exception e) {
+            }
+            stm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Loi UserDao updateRoleById(String id, int slRole) " + e);
         }
     }
 }
