@@ -181,7 +181,7 @@ public class updateAccount extends HttpServlet {
             String acc_MK_Mail_Send = "npmgjujnxbtswmit";
             SendMail.SendMail(email, topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
         }
-        response.sendRedirect("indexBQT?slRole=" + slRole);
+        response.sendRedirect("indexBQT?nextAccount=1&slRole=" + slRole);
 
     }
 

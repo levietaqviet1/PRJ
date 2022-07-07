@@ -87,8 +87,8 @@ public class studentParentsDao {
         try {
             String sql = "SELECT *\n"
                     + "FROM [PRJ_G10].[dbo].[phuHuynh] s\n"
-                    + " JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN taiKhoan tk ON s.taiKhoanId = tk.taiKhoanId JOIN sinhVien sv ON s.sinhVienId = sv.sinhVienId "
-                    + "WHERE sv.sinhVienId = " + id + "";
+                    + " JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN taiKhoan tk ON s.taiKhoanId = tk.taiKhoanId "
+                    + "WHERE s.sinhVienId = " + id + "";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -97,7 +97,7 @@ public class studentParentsDao {
                 User user = new User(String.valueOf(rs.getInt("taiKhoanId")));
                 Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"));
                 StudentParents studentParents = new StudentParents(rs.getInt("phuHuynhId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
-                        rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChiSV"), campus, user, student);
+                        rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChi"), campus, user, student);
                 return studentParents;
             }
 

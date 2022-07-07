@@ -166,7 +166,7 @@ public class UserDao {
             PreparedStatement stm = cnn.prepareStatement(sql);
             stm.executeUpdate();
         } catch (SQLException ex) {
-            System.out.println("Loi TeacherDao  deleteByid(String parameter) " + ex);
+            System.out.println("Loi TeacherDao  UserDao (String parameter) " + ex);
         }
     }
 

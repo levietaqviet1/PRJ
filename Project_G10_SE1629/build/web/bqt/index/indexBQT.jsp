@@ -270,9 +270,9 @@
                                         <td>${t.phone}</td>
                                         <td>${t.address}</td>
                                         <td>${t.status.name}</td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&campusId=${t.campus.id}"><span></span><span></span><span></span><span></span>
+                                        <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&campusId=${t.campus.id}">
                                                 Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}"><span></span><span></span><span></span><span></span>Delete</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}">${t.id}</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -314,7 +314,7 @@
                                         <td>${t.address}</td>
                                         <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&campusId=${t.campus.id}"><span></span><span></span><span></span><span></span>
                                                 Update</a></td>
-                                                <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}"><span></span><span></span><span></span><span></span>Delete</a></td>
+                                                <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}"><span></span><span></span><span></span><span></span>Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

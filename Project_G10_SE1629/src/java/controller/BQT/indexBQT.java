@@ -86,8 +86,10 @@ public class indexBQT extends HttpServlet {
                 //sv
                 if (request.getParameter("delete").equals("2")) {
                     StudentParents studentParents = studentParentsDao.getStudentParentsByIdStudent(request.getParameter("sid"));
-                    studentParentsDao.deleteByid(String.valueOf(studentParents.getId()));
-                    userDao.deleteByid(request.getParameter(String.valueOf(studentParents.getUser().getId())));
+                    if (studentParents != null) {
+                        studentParentsDao.deleteByid(String.valueOf(studentParents.getId()));
+                        userDao.deleteByid(String.valueOf(studentParents.getUser().getId()));
+                    }
                     studentDao.deleteByid(request.getParameter("sid"));
                     userDao.deleteByid(request.getParameter("tkid"));
 
@@ -104,7 +106,7 @@ public class indexBQT extends HttpServlet {
                 }
 
                 roleId = request.getParameter("delete");
-                response.sendRedirect("indexBQT?slRole=" + roleId);
+                response.sendRedirect("indexBQT?nextAccount=1&slRole=" + roleId);
             }
 
             //sv

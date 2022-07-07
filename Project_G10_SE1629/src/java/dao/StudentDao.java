@@ -114,6 +114,7 @@ public class StudentDao {
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
+                User user = new User(rs.getString("taiKhoanId"), "", "");
                 Specializedin specializedin = new Specializedin(rs.getInt("idChuyenNganh"), rs.getNString("tenChuyenNganh"), rs.getString("codeChuyenNganh"),
                         rs.getDate("dateStartCN") == null ? "null" : String.valueOf(rs.getDate("dateStartCN")), rs.getDate("dateEndCN") == null ? "null" : String.valueOf(rs.getDate("dateEndCN")));
                 Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"),
@@ -122,7 +123,7 @@ public class StudentDao {
                 Student student = new Student(rs.getInt("sinhVienId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChiSV"),
                         rs.getDate("batDauTuSV") == null ? "null" : String.valueOf(rs.getDate("batDauTuSV")), rs.getString("ketThucNgaySV"),
-                        specializedin, campus, status, rs.getString("MSSV"));
+                        specializedin, campus, status, rs.getString("MSSV"),user);
                 listStudent.add(student);
             }
             return listStudent;
@@ -142,6 +143,7 @@ public class StudentDao {
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
+                User user = new User(rs.getString("taiKhoanId"), "", "");
                 Specializedin specializedin = new Specializedin(rs.getInt("idChuyenNganh"), rs.getNString("tenChuyenNganh"), rs.getString("codeChuyenNganh"),
                         rs.getDate("dateStartCN") == null ? "null" : String.valueOf(rs.getDate("dateStartCN")), rs.getDate("dateEndCN") == null ? "null" : String.valueOf(rs.getDate("dateEndCN")));
                 Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"),
@@ -150,7 +152,7 @@ public class StudentDao {
                 Student student = new Student(rs.getInt("sinhVienId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChiSV"),
                         rs.getDate("batDauTuSV") == null ? "null" : String.valueOf(rs.getDate("batDauTuSV")), rs.getString("ketThucNgaySV"),
-                        specializedin, campus, status, rs.getString("MSSV"));
+                        specializedin, campus, status, rs.getString("MSSV"),user);
                 listStudent.add(student);
             }
             return listStudent;
@@ -170,6 +172,7 @@ public class StudentDao {
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
+                User user = new User(rs.getString("taiKhoanId"), "", "");
                 Specializedin specializedin = new Specializedin(rs.getInt("idChuyenNganh"), rs.getNString("tenChuyenNganh"), rs.getString("codeChuyenNganh"),
                         rs.getDate("dateStartCN") == null ? "null" : String.valueOf(rs.getDate("dateStartCN")), rs.getDate("dateEndCN") == null ? "null" : String.valueOf(rs.getDate("dateEndCN")));
                 Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"),
@@ -178,7 +181,7 @@ public class StudentDao {
                 Student student = new Student(rs.getInt("sinhVienId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChiSV"),
                         rs.getDate("batDauTuSV") == null ? "null" : String.valueOf(rs.getDate("batDauTuSV")), rs.getString("ketThucNgaySV"),
-                        specializedin, campus, status, rs.getString("MSSV"));
+                        specializedin, campus, status, rs.getString("MSSV"),user);
                 listStudent.add(student);
             }
             System.out.println(sql);
