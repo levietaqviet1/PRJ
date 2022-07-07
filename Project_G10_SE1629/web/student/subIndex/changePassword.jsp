@@ -105,8 +105,8 @@
                         </div>
                     </table>
             </div>
-            <div>
-                <input style="margin-left: 230px;background-color: beige;border-radius: 10px; padding: 5px" type="submit" name="OK" value="Change"> 
+            <div style="text-align: center">
+                <input style="background-color: beige;border-radius: 10px; padding: 5px" type="submit" name="OK" value="Change"> 
                 </form>
             </div>
         </div>

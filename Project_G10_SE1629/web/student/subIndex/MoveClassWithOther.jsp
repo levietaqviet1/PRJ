@@ -110,8 +110,8 @@
                         
                 </table>
             </div>
-                <div>
-                    <input style="margin-left: 400px;background-color: beige;border-radius: 10px; padding: 5px" type="submit" name="OK" value="Send"> 
+                <div style="text-align: center">
+                    <input style="background-color: beige;border-radius: 10px; padding: 5px" type="submit" name="OK" value="Send"> 
                     <input style="background-color:gainsboro;border-radius: 10px; padding: 5px " type="reset" name="cancel" value="Cancel">  
                 </div>
         </div>

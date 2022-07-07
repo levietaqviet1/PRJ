@@ -80,8 +80,8 @@
                         </tr>
                     </table>
                 </div>
-                <div class="submit">
-                    <br><input style="background-color: beige; font-size: 18px; margin-left: 280px;border-radius: 10px;padding: 5px" type="submit" name="OK" value="Send">
+                <div class="submit" style="text-align: center">
+                    <br><input style="background-color: beige; font-size: 18px; border-radius: 10px;padding: 5px" type="submit" name="OK" value="Send">
 
                 </div>
             </div>

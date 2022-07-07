@@ -98,7 +98,7 @@
                 </table>                
             </div>
                 <div class="textA" style="text-align: center">
-                <input style="margin-left: 350px;background-color: beige;border-radius: 10px; padding: 5px" type="submit" name="OK" value="Send"> 
+                <input style="background-color: beige;border-radius: 10px; padding: 5px" type="submit" name="OK" value="Send"> 
                 <input style="background-color:gainsboro;border-radius: 10px; padding: 5px " type="reset" name="cancel" value="Cancel">  
             </div>               
         </div>
