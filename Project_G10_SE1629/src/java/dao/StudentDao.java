@@ -52,6 +52,32 @@ public class StudentDao {
         }
         return null;
     }
+    
+    
+    public Student getStudentByidStudent(int id) {
+        try {
+            String sql = "SELECT *\n"
+                    + "  FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn "
+                    + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId \n"
+                    + "WHERE s.sinhVienId = ? ";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            stm.setInt(1, id); 
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Specializedin specializedin = new Specializedin(rs.getInt(17), rs.getString(18), rs.getString(19), String.valueOf(rs.getDate(20)), String.valueOf(rs.getDate(21)));
+                Campus campus = new Campus(rs.getInt(22), rs.getString(23), rs.getString(24), String.valueOf(rs.getDate(25)), String.valueOf(rs.getDate(26)));
+                Status status = new Status(rs.getInt(27), rs.getString(28));
+                User user = new User(rs.getString(12), "", "");
+                return new Student(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getString(5),
+                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(13), rs.getString(14),
+                        specializedin, campus, status, rs.getBytes(15), rs.getString(16), user);
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Loi StudentDao " + ex);
+        }
+        return null;
+    }
 
     public Student getStudentByidUser(int id, String campusup_login) {
         try {
@@ -106,13 +132,13 @@ public class StudentDao {
         return null;
     }
 
-    public ArrayList<Student> getAll(String st) {
+    public ArrayList<Student> getAll(String st, String cam) {
         ArrayList<Student> listStudent = new ArrayList<Student>();
         try {
             String sql = " SELECT *\n"
                     + "FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn \n"
                     + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId "
-                    + "WHERE  s.trangThaiId like '%" + st + "%' ";
+                    + "WHERE  s.trangThaiId like '%" + st + "%'  AND cs.idCoSo like '%" + cam + "%' ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -134,13 +160,13 @@ public class StudentDao {
         return null;
     }
 
-    public ArrayList<Student> getAllByInfo(String frist, String last, String st) {
+    public ArrayList<Student> getAllByInfo(String frist, String last, String st, String cam) {
         ArrayList<Student> listStudent = new ArrayList<Student>();
         try {
             String sql = " SELECT *\n"
                     + "FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn \n"
                     + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId "
-                    + "WHERE s.firstName like '%" + frist + "%' AND s.lastName like '%" + last + "%'  AND s.trangThaiId like '%" + st + "%' ";
+                    + "WHERE s.firstName like '%" + frist + "%' AND s.lastName like '%" + last + "%'  AND s.trangThaiId like '%" + st + "%'  AND cs.idCoSo like '%" + cam + "%' ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {

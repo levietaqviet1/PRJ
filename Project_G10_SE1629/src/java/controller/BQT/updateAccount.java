@@ -104,7 +104,13 @@ public class updateAccount extends HttpServlet {
                 officerFUDao.insert(officerFU);
                 role = "Officer FU";
                 coutCheckRole++;
-
+            }
+            if (slRole == 5) {
+                //phuHuynh
+                OfficerFU officerFU = new OfficerFU(roleId, firstName, lastName, gender, dob, phone, email, address, campus, user);
+                officerFUDao.insert(officerFU);
+                role = "Officer FU";
+                coutCheckRole++;
             }
             userDao.updateRoleById(user.getId(), slRole);
         }

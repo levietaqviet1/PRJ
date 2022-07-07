@@ -58,13 +58,13 @@ public class TeacherDao {
 
     }
 
-    public ArrayList<Teacher> getAllByInfo(String firt, String last) {
+    public ArrayList<Teacher> getAllByInfo(String firt, String last, String cam) {
         ArrayList<Teacher> listTeacher = new ArrayList<Teacher>();
         try {
             String sql = "SELECT * \n"
                     + "FROM [PRJ_G10].[dbo].[giangVien] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
                     + "ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
-                    + "WHERE gv.firstName like '%" + firt + "%' AND lastName like '%" + last + "%' ";
+                    + "WHERE gv.firstName like '%" + firt + "%' AND lastName like '%" + last + "%'  AND cs.idCoSo like '%" + cam + "%' ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {

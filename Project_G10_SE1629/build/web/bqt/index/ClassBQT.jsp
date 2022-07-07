@@ -1,7 +1,7 @@
 <%-- 
-    Document   : adminAccountPage
-    Created on : Jun 22, 2022, 11:14:47 PM
-    Author     : win
+    Document   : ClassBQT
+    Created on : Jul 6, 2022, 3:55:44 PM
+    Author     : NCC
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -126,9 +126,6 @@
                             </c:forEach>
                         </select>
                     </div>
-                    <div>
-                        <input type="submit" value="Add new Account" name="addSubAccou" style="width: auto;margin-left: 70px;margin-top: 20px;"/>
-                    </div>
                 </div>
 
                 <div class="dash-bottomtable">
@@ -172,8 +169,8 @@
                                         <td>
                                             ${t.user.role.name}
                                         </td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&tkid=${t.user.id}">Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}">Delete</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&update=4&tkid=${t.user.id}">Update</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&delete=4&tkid=${t.user.id}">Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -217,8 +214,8 @@
                                         <td>
                                             ${t.user.role.name}
                                         </td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&tkid=${t.user.id}">Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}">Delete</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&update=3&tkid=${t.user.id}">Update</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&delete=3&tkid=${t.user.id}">Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -270,110 +267,45 @@
                                         <td>${t.phone}</td>
                                         <td>${t.address}</td>
                                         <td>${t.status.name}</td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&campusId=${t.campus.id}"><span></span><span></span><span></span><span></span>
+                                        <td><a href="indexBQT?sid=${t.id}&update=2&campusId=${t.campus.id}"><span></span><span></span><span></span><span></span>
                                                 Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}"><span></span><span></span><span></span><span></span>Delete</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&delete=2"><span></span><span></span><span></span><span></span>Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
                         </c:if>
-                            
-                             <!--phu huynh-->
-                        <c:if test="${roleId == 5}">
-                            <thead>
-                                <tr> 
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Gender</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Dob</th>
-                                    <th scope="col">Phone Number</th>
-                                    <th scope="col">Address</th>
-                                    <th scope="col">Update</th>
-                                    <th scope="col">Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${requestScope.listStudentParents}" var="t"  >
-                                    <tr>
-                                        <td>${t.firstName}</td>
-                                        <td>${t.lastName}</td>
-                                        <td>${t.lastName} ${t.firstName} </td>
-                                        <td>
-                                            <c:if test="${t.gender == true}" >
-                                                Male
-                                            </c:if>    
-                                            <c:if test="${t.gender == false}" >
-                                                FeMale
-                                            </c:if>  
-                                        </td>
-                                        <td>${t.gmail}</td>
-                                        <td>${t.date}</td>
-                                        <td>${t.phone}</td>
-                                        <td>${t.address}</td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&campusId=${t.campus.id}"><span></span><span></span><span></span><span></span>
-                                                Update</a></td>
-                                                <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}"><span></span><span></span><span></span><span></span>Delete</a></td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </c:if>
-                        </form>
-                        <form action="addAccountBQT" method="get">
-                            <!--add-->
-                            <c:if test="${requestScope.addAccAttibu == 1}"> 
-                                <tbody>
-                                    <tr>
-                                        <td><h3>Please select the role you want to add</h3></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td><input type="radio" value="1" name="roleAdd" id="roleAdd1" checked style="margin-right: 8px"/><label for="roleAdd1">BQT </label></td>
-                                    </tr>
-                                    <c:forEach items="${listRole}" var="t"  >
-                                        <tr>
-                                            <td><input type="radio" value="${t.id}" name="roleAdd" id="${t.name}" style="margin-right: 8px"/><label for="${t.name}">${t.name} </label></td>
-                                        </tr>
-                                    </c:forEach>
-                                    <tr>
-                                        <td><input type="submit" value="Add Account" name="Submit" style="width: auto;margin-left: 70px;margin-top: 20px;"/></td>
-                                    </tr>
-
-                                </tbody>
-                            </c:if>
                     </table>
-            </form> 
+
+                </div>
+            </form>
         </div>
 
-    </div>
+        <script>
+            document.addEventListener('mousemove', function (e) {
+                let body = document.querySelector('body');
+                let particles = document.createElement('b');
+                let x = e.offsetX;
+                let y = e.offsetY;
 
-    <script>
-        document.addEventListener('mousemove', function (e) {
-            let body = document.querySelector('body');
-            let particles = document.createElement('b');
-            let x = e.offsetX;
-            let y = e.offsetY;
+                particles.style.left = x + 'px';
+                particles.style.top = y + 'px';
+                body.appendChild(particles);
 
-            particles.style.left = x + 'px';
-            particles.style.top = y + 'px';
-            body.appendChild(particles);
+                let size = Math.random() * 8;
+                particles.style.width = 2 + size + 'px';
+                particles.style.height = 2 + size + 'px';
 
-            let size = Math.random() * 8;
-            particles.style.width = 2 + size + 'px';
-            particles.style.height = 2 + size + 'px';
+                let transformValue = Math.random() * 3600;
+                particles.style.transform = 'rotate(' + transformValue + 'deg)';
 
-            let transformValue = Math.random() * 3600;
-            particles.style.transform = 'rotate(' + transformValue + 'deg)';
+                setTimeout(function () {
+                    particles.remove()
+                }, 200)
 
-            setTimeout(function () {
-                particles.remove()
-            }, 200)
+            })
+        </script>
 
-        })
-    </script>
-
-    <!-- <script src="agu.js"></script> -->
-</body>
+        <!-- <script src="agu.js"></script> -->
+    </body>
 
 </html>

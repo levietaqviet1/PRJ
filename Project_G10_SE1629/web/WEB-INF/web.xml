@@ -60,6 +60,10 @@
         <servlet-name>updateAccount</servlet-name>
         <servlet-class>controller.BQT.updateAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>addAccountBQT</servlet-name>
+        <servlet-class>controller.BQT.addAccountBQT</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>testAdd</servlet-name>
         <url-pattern>/testAdd</url-pattern>
@@ -119,6 +123,10 @@
     <servlet-mapping>
         <servlet-name>updateAccount</servlet-name>
         <url-pattern>/updateAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>addAccountBQT</servlet-name>
+        <url-pattern>/addAccountBQT</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -78,18 +78,18 @@
 
             <div class="menu-items">
                 <ul class="nav-links">
-                    <li><a href="indexBQT">
+                    <li><a href="indexBQT?nextAccount=1">
                             <i class="uil uil-estate"></i>
                             <span class="link-name">Account</span>
                         </a></li>
-                    <li><a href="#">
+                    <li><a href="indexBQT?nextClass=1">
                             <i class="uil uil-thumbs-up"></i>
                             <span class="link-name">Class</span>
                         </a></li>
                 </ul>
 
                 <ul class="logout-mode">
-                    <li><a href="LogOutController?LogId=1">
+                    <li><a href="LogOutController?LogId=2">
                             <i class="uil uil-signout"></i>
                             <span class="link-name">Logout</span>
                         </a></li>
@@ -115,6 +115,19 @@
                                         >${roles.name}</option>
                             </c:forEach>
                         </select>
+                    </div>
+                    <div>
+                        <select name="slCampusSearch"  style="width: auto;margin-left: 70px;margin-top: 20px;">
+                            <option value="">All Campus</option>
+                            <c:forEach items="${listCampus}"  var="campus">
+                                <option value="${campus.id}" 
+                                        <c:if test="${campusID == campus.id }" >selected</c:if>
+                                        >FU-${campus.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="submit" value="Add new Account" name="addSubAccou" style="width: auto;margin-left: 70px;margin-top: 20px;"/>
                     </div>
                 </div>
 
@@ -159,8 +172,8 @@
                                         <td>
                                             ${t.user.role.name}
                                         </td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=4&tkid=${t.user.id}">Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=4&tkid=${t.user.id}">Delete</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&tkid=${t.user.id}">Update</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}">Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -204,8 +217,8 @@
                                         <td>
                                             ${t.user.role.name}
                                         </td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=3&tkid=${t.user.id}">Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=3&tkid=${t.user.id}">Delete</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&tkid=${t.user.id}">Update</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}">Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -224,8 +237,8 @@
                                     <th scope="col">Address</th>
                                     <th scope="col" >
                                         <select name="slStatus">
-                                            <option hidden >Status</option>
-                                            <option  value="0" >All</option>
+                                            <option hidden value="">Status</option>
+                                            <option  value="" >All</option>
                                             <c:forEach items="${session_listStatusBQT}"  var="t">
                                                 <option value="${t.id}" 
                                                         <c:if test="${slStatus == t.id }" >selected</c:if>
@@ -257,45 +270,110 @@
                                         <td>${t.phone}</td>
                                         <td>${t.address}</td>
                                         <td>${t.status.name}</td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=2&campusId=${t.campus.id}"><span></span><span></span><span></span><span></span>
+                                        <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&campusId=${t.campus.id}"><span></span><span></span><span></span><span></span>
                                                 Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=2"><span></span><span></span><span></span><span></span>Delete</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}"><span></span><span></span><span></span><span></span>Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
                         </c:if>
-                    </table>
+                            
+                             <!--phu huynh-->
+                        <c:if test="${roleId == 5}">
+                            <thead>
+                                <tr> 
+                                    <th scope="col">First Name</th>
+                                    <th scope="col">Last Name</th>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Gender</th>
+                                    <th scope="col">Email</th>
+                                    <th scope="col">Dob</th>
+                                    <th scope="col">Phone Number</th>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">Update</th>
+                                    <th scope="col">Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${requestScope.listStudentParents}" var="t"  >
+                                    <tr>
+                                        <td>${t.firstName}</td>
+                                        <td>${t.lastName}</td>
+                                        <td>${t.lastName} ${t.firstName} </td>
+                                        <td>
+                                            <c:if test="${t.gender == true}" >
+                                                Male
+                                            </c:if>    
+                                            <c:if test="${t.gender == false}" >
+                                                FeMale
+                                            </c:if>  
+                                        </td>
+                                        <td>${t.gmail}</td>
+                                        <td>${t.date}</td>
+                                        <td>${t.phone}</td>
+                                        <td>${t.address}</td>
+                                        <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&campusId=${t.campus.id}"><span></span><span></span><span></span><span></span>
+                                                Update</a></td>
+                                                <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}"><span></span><span></span><span></span><span></span>Delete</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                        </c:if>
+                        </form>
+                        <form action="addAccountBQT" method="get">
+                            <!--add-->
+                            <c:if test="${requestScope.addAccAttibu == 1}"> 
+                                <tbody>
+                                    <tr>
+                                        <td><h3>Please select the role you want to add</h3></td>
 
-                </div>
-            </form>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" value="1" name="roleAdd" id="roleAdd1" checked style="margin-right: 8px"/><label for="roleAdd1">BQT </label></td>
+                                    </tr>
+                                    <c:forEach items="${listRole}" var="t"  >
+                                        <tr>
+                                            <td><input type="radio" value="${t.id}" name="roleAdd" id="${t.name}" style="margin-right: 8px"/><label for="${t.name}">${t.name} </label></td>
+                                        </tr>
+                                    </c:forEach>
+                                    <tr>
+                                        <td><input type="submit" value="Add Account" name="Submit" style="width: auto;margin-left: 70px;margin-top: 20px;"/></td>
+                                    </tr>
+
+                                </tbody>
+                            </c:if>
+                    </table>
+            </form> 
         </div>
 
-        <script>
-            document.addEventListener('mousemove', function (e) {
-                let body = document.querySelector('body');
-                let particles = document.createElement('b');
-                let x = e.offsetX;
-                let y = e.offsetY;
+    </div>
 
-                particles.style.left = x + 'px';
-                particles.style.top = y + 'px';
-                body.appendChild(particles);
+    <script>
+        document.addEventListener('mousemove', function (e) {
+            let body = document.querySelector('body');
+            let particles = document.createElement('b');
+            let x = e.offsetX;
+            let y = e.offsetY;
 
-                let size = Math.random() * 8;
-                particles.style.width = 2 + size + 'px';
-                particles.style.height = 2 + size + 'px';
+            particles.style.left = x + 'px';
+            particles.style.top = y + 'px';
+            body.appendChild(particles);
 
-                let transformValue = Math.random() * 3600;
-                particles.style.transform = 'rotate(' + transformValue + 'deg)';
+            let size = Math.random() * 8;
+            particles.style.width = 2 + size + 'px';
+            particles.style.height = 2 + size + 'px';
 
-                setTimeout(function () {
-                    particles.remove()
-                }, 200)
+            let transformValue = Math.random() * 3600;
+            particles.style.transform = 'rotate(' + transformValue + 'deg)';
 
-            })
-        </script>
+            setTimeout(function () {
+                particles.remove()
+            }, 200)
 
-        <!-- <script src="agu.js"></script> -->
-    </body>
+        })
+    </script>
+
+    <!-- <script src="agu.js"></script> -->
+</body>
 
 </html>

@@ -28,7 +28,7 @@ public class index extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         if (request.getSession().getAttribute("dalogin") == null) {
-            response.sendRedirect("homeBQT");
+            response.sendRedirect("home");
         }
         // student
         if (session.getAttribute("st_login_successful") != null) {

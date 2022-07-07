@@ -80,18 +80,18 @@
 
                 <div class="menu-items">
                     <ul class="nav-links">
-                        <li><a href="indexBQT">
-                                <i class="uil uil-estate"></i>
-                                <span class="link-name">Account</span>
-                            </a></li>
-                        <li><a href="#">
-                                <i class="uil uil-thumbs-up"></i>
-                                <span class="link-name">Class</span>
-                            </a></li>
+                        <li><a href="indexBQT?nextAccount=1">
+                            <i class="uil uil-estate"></i>
+                            <span class="link-name">Account</span>
+                        </a></li>
+                    <li><a href="indexBQT?nextClass=1">
+                            <i class="uil uil-thumbs-up"></i>
+                            <span class="link-name">Class</span>
+                        </a></li>
                     </ul>
 
                     <ul class="logout-mode">
-                        <li><a href="LogOutController?LogId=1">
+                        <li><a href="LogOutController?LogId=2">
                                 <i class="uil uil-signout"></i>
                                 <span class="link-name">Logout</span>
                             </a></li>
@@ -388,7 +388,7 @@
 
                     <div class="d-grid gap-2 d-md-block" style="margin-top: 30px; margin-bottom: 30px; ;">
                         <input  type="submit" value="Save"/>
-                        <a href="indexBQT?slRole=${requestScope.updateID}"><button class="btn btn-primary" type="button" style="background-color: red;">Cancel X</button> </a>
+                        <a href="indexBQT?slRole=${requestScope.updateID}&nextAccount=1"><button class="btn btn-primary" type="button" style="background-color: red;">Cancel X</button> </a>
                     </div>
                 </div>
             </div>

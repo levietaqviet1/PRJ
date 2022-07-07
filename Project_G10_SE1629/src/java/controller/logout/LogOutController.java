@@ -34,7 +34,7 @@ public class LogOutController extends HttpServlet {
             /* TODO output your page here. You may use following sample code. */
             HttpSession session = request.getSession();
             if (request.getSession().getAttribute("dalogin") != null) {
-                if (request.getParameter("LogId") != null) {
+                if (request.getParameter("LogId") != null && request.getParameter("LogId").equals("1")) {
                     session.removeAttribute("dalogin");
                     if (request.getSession().getAttribute("giaoDien") != null) {
                         session.removeAttribute("giaoDien");
@@ -47,7 +47,7 @@ public class LogOutController extends HttpServlet {
             }
             
             if (request.getSession().getAttribute("dalogin_bqt") != null) {
-                if (request.getParameter("LogId") != null) {
+                if (request.getParameter("LogId") != null && request.getParameter("LogId").equals("2") ) {
                     session.removeAttribute("dalogin_bqt"); 
                     if (request.getSession().getAttribute("bqt_login_successful") != null) {
                         session.removeAttribute("bqt_login_successful");

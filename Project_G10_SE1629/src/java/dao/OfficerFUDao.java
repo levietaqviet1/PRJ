@@ -29,12 +29,13 @@ public class OfficerFUDao {
         }
     }
 
-    public ArrayList<OfficerFU> getAll() {
+    public ArrayList<OfficerFU> getAll( String cam) {
         ArrayList<OfficerFU> listOfficerFU = new ArrayList<OfficerFU>();
         try {
             String sql = "  SELECT *\n"
                     + "  FROM [PRJ_G10].[dbo].[canBo] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
-                    + "  ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId";
+                    + "  ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
+                    + "WHERE  cs.idCoSo like '%" + cam + "%' ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -53,13 +54,13 @@ public class OfficerFUDao {
         return listOfficerFU;
     }
 
-    public ArrayList<OfficerFU> getAllByInfo(String firt, String last) {
+    public ArrayList<OfficerFU> getAllByInfo(String firt, String last, String cam) {
         ArrayList<OfficerFU> listOfficerFU = new ArrayList<OfficerFU>();
         try {
             String sql = "  SELECT *\n"
                     + "  FROM [PRJ_G10].[dbo].[canBo] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
-                    + "  ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId"
-                    + "WHERE gv.firstName like '%" + firt + "%' AND lastName like '%" + last + "%' ";
+                    + "  ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
+                    + "WHERE gv.firstName like '%" + firt + "%' AND lastName like '%" + last + "%'   AND cs.idCoSo like '%" + cam + "%' ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -70,6 +71,7 @@ public class OfficerFUDao {
                         rs.getNString("ngaySinh"), rs.getNString("soDienThoai"), rs.getNString("gmail"),
                         rs.getNString("diaChi"), campus, user);
                 listOfficerFU.add(officerFU);
+                System.out.println(sql);
             }
 
         } catch (SQLException ex) {

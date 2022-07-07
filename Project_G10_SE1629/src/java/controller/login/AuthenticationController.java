@@ -215,7 +215,7 @@ public class AuthenticationController extends HttpServlet {
                         session.setAttribute("bqt_login_successful", bqt);
                         session.setAttribute("dalogin_bqt", bqt);
                         session.setMaxInactiveInterval(60 * 60 * 60);
-                        response.sendRedirect("indexBQT");
+                        response.sendRedirect("indexBQT?nextAccount=1");
                     }
                 }
                 if (countCheck == 0) {

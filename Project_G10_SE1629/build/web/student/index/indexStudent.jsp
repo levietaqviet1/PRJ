@@ -156,7 +156,7 @@ if (request.getSession().getAttribute("st_login_successful") == null) {
                 <a <c:if test="${giaoDien == 7}" var="t">
                         class="acti10"
                     </c:if> href="index?sid=7">Change Password</a>
-                <a href="LogOutController?LogId=${giaoDien}">
+                <a href="LogOutController?LogId=1">
                     <i class="uil uil-signout"></i>
                     <span class="link-name">Logout</span>
                 </a>
