@@ -1,7 +1,7 @@
 <%-- 
-    Document   : AddAccountNew
-    Created on : Jul 6, 2022, 4:04:42 PM
-    Author     : NCC
+    Document   : adminAccountUpdate
+    Created on : Jun 24, 2022, 4:32:23 PM
+    Author     : win
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -81,13 +81,13 @@
                 <div class="menu-items">
                     <ul class="nav-links">
                         <li><a href="indexBQT?nextAccount=1">
-                            <i class="uil uil-estate"></i>
-                            <span class="link-name">Account</span>
-                        </a></li>
-                    <li><a href="indexBQT?nextClass=1">
-                            <i class="uil uil-thumbs-up"></i>
-                            <span class="link-name">Class</span>
-                        </a></li>
+                                <i class="uil uil-estate"></i>
+                                <span class="link-name">Account</span>
+                            </a></li>
+                        <li><a href="indexBQT?nextClass=1">
+                                <i class="uil uil-thumbs-up"></i>
+                                <span class="link-name">Class</span>
+                            </a></li>
                     </ul>
 
                     <ul class="logout-mode">
@@ -109,8 +109,9 @@
                 <div class="form-title" style="text-align: center;font-size: 50px;">Update Account</div>
 
                 <div class="form-content" style="width: 80%;height: auto; margin-left: 10%; padding-top: 0;padding-bottom: 0;">
-                    <!--                     gv         -->
-                    <c:if test = "${teacherBQT != null}">
+
+                    <!--                     BQT         -->
+                    <c:if test = "${updateID == 1}">
                         <div class="mb-3">
                             <label for="exampleFormControlInput11" class="form-label">First Name</label>
                             <input required type="text" class="form-control"  id="exampleFormControlInput11" name="txtFirstName" value="${teacherBQT.firstName}" >
@@ -152,14 +153,6 @@
                             <input  type="date" name="dob" value="${teacherBQT.date}"/> <br/>
                         </div>
                         <div class="mb-3">
-                            <label for="exampleFormControlInput15" class="form-label">Date Of Start</label>
-                            <input  type="date" name="dobStart" value="${teacherBQT.dateOfStart}"/> <br/>
-                        </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput15" class="form-label">Date Of End</label>
-                            <input  type="date" name="dobEnd" value="${teacherBQT.dateOfEnd}"/> <br/>
-                        </div>
-                        <div class="mb-3">
                             <label for="exampleFormControlInput16" class="form-label">Number Phone</label>
                             <input required type="text" class="form-control" id="exampleFormControlInput16" name="txtPhone" value="${teacherBQT.phone}" placeholder="name@example.com">
                         </div> 
@@ -167,18 +160,7 @@
                             <label for="exampleFormControlInput17" class="form-label">Address</label>
                             <input required type="text" class="form-control" id="exampleFormControlInput17" name="ttAddress" value="${teacherBQT.address}" placeholder="name@example.com">
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleFormControlInput18" class="form-label">Role</label>
-                            <select class="form-select" name="slRole" aria-label="Default select example">
-                                <c:forEach items="${listRole}" var="role">
-                                    <option  value="${role.id}"
-                                             <c:if test="${requestScope.teacherBQT.user.role.id == role.id}" var="t">
-                                                 selected
-                                             </c:if>
-                                             >${role.name}</option>
-                                </c:forEach>
-                            </select>
-                        </div>
+                        
 
                         <div class="mb-3">
                             <label for="exampleFormControlInput18" class="form-label">Campus</label>
@@ -196,7 +178,7 @@
                     </c:if>  
 
                     <!--sv-->
-                    <c:if test = "${studentBQT != null}">
+                    <c:if test = "${updateID == 2}">
 
                         <div class="mb-3">
                             <label for="exampleFormControlInput11" class="form-label">First Name</label>
@@ -306,8 +288,94 @@
 
                     </c:if>  
 
+                    <!--                     gv         -->
+                    <c:if test = "${updateID == 3}">
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput11" class="form-label">First Name</label>
+                            <input required type="text" class="form-control"  id="exampleFormControlInput11" name="txtFirstName" value="${teacherBQT.firstName}" >
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput12" class="form-label">Last Name</label>
+                            <input required type="text" class="form-control" id="exampleFormControlInput12" name="txtLastName" value="${teacherBQT.lastName}">
+                        </div>
+                        <div class="rdCheck" style="display: flex">
+                            <div class="form-check">
+                                <div class="form-label">Gender</div>
+                                <input  type="radio" name="gender" id="gender1"
+                                        <c:if test = "${teacherBQT.gender}">
+                                            checked
+                                        </c:if>    
+                                        value="1" /> <label for="gender1">Male</label> 
+                                <input  type="radio" name="gender" id="gender2"
+                                        <c:if test = "${!teacherBQT.gender}">
+                                            checked 
+                                        </c:if>    
+                                        value="0" /> <label for="gender2">Female</label>   
+                                <br/>
+                            </div>
+
+
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput13" class="form-label">Email</label>
+                            <input required type="email" class="form-control" id="exampleFormControlInput13" name="txtEmail" value="${teacherBQT.gmail}" placeholder="name@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput14" class="form-label">Pass Word</label>
+                            <input  type="text" class="form-control" name="txtPassword" value="" id="exampleFormControlInput14">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput15" class="form-label">Date</label>
+                            <input  type="date" name="dob" value="${teacherBQT.date}"/> <br/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput15" class="form-label">Date Of Start</label>
+                            <input  type="date" name="dobStart" value="${teacherBQT.dateOfStart}"/> <br/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput15" class="form-label">Date Of End</label>
+                            <input  type="date" name="dobEnd" value="${teacherBQT.dateOfEnd}"/> <br/>
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput16" class="form-label">Number Phone</label>
+                            <input required type="text" class="form-control" id="exampleFormControlInput16" name="txtPhone" value="${teacherBQT.phone}" placeholder="name@example.com">
+                        </div> 
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput17" class="form-label">Address</label>
+                            <input required type="text" class="form-control" id="exampleFormControlInput17" name="ttAddress" value="${teacherBQT.address}" placeholder="name@example.com">
+                        </div>
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput18" class="form-label">Role</label>
+                            <select class="form-select" name="slRole" aria-label="Default select example">
+                                <c:forEach items="${listRole}" var="role">
+                                    <option  value="${role.id}"
+                                             <c:if test="${requestScope.teacherBQT.user.role.id == role.id}" var="t">
+                                                 selected
+                                             </c:if>
+                                             >${role.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="exampleFormControlInput18" class="form-label">Campus</label>
+                            <select class="form-select" name="slCampus" aria-label="Default select example">
+
+                                <c:forEach items="${listCampus}" var="role">
+                                    <option  value="${role.id}"
+                                             <c:if test="${requestScope.teacherBQT.campus.id == role.id}" var="t">
+                                                 selected
+                                             </c:if>
+                                             >FU-${role.name}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                    </c:if>  
+
                     <!--can bo-->
-                    <c:if test = "${oficerFUBQT != null}">
+                    <c:if test = "${updateID == 4}">
 
                         <div class="mb-3">
                             <label for="exampleFormControlInput11" class="form-label">First Name</label>
@@ -388,7 +456,7 @@
 
                     <div class="d-grid gap-2 d-md-block" style="margin-top: 30px; margin-bottom: 30px; ;">
                         <input  type="submit" value="Save"/>
-                        <a href="indexBQT?slRole=${requestScope.updateID}&nextAccount=1"><button class="btn btn-primary" type="button" style="background-color: red;">Cancel X</button> </a>
+                        <a href="indexBQT?slRole=${requestScope.updateID}&nextAccount=${requestScope.updateID}"><button class="btn btn-primary" type="button" style="background-color: red;">Cancel X</button> </a>
                     </div>
                 </div>
             </div>

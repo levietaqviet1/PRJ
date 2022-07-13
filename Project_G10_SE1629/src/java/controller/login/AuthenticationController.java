@@ -45,6 +45,7 @@ public class AuthenticationController extends HttpServlet {
         // student
         if (request.getParameter("login") != null || request.getParameter("signup") != null) {
             StudentDao studentDao = new StudentDao();
+            Dao dao = new Dao();
             String login = request.getParameter("login");
             if (login != null && login != "") {
                 int countCheck = 0;
@@ -148,7 +149,7 @@ public class AuthenticationController extends HttpServlet {
                     countCheck++;
                 }
                 if (telephonein_signup.length() >= 10) {
-                    if (studentDao.checkPhoneExit(telephonein_signup) == 1) {
+                    if (dao.checkPhoneExit(telephonein_signup) == 1) {
                         mess = "Phone đã tồn tại !!!";
                         request.setAttribute("telephoneup_mess", mess);
                         countCheck++;
@@ -160,7 +161,8 @@ public class AuthenticationController extends HttpServlet {
                     request.setAttribute("emailin_signup_mess", mess);
                     countCheck++;
                 }
-                if (studentDao.checkMailExit(emailin_signup) == 1) {
+                
+                if (dao.checkMailExit(emailin_signup) == 1) {
                     mess = "Email đã tồn tại !!!";
                     request.setAttribute("emailin_signup_mess", mess);
                     countCheck++;

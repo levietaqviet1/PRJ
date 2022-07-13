@@ -230,6 +230,7 @@
                                     <th scope="col">First Name</th>
                                     <th scope="col">Last Name</th>
                                     <th scope="col">Name</th>
+                                     <th scope="col">MSSV</th>
                                     <th scope="col">Gender</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Dob</th>
@@ -256,6 +257,7 @@
                                         <td>${t.firstName}</td>
                                         <td>${t.lastName}</td>
                                         <td>${t.lastName} ${t.firstName} </td>
+                                        <td>${t.codeStudent}</td>
                                         <td>
                                             <c:if test="${t.gender == true}" >
                                                 Male
@@ -272,7 +274,7 @@
                                         <td>${t.status.name}</td>
                                         <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&campusId=${t.campus.id}">
                                                 Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}">${t.id}</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}">Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -333,7 +335,7 @@
                                     </tr>
                                     <c:forEach items="${listRole}" var="t"  >
                                         <tr>
-                                            <td><input type="radio" value="${t.id}" name="roleAdd" id="${t.name}" style="margin-right: 8px"/><label for="${t.name}">${t.name} </label></td>
+                                            <td><input type="radio" value="${t.id}" name="roleAdd" id="${t.name}" style="margin-right: 8px"/><label for="${t.name}">${t.name}${t.id} </label></td>
                                         </tr>
                                     </c:forEach>
                                     <tr>

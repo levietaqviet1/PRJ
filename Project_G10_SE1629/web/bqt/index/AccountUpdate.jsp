@@ -144,7 +144,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput14" class="form-label">Pass Word</label>
-                            <input  type="text" class="form-control" name="txtPassword" value="" id="exampleFormControlInput14">
+                            <input  type="text" class="form-control"  placeholder="Không cần ghi nếu ko muốn thay đổi mật khẩu"  name="txtPassword" value="" id="exampleFormControlInput14">
                         </div>
 
                         <div class="mb-3">
@@ -231,7 +231,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput14" class="form-label">Pass Word</label>
-                            <input  type="text" class="form-control" name="txtPassword" value="" id="exampleFormControlInput14">
+                            <input  type="text" class="form-control"  placeholder="Không cần ghi nếu ko muốn thay đổi mật khẩu"  name="txtPassword" value="" id="exampleFormControlInput14">
                         </div>
 
                         <div class="mb-3">
@@ -342,7 +342,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="exampleFormControlInput14" class="form-label">Pass Word</label>
-                            <input  type="text" class="form-control" name="txtPassword" value="" id="exampleFormControlInput14">
+                            <input  type="text" class="form-control"  placeholder="Không cần ghi nếu ko muốn thay đổi mật khẩu"  name="txtPassword" value="" id="exampleFormControlInput14">
                         </div>
 
                         <div class="mb-3">
