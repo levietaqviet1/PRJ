@@ -26,14 +26,23 @@ public class locationHot {
 //        this.password = "123";
 //        this.local = "9999";
 //    }
+//    public locationHot() {
+//        // PC
+//        this.serverName = "DESKTOP-FOIPU4I";
+//        this.dbName = "PRJ_G10";
+//        this.portNumber = "1433";
+//        this.userID = "sa";
+//        this.password = "Viet2001";
+//        this.local = "8080";
+//    }
     public locationHot() {
-        // PC
-        this.serverName = "DESKTOP-FOIPU4I";
+        // thu
+        this.serverName = "MSI\\SQLEXPRESS";
         this.dbName = "PRJ_G10";
         this.portNumber = "1433";
         this.userID = "sa";
-        this.password = "Viet2001";
-        this.local = "8080";
+        this.password = "123";
+        this.local = "9999";
     }
 
     public String getLocal() {
