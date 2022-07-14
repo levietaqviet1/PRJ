@@ -35,6 +35,19 @@ public class StudentParents {
         this.student = student;
     }
 
+    public StudentParents(int id, String firstName, String lastName, boolean gender, String date, String phone, String gmail, String address, Campus campus) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.date = date;
+        this.phone = phone;
+        this.gmail = gmail;
+        this.address = address;
+        this.campus = campus;
+    }
+    
+
     public int getId() {
         return id;
     }
@@ -122,5 +135,11 @@ public class StudentParents {
     public void setStudent(Student student) {
         this.student = student;
     }
+
+    @Override
+    public String toString() {
+        return "StudentParents{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", date=" + date + ", phone=" + phone + ", gmail=" + gmail + ", address=" + address + ", campus=" + campus + ", user=" + user + ", student=" + student + '}';
+    }
+    
     
 }

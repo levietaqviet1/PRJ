@@ -326,9 +326,9 @@
                                         <td>${t.date}</td>
                                         <td>${t.phone}</td>
                                         <td>${t.address}</td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&campusId=${t.campus.id}"><span></span><span></span><span></span><span></span>
+                                        <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&campusId=${t.campus.id}">
                                                 Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}"><span></span><span></span><span></span><span></span>Delete</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}">Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

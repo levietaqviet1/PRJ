@@ -18,6 +18,8 @@ import model.*;
  */
 public class studentParentsDao {
 
+    
+
     Connection cnn; //Kết nối CSDL
 
     public studentParentsDao() {
@@ -50,10 +52,33 @@ public class studentParentsDao {
             }
             return listStudentParents;
         } catch (SQLException ex) {
-            System.err.println("Loi studentParentsDao getAll() " + ex);
+            System.err.println("Loi StudentParentsDao getAll() " + ex);
         }
         return null;
     }
+       public void update(StudentParents studentParents) {
+        try {
+            String sql = "UPDATE [dbo].[phuHuynh]\n"
+                    + "   SET [firstName] = '" + studentParents.getFirstName() + "' \n"
+                    + "      ,[lastName] =  '" + studentParents.getLastName() + "' \n"
+                    + "      ,[gioiTinh] =  ? \n"
+                    + "      ,[ngaySinh] =  '" + studentParents.getDate() + "' \n"
+                    + "      ,[soDienThoai] = '" + studentParents.getPhone() + "' \n"
+                    + "      ,[gmail] =  '" + studentParents.getGmail() + "' \n"
+                    + "      ,[diaChi] =  '" + studentParents.getAddress() + "' \n"
+                    + "      ,[idCoSo] =  '" + studentParents.getCampus().getId() + "' \n"
+                    + " WHERE [phuHuynhId] = " + studentParents.getId() + " ";
+            System.out.println(sql);
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            stm.setBoolean(1, studentParents.isGender());
+            stm.executeUpdate();
+            
+
+        } catch (SQLException ex) {
+            System.out.println("Loi StudentParentsDao  update(OfficerFU officerFU)  " + ex);
+        }
+    }
+
 
     public ArrayList<StudentParents> getAllByInfo(String firt, String last, String cam) {
         StudentDao studentDao = new StudentDao();
@@ -91,6 +116,33 @@ public class studentParentsDao {
                     + "WHERE s.sinhVienId = " + id + "";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
+            System.out.println(sql);
+            while (rs.next()) {
+                Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"),
+                        rs.getDate("dateStartCS") == null ? "null" : String.valueOf(rs.getDate("dateStartCS")), rs.getDate("dateEndCS") == null ? "null" : String.valueOf(rs.getDate("dateEndCS")));
+                User user = new User(String.valueOf(rs.getInt("taiKhoanId")));
+                Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"));
+                StudentParents studentParents = new StudentParents(rs.getInt("phuHuynhId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
+                        rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChi"), campus, user, student);
+                return studentParents;
+            }
+
+        } catch (SQLException ex) {
+            System.err.println("Loi studentParentsDao getAll() " + ex);
+        }
+        return null;
+    }
+    
+      public StudentParents getStudentParentsByIdParent(String id) {
+        StudentDao studentDao = new StudentDao();
+        try {
+            String sql = "SELECT *\n"
+                    + "FROM [PRJ_G10].[dbo].[phuHuynh] s\n"
+                    + " JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN taiKhoan tk ON s.taiKhoanId = tk.taiKhoanId "
+                    + "WHERE s.phuHuynhId = " + id + "";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            System.out.println(sql);
             while (rs.next()) {
                 Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"),
                         rs.getDate("dateStartCS") == null ? "null" : String.valueOf(rs.getDate("dateStartCS")), rs.getDate("dateEndCS") == null ? "null" : String.valueOf(rs.getDate("dateEndCS")));

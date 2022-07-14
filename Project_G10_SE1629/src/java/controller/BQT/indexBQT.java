@@ -70,9 +70,11 @@ public class indexBQT extends HttpServlet {
                 }
                 //phuHuynh
                 if (request.getParameter("update").equals("5")) {
-                    StudentParents studentParents = studentParentsDao.getStudentParentsByIdStudent(request.getParameter("sid"));
+                    StudentParents studentParents = studentParentsDao.getStudentParentsByIdParent(request.getParameter("sid"));
                     request.setAttribute("studentParentsBQT", studentParents);
+                    out.print(studentParents);
                     request.setAttribute("userId", studentParents.getUser().getId());
+                    
                 }
                 request.getRequestDispatcher("bqt/index/AccountUpdate.jsp").forward(request, response);
             }
@@ -253,6 +255,7 @@ public class indexBQT extends HttpServlet {
                     }
                     request.setAttribute("listOfficerFU", listOfficerFU);
                 }
+                
                 // phu huynh
                 if (roleId == 5) {
                     studentParentsDao studentParentsDao = new studentParentsDao();

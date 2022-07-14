@@ -61,6 +61,7 @@ public class updateAccount extends HttpServlet {
         StudentDao studentDao = new StudentDao();
         TeacherDao teacherDao = new TeacherDao();
         OfficerFUDao officerFUDao = new OfficerFUDao();
+        studentParentsDao studentParentsDao1 = new studentParentsDao();
         SpecializedinDao specializedinDao = new SpecializedinDao();
         UserDao userDao = new UserDao();
 
@@ -151,6 +152,14 @@ public class updateAccount extends HttpServlet {
                 role = "Officer FU";
             }
         }
+        if (roleId == 5) {
+            StudentParents studentParents = new StudentParents(Integer.parseInt(idAccount), firstName, lastName, gender, dob, phone, email, address, campus);
+            PrintWriter out = response.getWriter();
+            out.print(studentParents.toString());
+            studentParentsDao1.update(studentParents);
+            role = "Student Parents";
+        }
+
         if (slRole == roleId) {
             if (password != null && !password.equals("")) {
                 user = new User(idUser, lastName, password);
