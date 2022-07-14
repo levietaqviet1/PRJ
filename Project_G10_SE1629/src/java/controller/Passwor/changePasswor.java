@@ -19,7 +19,7 @@ import model.User;
  * @author NCC
  */
 public class changePasswor extends HttpServlet {
- 
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -45,9 +45,9 @@ public class changePasswor extends HttpServlet {
             throws ServletException, IOException {
         PrintWriter out = response.getWriter();
         if (request.getSession().getAttribute("dalogin") != null) {
+            int countCheck = 0;
+            String mess = "";
             if (request.getSession().getAttribute("st_login_successful") != null) {
-                int countCheck = 0;
-                String mess = "";
                 String oldpass = request.getParameter("oldpass");
                 String newpass = request.getParameter("newpass");
                 String confirm = request.getParameter("confirm");
@@ -70,17 +70,44 @@ public class changePasswor extends HttpServlet {
                     request.setAttribute("newpass", newpass);
                     request.setAttribute("confirm", confirm);
                 }
-                if(countCheck == 0){
+                if (countCheck == 0) {
                     user.setPassword(confirm);
                     userDao.updateUserPass(user);
                     request.setAttribute("change_pass_succ", "Đã thay mật khẩu thành công");
                 }
-                
-               
                 request.getRequestDispatcher("student/index/indexStudent.jsp").forward(request, response);
-
             }
-            
+
+            if (request.getSession().getAttribute("st_login_tam_thoi") != null) {
+                String oldpass = request.getParameter("oldpass");
+                String newpass = request.getParameter("newpass");
+                String confirm = request.getParameter("confirm");
+                if (!newpass.equals(confirm)) {
+                    countCheck++;
+                    request.setAttribute("confirm_mess", "Mật khẩu xác nhận không khớp");
+                }
+
+                Student student = (Student) request.getSession().getAttribute("st_login_tam_thoi");
+                UserDao userDao = new UserDao();
+                User user = student.getUser();
+                user.setPassword(oldpass);
+                int checkExit = userDao.checkPassWordById(user);
+                if (checkExit == -1) {
+                    countCheck++;
+                    request.setAttribute("oldPass_mess", "Mật khẩu cũ bị sai nếu quên vui lòng lấy lại mật khẩu");
+                }
+                if (countCheck != 0) {
+                    request.setAttribute("oldpass", oldpass);
+                    request.setAttribute("newpass", newpass);
+                    request.setAttribute("confirm", confirm);
+                }
+                if (countCheck == 0) {
+                    user.setPassword(confirm);
+                    userDao.updateUserPass(user);
+                    request.setAttribute("change_pass_succ", "Đã thay mật khẩu thành công");
+                }
+                request.getRequestDispatcher("student/index/indexStudent.jsp").forward(request, response);
+            }
         } else {
             response.sendRedirect("home");
         }

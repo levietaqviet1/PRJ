@@ -21,7 +21,6 @@ import model.*;
  */
 public class index extends HttpServlet {
 
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -29,29 +28,46 @@ public class index extends HttpServlet {
         HttpSession session = request.getSession();
         if (request.getSession().getAttribute("dalogin") == null) {
             response.sendRedirect("home");
-        }
-        // student
-        if (session.getAttribute("st_login_successful") != null) {
-            Student student = (Student) session.getAttribute("st_login_successful");
+        } else {
+            // student
+            if (session.getAttribute("st_login_successful") != null) {
+                Student student = (Student) session.getAttribute("st_login_successful");
 
-            int giaodien = 1;
-            if (request.getParameter("sid") != null) {
-                try {
-                    giaodien = Integer.parseInt((String) request.getParameter("sid"));
-                    if (student.getStatus().getId() == 1 || student.getStatus().getId() == 3) {
-                        if (giaodien != 1 && giaodien != 7) {
+                int giaodien = 1;
+                if (request.getParameter("sid") != null) {
+                    try {
+                        giaodien = Integer.parseInt((String) request.getParameter("sid"));
+                        if (student.getStatus().getId() == 1 || student.getStatus().getId() == 3) {
+                            if (giaodien != 1 && giaodien != 7) {
+                                giaodien = 1;
+                            }
+                        }
+                        if (giaodien > 7) {
                             giaodien = 1;
                         }
+                    } catch (Exception e) {
+                        request.getRequestDispatcher("student/index/home.jsp").forward(request, response);
                     }
-                    if (giaodien > 7) {
-                        giaodien = 1;
-                    }
-                } catch (Exception e) {
-                    request.getRequestDispatcher("student/index/home.jsp").forward(request, response);
                 }
+                session.setAttribute("giaoDien", giaodien);
+                request.getRequestDispatcher("student/index/indexStudent.jsp").forward(request, response);
             }
-            session.setAttribute("giaoDien", giaodien);
-            request.getRequestDispatcher("student/index/indexStudent.jsp").forward(request, response);
+            if (session.getAttribute("st_login_tam_thoi") != null) {
+                int giaodien = 0;
+                if (request.getParameter("sid") != null) {
+                    try {
+                        giaodien = Integer.parseInt((String) request.getParameter("sid"));
+                        if (giaodien != 0 && giaodien != 7) {
+                            giaodien = 0;
+                        }
+                    } catch (Exception e) {
+                        request.getRequestDispatcher("student/index/home.jsp").forward(request, response);
+                    }
+                }
+                session.setAttribute("giaoDien", giaodien);
+                request.getRequestDispatcher("student/index/indexStudent.jsp").forward(request, response);
+            }
+
         }
     }
 
@@ -66,7 +82,9 @@ public class index extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+        if (request.getSession().getAttribute("st_login_tam_thoi") != null) {
+            
+        }
     }
 
     /**

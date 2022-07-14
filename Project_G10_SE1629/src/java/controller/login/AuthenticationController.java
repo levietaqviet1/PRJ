@@ -58,14 +58,21 @@ public class AuthenticationController extends HttpServlet {
                 UserDao userDao = new UserDao();
                 int checkU = userDao.checkUser(user); // check tai khoan 
                 if (checkU != -1) {
+
                     if (roleup_login.equals("2")) {
                         Student student = studentDao.getStudentByidUser(checkU, campusup_login);
                         if (student != null) {
+                            studentParentsDao studentParentsDao = new studentParentsDao();
+                            StudentParents studentParents = studentParentsDao.getStudentParentsByIdStudent(String.valueOf(student.getId()));
                             user = new User(student.getUser().getId(), usernameup_login, passup_login);
                             student.setUser(user);
                             countCheck++;
-                            session.setAttribute("st_login_successful", student);
                             session.setAttribute("dalogin", student);
+                            if (studentParents != null) {
+                                session.setAttribute("st_login_successful", student);
+                            } else {
+                                session.setAttribute("st_login_tam_thoi", student);
+                            }
                             session.setMaxInactiveInterval(60 * 60 * 60);
                             response.sendRedirect("index");
                         }
@@ -161,7 +168,7 @@ public class AuthenticationController extends HttpServlet {
                     request.setAttribute("emailin_signup_mess", mess);
                     countCheck++;
                 }
-                
+
                 if (dao.checkMailExit(emailin_signup) == 1) {
                     mess = "Email đã tồn tại !!!";
                     request.setAttribute("emailin_signup_mess", mess);

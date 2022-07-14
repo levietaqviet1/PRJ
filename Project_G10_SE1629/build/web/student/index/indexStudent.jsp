@@ -8,9 +8,7 @@
 if (request.getSession().getAttribute("dalogin") == null) {
             response.sendRedirect("home");
         }
-if (request.getSession().getAttribute("st_login_successful") == null) {
-            response.sendRedirect("index");
-        }
+
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -131,28 +129,37 @@ if (request.getSession().getAttribute("st_login_successful") == null) {
         <div id="mySidenav" class="sidenav">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br /><br /><br />
             <form>
-
-                <a <c:if test="${giaoDien == 1}" var="t">
-                        class="acti10"
-                    </c:if> href="index?sid=1">Home</a>
-                <c:if test="${st_login_successful.getStatus().id!=1 && st_login_successful.getStatus().id!=3 }" var="t">
-                    <a <c:if test="${giaoDien == 2}" var="t">
+                <c:if test="${st_login_tam_thoi != null}">
+                    <a <c:if test="${giaoDien == 0}" var="t">
                             class="acti10"
-                        </c:if> href="index?sid=2">MoveClass
-                    </a>
-                    <a <c:if test="${giaoDien == 3}" var="t">
-                            class="acti10"
-                        </c:if> href="index?sid=3">MoveClassWithOther</a>
-                    <a <c:if test="${giaoDien == 4}" var="t">
-                            class="acti10"
-                        </c:if> href="index?sid=4">RegisterExtraCourses</a>
-                    <a <c:if test="${giaoDien == 5}" var="t">
-                            class="acti10"
-                        </c:if> href="index?sid=5">RegisterImproveMark</a>
-                    <a <c:if test="${giaoDien == 6}" var="t">
-                            class="acti10"
-                        </c:if> href="index?sid=6">SendApplication</a>
+                        </c:if> href="index?sid=1">Home</a>
                 </c:if>
+               
+                <c:if test="${st_login_tam_thoi == null}">
+                     <a <c:if test="${giaoDien == 1}" var="t">
+                            class="acti10"
+                        </c:if> href="index?sid=1">Home</a>
+                    <c:if test="${st_login_successful.getStatus().id!=1 && st_login_successful.getStatus().id!=3 }" var="t">
+                        <a <c:if test="${giaoDien == 2}" var="t">
+                                class="acti10"
+                            </c:if> href="index?sid=2">MoveClass
+                        </a>
+                        <a <c:if test="${giaoDien == 3}" var="t">
+                                class="acti10"
+                            </c:if> href="index?sid=3">MoveClassWithOther</a>
+                        <a <c:if test="${giaoDien == 4}" var="t">
+                                class="acti10"
+                            </c:if> href="index?sid=4">RegisterExtraCourses</a>
+                        <a <c:if test="${giaoDien == 5}" var="t">
+                                class="acti10"
+                            </c:if> href="index?sid=5">RegisterImproveMark</a>
+                        <a <c:if test="${giaoDien == 6}" var="t">
+                                class="acti10"
+                            </c:if> href="index?sid=6">SendApplication</a>
+                    </c:if>
+                </c:if>
+
+
                 <a <c:if test="${giaoDien == 7}" var="t">
                         class="acti10"
                     </c:if> href="index?sid=7">Change Password</a>
@@ -170,7 +177,11 @@ if (request.getSession().getAttribute("st_login_successful") == null) {
             </div>
             <div id="right">
 
-                <div class="hearder"><c:choose>
+                <div class="hearder">
+                    <c:choose>
+                        <c:when test="${giaoDien == 0}">
+                            <%@include file="../subIndex/updateParent.jsp" %>
+                        </c:when>
                         <c:when test="${giaoDien == 1}">
                             <%@include file="../subIndex/home.jsp" %>
                         </c:when>
