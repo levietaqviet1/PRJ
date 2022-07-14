@@ -4,10 +4,16 @@
     Author     : win
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<c:if test=" ${bqt_login_successful == null}">
+    <% 
+    response.sendRedirect("indexBQT");
+    %>
+</c:if>
 <!DOCTYPE html>
 <!--=== Coding by CodingLab | www.codinglabweb.com === -->
 <html lang="en">
@@ -86,6 +92,10 @@
                             <i class="uil uil-thumbs-up"></i>
                             <span class="link-name">Class</span>
                         </a></li>
+                    <li><a href="changePassworBQT?id=1">
+                            <i class="uil uil-thumbs-up"></i>
+                            <span class="link-name">Change Password</span>
+                        </a></li>
                 </ul>
 
                 <ul class="logout-mode">
@@ -99,7 +109,9 @@
         </nav>
 
         <div class="dashboard">
-            <div class="dash-lefttop"> </div>
+            <div class="dash-lefttop"> 
+           
+            </div>
 
             <form action="indexBQT" method="POST" >
                 <div class="dash-bottom">
@@ -230,7 +242,7 @@
                                     <th scope="col">First Name</th>
                                     <th scope="col">Last Name</th>
                                     <th scope="col">Name</th>
-                                     <th scope="col">MSSV</th>
+                                    <th scope="col">MSSV</th>
                                     <th scope="col">Gender</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Dob</th>
@@ -279,8 +291,8 @@
                                 </c:forEach>
                             </tbody>
                         </c:if>
-                            
-                             <!--phu huynh-->
+
+                        <!--phu huynh-->
                         <c:if test="${roleId == 5}">
                             <thead>
                                 <tr> 
@@ -316,7 +328,7 @@
                                         <td>${t.address}</td>
                                         <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&campusId=${t.campus.id}"><span></span><span></span><span></span><span></span>
                                                 Update</a></td>
-                                                <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}"><span></span><span></span><span></span><span></span>Delete</a></td>
+                                        <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}"><span></span><span></span><span></span><span></span>Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>

@@ -33,14 +33,14 @@ public class indexBQT extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (request.getSession().getAttribute("bqt_login_successful")==null) {
+             response.sendRedirect("homeBQT");
+        }
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
         TeacherDao teacherDao = new TeacherDao();
         StudentDao studentDao = new StudentDao();
         studentParentsDao studentParentsDao = new studentParentsDao();
-        if (session.getAttribute("dalogin_bqt") == null) {
-            response.sendRedirect("homeBQT");
-        }
 
         // BQT
         if (request.getParameter("sid") != null) {

@@ -52,7 +52,7 @@ public class LogOutController extends HttpServlet {
                     if (request.getSession().getAttribute("bqt_login_successful") != null) {
                         session.removeAttribute("bqt_login_successful");
                     }
-                    response.sendRedirect("index");
+                    response.sendRedirect("indexBQT");
                 }
             }
 

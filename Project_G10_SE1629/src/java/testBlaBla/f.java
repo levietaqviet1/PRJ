@@ -13,11 +13,8 @@ import java.util.Scanner;
 public class f implements cha{
 
     public static void main(String[] args) {
-        int a = 5;
-        int b=10;
-        f a1 = new f();
-        a1.a(a,b);
-        System.out.println(a);
+       System.out.println(java.time.LocalTime.now());
+       System.out.println(java.time.LocalDate.now());
     }
 
     public void doi(int a) {
