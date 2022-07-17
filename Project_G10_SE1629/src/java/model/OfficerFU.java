@@ -16,13 +16,18 @@ public class OfficerFU {
     private String date, phone, gmail, address;
     private Campus campus;
     private User user;
+    private String codeCB;
+    private boolean active;
 
     public OfficerFU() {
     }
-    
-    
 
-    public OfficerFU(int id, String firstName, String lastName, boolean gender, String date, String phone, String gmail, String address, Campus campus, User user) {
+    public OfficerFU(int id, boolean active) {
+        this.id = id;
+        this.active = active;
+    }
+
+    public OfficerFU(int id, String firstName, String lastName, boolean gender, String date, String phone, String gmail, String address, Campus campus, User user, String codeCB, boolean active) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -33,6 +38,24 @@ public class OfficerFU {
         this.address = address;
         this.campus = campus;
         this.user = user;
+        this.codeCB = codeCB;
+        this.active = active;
+    }
+
+    public String getCodeCB() {
+        return codeCB;
+    }
+
+    public void setCodeCB(String codeCB) {
+        this.codeCB = codeCB;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public int getId() {
@@ -114,6 +137,5 @@ public class OfficerFU {
     public void setUser(User user) {
         this.user = user;
     }
-    
-    
+
 }

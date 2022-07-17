@@ -98,9 +98,9 @@ public class UserDao {
 
     }
 
-    public void insertUserStudent(User user) {
+    public void insertUser(User user, String role) {
         String sql = "INSERT INTO taiKhoan(taiKhoan,matKhau,vaiTroId)\n"
-                + "  VALUES	(?, ?,2)";
+                + "  VALUES	(?, ?,"+role+")";
         try {
             PreparedStatement stm = cnn.prepareStatement(sql);
             try {

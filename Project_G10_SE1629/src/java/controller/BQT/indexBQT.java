@@ -33,8 +33,8 @@ public class indexBQT extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getSession().getAttribute("bqt_login_successful")==null) {
-             response.sendRedirect("homeBQT");
+        if (request.getSession().getAttribute("bqt_login_successful") == null) {
+            response.sendRedirect("homeBQT");
         }
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
@@ -74,7 +74,7 @@ public class indexBQT extends HttpServlet {
                     request.setAttribute("studentParentsBQT", studentParents);
                     out.print(studentParents);
                     request.setAttribute("userId", studentParents.getUser().getId());
-                    
+
                 }
                 request.getRequestDispatcher("bqt/index/AccountUpdate.jsp").forward(request, response);
             }
@@ -82,29 +82,35 @@ public class indexBQT extends HttpServlet {
             if (request.getParameter("delete") != null) {
                 //gv
                 if (request.getParameter("delete").equals("3")) {
-                    teacherDao.deleteByid(request.getParameter("sid"));
-                    userDao.deleteByid(request.getParameter("tkid"));
+                    Teacher teacher = new Teacher(Integer.parseInt(request.getParameter("sid")), false);
+                    teacherDao.updateActive(teacher);
                 }
                 //sv
                 if (request.getParameter("delete").equals("2")) {
                     StudentParents studentParents = studentParentsDao.getStudentParentsByIdStudent(request.getParameter("sid"));
                     if (studentParents != null) {
-                        studentParentsDao.deleteByid(String.valueOf(studentParents.getId()));
-                        userDao.deleteByid(String.valueOf(studentParents.getUser().getId()));
+                        studentParents.setActiveSP(false);
+                        studentParentsDao.updateActive(studentParents);
+//                        userDao.deleteByid(String.valueOf(studentParents.getUser().getId()));
                     }
-                    studentDao.deleteByid(request.getParameter("sid"));
-                    userDao.deleteByid(request.getParameter("tkid"));
+                    Student student = new Student(Integer.parseInt(request.getParameter("sid")), false);
+                    studentDao.updateActive(student);
+//                    studentDao.deleteByid(request.getParameter("sid"));
+//                    userDao.deleteByid(request.getParameter("tkid"));
 
                 }
                 //can-bo
                 if (request.getParameter("delete").equals("4")) {
-                    OfficerFUDao.deleteByid(request.getParameter("sid"));
-                    userDao.deleteByid(request.getParameter("tkid"));
+                    OfficerFU officerFU = new OfficerFU(Integer.parseInt(request.getParameter("sid")), false);
+                    OfficerFUDao.updateActive(officerFU);
                 }
                 //phu-huynh
                 if (request.getParameter("delete").equals("5")) {
-                    studentParentsDao.deleteByid(request.getParameter("sid"));
-                    userDao.deleteByid(request.getParameter("tkid"));
+//                    studentParentsDao.deleteByid(request.getParameter("sid"));
+//                    userDao.deleteByid(request.getParameter("tkid"));
+                    StudentParents studentParents = studentParentsDao.getStudentParentsByIdParent(request.getParameter("sid"));
+                    studentParents.setActiveSP(false);
+                    studentParentsDao.updateActive(studentParents);
                 }
 
                 roleId = request.getParameter("delete");
@@ -136,7 +142,7 @@ public class indexBQT extends HttpServlet {
                     }
                     if (roleId == 4) {
                         OfficerFUDao OfficerFUDao = new OfficerFUDao();
-                        ArrayList<OfficerFU> listOfficerFU = OfficerFUDao.getAll("");
+                        ArrayList<OfficerFU> listOfficerFU = OfficerFUDao.getAll("", "1");
                         request.setAttribute("listOfficerFU", listOfficerFU);
                     }
                     if (roleId == 5) {
@@ -242,20 +248,20 @@ public class indexBQT extends HttpServlet {
                     ArrayList<OfficerFU> listOfficerFU;
                     if (checkSearch != 0) {
                         if (searchArr.length == 1) {
-                            listOfficerFU = OfficerFUDao.getAllByInfo(searchArr[0], "", slCampusSearch);
+                            listOfficerFU = OfficerFUDao.getAllByInfo(searchArr[0], "", slCampusSearch, "1");
                         } else {
                             String lastN = "";
                             for (int i = 1; i < searchArr.length; i++) {
                                 lastN += searchArr[i];
                             }
-                            listOfficerFU = OfficerFUDao.getAllByInfo(searchArr[0], lastN, slCampusSearch);
+                            listOfficerFU = OfficerFUDao.getAllByInfo(searchArr[0], lastN, slCampusSearch, "1");
                         }
                     } else {
-                        listOfficerFU = OfficerFUDao.getAll(slCampusSearch);
+                        listOfficerFU = OfficerFUDao.getAll(slCampusSearch, "1");
                     }
                     request.setAttribute("listOfficerFU", listOfficerFU);
                 }
-                
+
                 // phu huynh
                 if (roleId == 5) {
                     studentParentsDao studentParentsDao = new studentParentsDao();

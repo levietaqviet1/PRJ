@@ -152,6 +152,7 @@
                                     <th scope="col">First Name</th>
                                     <th scope="col">Last Name</th>
                                     <th scope="col">Name</th>
+                                    <th scope="col">MSCB</th>
                                     <th scope="col">Gender</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Dob</th>
@@ -168,6 +169,7 @@
                                         <td>${t.firstName}</td>
                                         <td>${t.lastName}</td>
                                         <td>${t.lastName} ${t.firstName} </td>
+                                        <td>${t.codeCB}</td>
                                         <td>
                                             <c:if test="${t.gender == true}" >
                                                 Male
@@ -197,6 +199,7 @@
                                     <th scope="col">First Name</th>
                                     <th scope="col">Last Name</th>
                                     <th scope="col">Name</th>
+                                     <th scope="col">MSGV</th>
                                     <th scope="col">Gender</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Dob</th>
@@ -213,6 +216,7 @@
                                         <td>${t.firstName}</td>
                                         <td>${t.lastName}</td>
                                         <td>${t.lastName} ${t.firstName} </td>
+                                         <td>${t.codeTearcher}</td>
                                         <td>
                                             <c:if test="${t.gender == true}" >
                                                 Male
@@ -280,7 +284,7 @@
                                         </td>
                                         <td>${t.gmail}</td>
 
-                                        <td>${t.dateOfStart}</td>
+                                        <td>${t.dateOfBirth}</td>
                                         <td>${t.phone}</td>
                                         <td>${t.address}</td>
                                         <td>${t.status.name}</td>
@@ -299,6 +303,7 @@
                                     <th scope="col">First Name</th>
                                     <th scope="col">Last Name</th>
                                     <th scope="col">Name</th>
+                                    <th scope="col">MSPH</th>
                                     <th scope="col">Gender</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Dob</th>
@@ -314,6 +319,7 @@
                                         <td>${t.firstName}</td>
                                         <td>${t.lastName}</td>
                                         <td>${t.lastName} ${t.firstName} </td>
+                                        <td>${t.codeSP}</td>
                                         <td>
                                             <c:if test="${t.gender == true}" >
                                                 Male

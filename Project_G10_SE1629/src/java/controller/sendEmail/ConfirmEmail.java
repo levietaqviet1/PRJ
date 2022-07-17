@@ -8,7 +8,8 @@ import MyUntils.RandomString;
 import MyUntils.SendMail;
 import dao.SpecializedinDao;
 import dao.StudentDao;
-import dao.UserDao;
+import dao.*;
+import dao.studentParentsDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,7 +18,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Student;
-import model.User;
+import model.StudentParents;
+import model.*;
 
 /**
  *
@@ -25,23 +27,13 @@ import model.User;
  */
 public class ConfirmEmail extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             /* TODO output your page here. You may use following sample code. */
 
             String id = request.getParameter("id");
-
             if (request.getSession().getAttribute("confirmEmail_st").equals(id)) {
                 if (request.getSession().getAttribute("account_session_student") != null) {
                     Student student = (Student) request.getSession().getAttribute("account_session_student"); // hung lai dữ liệu
@@ -63,7 +55,7 @@ public class ConfirmEmail extends HttpServlet {
                     out.print(student.toString() + "<br/>");
                     out.print(user.toString());
 
-                    userDao.insertUserStudent(user); // insert user vao datase
+                    userDao.insertUser(user, "2"); // insert user vao datase
                     studentDao.insertStudent(student); // insert student cao database
 
                     String topic = "FPT-University";
@@ -80,7 +72,7 @@ public class ConfirmEmail extends HttpServlet {
                             + "You can login to check your application status<br/>\n"
                             + "Please do not share your account with others<br/>\n"
                             + "Account: <span style='color: red;'> " + student.getUser().getUsername() + "</span><br/>\n"
-                            + "Password: <span style='color: red;'> " + student.getUser().getPassword() + "</span><br/>\n" 
+                            + "Password: <span style='color: red;'> " + student.getUser().getPassword() + "</span><br/>\n"
                             + "You can follow up through FPT University's website or wait for the next email to respond to your application<br/>"
                             + "</body>\n"
                             + "</html>";
@@ -96,54 +88,35 @@ public class ConfirmEmail extends HttpServlet {
                     session.setMaxInactiveInterval(60 * 60);
                     response.sendRedirect("sendEmaillSu");
 
-//                    
-//                    request.setAttribute("lastNamein_signup", student.getLastName());
-//                    request.setAttribute("password_signup2", user.getPassword());
-//                    request.setAttribute("conpass_signup", user.getPassword());
-//                    request.setAttribute("addressin_signup", student.getAddress());
-//                    request.setAttribute("telephonein_signup", student.getPhone());
-//                    request.setAttribute("emailin_signup", student.getGmail());
-//                    request.setAttribute("genderin_signup", student.isGender() ? "1" : "0");
-//                    request.setAttribute("specializedin_signup", student.getDateOfStart());
-//                    request.setAttribute("campusin_signup", student.getDateOfEnd());
-//                    request.setAttribute("messUp", "123");
-//                    request.setAttribute("dateOfBirthup_mess", student.getDateOfBirth());
-//                    request.setAttribute("tessssst", "aaaaaaaaaaaaaaaaaaaaaa");
                 }
-                out.print("aaaaaaaaaaaa");
-            }
 
-//            response.sendRedirect("home");
+            }
         }
     }
 
-// <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
+        if (request.getSession().getAttribute("st_login_tam_thoi") != null) {
+            if (request.getSession().getAttribute("parentStudenthome0") != null) {
+                if (request.getSession().getAttribute("codeXacMinhHome0") != null) {
+                    String codeXm = (String) request.getSession().getAttribute("codeXacMinhHome0");
+                    String codeHome0 = request.getParameter("codeHome0");
+                    if (!codeXm.equals(codeHome0)) { 
+                        response.sendRedirect("index?erroMaill=codeHome0"); 
+                    } else {
+                        StudentParents studentParents = (StudentParents) request.getSession().getAttribute("parentStudenthome0");
+                        studentParentsDao studentParentsDao = new studentParentsDao();
+                        studentParentsDao.insert(studentParents); 
+                        response.sendRedirect("index?thanhCongMaill=1");
+                    }
+                    
+
+                }
+            }
+        }
     }
 
     /**

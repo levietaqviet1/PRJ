@@ -17,11 +17,28 @@ public class StudentParents {
     private Campus campus;
     private User user;
     private Student student;
+    private String codeSP;
+    private boolean activeSP;
 
     public StudentParents() {
     }
 
-    public StudentParents(int id, String firstName, String lastName, boolean gender, String date, String phone, String gmail, String address, Campus campus, User user, Student student) {
+    public StudentParents(int id, String firstName, String lastName, boolean gender, String date, String phone, String gmail, String address, Campus campus, String codeSP, boolean activeSP) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.date = date;
+        this.phone = phone;
+        this.gmail = gmail;
+        this.address = address;
+        this.campus = campus;
+        this.codeSP = codeSP;
+        this.activeSP = activeSP;
+    }
+
+ 
+    public StudentParents(int id, String firstName, String lastName, boolean gender, String date, String phone, String gmail, String address, Campus campus, User user, Student student, String codeSP, boolean activeSP) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -33,19 +50,27 @@ public class StudentParents {
         this.campus = campus;
         this.user = user;
         this.student = student;
+        this.codeSP = codeSP;
+        this.activeSP = activeSP;
     }
 
-    public StudentParents(int id, String firstName, String lastName, boolean gender, String date, String phone, String gmail, String address, Campus campus) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.gender = gender;
-        this.date = date;
-        this.phone = phone;
-        this.gmail = gmail;
-        this.address = address;
-        this.campus = campus;
+    public String getCodeSP() {
+        return codeSP;
     }
+
+    public void setCodeSP(String codeSP) {
+        this.codeSP = codeSP;
+    }
+
+    public boolean isActiveSP() {
+        return activeSP;
+    }
+
+    public void setActiveSP(boolean activeSP) {
+        this.activeSP = activeSP;
+    }
+
+   
     
 
     public int getId() {

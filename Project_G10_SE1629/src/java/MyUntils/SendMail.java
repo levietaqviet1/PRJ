@@ -4,12 +4,10 @@
  */
 package MyUntils;
 
-
 import java.io.PrintWriter;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
-
 
 public class SendMail {
 
@@ -27,7 +25,7 @@ public class SendMail {
                 return new PasswordAuthentication(user, pass);
             }
         });
-       
+
         try {
             MimeMessage message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
@@ -39,7 +37,7 @@ public class SendMail {
             e.printStackTrace();
         }
     }
-
+ 
     public static void main(String[] args) {
         String subject = "Confirm Your email !";
         String message = "This is your Code:" + 123;

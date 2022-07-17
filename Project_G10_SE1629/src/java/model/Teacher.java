@@ -16,13 +16,21 @@ public class Teacher {
     private String date, dateOfStart, dateOfEnd, phone, gmail, address;
     private Campus campus;
     private User user;
+    private String codeTearcher;
+    private boolean active;
     
 
     public Teacher() {
         
     }
 
-    public Teacher(int id, String firstName, String lastName, boolean gender, String date, String dateOfStart, String dateOfEnd, String phone, String gmail, String address, Campus campus, User user) {
+    public Teacher(int id, boolean active) {
+        this.id = id;
+        this.active = active;
+    }
+
+    
+    public Teacher(int id, String firstName, String lastName, boolean gender, String date, String dateOfStart, String dateOfEnd, String phone, String gmail, String address, Campus campus, User user, String codeTearcher, boolean active) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -35,7 +43,29 @@ public class Teacher {
         this.address = address;
         this.campus = campus;
         this.user = user;
+        this.codeTearcher = codeTearcher;
+        this.active = active;
     }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    
+
+    public String getCodeTearcher() {
+        return codeTearcher;
+    }
+
+    public void setCodeTearcher(String codeTearcher) {
+        this.codeTearcher = codeTearcher;
+    }
+
+  
 
     public int getId() {
         return id;
@@ -135,10 +165,10 @@ public class Teacher {
 
     @Override
     public String toString() {
-        return "Teacher{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", date=" + date + ", dateOfStart=" + dateOfStart + ", dateOfEnd=" + dateOfEnd + ", phone=" + phone + ", gmail=" + gmail + ", address=" + address + ", "
-                + "campus=" + campus.toString() + ", user=" + user.toString() + '}';
+        return "Teacher{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", date=" + date + ", dateOfStart=" + dateOfStart + ", dateOfEnd=" + dateOfEnd + ", phone=" + phone + ", gmail=" + gmail + ", address=" + address + ", campus=" + campus + ", user=" + user + ", codeTearcher=" + codeTearcher + '}';
     }
 
+    
    
     
 }

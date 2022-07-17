@@ -29,13 +29,14 @@ public class OfficerFUDao {
         }
     }
 
-    public ArrayList<OfficerFU> getAll( String cam) {
+    public ArrayList<OfficerFU> getAll(String cam, String ac) {
         ArrayList<OfficerFU> listOfficerFU = new ArrayList<OfficerFU>();
         try {
             String sql = "  SELECT *\n"
                     + "  FROM [PRJ_G10].[dbo].[canBo] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
                     + "  ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
-                    + "WHERE  cs.idCoSo like '%" + cam + "%' ";
+                    + "WHERE  cs.idCoSo like '%" + cam + "%'"
+                    + " AND gv.activeCB = " + ac + " ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -44,7 +45,7 @@ public class OfficerFUDao {
                 User user = new User(String.valueOf(rs.getInt("taiKhoanId")), role);
                 OfficerFU officerFU = new OfficerFU(rs.getInt("canBoId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getNString("ngaySinh"), rs.getNString("soDienThoai"), rs.getNString("gmail"),
-                        rs.getNString("diaChi"), campus, user);
+                        rs.getNString("diaChi"), campus, user, rs.getString("codeCB"), rs.getBoolean("activeCB"));
                 listOfficerFU.add(officerFU);
             }
 
@@ -54,13 +55,14 @@ public class OfficerFUDao {
         return listOfficerFU;
     }
 
-    public ArrayList<OfficerFU> getAllByInfo(String firt, String last, String cam) {
+    public ArrayList<OfficerFU> getAllByInfo(String firt, String last, String cam, String ac) {
         ArrayList<OfficerFU> listOfficerFU = new ArrayList<OfficerFU>();
         try {
             String sql = "  SELECT *\n"
                     + "  FROM [PRJ_G10].[dbo].[canBo] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
                     + "  ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
-                    + "WHERE gv.firstName like '%" + firt + "%' AND lastName like '%" + last + "%'   AND cs.idCoSo like '%" + cam + "%' ";
+                    + "WHERE gv.firstName like '%" + firt + "%' AND lastName like '%" + last + "%'   AND cs.idCoSo like '%" + cam + "%' "
+                    + " AND gv.activeCB = " + ac + " ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -69,7 +71,7 @@ public class OfficerFUDao {
                 User user = new User(String.valueOf(rs.getInt("taiKhoanId")), role);
                 OfficerFU officerFU = new OfficerFU(rs.getInt("canBoId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getNString("ngaySinh"), rs.getNString("soDienThoai"), rs.getNString("gmail"),
-                        rs.getNString("diaChi"), campus, user);
+                        rs.getNString("diaChi"), campus, user, rs.getString("codeCB)"), rs.getBoolean("activeCB"));
                 listOfficerFU.add(officerFU);
                 System.out.println(sql);
             }
@@ -130,7 +132,7 @@ public class OfficerFUDao {
                 User user = new User(String.valueOf(rs.getInt("taiKhoanId")), role);
                 officerFU = new OfficerFU(rs.getInt("canBoId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getNString("ngaySinh"), rs.getNString("soDienThoai"), rs.getNString("gmail"), rs.getNString("diaChi"),
-                        campus, user);
+                        campus, user, rs.getString("codeCB"), rs.getBoolean("activeCB"));
             }
 
             return officerFU;
@@ -142,23 +144,74 @@ public class OfficerFUDao {
 
     public void insert(OfficerFU s) {
         String sql = "INSERT INTO [dbo].[canBo]\n"
-                + "           ([firstName],[lastName],[gioiTinh],[ngaySinh],[soDienThoai],[gmail],[diaChi],[idCoSo],[taiKhoanId])\n"
-                + "  VALUES(?,?,?,?,?,?,?,?,?);";
+                + "           ([firstName],[lastName],[gioiTinh],[ngaySinh],[soDienThoai],[gmail],[diaChi],[idCoSo],[taiKhoanId],[codeCB],[activeCB])\n"
+                + "  VALUES(?,?,?,?,?,?,?,?,?,?,1);";
         try {
             PreparedStatement stm = cnn.prepareStatement(sql);
 
-            stm.setString(1, s.getFirstName());
-            stm.setString(2, s.getLastName());
+            stm.setString(1, s.getFirstName().trim());
+            stm.setString(2, s.getLastName().trim());
             stm.setBoolean(3, s.isGender());
-            stm.setString(4, s.getDate());
-            stm.setString(5, s.getPhone());
-            stm.setString(6, s.getGmail());
-            stm.setString(7, s.getAddress());
+            stm.setString(4, s.getDate().trim());
+            stm.setString(5, s.getPhone().trim());
+            stm.setString(6, s.getGmail().trim());
+            stm.setString(7, s.getAddress().trim());
             stm.setInt(8, s.getCampus().getId());
             stm.setInt(9, Integer.parseInt(s.getUser().getId()));
+            stm.setString(10, s.getCodeCB());
             stm.executeUpdate();
         } catch (Exception e) {
             System.out.println("Loi OfficerFUDao insert(OfficerFU s)  " + e);
         }
+    }
+
+    public String getCodeofficerFU() {
+        int count = 0;
+        String relust = "";
+        String t = "CB";
+        try {
+
+            String sql = "SELECT TOP 1 [codeCB]\n"
+                    + "  FROM [PRJ_G10].[dbo].[canBo]\n"
+                    + "  ORDER BY [codeCB] DESC";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                 relust = rs.getString(1);
+            }
+            if (relust.equals("")) {
+                return t + "1";
+            } else {
+                int i = Integer.parseInt(relust.substring(2, relust.length()));
+                i++;
+                String iN = String.valueOf(i);
+                return t += iN;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Loi TeacherDao getCodeTeacher()" + ex);
+        }
+
+        return relust;
+    }
+
+    public void updateActive(OfficerFU officerFU) {
+        try {
+            String sql = "UPDATE [dbo].[canBo]\n"
+                    + "   SET [activeCB] =  ? \n"
+                    + " WHERE [canBoId] = " + officerFU.getId() + " ";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            stm.setBoolean(1, officerFU.isActive());
+            System.out.println(sql);
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("Loi TeacherDao   updateActive(Teacher teacher)  " + ex);
+        }
+    }
+
+    public static void main(String[] args) {
+        OfficerFUDao o = new OfficerFUDao();
+        System.out.println(o.getCodeofficerFU());
     }
 }

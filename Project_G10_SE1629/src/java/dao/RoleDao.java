@@ -32,8 +32,7 @@ public class RoleDao {
     public ArrayList<Role> getAll() {
         ArrayList<Role> listRole = new ArrayList<Role>();
         try {
-            String sql = "SELECT  [vaiTroId]\n"
-                    + "      ,[tenVaiTro]\n"
+            String sql = "SELECT *\n"
                     + "  FROM [PRJ_G10].[dbo].[vaiTro]";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
@@ -41,7 +40,8 @@ public class RoleDao {
                 if (rs.getNString("tenVaiTro").equals("BQT")) {
                     continue;
                 }
-                Role role = new Role(rs.getInt("vaiTroId"), rs.getNString("tenVaiTro"));
+                Role role = new Role(rs.getInt("vaiTroId"), rs.getNString("tenVaiTro"),rs.getString("codeRo"));
+               
                 listRole.add(role);
             }
 

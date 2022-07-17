@@ -32,19 +32,21 @@ public class StudentDao {
             String sql = "SELECT *\n"
                     + "  FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn "
                     + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId \n"
-                    + "WHERE s.sinhVienId = ? AND cs.idCoSo = ? ";
+                    + "WHERE s.sinhVienId = ? AND cs.idCoSo = ? "
+                    + "AND  s.[acctiveSV] =1";
             PreparedStatement stm = cnn.prepareStatement(sql);
             stm.setInt(1, id);
             stm.setString(2, campusup_login);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Specializedin specializedin = new Specializedin(rs.getInt(17), rs.getString(18), rs.getString(19), String.valueOf(rs.getDate(20)), String.valueOf(rs.getDate(21)));
-                Campus campus = new Campus(rs.getInt(22), rs.getString(23), rs.getString(24), String.valueOf(rs.getDate(25)), String.valueOf(rs.getDate(26)));
-                Status status = new Status(rs.getInt(27), rs.getString(28));
-                User user = new User(rs.getString(12), "", "");
-                return new Student(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getString(5),
-                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(13), rs.getString(14),
-                        specializedin, campus, status, rs.getBytes(15), rs.getString(16), user);
+                Specializedin specializedin = new Specializedin(rs.getInt("idChuyenNganh"), rs.getString("tenChuyenNganh"), rs.getString("codeChuyenNganh"), String.valueOf(rs.getDate("dateStartCN")), String.valueOf(rs.getDate("dateEndCN")));
+                Campus campus = new Campus(rs.getInt("idCoSo"), rs.getString("tenCoSo"), rs.getString("diaChiCoSo"), String.valueOf(rs.getDate("dateStartCS")), String.valueOf(rs.getDate("dateEndCS")));
+                Status status = new Status(rs.getInt("trangThaiId"), rs.getString("tenTrangThai"));
+                User user = new User(rs.getString("taiKhoanId"), "", "");
+                return new Student(rs.getInt("sinhVienId"), rs.getString("firstName"), rs.getString("lastName"), rs.getBoolean("gioiTinh"), rs.getString("ngaySinh"),
+                        rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChiSV"),
+                        rs.getString("batDauTuSV"), rs.getString("ketThucNgaySV"),
+                        specializedin, campus, status, rs.getBytes("imgData"), rs.getString("MSSV"), user, rs.getBoolean("acctiveSV"));
             }
 
         } catch (SQLException ex) {
@@ -52,25 +54,26 @@ public class StudentDao {
         }
         return null;
     }
-    
-    
+
     public Student getStudentByidStudent(int id) {
         try {
             String sql = "SELECT *\n"
                     + "  FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn "
                     + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId \n"
-                    + "WHERE s.sinhVienId = ? ";
+                    + "WHERE s.sinhVienId = ? "
+                    + "AND  s.[acctiveSV] =1";
             PreparedStatement stm = cnn.prepareStatement(sql);
-            stm.setInt(1, id); 
+            stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Specializedin specializedin = new Specializedin(rs.getInt(17), rs.getString(18), rs.getString(19), String.valueOf(rs.getDate(20)), String.valueOf(rs.getDate(21)));
-                Campus campus = new Campus(rs.getInt(22), rs.getString(23), rs.getString(24), String.valueOf(rs.getDate(25)), String.valueOf(rs.getDate(26)));
-                Status status = new Status(rs.getInt(27), rs.getString(28));
-                User user = new User(rs.getString(12), "", "");
-                return new Student(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getString(5),
-                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(13), rs.getString(14),
-                        specializedin, campus, status, rs.getBytes(15), rs.getString(16), user);
+                Specializedin specializedin = new Specializedin(rs.getInt("idChuyenNganh"), rs.getString("tenChuyenNganh"), rs.getString("codeChuyenNganh"), String.valueOf(rs.getDate("dateStartCN")), String.valueOf(rs.getDate("dateEndCN")));
+                Campus campus = new Campus(rs.getInt("idCoSo"), rs.getString("tenCoSo"), rs.getString("diaChiCoSo"), String.valueOf(rs.getDate("dateStartCS")), String.valueOf(rs.getDate("dateEndCS")));
+                Status status = new Status(rs.getInt("trangThaiId"), rs.getString("tenTrangThai"));
+                User user = new User(rs.getString("taiKhoanId"), "", "");
+                return new Student(rs.getInt("sinhVienId"), rs.getString("firstName"), rs.getString("lastName"), rs.getBoolean("gioiTinh"), rs.getString("ngaySinh"),
+                        rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChiSV"),
+                        rs.getString("batDauTuSV"), rs.getString("ketThucNgaySV"),
+                        specializedin, campus, status, rs.getBytes("imgData"), rs.getString("MSSV"), user, rs.getBoolean("acctiveSV"));
             }
 
         } catch (SQLException ex) {
@@ -84,19 +87,21 @@ public class StudentDao {
             String sql = "SELECT *\n"
                     + "  FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn "
                     + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId \n"
-                    + "WHERE s.taiKhoanId = ? AND cs.idCoSo = ? ";
+                    + "WHERE s.taiKhoanId = ? AND cs.idCoSo = ? "
+                    + "AND  s.[acctiveSV] =1";
             PreparedStatement stm = cnn.prepareStatement(sql);
             stm.setInt(1, id);
             stm.setString(2, campusup_login);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Specializedin specializedin = new Specializedin(rs.getInt(17), rs.getString(18), rs.getString(19), String.valueOf(rs.getDate(20)), String.valueOf(rs.getDate(21)));
-                Campus campus = new Campus(rs.getInt(22), rs.getString(23), rs.getString(24), String.valueOf(rs.getDate(25)), String.valueOf(rs.getDate(26)));
-                Status status = new Status(rs.getInt(27), rs.getString(28));
-                User user = new User(rs.getString(12), "", "");
-                return new Student(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4), rs.getString(5),
-                        rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(13), rs.getString(14),
-                        specializedin, campus, status, rs.getBytes(15), rs.getString(16), user);
+                Specializedin specializedin = new Specializedin(rs.getInt("idChuyenNganh"), rs.getString("tenChuyenNganh"), rs.getString("codeChuyenNganh"), String.valueOf(rs.getDate("dateStartCN")), String.valueOf(rs.getDate("dateEndCN")));
+                Campus campus = new Campus(rs.getInt("idCoSo"), rs.getString("tenCoSo"), rs.getString("diaChiCoSo"), String.valueOf(rs.getDate("dateStartCS")), String.valueOf(rs.getDate("dateEndCS")));
+                Status status = new Status(rs.getInt("trangThaiId"), rs.getString("tenTrangThai"));
+                User user = new User(rs.getString("taiKhoanId"), "", "");
+                return new Student(rs.getInt("sinhVienId"), rs.getString("firstName"), rs.getString("lastName"), rs.getBoolean("gioiTinh"), rs.getString("ngaySinh"),
+                        rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChiSV"),
+                        rs.getString("batDauTuSV"), rs.getString("ketThucNgaySV"),
+                        specializedin, campus, status, rs.getBytes("imgData"), rs.getString("MSSV"), user, rs.getBoolean("acctiveSV"));
             }
 
         } catch (SQLException ex) {
@@ -110,7 +115,8 @@ public class StudentDao {
         try {
             String sql = " SELECT *\n"
                     + "FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn \n"
-                    + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId ";
+                    + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId "
+                    + " WHERE  s.[acctiveSV] =1";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -123,7 +129,7 @@ public class StudentDao {
                 Student student = new Student(rs.getInt("sinhVienId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChiSV"),
                         rs.getDate("batDauTuSV") == null ? "null" : String.valueOf(rs.getDate("batDauTuSV")), rs.getString("ketThucNgaySV"),
-                        specializedin, campus, status, rs.getString("MSSV"),user);
+                        specializedin, campus, status, rs.getString("MSSV"), user);
                 listStudent.add(student);
             }
             return listStudent;
@@ -139,7 +145,8 @@ public class StudentDao {
             String sql = " SELECT *\n"
                     + "FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn \n"
                     + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId "
-                    + "WHERE  s.trangThaiId like '%" + st + "%'  AND cs.idCoSo like '%" + cam + "%' ";
+                    + "WHERE  s.trangThaiId like '%" + st + "%'  AND cs.idCoSo like '%" + cam + "%' "
+                    + "AND s.[acctiveSV] =1";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -152,7 +159,7 @@ public class StudentDao {
                 Student student = new Student(rs.getInt("sinhVienId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChiSV"),
                         rs.getDate("batDauTuSV") == null ? "null" : String.valueOf(rs.getDate("batDauTuSV")), rs.getString("ketThucNgaySV"),
-                        specializedin, campus, status, rs.getString("MSSV"),user);
+                        specializedin, campus, status, rs.getString("MSSV"), user);
                 listStudent.add(student);
             }
             return listStudent;
@@ -168,7 +175,8 @@ public class StudentDao {
             String sql = " SELECT *\n"
                     + "FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn \n"
                     + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId "
-                    + "WHERE s.firstName like '%" + frist + "%' AND s.lastName like '%" + last + "%'  AND s.trangThaiId like '%" + st + "%'  AND cs.idCoSo like '%" + cam + "%' ";
+                    + "WHERE s.firstName like '%" + frist + "%' AND s.lastName like '%" + last + "%'  AND s.trangThaiId like '%" + st + "%'  AND cs.idCoSo like '%" + cam + "%' "
+                    + "AND  s.[acctiveSV] =1";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -181,7 +189,7 @@ public class StudentDao {
                 Student student = new Student(rs.getInt("sinhVienId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChiSV"),
                         rs.getDate("batDauTuSV") == null ? "null" : String.valueOf(rs.getDate("batDauTuSV")), rs.getString("ketThucNgaySV"),
-                        specializedin, campus, status, rs.getString("MSSV"),user);
+                        specializedin, campus, status, rs.getString("MSSV"), user);
                 listStudent.add(student);
             }
             System.out.println(sql);
@@ -277,16 +285,11 @@ public class StudentDao {
                 relust = rs.getString(1);
             }
             if (relust.equals("")) {
-                return t + "000001";
+                return t + "1";
             } else {
                 int i = Integer.parseInt(relust.substring(2, relust.length()));
                 i++;
                 String iN = String.valueOf(i);
-                count = iN.length();
-                while (count < 6) {
-                    iN = "0" + iN;
-                    count = iN.length();
-                }
                 return t += iN;
             }
 
@@ -306,9 +309,9 @@ public class StudentDao {
     public void insertStudent(Student s) {
         String sql = "INSERT INTO [dbo].[sinhVien] "
                 + "( [firstName], [lastName], [gioiTinh], [ngaySinh], [soDienThoai], [gmail], "
-                + "[diaChiSV], [idChuyenNganh], [idCoSo], [trangThaiId], [taiKhoanId], [batDauTuSV], [ketThucNgaySV], [imgData], [MSSV]) \n"
+                + "[diaChiSV], [idChuyenNganh], [idCoSo], [trangThaiId], [taiKhoanId], [batDauTuSV], [ketThucNgaySV], [imgData], [MSSV],[acctiveSV]) \n"
                 + "   VALUES "
-                + "( ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, GETDATE(), ?, ?, ?)";
+                + "( ?, ?, ?, ?, ?, ?, ?, ?, ?, 1, ?, GETDATE(), ?, ?, ?,1)";
         try {
             PreparedStatement stm = cnn.prepareStatement(sql);
 
@@ -326,6 +329,7 @@ public class StudentDao {
             stm.setBytes(12, s.getImgStudent());
             stm.setString(13, s.getCodeStudent());
             stm.executeUpdate();
+            
         } catch (Exception e) {
             System.out.println("Loi StudentDao insertStudent(Student s)  " + e);
         }
@@ -348,7 +352,7 @@ public class StudentDao {
     }
 
     public void update(Student student) {
-       try {
+        try {
             String sql = "UPDATE [dbo].[sinhVien]\n"
                     + "   SET [firstName] = '" + student.getFirstName() + "' \n"
                     + "      ,[lastName] =  '" + student.getLastName() + "' \n"
@@ -358,12 +362,12 @@ public class StudentDao {
                     + "      ,[gmail] =  '" + student.getGmail() + "' \n"
                     + "      ,[diaChiSV] =  '" + student.getAddress() + "' \n"
                     + "      ,[idChuyenNganh] =  '" + student.getSpecializedin().getId() + "' \n"
-                     + "      ,[idCoSo] =  '" + student.getCampus().getId() + "' \n"
-                     + "      ,[trangThaiId] =  '" + student.getStatus().getId() + "' \n"
-                     + "      ,[taiKhoanId] =  " + student.getUser().getId() + " \n"
+                    + "      ,[idCoSo] =  '" + student.getCampus().getId() + "' \n"
+                    + "      ,[trangThaiId] =  '" + student.getStatus().getId() + "' \n"
+                    + "      ,[taiKhoanId] =  " + student.getUser().getId() + " \n"
                     + "      ,[batDauTuSV] =  '" + student.getDateOfStart() + "' \n"
                     + "      ,[ketThucNgaySV] =  '" + student.getDateOfEnd() + "' \n"
-                     + " WHERE [sinhVienId] = " + student.getId() + " ";
+                    + " WHERE [sinhVienId] = " + student.getId() + " ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             stm.setBoolean(1, student.isGender());
             System.out.println(sql);
@@ -371,6 +375,21 @@ public class StudentDao {
 
         } catch (SQLException ex) {
             System.out.println("Loi StudentDao   update(Student student)  " + ex);
+        }
+    }
+
+    public void updateActive(Student student) {
+        try {
+            String sql = "UPDATE [dbo].[sinhVien]\n"
+                    + "   SET [acctiveSV] =  ? \n"
+                    + " WHERE [sinhVienId] = " + student.getId() + " ";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            stm.setBoolean(1, student.isActive());
+            System.out.println(sql);
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("Loi TeacherDao   updateActive(Teacher teacher)  " + ex);
         }
     }
 

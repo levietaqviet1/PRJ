@@ -20,11 +20,17 @@ public class Student {
     private byte[] imgStudent;
     private String codeStudent;
     private User user;
+    private boolean active;
 
     public Student() {
     }
 
-    public Student(int id, String firstName, String lastName, boolean gender, String dateOfBirth, String phone, String gmail, String address, String dateOfStart, String dateOfEnd, Specializedin specializedin, Campus campus, Status status, byte[] imgStudent, String codeStudent, User user) {
+    public Student(int id, boolean active) {
+        this.id = id;
+        this.active = active;
+    }
+
+    public Student(int id, String firstName, String lastName, boolean gender, String dateOfBirth, String phone, String gmail, String address, String dateOfStart, String dateOfEnd, Specializedin specializedin, Campus campus, Status status, byte[] imgStudent, String codeStudent, User user, boolean active) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -41,6 +47,7 @@ public class Student {
         this.imgStudent = imgStudent;
         this.codeStudent = codeStudent;
         this.user = user;
+        this.active = active;
     }
 
     public Student(String firstName, String lastName, boolean gender, String dateOfBirth, String phone, String gmail, Specializedin specializedin, Campus campus, User user) {
@@ -102,6 +109,14 @@ public class Student {
 
     public String getCodeStudent() {
         return codeStudent;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public void setCodeStudent(String codeStudent) {
@@ -222,7 +237,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", phone=" + phone + ", gmail=" + gmail + ", address=" + address + ", dateOfStart=" + dateOfStart + ", dateOfEnd=" + dateOfEnd + ", specializedin=" + specializedin.toString() + ", campus=" + campus.toString() +  ", user=" + user.toString() + '}';
+        return "Student{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", gender=" + gender + ", dateOfBirth=" + dateOfBirth + ", phone=" + phone + ", gmail=" + gmail + ", address=" + address + ", dateOfStart=" + dateOfStart + ", dateOfEnd=" + dateOfEnd + ", specializedin=" + specializedin.toString() + ", campus=" + campus.toString() + ", user=" + user.toString() + '}';
     }
 
 }

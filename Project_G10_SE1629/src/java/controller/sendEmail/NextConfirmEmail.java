@@ -23,68 +23,40 @@ import model.User;
  */
 public class NextConfirmEmail extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-
-            /* TODO output your page here. You may use following sample code. */
-            if (request.getSession().getAttribute("account_session_student") != null) {
-                Student student = (Student) request.getSession().getAttribute("account_session_student");
-                locationHot location = new locationHot();
-                String code = RandomString.RandomStringg(6);
-                String topic = "FPT-Xác minh Email";
-                String content = "<html lang=\"en\">\n"
-                        + "<head>\n"
-                        + "    <title></title>\n"
-                        + "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n"
-                        + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
-                        + "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n"
-                        + "</head>\n"
-                        + "<body>\n"
-                        + "    Hello " + student.getFirstName() + " " + student.getLastName() + " !  Please click on the link below to activate Email:\n"
-                        + "     <a href='http://localhost:"+String.valueOf(location.getLocal())+"/Project_G10_SE1629/ConfirmEmail?id=" + code + "'><span style=\"color: red ;\">Click here</span></a> <br/>\n"
-                        + "   Note: The activation link is only valid for 1 day. Thanks !\n"
-                        + "</body>\n"
-                        + "</html>";
-
-                String acc_TK_Mail_Send = "phongdaotaofbt@gmail.com";
-                String acc_MK_Mail_Send = "npmgjujnxbtswmit";
-                SendMail.SendMail(student.getGmail(), topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
-
-                HttpSession session = request.getSession();
-                session.setAttribute("suDungsendMall", code);
-                session.setAttribute("confirmEmail_st", code);
-                session.setMaxInactiveInterval(60 * 60 * 24);
-                response.sendRedirect("sendEmaillSu");
-
-            }
-
-        }
-    }
-
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        PrintWriter out = response.getWriter();
+        if (request.getSession().getAttribute("account_session_student") != null) {
+            Student student = (Student) request.getSession().getAttribute("account_session_student");
+            locationHot location = new locationHot();
+            String code = RandomString.RandomStringg(6);
+            String topic = "FPT-Xác minh Email";
+            String content = "<html lang=\"en\">\n"
+                    + "<head>\n"
+                    + "    <title></title>\n"
+                    + "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n"
+                    + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
+                    + "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n"
+                    + "</head>\n"
+                    + "<body>\n"
+                    + "    Hello " + student.getFirstName() + " " + student.getLastName() + " !  Please click on the link below to activate Email:\n"
+                    + "     <a href='http://localhost:" + String.valueOf(location.getLocal()) + "/Project_G10_SE1629/ConfirmEmail?id=" + code + "'><span style=\"color: red ;\">Click here</span></a> <br/>\n"
+                    + "   Note: The activation link is only valid for 1 day. Thanks !\n"
+                    + "</body>\n"
+                    + "</html>";
+
+            String acc_TK_Mail_Send = "phongdaotaofbt@gmail.com";
+            String acc_MK_Mail_Send = "npmgjujnxbtswmit";
+            SendMail.SendMail(student.getGmail(), topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
+
+            HttpSession session = request.getSession();
+            session.setAttribute("suDungsendMall", code);
+            session.setAttribute("confirmEmail_st", code);
+            session.setMaxInactiveInterval(60 * 60 * 24);
+            response.sendRedirect("sendEmaillSu");
+
+        }
     }
 
     /**
@@ -98,7 +70,7 @@ public class NextConfirmEmail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+
     }
 
     /**

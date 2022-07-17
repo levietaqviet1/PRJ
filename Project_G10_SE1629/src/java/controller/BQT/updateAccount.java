@@ -75,21 +75,21 @@ public class updateAccount extends HttpServlet {
                 if (password == null || password.equals("")) {
                     password = RandomString.RandomStringg(8);
                 }
+                String[] userNameLast = lastName.split(" ");
+                String userName = firstName;
+                for (String name : userNameLast) {
+                    userName += name.charAt(0);
+                }
+                userName = userName.toLowerCase();
                 if (slRole == 2) {
                     //sv
                     specializedin = new Specializedin(1);
                     Student student = new Student(roleId, firstName, lastName, gender, dob, phone, email, address, "", "", specializedin, campus, status, "", user);
-                    String[] userNameLast = lastName.split(" ");
-                    String userName = firstName;
-                    for (String name : userNameLast) {
-                        userName += name.charAt(0);
-                    }
-                    userName = userName.toLowerCase();
                     student.setCodeStudent(studentDao.getMssv(specializedinDao.getCodeSpecializedin(String.valueOf(specializedin.getId()))));
                     userName += student.getCodeStudent();
                     user = new User(String.valueOf(userDao.getIdAccount() + 1), userName, password);
                     student.setUser(user);
-                    userDao.insertUserStudent(user); // insert user vao datase
+                    userDao.insertUser(user, "2"); // insert user vao datase
                     studentDao.insertStudent(student); // insert student cao database
                     coutCheckRole++;
                     account = student.getUser().getUsername();
@@ -97,16 +97,26 @@ public class updateAccount extends HttpServlet {
                 }
                 if (slRole == 3) {
                     //gv
-                    Teacher teacher = new Teacher(roleId, firstName, lastName, gender, dob, "", "", phone, email, address, campus, user);
-                    teacherDao.insert(teacher);
+                    String code = teacherDao.getCodeTeacher();
+                    userName += code;
+                    user = new User(String.valueOf(userDao.getIdAccount() + 1), userName, password);
+                    userDao.insertUser(user, "3"); // insert user vao datase
+                    Teacher teacher = new Teacher(roleId, firstName, lastName, gender, dob, "", "", phone, email, address, campus, user, code, true);
+                    teacherDao.insert(teacher); // nhap teacher
                     role = "Teacher";
+                    account = teacher.getUser().getUsername();
                     coutCheckRole++;
                 }
                 if (slRole == 4) {
                     //cb
-                    OfficerFU officerFU = new OfficerFU(roleId, firstName, lastName, gender, dob, phone, email, address, campus, user);
+                    String code = officerFUDao.getCodeofficerFU();
+                    userName += code;
+                    user = new User(String.valueOf(userDao.getIdAccount() + 1), userName, password);
+                    userDao.insertUser(user, "4"); // insert user vao datase
+                    OfficerFU officerFU = new OfficerFU(roleId, firstName, lastName, gender, dob, phone, email, address, campus, user, code, true);
                     officerFUDao.insert(officerFU);
                     role = "Officer FU";
+                    account = officerFU.getUser().getUsername();
                     coutCheckRole++;
                 }
 
@@ -116,7 +126,10 @@ public class updateAccount extends HttpServlet {
 
             if (roleId == 2) {
                 if (slRole != roleId) {
-                    studentParentsDao1.deleteByid(String.valueOf(studentParentsDao1.getStudentParentsByIdStudent(idAccount).getId()));
+                    StudentParents studentParents1 = studentParentsDao1.getStudentParentsByIdStudent(String.valueOf(idAccount));
+                    if (studentParents1 != null) {
+                        studentParentsDao1.deleteByid(String.valueOf(studentParents1.getId()));
+                    }
                     studentDao.deleteByid(idAccount);
                 } else {
                     Student student = new Student(Integer.parseInt(idAccount), firstName, lastName, gender, dob, phone, email, address, request.getParameter("dobStart"), request.getParameter("dobEnd") == null ? "" : request.getParameter("dobEnd"), specializedin, campus, status, "", user);
@@ -125,14 +138,14 @@ public class updateAccount extends HttpServlet {
                 }
             }
 
-            if (roleId == 3) {
+            if (roleId == 3) { // done
                 if (slRole != roleId) {
                     teacherDao.deleteByid(idAccount);
-                    if (slRole == 2) {
+                    if (slRole != 3) {
                         userDao.deleteByid(idUser);
                     }
                 } else {
-                    Teacher teacher = new Teacher(Integer.parseInt(idAccount), firstName, lastName, gender, dob, request.getParameter("dobStart"), request.getParameter("dobEnd") == null ? "" : request.getParameter("dobEnd"), phone, email, address, campus, user);
+                    Teacher teacher = new Teacher(Integer.parseInt(idAccount), firstName, lastName, gender, dob, request.getParameter("dobStart"), request.getParameter("dobEnd") == null ? "" : request.getParameter("dobEnd"), phone, email, address, campus, user, "", true);
                     teacherDao.update(teacher);
                     role = "Teacher";
                 }
@@ -140,20 +153,17 @@ public class updateAccount extends HttpServlet {
             if (roleId == 4) {
                 if (slRole != roleId) {
                     officerFUDao.deleteByid(String.valueOf(idAccount));
-                    if (slRole == 2) {
+                    if (slRole != 4) {
                         userDao.deleteByid(idUser);
                     }
-                }
-                if (slRole == roleId) {
-                    OfficerFU officerFU = new OfficerFU(Integer.parseInt(idAccount), firstName, lastName, gender, dob, phone, email, address, campus, user);
+                } else {
+                    OfficerFU officerFU = new OfficerFU(Integer.parseInt(idAccount), firstName, lastName, gender, dob, phone, email, address, campus, user, "", true);
                     officerFUDao.update(officerFU);
                     role = "Officer FU";
                 }
             }
             if (roleId == 5) {
-                StudentParents studentParents = new StudentParents(Integer.parseInt(idAccount), firstName, lastName, gender, dob, phone, email, address, campus);
-                PrintWriter out = response.getWriter();
-                out.print(studentParents.toString());
+                StudentParents studentParents = new StudentParents(Integer.parseInt(idAccount), firstName, lastName, gender, dob, phone, email, address, campus, "", true);
                 studentParentsDao1.update(studentParents);
                 role = "Student Parents";
             }

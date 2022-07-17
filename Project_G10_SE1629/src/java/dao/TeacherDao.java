@@ -37,7 +37,8 @@ public class TeacherDao {
         try {
             String sql = "SELECT * \n"
                     + "FROM [PRJ_G10].[dbo].[giangVien] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
-                    + "ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId";
+                    + "ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
+                    + "WHERE gv.activeGv= 1";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -47,7 +48,7 @@ public class TeacherDao {
                 Teacher teacher = new Teacher(rs.getInt("giangVienId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getNString("ngaySinh"), rs.getNString("ngayBatDauLamViec"), rs.getNString("ngayNghiLam"),
                         rs.getNString("soDienThoai"), rs.getNString("gmail"), rs.getNString("diaChi"),
-                        campus, user);
+                        campus, user, rs.getString("maGiangVien"), rs.getBoolean("activeGV"));
                 listTeacher.add(teacher);
             }
 
@@ -64,7 +65,8 @@ public class TeacherDao {
             String sql = "SELECT * \n"
                     + "FROM [PRJ_G10].[dbo].[giangVien] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
                     + "ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
-                    + "WHERE gv.firstName like '%" + firt + "%' AND lastName like '%" + last + "%'  AND cs.idCoSo like '%" + cam + "%' ";
+                    + "WHERE gv.firstName like '%" + firt + "%' AND lastName like '%" + last + "%'  AND cs.idCoSo like '%" + cam + "%' "
+                    + "AND gv.activeGv= 1";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -74,7 +76,7 @@ public class TeacherDao {
                 Teacher teacher = new Teacher(rs.getInt("giangVienId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getNString("ngaySinh"), rs.getNString("ngayBatDauLamViec"), rs.getNString("ngayNghiLam"),
                         rs.getNString("soDienThoai"), rs.getNString("gmail"), rs.getNString("diaChi"),
-                        campus, user);
+                        campus, user, rs.getString("maGiangVien"), rs.getBoolean("activeGV"));
                 listTeacher.add(teacher);
             }
 
@@ -103,17 +105,18 @@ public class TeacherDao {
             String sql = "SELECT * \n"
                     + "FROM [PRJ_G10].[dbo].[giangVien] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
                     + "ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
-                    + "WHERE gv.giangVienId = " + id + " ";
+                    + "WHERE gv.giangVienId = " + id + " "
+                    + "AND gv.activeGv= 1";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"));
-                Role role = new Role(rs.getInt("vaiTroId"), rs.getNString("tenVaiTro"));
+                Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo").trim(), rs.getNString("diaChiCoSo"));
+                Role role = new Role(rs.getInt("vaiTroId"), rs.getNString("tenVaiTro").trim());
                 User user = new User(String.valueOf(rs.getInt("taiKhoanId")), role);
-                teacher = new Teacher(rs.getInt("giangVienId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
+                teacher = new Teacher(rs.getInt("giangVienId"), rs.getNString("firstName").trim(), rs.getNString("lastName").trim(), rs.getBoolean("gioiTinh"),
                         rs.getNString("ngaySinh"), rs.getNString("ngayBatDauLamViec"), rs.getNString("ngayNghiLam"),
-                        rs.getNString("soDienThoai"), rs.getNString("gmail"), rs.getNString("diaChi"),
-                        campus, user);
+                        rs.getNString("soDienThoai").trim(), rs.getNString("gmail"), rs.getNString("diaChi").trim(),
+                        campus, user, rs.getString("maGiangVien").trim(), rs.getBoolean("activeGV"));
             }
 
         } catch (SQLException ex) {
@@ -124,8 +127,8 @@ public class TeacherDao {
 
     public void insert(Teacher s) {
         String sql = "INSERT INTO [dbo].[giangVien] "
-                + "([firstName] ,[lastName] ,[gioiTinh] ,[ngaySinh] ,[ngayBatDauLamViec] ,[soDienThoai] ,[gmail] ,[diaChi] ,[idCoSo] ,[taiKhoanId])\n"
-                + "     VALUES(?,?,?,?,?,?,?,?,?,?);";
+                + "([firstName] ,[lastName] ,[gioiTinh] ,[ngaySinh] ,[ngayBatDauLamViec] ,[soDienThoai] ,[gmail] ,[diaChi] ,[idCoSo] ,[taiKhoanId],[maGiangVien],[activeGV])\n"
+                + "     VALUES(?,?,?,?,?,?,?,?,?,?,?,1);";
         try {
             PreparedStatement stm = cnn.prepareStatement(sql);
 
@@ -139,6 +142,7 @@ public class TeacherDao {
             stm.setString(8, s.getAddress());
             stm.setInt(9, s.getCampus().getId());
             stm.setInt(10, Integer.parseInt(s.getUser().getId()));
+            stm.setString(11, s.getCodeTearcher());
             stm.executeUpdate();
         } catch (Exception e) {
             System.out.println("Loi TeacherDao insert(Teacher s)  " + e);
@@ -167,11 +171,57 @@ public class TeacherDao {
                     + " WHERE [giangVienId] = " + teacher.getId() + " ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             stm.setBoolean(1, teacher.isGender());
+           
             System.out.println(sql);
             stm.executeUpdate();
 
         } catch (SQLException ex) {
             System.out.println("Loi TeacherDao   update(Teacher teacher)  " + ex);
         }
+    }
+    
+      public void updateActive(Teacher teacher) {
+        try {
+            String sql = "UPDATE [dbo].[giangVien]\n"
+                    + "   SET [activeGV] =  ? \n"
+                    + " WHERE [giangVienId] = " + teacher.getId() + " ";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            stm.setBoolean(1, teacher.isActive());
+            System.out.println(sql);
+            stm.executeUpdate();
+
+        } catch (SQLException ex) {
+            System.out.println("Loi TeacherDao   updateActive(Teacher teacher)  " + ex);
+        }
+    }
+
+    public String getCodeTeacher() {
+        int count = 0;
+        String relust = "";
+        String t = "GV";
+        try {
+
+            String sql = "SELECT TOP 1 [maGiangVien]\n"
+                    + "  FROM [PRJ_G10].[dbo].[giangVien]\n"
+                    + "  ORDER BY maGiangVien DESC";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+           while (rs.next()) {
+                relust = rs.getString(1);
+            }
+            if (relust.equals("")) {
+                return t + "1";
+            } else {
+                int i = Integer.parseInt(relust.substring(2, relust.length()));
+                i++;
+                String iN = String.valueOf(i);
+                return t += iN;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Loi TeacherDao getCodeTeacher()" + ex);
+        }
+
+        return relust;
     }
 }

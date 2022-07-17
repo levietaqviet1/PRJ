@@ -10,7 +10,7 @@ package model;
  */
 public class Role {
     private int id;
-    private String name;
+    private String name,code;
 
     public Role() {
         
@@ -25,6 +25,21 @@ public class Role {
         this.id = id;
         this.name = name;
     }
+
+    public Role(int id, String name, String code) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+    }
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+    
 
     public int getId() {
         return id;
