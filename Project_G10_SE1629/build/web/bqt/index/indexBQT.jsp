@@ -67,6 +67,11 @@
                 background: #2196f3;
                 box-shadow: 0 0 10px #2196f3, 0 0 40px #2196f3, 0 0 80px #2196f3;
             }
+            .ac{
+                color: #255784;
+                background: #81D742;
+                box-shadow: 0 0 10px #81D742, 0 0 40px #81D742, 0 0 80px #81D742;
+            }
 
         </style>
     </head>
@@ -84,7 +89,7 @@
 
             <div class="menu-items">
                 <ul class="nav-links">
-                    <li><a href="indexBQT?nextAccount=1">
+                    <li><a href="indexBQT?nextAccount=1" class="ac">
                             <i class="uil uil-estate"></i>
                             <span class="link-name">Account</span>
                         </a></li>
@@ -92,8 +97,12 @@
                             <i class="uil uil-thumbs-up"></i>
                             <span class="link-name">Class</span>
                         </a></li>
+                    <li><a href="indexBQT?recycleBin=1">
+                            <i><ion-icon name="archive-outline"></ion-icon></i> 
+                            <span class="link-name">Recycle Bin</span>
+                        </a></li>
                     <li><a href="changePassworBQT?id=1">
-                            <i class="uil uil-thumbs-up"></i>
+                            <i><ion-icon name="git-compare-outline"></ion-icon></i> 
                             <span class="link-name">Change Password</span>
                         </a></li>
                 </ul>
@@ -110,7 +119,7 @@
 
         <div class="dashboard">
             <div class="dash-lefttop"> 
-           
+
             </div>
 
             <form action="indexBQT" method="POST" >
@@ -138,9 +147,9 @@
                             </c:forEach>
                         </select>
                     </div>
-                    <div>
-                        <input type="submit" value="Add new Account" name="addSubAccou" style="width: auto;margin-left: 70px;margin-top: 20px;"/>
-                    </div>
+                    <!--                    <div>
+                                            <input type="submit" value="Add new Account" name="addSubAccou" style="width: auto;margin-left: 70px;margin-top: 20px;"/>
+                                        </div>-->
                 </div>
 
                 <div class="dash-bottomtable">
@@ -199,7 +208,7 @@
                                     <th scope="col">First Name</th>
                                     <th scope="col">Last Name</th>
                                     <th scope="col">Name</th>
-                                     <th scope="col">MSGV</th>
+                                    <th scope="col">MSGV</th>
                                     <th scope="col">Gender</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Dob</th>
@@ -216,7 +225,7 @@
                                         <td>${t.firstName}</td>
                                         <td>${t.lastName}</td>
                                         <td>${t.lastName} ${t.firstName} </td>
-                                         <td>${t.codeTearcher}</td>
+                                        <td>${t.codeTearcher}</td>
                                         <td>
                                             <c:if test="${t.gender == true}" >
                                                 Male
@@ -299,11 +308,12 @@
                         <!--phu huynh-->
                         <c:if test="${roleId == 5}">
                             <thead>
-                                <tr> 
+                                <tr>  
                                     <th scope="col">First Name</th>
                                     <th scope="col">Last Name</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">MSPH</th>
+                                    <th scope="col">MSSV</th>
                                     <th scope="col">Gender</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Dob</th>
@@ -320,6 +330,7 @@
                                         <td>${t.lastName}</td>
                                         <td>${t.lastName} ${t.firstName} </td>
                                         <td>${t.codeSP}</td>
+                                        <td>${t.student.codeStudent}</td>
                                         <td>
                                             <c:if test="${t.gender == true}" >
                                                 Male
@@ -367,8 +378,10 @@
         </div>
 
     </div>
-
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
     <script>
+
         document.addEventListener('mousemove', function (e) {
             let body = document.querySelector('body');
             let particles = document.createElement('b');

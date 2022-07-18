@@ -8,6 +8,9 @@ import dao.OfficerFUDao;
 import dao.RoleDao;
 import dao.StatusDao;
 import dao.StudentDao;
+import dao.TeacherDao;
+import dao.UserDao;
+import dao.studentParentsDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -17,112 +20,103 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.ArrayList;
 import model.BQT;
-import model.Role;
+import model.OfficerFU;
+import model.Status;
+import model.Student;
+import model.StudentParents;
 import model.Teacher;
-import dao.TeacherDao;
-import dao.UserDao;
-import dao.studentParentsDao;
-import model.*;
 
 /**
  *
  * @author NCC
  */
-public class indexBQT extends HttpServlet {
-
+public class recycleBinBQT extends HttpServlet {
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (request.getSession().getAttribute("bqt_login_successful") == null) {
             response.sendRedirect("homeBQT");
-        }
-        PrintWriter out = response.getWriter();
-        HttpSession session = request.getSession();
-        TeacherDao teacherDao = new TeacherDao();
-        StudentDao studentDao = new StudentDao();
-        studentParentsDao studentParentsDao = new studentParentsDao();
-
-        // BQT
-        if (request.getParameter("sid") != null) {
-            UserDao userDao = new UserDao();
-            OfficerFUDao OfficerFUDao = new OfficerFUDao();
-            String roleId = "";
-            if (request.getParameter("update") != null) {
-                request.setAttribute("updateID", request.getParameter("update"));
-                request.setAttribute("sid", request.getParameter("sid"));
-                //gv
-                if (request.getParameter("update").equals("3")) {
-                    Teacher teacher = teacherDao.getTeacherById(request.getParameter("sid"), "1");
-                    request.setAttribute("teacherBQT", teacher);
-                    request.setAttribute("userId", teacher.getUser().getId());
-                }
-                //sv
-                if (request.getParameter("update").equals("2")) {
-                    Student student = studentDao.getStudent(Integer.parseInt(request.getParameter("sid")), request.getParameter("campusId"), "1");
-                    request.setAttribute("studentBQT", student);
-                    request.setAttribute("userId", student.getUser().getId());
-                }
-                //can-bo
-                if (request.getParameter("update").equals("4")) {
-                    OfficerFU oficerFU = OfficerFUDao.getOfficerByID(request.getParameter("sid"),"1");
-                    request.setAttribute("oficerFUBQT", oficerFU);
-                    request.setAttribute("userId", oficerFU.getUser().getId());
-                }
-                //phuHuynh
-                if (request.getParameter("update").equals("5")) {
-                    StudentParents studentParents = studentParentsDao.getStudentParentsByIdParent(request.getParameter("sid"), "1");
-                    request.setAttribute("studentParentsBQT", studentParents);
-                    out.print(studentParents);
-                    request.setAttribute("userId", studentParents.getUser().getId());
-
-                }
-                request.getRequestDispatcher("bqt/index/AccountUpdate.jsp").forward(request, response);
-            }
-
-            if (request.getParameter("delete") != null) {
-                //gv
-                if (request.getParameter("delete").equals("3")) {
-                    Teacher teacher = new Teacher(Integer.parseInt(request.getParameter("sid")), false);
-                    teacherDao.updateActive(teacher);
-                }
-                //sv
-                if (request.getParameter("delete").equals("2")) {
-                    StudentParents studentParents = studentParentsDao.getStudentParentsByIdStudent(request.getParameter("sid"));
-                    if (studentParents != null) {
-                        studentParents.setActiveSP(false);
-                        studentParentsDao.updateActive(studentParents);
-//                        userDao.deleteByid(String.valueOf(studentParents.getUser().getId()));
-                    }
-                    Student student = new Student(Integer.parseInt(request.getParameter("sid")), false);
-                    studentDao.updateActive(student);
-//                    studentDao.deleteByid(request.getParameter("sid"));
-//                    userDao.deleteByid(request.getParameter("tkid"));
-
-                }
-                //can-bo
-                if (request.getParameter("delete").equals("4")) {
-                    OfficerFU officerFU = new OfficerFU(Integer.parseInt(request.getParameter("sid")), false);
-                    OfficerFUDao.updateActive(officerFU);
-                }
-                //phu-huynh
-                if (request.getParameter("delete").equals("5")) {
-//                    studentParentsDao.deleteByid(request.getParameter("sid"));
-//                    userDao.deleteByid(request.getParameter("tkid"));
-                    StudentParents studentParents = new StudentParents(Integer.parseInt(request.getParameter("sid")), false); 
-                    studentParentsDao.updateActive(studentParents);
-                }
-
-                roleId = request.getParameter("delete");
-                response.sendRedirect("indexBQT?nextAccount=1&slRole=" + roleId);
-            }
-
-            //sv
         } else {
-            if (session.getAttribute("bqt_login_successful") != null) {
+            PrintWriter out = response.getWriter();
+            HttpSession session = request.getSession();
+            TeacherDao teacherDao = new TeacherDao();
+            StudentDao studentDao = new StudentDao();
+            studentParentsDao studentParentsDao = new studentParentsDao();
+            // BQT
+            if (request.getParameter("sid") != null) {
+                UserDao userDao = new UserDao();
+                OfficerFUDao OfficerFUDao = new OfficerFUDao();
+                String roleId = "";
+                if (request.getParameter("update") != null) {
+                    request.setAttribute("updateID", request.getParameter("update"));
+                    request.setAttribute("sid", request.getParameter("sid"));
+                    //gv
+                    if (request.getParameter("update").equals("3")) {
+                        Teacher teacher = new Teacher(Integer.parseInt(request.getParameter("sid")), true);
+                        teacherDao.updateActive(teacher);
+                    }
+                    //sv
+                    if (request.getParameter("update").equals("2")) {
+                        StudentParents studentParents = studentParentsDao.getStudentParentsByIdStudent(request.getParameter("sid"));
+                        studentParents.setActiveSP(true);
+                        studentParentsDao.updateActive(studentParents);
+                        Student student = new Student(Integer.parseInt(request.getParameter("sid")), true);
+                        studentDao.updateActive(student);
+                    }
+                    //can-bo
+                    if (request.getParameter("update").equals("4")) {
+                        OfficerFU oficerFU = new OfficerFU(Integer.parseInt(request.getParameter("sid")), true);
+                        OfficerFUDao.updateActive(oficerFU);
+                    }
+                    //phuHuynh
+                    if (request.getParameter("update").equals("5")) {
+                        StudentParents studentParents = new StudentParents(Integer.parseInt(request.getParameter("sid")), true);
+                        studentParentsDao.updateActive(studentParents);
+                    }
+                    roleId = request.getParameter("update");
+                    response.sendRedirect("recycleBinBQT?nextAccount=1&slRole=" + roleId);
+                }
+                
+                if (request.getParameter("delete") != null) {
+                    //gv
+                    if (request.getParameter("delete").equals("3")) {
+                        Teacher teacher = teacherDao.getTeacherById(request.getParameter("sid"), "0");
+                        teacherDao.deleteByid(String.valueOf(teacher.getId()));
+                        userDao.deleteByid(teacher.getUser().getId());
+                    }
+                    //sv
+                    if (request.getParameter("delete").equals("2")) {
+                        StudentParents studentParents = studentParentsDao.getStudentParentsByIdStudent(request.getParameter("sid"));
+                        if (studentParents != null) {
+                            studentParentsDao.deleteByid(String.valueOf(studentParents.getId()));
+                            userDao.deleteByid(String.valueOf(studentParents.getUser().getId()));
+                        }
+                        studentDao.deleteByid(request.getParameter("sid"));
+                        userDao.deleteByid(request.getParameter("tkid"));
+                    }
+                    //can-bo
+                    if (request.getParameter("delete").equals("4")) {
+                        OfficerFU officerFU = OfficerFUDao.getOfficerByID(request.getParameter("sid"), "");
+                        OfficerFUDao.deleteByid(String.valueOf(officerFU.getId()));
+                        userDao.deleteByid(officerFU.getUser().getId());
+                    }
+                    //phu-huynh
+                    if (request.getParameter("delete").equals("5")) {
+                        studentParentsDao.deleteByid(request.getParameter("sid"));
+                        userDao.deleteByid(request.getParameter("tkid"));
+                    }
+                    
+                    roleId = request.getParameter("delete");
+                    response.sendRedirect("recycleBinBQT?nextAccount=1&slRole=" + roleId);
+                }
+
+                //sv
+            } else {
                 BQT bQT = (BQT) session.getAttribute("bqt_login_successful");
                 Teacher teacher = new Teacher();
                 RoleDao roleDao = new RoleDao();
-
+                
                 if (request.getParameter("nextClass") != null) {
                     request.getRequestDispatcher("bqt/index/ClassBQT.jsp").forward(request, response);
                 }
@@ -132,33 +126,32 @@ public class indexBQT extends HttpServlet {
                         roleId = Integer.parseInt(request.getParameter("slRole"));
                     }
                     if (roleId == 2) {
-                        ArrayList<Student> listStudent = studentDao.getAll("1");
+                        ArrayList<Student> listStudent = studentDao.getAll("0");
                         request.setAttribute("listStudent", listStudent);
                     }
                     if (roleId == 3) {
-                        ArrayList<Teacher> listTeacher = teacherDao.getAll("1");
+                        ArrayList<Teacher> listTeacher = teacherDao.getAll("0");
                         request.setAttribute("listTeacher", listTeacher);
                     }
                     if (roleId == 4) {
                         OfficerFUDao OfficerFUDao = new OfficerFUDao();
-                        ArrayList<OfficerFU> listOfficerFU = OfficerFUDao.getAll("", "1");
+                        ArrayList<OfficerFU> listOfficerFU = OfficerFUDao.getAll("", "0");
                         request.setAttribute("listOfficerFU", listOfficerFU);
                     }
                     if (roleId == 5) {
-                        ArrayList<StudentParents> listStudentParents = studentParentsDao.getAll("", "1");
+                        ArrayList<StudentParents> listStudentParents = studentParentsDao.getAll("", "0");
                         request.setAttribute("listStudentParents", listStudentParents);
                     }
-
+                    
                     request.setAttribute("roleId", roleId);
-                    request.getRequestDispatcher("bqt/index/indexBQT.jsp").forward(request, response);
+                    request.getRequestDispatcher("bqt/index/RecycleBinBQT.jsp").forward(request, response);
                 }
                 if (request.getParameter("recycleBin") != null) {
-                    response.sendRedirect("recycleBinBQT?nextAccount=1");
+                    response.sendRedirect("recycleBinBQT");
                 }
-
+                
             }
         }
-
     }
 
     /**
@@ -202,16 +195,16 @@ public class indexBQT extends HttpServlet {
                     ArrayList<Student> listStudent;
                     if (checkSearch != 0) {
                         if (searchArr.length == 1) {
-                            listStudent = studentDao.getAllByInfo(searchArr[0], "", slStatus, slCampusSearch, "1");
+                            listStudent = studentDao.getAllByInfo(searchArr[0], "", slStatus, slCampusSearch, "0");
                         } else {
                             String lastN = "";
                             for (int i = 1; i < searchArr.length; i++) {
                                 lastN += searchArr[i];
                             }
-                            listStudent = studentDao.getAllByInfo(searchArr[0], lastN, slStatus, slCampusSearch, "1");
+                            listStudent = studentDao.getAllByInfo(searchArr[0], lastN, slStatus, slCampusSearch, "0");
                         }
                     } else {
-                        listStudent = studentDao.getAll(slStatus, slCampusSearch, "1");
+                        listStudent = studentDao.getAll(slStatus, slCampusSearch, "0");
                     }
                     StatusDao statusDao = new StatusDao();
                     ArrayList<Status> listStatus = statusDao.getAll();
@@ -221,7 +214,7 @@ public class indexBQT extends HttpServlet {
                     }
                     request.setAttribute("slStatus", slStatus);
                     request.setAttribute("listStudent", listStudent);
-
+                    
                 }
 
                 //gv
@@ -230,16 +223,16 @@ public class indexBQT extends HttpServlet {
                     ArrayList<Teacher> listTeacher;
                     if (checkSearch != 0) {
                         if (searchArr.length == 1) {
-                            listTeacher = teacherDao.getAllByInfo(searchArr[0], "", slCampusSearch, "1");
+                            listTeacher = teacherDao.getAllByInfo(searchArr[0], "", slCampusSearch, "0");
                         } else {
                             String lastN = "";
                             for (int i = 1; i < searchArr.length; i++) {
                                 lastN += searchArr[i];
                             }
-                            listTeacher = teacherDao.getAllByInfo(searchArr[0], lastN, slCampusSearch, "1");
+                            listTeacher = teacherDao.getAllByInfo(searchArr[0], lastN, slCampusSearch, "0");
                         }
                     } else {
-                        listTeacher = teacherDao.getAllByInfo("", "", slCampusSearch, "1");
+                        listTeacher = teacherDao.getAllByInfo("", "", slCampusSearch, "0");
                     }
                     request.setAttribute("listTeacher", listTeacher);
                 }
@@ -250,16 +243,16 @@ public class indexBQT extends HttpServlet {
                     ArrayList<OfficerFU> listOfficerFU;
                     if (checkSearch != 0) {
                         if (searchArr.length == 1) {
-                            listOfficerFU = OfficerFUDao.getAllByInfo(searchArr[0], "", slCampusSearch, "1");
+                            listOfficerFU = OfficerFUDao.getAllByInfo(searchArr[0], "", slCampusSearch, "0");
                         } else {
                             String lastN = "";
                             for (int i = 1; i < searchArr.length; i++) {
                                 lastN += searchArr[i];
                             }
-                            listOfficerFU = OfficerFUDao.getAllByInfo(searchArr[0], lastN, slCampusSearch, "1");
+                            listOfficerFU = OfficerFUDao.getAllByInfo(searchArr[0], lastN, slCampusSearch, "0");
                         }
                     } else {
-                        listOfficerFU = OfficerFUDao.getAll(slCampusSearch, "1");
+                        listOfficerFU = OfficerFUDao.getAll(slCampusSearch, "0");
                     }
                     request.setAttribute("listOfficerFU", listOfficerFU);
                 }
@@ -270,27 +263,27 @@ public class indexBQT extends HttpServlet {
                     ArrayList<StudentParents> listStudentParents;
                     if (checkSearch != 0) {
                         if (searchArr.length == 1) {
-                            listStudentParents = studentParentsDao.getAllByInfo(searchArr[0], "", slCampusSearch, "1");
+                            listStudentParents = studentParentsDao.getAllByInfo(searchArr[0], "", slCampusSearch, "0");
                         } else {
                             String lastN = "";
                             for (int i = 1; i < searchArr.length; i++) {
                                 lastN += searchArr[i];
                             }
-                            listStudentParents = studentParentsDao.getAllByInfo(searchArr[0], lastN, slCampusSearch, "1");
+                            listStudentParents = studentParentsDao.getAllByInfo(searchArr[0], lastN, slCampusSearch, "0");
                         }
                     } else {
-                        listStudentParents = studentParentsDao.getAll(slCampusSearch, "1");
+                        listStudentParents = studentParentsDao.getAll(slCampusSearch, "0");
                     }
                     request.setAttribute("listStudentParents", listStudentParents);
                 }
                 request.setAttribute("campusID", slCampusSearch);
                 request.setAttribute("Tsearch", search);
                 request.setAttribute("roleId", roleId);
-                request.getRequestDispatcher("bqt/index/indexBQT.jsp").forward(request, response);
-
+                request.getRequestDispatcher("bqt/index/RecycleBinBQT.jsp").forward(request, response);
+                
             }
         }
-
+        
     }
 
     /**

@@ -6,6 +6,7 @@ package controller.BQT;
 
 import MyUntils.RandomString;
 import MyUntils.SendMail;
+import MyUntils.Validate;
 import dao.*;
 import dao.TeacherDao;
 import java.io.IOException;
@@ -35,17 +36,55 @@ public class updateAccount extends HttpServlet {
         if (request.getSession().getAttribute("bqt_login_successful") == null) {
             response.sendRedirect("homeBQT");
         } else {
+            int countTrue = 0;
+            Validate validate = new Validate();
             String idAccount = request.getParameter("sid");
             int roleId = Integer.parseInt(request.getParameter("roleId"));
             String idUser = request.getParameter("idUser");
             String firstName = request.getParameter("txtFirstName");
+            if (firstName.length() < 2) {
+                request.setAttribute("erroFirstNameUpdate", "First Name quá ngắn");
+                countTrue++;
+            } else {
+                if (!validate.checkInputStringNotEmail(firstName)) {
+                    request.setAttribute("erroFirstNameUpdate", "Sai định dạng chỉ nhập chữ không dấu và không chứa ký tự đặc biệt");
+                    countTrue++;
+                }
+            }
             String lastName = request.getParameter("txtLastName");
+            if (lastName.length() < 2) {
+                request.setAttribute("errolastNameUpdate", "Last Name quá ngắn");
+                countTrue++;
+            } else {
+                if (!validate.checkInputStringNotEmail(lastName)) {
+                    request.setAttribute("errolastNameUpdate", "Sai định dạng chỉ nhập chữ không dấu và không chứa ký tự đặc biệt");
+                    countTrue++;
+                }
+            }
+
             boolean gender = request.getParameter("gender").equals("1") ? true : false;
-            String email = request.getParameter("txtEmail");
+            String email = request.getParameter("txtEmail").trim();
+            if (!validate.checkInputStringEmail(email)) {
+                request.setAttribute("erroEmailUpdate", "Email không hợp lệ");
+                countTrue++;
+            }
             String password = request.getParameter("txtPassword");
             String dob = request.getParameter("dob");
             String phone = request.getParameter("txtPhone");
+            if (!validate.checkPhone(phone)) {
+                request.setAttribute("erroPhoneUpdate", "Chỉ nhận phone ở Việt Nam");
+                countTrue++;
+            }
             String address = request.getParameter("ttAddress");
+            if (address.length() < 5) {
+                request.setAttribute("erroAddressUpdate", "Address quá ngắn");
+                countTrue++;
+            } else {
+                if (!validate.checkInputStringNotEmail(lastName)) {
+                    request.setAttribute("erroAddressUpdate", "Sai định dạng chỉ nhập chữ không dấu và không chứa ký tự đặc biệt");
+                    countTrue++;
+                }
+            }
             int slRole = Integer.parseInt(request.getParameter("slRole"));
             int slCampus = Integer.parseInt(request.getParameter("slCampus"));
             int slSpecializedin = 0;
@@ -67,7 +106,27 @@ public class updateAccount extends HttpServlet {
             studentParentsDao studentParentsDao1 = new studentParentsDao();
             SpecializedinDao specializedinDao = new SpecializedinDao();
             UserDao userDao = new UserDao();
+            Dao dao = new Dao();
+            //sv
+            if (roleId == 2) {
+                Student student = studentDao.getStudentByidStudent(Integer.parseInt(idAccount), "");
+                if (!email.equalsIgnoreCase(student.getGmail())) {
+                    if (dao.checkMailExit(email) == 1) {
+                        request.setAttribute("erroEmailUpdate", "Email đã tồn tại");
+                        countTrue++;
+                    }
+                }
+                if (!phone.equals(student.getPhone())) {
+                    if (dao.checkPhoneExit(phone) == 1) {
+                        request.setAttribute("erroPhoneUpdate", "Phone đã tồn tại");
+                        countTrue++;
+                    }
+                }
+                if (countTrue!=0) {
+                    
+                }
 
+            }
             int coutCheckRole = 0;
             String role = "";
             String account = "Not Change";
@@ -89,6 +148,7 @@ public class updateAccount extends HttpServlet {
                     userName += student.getCodeStudent();
                     user = new User(String.valueOf(userDao.getIdAccount() + 1), userName, password);
                     student.setUser(user);
+
                     userDao.insertUser(user, "2"); // insert user vao datase
                     studentDao.insertStudent(student); // insert student cao database
                     coutCheckRole++;

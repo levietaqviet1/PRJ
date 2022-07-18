@@ -60,7 +60,7 @@ public class AuthenticationController extends HttpServlet {
                 if (checkU != -1) {
 
                     if (roleup_login.equals("2")) {
-                        Student student = studentDao.getStudentByidUser(checkU, campusup_login);
+                        Student student = studentDao.getStudentByidUser(checkU, campusup_login,"1");
                         if (student != null) {
                             studentParentsDao studentParentsDao = new studentParentsDao();
                             StudentParents studentParents = studentParentsDao.getStudentParentsByIdStudent(String.valueOf(student.getId()));

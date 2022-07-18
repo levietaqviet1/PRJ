@@ -31,7 +31,7 @@ public class studentParentsDao {
         }
     }
 
-    public ArrayList<StudentParents> getAll(String idCam) {
+    public ArrayList<StudentParents> getAll(String idCam, String a) {
         StudentDao studentDao = new StudentDao();
         ArrayList<StudentParents> listStudentParents = new ArrayList<StudentParents>();
         try {
@@ -39,14 +39,14 @@ public class studentParentsDao {
                     + "FROM [PRJ_G10].[dbo].[phuHuynh] s \n"
                     + " JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN taiKhoan tk ON s.taiKhoanId = tk.taiKhoanId JOIN sinhVien sv ON s.sinhVienId = sv.sinhVienId "
                     + "WHERE  cs.idCoSo like '%" + idCam + "%' "
-                    + "AND s.acctivePH = 1 ";
+                    + "AND s.acctivePH = "+a+"";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"),
                         rs.getDate("dateStartCS") == null ? "null" : String.valueOf(rs.getDate("dateStartCS")), rs.getDate("dateEndCS") == null ? "null" : String.valueOf(rs.getDate("dateEndCS")));
                 User user = new User(String.valueOf(rs.getInt("taiKhoanId")));
-                Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"));
+                Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"),""+a+"");
                 StudentParents studentParents = new StudentParents(rs.getInt("phuHuynhId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChiSV"), campus, user, student, rs.getString("codePH"), rs.getBoolean("acctivePH"));
                 listStudentParents.add(studentParents);
@@ -80,7 +80,7 @@ public class studentParentsDao {
         }
     }
 
-    public ArrayList<StudentParents> getAllByInfo(String firt, String last, String cam) {
+    public ArrayList<StudentParents> getAllByInfo(String firt, String last, String cam, String a) {
         StudentDao studentDao = new StudentDao();
         ArrayList<StudentParents> listStudentParents = new ArrayList<StudentParents>();
         try {
@@ -88,14 +88,14 @@ public class studentParentsDao {
                     + "FROM [PRJ_G10].[dbo].[phuHuynh] s\n"
                     + " JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN taiKhoan tk ON s.taiKhoanId = tk.taiKhoanId JOIN sinhVien sv ON s.sinhVienId = sv.sinhVienId "
                     + "WHERE s.firstName like '%" + firt + "%' AND s.lastName like '%" + last + "%'   AND cs.idCoSo like '%" + cam + "%' "
-                    + "AND s.acctivePH = 1 ";
+                    + "AND s.acctivePH = "+a+"";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"),
                         rs.getDate("dateStartCS") == null ? "null" : String.valueOf(rs.getDate("dateStartCS")), rs.getDate("dateEndCS") == null ? "null" : String.valueOf(rs.getDate("dateEndCS")));
                 User user = new User(String.valueOf(rs.getInt("taiKhoanId")));
-                Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"));
+                Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"),""+a+"");
                 StudentParents studentParents = new StudentParents(rs.getInt("phuHuynhId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChiSV"), campus, user, student, rs.getString("codePH"), rs.getBoolean("acctivePH"));
                 listStudentParents.add(studentParents);
@@ -122,7 +122,7 @@ public class studentParentsDao {
                 Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"),
                         rs.getDate("dateStartCS") == null ? "null" : String.valueOf(rs.getDate("dateStartCS")), rs.getDate("dateEndCS") == null ? "null" : String.valueOf(rs.getDate("dateEndCS")));
                 User user = new User(String.valueOf(rs.getInt("taiKhoanId")));
-                Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"));
+                Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"),"1");
                 StudentParents studentParents = new StudentParents(rs.getInt("phuHuynhId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChi"), campus, user, student, rs.getString("codePH"), rs.getBoolean("acctivePH"));
                 return studentParents;
@@ -134,14 +134,14 @@ public class studentParentsDao {
         return null;
     }
 
-    public StudentParents getStudentParentsByIdParent(String id) {
+    public StudentParents getStudentParentsByIdParent(String id, String a) {
         StudentDao studentDao = new StudentDao();
         try {
             String sql = "SELECT *\n"
                     + "FROM [PRJ_G10].[dbo].[phuHuynh] s\n"
                     + " JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN taiKhoan tk ON s.taiKhoanId = tk.taiKhoanId "
                     + "WHERE s.phuHuynhId = " + id + ""
-                    + "AND s.acctivePH = 1 ";
+                    + "AND s.acctivePH =  "+a+"";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             System.out.println(sql);
@@ -149,7 +149,7 @@ public class studentParentsDao {
                 Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"),
                         rs.getDate("dateStartCS") == null ? "null" : String.valueOf(rs.getDate("dateStartCS")), rs.getDate("dateEndCS") == null ? "null" : String.valueOf(rs.getDate("dateEndCS")));
                 User user = new User(String.valueOf(rs.getInt("taiKhoanId")));
-                Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"));
+                Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"),""+a+"");
                 StudentParents studentParents = new StudentParents(rs.getInt("phuHuynhId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChi"), campus, user, student, rs.getString("codePH"), rs.getBoolean("acctivePH"));
                 return studentParents;

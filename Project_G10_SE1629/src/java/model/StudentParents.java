@@ -23,6 +23,11 @@ public class StudentParents {
     public StudentParents() {
     }
 
+    public StudentParents(int id, boolean activeSP) {
+        this.id = id;
+        this.activeSP = activeSP;
+    }
+
     public StudentParents(int id, String firstName, String lastName, boolean gender, String date, String phone, String gmail, String address, Campus campus, String codeSP, boolean activeSP) {
         this.id = id;
         this.firstName = firstName;

@@ -1,13 +1,19 @@
 <%-- 
-    Document   : ClassBQT
-    Created on : Jul 6, 2022, 3:55:44 PM
-    Author     : NCC
+    Document   : adminAccountPage
+    Created on : Jun 22, 2022, 11:14:47 PM
+    Author     : win
 --%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<c:if test=" ${bqt_login_successful == null}">
+    <% 
+    response.sendRedirect("indexBQT");
+    %>
+</c:if>
 <!DOCTYPE html>
 <!--=== Coding by CodingLab | www.codinglabweb.com === -->
 <html lang="en">
@@ -61,6 +67,11 @@
                 background: #2196f3;
                 box-shadow: 0 0 10px #2196f3, 0 0 40px #2196f3, 0 0 80px #2196f3;
             }
+            .ac{
+                color: #255784;
+                background: #81D742;
+                box-shadow: 0 0 10px #81D742, 0 0 40px #81D742, 0 0 80px #81D742;
+            }
 
         </style>
     </head>
@@ -82,9 +93,17 @@
                             <i class="uil uil-estate"></i>
                             <span class="link-name">Account</span>
                         </a></li>
-                    <li><a href="indexBQT?nextClass=1">
+                    <li><a href="indexBQT?nextClass=1"  class="ac">
                             <i class="uil uil-thumbs-up"></i>
                             <span class="link-name">Class</span>
+                        </a></li>
+                    <li><a href="indexBQT?recycleBin=1">
+                            <i><ion-icon name="archive-outline"></ion-icon></i> 
+                            <span class="link-name">Recycle Bin</span>
+                        </a></li>
+                    <li><a href="changePassworBQT?id=1">
+                            <i><ion-icon name="git-compare-outline"></ion-icon></i> 
+                            <span class="link-name">Change Password</span>
                         </a></li>
                 </ul>
 
@@ -99,188 +118,22 @@
         </nav>
 
         <div class="dashboard">
-            <div class="dash-lefttop"> </div>
+            <div class="dash-lefttop"> 
 
-            <form action="indexBQT" method="POST" >
-                <div class="dash-bottom">
-                    <input class="form-control me-2" type="search" name="search" placeholder="Search: EX le viet or l v" value="${Tsearch}" aria-label="Search">
-                    <button class="btn btn-outline-success" name="subSearch"value="2" type="submit">Search</button>
-                </div>
-                <div class="sl-id" style="display: flex;">
-                    <div>
-                        <select name="slRole"  style="width: auto;margin-left: 70px;margin-top: 20px;">
-                            <c:forEach items="${listRole}"  var="roles">
-                                <option value="${roles.id}" 
-                                        <c:if test="${roleId == roles.id }" >selected</c:if>
-                                        >${roles.name}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                    <div>
-                        <select name="slCampusSearch"  style="width: auto;margin-left: 70px;margin-top: 20px;">
-                            <option value="">All Campus</option>
-                            <c:forEach items="${listCampus}"  var="campus">
-                                <option value="${campus.id}" 
-                                        <c:if test="${campusID == campus.id }" >selected</c:if>
-                                        >FU-${campus.name}</option>
-                            </c:forEach>
-                        </select>
-                    </div>
-                </div>
+            </div>
 
-                <div class="dash-bottomtable">
-                    <table class="table" >
-                        <!--canbo-->
-                        <c:if test="${roleId == 4}">
-                            <thead>
-                                <tr> 
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Gender</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Dob</th>
-                                    <th scope="col">Phone Number</th>
-                                    <th scope="col">Address</th>
-                                    <th scope="col">Role</th>
-                                    <th scope="col">Update</th>
-                                    <th scope="col">Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${requestScope.listOfficerFU}" var="t"  >
-                                    <tr>
-                                        <td>${t.firstName}</td>
-                                        <td>${t.lastName}</td>
-                                        <td>${t.lastName} ${t.firstName} </td>
-                                        <td>
-                                            <c:if test="${t.gender == true}" >
-                                                Male
-                                            </c:if>    
-                                            <c:if test="${t.gender == false}" >
-                                                FeMale
-                                            </c:if>  
-                                        </td>
-                                        <td>${t.gmail}</td>
 
-                                        <td>${t.date}</td>
-                                        <td>${t.phone}</td>
-                                        <td>${t.address}</td>
-                                        <td>
-                                            ${t.user.role.name}
-                                        </td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=4&tkid=${t.user.id}">Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=4&tkid=${t.user.id}">Delete</a></td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </c:if>
-                        <!--gv-->
-                        <c:if test="${roleId == 3}">
-                            <thead>
-                                <tr> 
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Gender</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Dob</th>
-                                    <th scope="col">Phone Number</th>
-                                    <th scope="col">Address</th>
-                                    <th scope="col">Role</th>
-                                    <th scope="col">Update</th>
-                                    <th scope="col">Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${requestScope.listTeacher}" var="t"  >
-                                    <tr>
-                                        <td>${t.firstName}</td>
-                                        <td>${t.lastName}</td>
-                                        <td>${t.lastName} ${t.firstName} </td>
-                                        <td>
-                                            <c:if test="${t.gender == true}" >
-                                                Male
-                                            </c:if>    
-                                            <c:if test="${t.gender == false}" >
-                                                FeMale
-                                            </c:if>  
-                                        </td>
-                                        <td>${t.gmail}</td>
-
-                                        <td>${t.date}</td>
-                                        <td>${t.phone}</td>
-                                        <td>${t.address}</td>
-                                        <td>
-                                            ${t.user.role.name}
-                                        </td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=3&tkid=${t.user.id}">Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=3&tkid=${t.user.id}">Delete</a></td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </c:if>
-                        <!--sinh vien-->
-                        <c:if test="${roleId == 2}">
-                            <thead>
-                                <tr> 
-                                    <th scope="col">First Name</th>
-                                    <th scope="col">Last Name</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Gender</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Dob</th>
-                                    <th scope="col">Phone Number</th>
-                                    <th scope="col">Address</th>
-                                    <th scope="col" >
-                                        <select name="slStatus">
-                                            <option hidden value="">Status</option>
-                                            <option  value="" >All</option>
-                                            <c:forEach items="${session_listStatusBQT}"  var="t">
-                                                <option value="${t.id}" 
-                                                        <c:if test="${slStatus == t.id }" >selected</c:if>
-                                                        >${t.name}</option>
-                                            </c:forEach>
-                                        </select>
-                                    </th>
-                                    <th scope="col">Update</th>
-                                    <th scope="col">Delete</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <c:forEach items="${requestScope.listStudent}" var="t"  >
-                                    <tr>
-                                        <td>${t.firstName}</td>
-                                        <td>${t.lastName}</td>
-                                        <td>${t.lastName} ${t.firstName} </td>
-                                        <td>
-                                            <c:if test="${t.gender == true}" >
-                                                Male
-                                            </c:if>    
-                                            <c:if test="${t.gender == false}" >
-                                                FeMale
-                                            </c:if>  
-                                        </td>
-                                        <td>${t.gmail}</td>
-
-                                        <td>${t.dateOfStart}</td>
-                                        <td>${t.phone}</td>
-                                        <td>${t.address}</td>
-                                        <td>${t.status.name}</td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=2&campusId=${t.campus.id}"><span></span><span></span><span></span><span></span>
-                                                Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=2"><span></span><span></span><span></span><span></span>Delete</a></td>
-                                    </tr>
-                                </c:forEach>
-                            </tbody>
-                        </c:if>
-                    </table>
-
-                </div>
-            </form>
+            <div class="dash-bottom">
+                <h4 class="ac" style="margin: auto">Chức năng này chưa phát triển xong. Vui lòng chọn cái khác</h4>
+            </div>
+             <div class="dash-bottom">
+                  <img  style="margin: auto" src="img/thuFI.jpg" alt=""/>
+             </div>
         </div>
-
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
         <script>
+
             document.addEventListener('mousemove', function (e) {
                 let body = document.querySelector('body');
                 let particles = document.createElement('b');

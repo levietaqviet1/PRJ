@@ -50,7 +50,7 @@
     </servlet>
     <servlet>
         <servlet-name>homeBQT</servlet-name>
-        <servlet-class>controller.homeBQT</servlet-class>
+        <servlet-class>controller.BQT.homeBQT</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>indexBQT</servlet-name>
@@ -67,6 +67,10 @@
     <servlet>
         <servlet-name>changePassworBQT</servlet-name>
         <servlet-class>controller.Passwor.changePassworBQT</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>recycleBinBQT</servlet-name>
+        <servlet-class>controller.BQT.recycleBinBQT</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>testAdd</servlet-name>
@@ -135,6 +139,10 @@
     <servlet-mapping>
         <servlet-name>changePassworBQT</servlet-name>
         <url-pattern>/changePassworBQT</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>recycleBinBQT</servlet-name>
+        <url-pattern>/recycleBinBQT</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

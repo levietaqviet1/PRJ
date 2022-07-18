@@ -62,7 +62,11 @@
                 background: #2196f3;
                 box-shadow: 0 0 10px #2196f3, 0 0 40px #2196f3, 0 0 80px #2196f3;
             }
-
+            .ac{
+                color: #255784;
+                background: #81D742;
+                box-shadow: 0 0 10px #81D742, 0 0 40px #81D742, 0 0 80px #81D742;
+            }
         </style>
     </head>
 
@@ -88,8 +92,12 @@
                                 <i class="uil uil-thumbs-up"></i>
                                 <span class="link-name">Class</span>
                             </a></li>
-                        <li><a href="changePassworBQT?id=1">
-                                <i class="uil uil-thumbs-up"></i>
+                        <li><a href="indexBQT?recycleBin=1">
+                                <i><ion-icon name="archive-outline"></ion-icon></i> 
+                                <span class="link-name">Recycle Bin</span>
+                            </a></li>
+                        <li><a href="changePassworBQT?id=1" class="ac">
+                                <i><ion-icon name="git-compare-outline"></ion-icon></i> 
                                 <span class="link-name">Change Password</span>
                             </a></li>
                     </ul>
@@ -117,8 +125,8 @@
                     <!--can bo-->
                     <c:if test = "${dalogin_bqt != null}">
                         <div class="mb-3">
-                        <h5 style="color: blue">${requestScope.change_pass_succ}</h5  </div>
-                        
+                            <h5 style="color: blue">${requestScope.change_pass_succ}</h5  </div>
+
                         <div class="mb-3">
                             <h6 style="color: red">${requestScope.oldPass_mess}</h6
 
@@ -145,40 +153,41 @@
                 </div>
             </div>
         </div>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
         <script>
+                            function validateForm() {
+                                if (document.myForm.passwordNew.value != document.myForm.passwordNewConfirm.value) {
+                                    document.getElementById("errConfirm").innerHTML = "Mật khẩu xác nhận không khớp"
+                                    return false;
+                                } else {
+                                    document.getElementById("errConfirm").innerHTML = "";
+                                }
 
-            function validateForm() {
-                if (document.myForm.passwordNew.value != document.myForm.passwordNewConfirm.value) {
-                    document.getElementById("errConfirm").innerHTML = "Mật khẩu xác nhận không khớp"
-                    return false;
-                } else {
-                    document.getElementById("errConfirm").innerHTML = "";
-                }
+                            }
 
-            }
+                            document.addEventListener('mousemove', function (e) {
+                                let body = document.querySelector('body');
+                                let particles = document.createElement('b');
+                                let x = e.offsetX;
+                                let y = e.offsetY;
 
-            document.addEventListener('mousemove', function (e) {
-                let body = document.querySelector('body');
-                let particles = document.createElement('b');
-                let x = e.offsetX;
-                let y = e.offsetY;
+                                particles.style.left = x + 'px';
+                                particles.style.top = y + 'px';
+                                body.appendChild(particles);
 
-                particles.style.left = x + 'px';
-                particles.style.top = y + 'px';
-                body.appendChild(particles);
+                                let size = Math.random() * 8;
+                                particles.style.width = 2 + size + 'px';
+                                particles.style.height = 2 + size + 'px';
 
-                let size = Math.random() * 8;
-                particles.style.width = 2 + size + 'px';
-                particles.style.height = 2 + size + 'px';
+                                let transformValue = Math.random() * 3600;
+                                particles.style.transform = 'rotate(' + transformValue + 'deg)';
 
-                let transformValue = Math.random() * 3600;
-                particles.style.transform = 'rotate(' + transformValue + 'deg)';
+                                setTimeout(function () {
+                                    particles.remove()
+                                }, 200)
 
-                setTimeout(function () {
-                    particles.remove()
-                }, 200)
-
-            })
+                            })
         </script>
 
     </form>

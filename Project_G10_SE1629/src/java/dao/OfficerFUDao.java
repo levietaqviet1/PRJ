@@ -36,7 +36,7 @@ public class OfficerFUDao {
                     + "  FROM [PRJ_G10].[dbo].[canBo] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
                     + "  ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
                     + "WHERE  cs.idCoSo like '%" + cam + "%'"
-                    + " AND gv.activeCB = " + ac + " ";
+                    + " gv.activeCB like '%"+ac+"%' ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -62,7 +62,7 @@ public class OfficerFUDao {
                     + "  FROM [PRJ_G10].[dbo].[canBo] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
                     + "  ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
                     + "WHERE gv.firstName like '%" + firt + "%' AND lastName like '%" + last + "%'   AND cs.idCoSo like '%" + cam + "%' "
-                    + " AND gv.activeCB = " + ac + " ";
+                    + " AND gv.activeCB like '%"+ac+"%' ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -117,13 +117,14 @@ public class OfficerFUDao {
         }
     }
 
-    public OfficerFU getOfficerByID(String id) {
+    public OfficerFU getOfficerByID(String id, String a) {
         OfficerFU officerFU = new OfficerFU();
         try {
             String sql = "SELECT * \n"
                     + "FROM [PRJ_G10].[dbo].[canBo] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
                     + "ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
-                    + "WHERE gv.canBoId = " + id + " ";
+                    + "WHERE gv.canBoId = " + id + " "
+                    + "AND gv.activeCB like '%"+a+"%' ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -177,7 +178,7 @@ public class OfficerFUDao {
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
-                 relust = rs.getString(1);
+                relust = rs.getString(1);
             }
             if (relust.equals("")) {
                 return t + "1";

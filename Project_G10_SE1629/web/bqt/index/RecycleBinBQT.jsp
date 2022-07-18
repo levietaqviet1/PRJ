@@ -1,7 +1,7 @@
 <%-- 
-    Document   : adminAccountPage
-    Created on : Jun 22, 2022, 11:14:47 PM
-    Author     : win
+    Document   : RecycleBinBQT
+    Created on : Jul 18, 2022, 12:14:53 PM
+    Author     : NCC
 --%>
 
 
@@ -89,15 +89,15 @@
 
             <div class="menu-items">
                 <ul class="nav-links">
-                    <li><a href="indexBQT?nextAccount=1" class="ac">
+                    <li><a href="indexBQT?nextAccount=1">
                             <i class="uil uil-estate"></i>
                             <span class="link-name">Account</span>
                         </a></li>
-                    <li><a href="indexBQT?nextClass=1">
+                        <li ><a href="indexBQT?nextClass=1">
                             <i class="uil uil-thumbs-up"></i>
-                            <span class="link-name">Class</span>
+                            <span class="link-name ">Class</span>
                         </a></li>
-                    <li><a href="indexBQT?recycleBin=1">
+                    <li><a href="indexBQT?recycleBin=1" class="ac">
                             <i><ion-icon name="archive-outline"></ion-icon></i> 
                             <span class="link-name">Recycle Bin</span>
                         </a></li>
@@ -119,10 +119,10 @@
 
         <div class="dashboard">
             <div class="dash-lefttop"> 
-
+                
             </div>
 
-            <form action="indexBQT" method="POST" >
+            <form action="recycleBinBQT" method="POST" >
                 <div class="dash-bottom">
                     <input class="form-control me-2" type="search" name="search" placeholder="Search: EX le viet or l v" value="${Tsearch}" aria-label="Search">
                     <button class="btn btn-outline-success" name="subSearch"value="2" type="submit">Search</button>
@@ -147,9 +147,6 @@
                             </c:forEach>
                         </select>
                     </div>
-                    <!--                    <div>
-                                            <input type="submit" value="Add new Account" name="addSubAccou" style="width: auto;margin-left: 70px;margin-top: 20px;"/>
-                                        </div>-->
                 </div>
 
                 <div class="dash-bottomtable">
@@ -168,7 +165,7 @@
                                     <th scope="col">Phone Number</th>
                                     <th scope="col">Address</th>
                                     <th scope="col">Role</th>
-                                    <th scope="col">Update</th>
+                                    <th scope="col">Restore</th>
                                     <th scope="col">Delete</th>
                                 </tr>
                             </thead>
@@ -195,8 +192,8 @@
                                         <td>
                                             ${t.user.role.name}
                                         </td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&tkid=${t.user.id}">Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}">Delete</a></td>
+                                        <td><a href="recycleBinBQT?sid=${t.id}&update=${requestScope.roleId}&tkid=${t.user.id}">Restore</a></td>
+                                        <td><a href="recycleBinBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}">Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -215,7 +212,7 @@
                                     <th scope="col">Phone Number</th>
                                     <th scope="col">Address</th>
                                     <th scope="col">Role</th>
-                                    <th scope="col">Update</th>
+                                    <th scope="col">Restore</th>
                                     <th scope="col">Delete</th>
                                 </tr>
                             </thead>
@@ -242,8 +239,8 @@
                                         <td>
                                             ${t.user.role.name}
                                         </td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&tkid=${t.user.id}">Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}">Delete</a></td>
+                                        <td><a href="recycleBinBQT?sid=${t.id}&update=${requestScope.roleId}&tkid=${t.user.id}">Restore</a></td>
+                                        <td><a href="recycleBinBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}">Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -272,7 +269,7 @@
                                             </c:forEach>
                                         </select>
                                     </th>
-                                    <th scope="col">Update</th>
+                                    <th scope="col">Restore</th>
                                     <th scope="col">Delete</th>
                                 </tr>
                             </thead>
@@ -297,9 +294,9 @@
                                         <td>${t.phone}</td>
                                         <td>${t.address}</td>
                                         <td>${t.status.name}</td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&campusId=${t.campus.id}">
-                                                Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}">Delete</a></td>
+                                        <td><a href="recycleBinBQT?sid=${t.id}&update=${requestScope.roleId}&campusId=${t.campus.id}">
+                                                Restore</a></td>
+                                        <td><a href="recycleBinBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}">Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
@@ -319,7 +316,7 @@
                                     <th scope="col">Dob</th>
                                     <th scope="col">Phone Number</th>
                                     <th scope="col">Address</th>
-                                    <th scope="col">Update</th>
+                                    <th scope="col">Restore</th>
                                     <th scope="col">Delete</th>
                                 </tr>
                             </thead>
@@ -343,9 +340,9 @@
                                         <td>${t.date}</td>
                                         <td>${t.phone}</td>
                                         <td>${t.address}</td>
-                                        <td><a href="indexBQT?sid=${t.id}&update=${requestScope.roleId}&campusId=${t.campus.id}">
-                                                Update</a></td>
-                                        <td><a href="indexBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}">Delete</a></td>
+                                        <td><a href="recycleBinBQT?sid=${t.id}&update=${requestScope.roleId}&campusId=${t.campus.id}">
+                                                Restore</a></td>
+                                        <td><a href="recycleBinBQT?sid=${t.id}&delete=${requestScope.roleId}&tkid=${t.user.id}">Delete</a></td>
                                     </tr>
                                 </c:forEach>
                             </tbody>
