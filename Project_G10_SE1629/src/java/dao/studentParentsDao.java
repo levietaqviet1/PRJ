@@ -39,7 +39,7 @@ public class studentParentsDao {
                     + "FROM [PRJ_G10].[dbo].[phuHuynh] s \n"
                     + " JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN taiKhoan tk ON s.taiKhoanId = tk.taiKhoanId JOIN sinhVien sv ON s.sinhVienId = sv.sinhVienId "
                     + "WHERE  cs.idCoSo like '%" + idCam + "%' "
-                    + "AND s.acctivePH = "+a+"";
+                    + "AND s.acctivePH like '%"+a+"%' ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -88,7 +88,7 @@ public class studentParentsDao {
                     + "FROM [PRJ_G10].[dbo].[phuHuynh] s\n"
                     + " JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN taiKhoan tk ON s.taiKhoanId = tk.taiKhoanId JOIN sinhVien sv ON s.sinhVienId = sv.sinhVienId "
                     + "WHERE s.firstName like '%" + firt + "%' AND s.lastName like '%" + last + "%'   AND cs.idCoSo like '%" + cam + "%' "
-                    + "AND s.acctivePH = "+a+"";
+                    + "AND s.acctivePH  like '%"+a+"%' ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -141,7 +141,7 @@ public class studentParentsDao {
                     + "FROM [PRJ_G10].[dbo].[phuHuynh] s\n"
                     + " JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN taiKhoan tk ON s.taiKhoanId = tk.taiKhoanId "
                     + "WHERE s.phuHuynhId = " + id + ""
-                    + "AND s.acctivePH =  "+a+"";
+                    + "AND s.acctivePH like '%"+a+"%' ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             System.out.println(sql);

@@ -74,7 +74,7 @@
                         <img src="https://s3.ap-northeast-1.amazonaws.com/h.files/images/1655654596490_Cn6PveFXv2.png" alt="khong co internet">
                     </div>
 
-                    <span class="logo_name"><a href="#" style="text-decoration: none;color: black">BQT FPT</a></span>
+                    <span class="logo_name"><a href="indexBQT?nextListBQT=1" style="text-decoration: none;color: black">BQT FPT</a></span>
                 </div>
 
                 <div class="menu-items">
@@ -87,8 +87,12 @@
                                 <i class="uil uil-thumbs-up"></i>
                                 <span class="link-name">Class</span>
                             </a></li>
+                        <li><a href="indexBQT?recycleBin=1">
+                                <i><ion-icon name="archive-outline"></ion-icon></i> 
+                                <span class="link-name">Recycle Bin</span>
+                            </a></li> 
                         <li><a href="changePassworBQT?id=1">
-                                <i class="uil uil-thumbs-up"></i>
+                                <i><ion-icon name="git-compare-outline"></ion-icon></i> 
                                 <span class="link-name">Change Password</span>
                             </a></li>
                     </ul>
@@ -102,7 +106,6 @@
                     </ul>
                 </div>
             </nav>
-
             <div class="dashboard">
 
                 <div class="dash-lefttop">
@@ -114,12 +117,12 @@
                 <div class="form-content" style="width: 80%;height: auto; margin-left: 10%; padding-top: 0;padding-bottom: 0;">
                     <!--                     phuHuynh         -->
                     <c:if test = "${studentParentsBQT != null}">
-                        <span>${erroFirstNameUpdate}</span>
+                        <span  style="color: red">${erroFirstNameUpdate}</span>
                         <div class="mb-3">
                             <label for="exampleFormControlInput11" class="form-label">First Name</label>
                             <input required type="text" class="form-control"  id="exampleFormControlInput11" name="txtFirstName" value="${studentParentsBQT.firstName}" >
                         </div>
-                        <span>${errolastNameUpdate}</span>
+                        <span style="color: red">${errolastNameUpdate}</span>
                         <div class="mb-3">
                             <label for="exampleFormControlInput12" class="form-label">Last Name</label>
                             <input required type="text" class="form-control" id="exampleFormControlInput12" name="txtLastName" value="${studentParentsBQT.lastName}">
@@ -142,7 +145,7 @@
 
 
                         </div>
-                        <span>${erroEmailUpdate}</span>
+                        <span style="color: red">${erroEmailUpdate}</span>
                         <div class="mb-3">
                             <label for="exampleFormControlInput13" class="form-label">Email</label>
                             <input required type="email" class="form-control" id="exampleFormControlInput13" name="txtEmail" value="${studentParentsBQT.gmail}" placeholder="name@example.com">
@@ -156,12 +159,12 @@
                             <label for="exampleFormControlInput15" class="form-label">Date</label>
                             <input  type="date" name="dob" value="${studentParentsBQT.date}"/> <br/>
                         </div>
-                        <span>${erroPhoneUpdate}</span>
+                        <span style="color: red">${erroPhoneUpdate}</span>
                         <div class="mb-3">
                             <label for="exampleFormControlInput16" class="form-label">Number Phone</label>
                             <input required type="text" class="form-control" id="exampleFormControlInput16" name="txtPhone" value="${studentParentsBQT.phone}" placeholder="name@example.com">
                         </div> 
-                        <span>${erroAddressUpdate}</span>
+                        <span style="color: red">${erroAddressUpdate}</span>
                         <div class="mb-3">
                             <label for="exampleFormControlInput17" class="form-label">Address</label>
                             <input required type="text" class="form-control" id="exampleFormControlInput17" name="ttAddress" value="${studentParentsBQT.address}" placeholder="name@example.com">
@@ -195,12 +198,12 @@
 
                     <!--                     gv         -->
                     <c:if test = "${teacherBQT != null}">
-                        <span>${erroFirstNameUpdate}</span>
+                        <span style="color: red">${erroFirstNameUpdate}</span>
                         <div class="mb-3">
                             <label for="exampleFormControlInput11" class="form-label">First Name</label>
                             <input required type="text" class="form-control"  id="exampleFormControlInput11" name="txtFirstName" value="${teacherBQT.firstName}" >
                         </div>
-                        <span>${errolastNameUpdate}</span>
+                        <span style="color: red">${errolastNameUpdate}</span>
                         <div class="mb-3">
                             <label for="exampleFormControlInput12" class="form-label">Last Name</label>
                             <input required type="text" class="form-control" id="exampleFormControlInput12" name="txtLastName" value="${teacherBQT.lastName}">
@@ -223,7 +226,7 @@
 
 
                         </div>
-                        <span>${erroEmailUpdate}</span>
+                        <span style="color: red">${erroEmailUpdate}</span>
                         <div class="mb-3">
                             <label for="exampleFormControlInput13" class="form-label">Email</label>
                             <input required type="email" class="form-control" id="exampleFormControlInput13" name="txtEmail" value="${teacherBQT.gmail}" placeholder="name@example.com">
@@ -246,12 +249,12 @@
                             <label for="exampleFormControlInput15" class="form-label">Date Of End</label>
                             <input  type="date" name="dobEnd" value="${teacherBQT.dateOfEnd}"/> <br/>
                         </div>
-                        <span>${erroPhoneUpdate}</span>
+                        <span style="color: red">${erroPhoneUpdate}</span>
                         <div class="mb-3">
                             <label for="exampleFormControlInput16" class="form-label">Number Phone</label>
                             <input required type="text" class="form-control" id="exampleFormControlInput16" name="txtPhone" value="${teacherBQT.phone}" placeholder="name@example.com">
                         </div> 
-                        <span>${erroAddressUpdate}</span>
+                        <span style="color: red">${erroAddressUpdate}</span>
                         <div class="mb-3">
                             <label for="exampleFormControlInput17" class="form-label">Address</label>
                             <input required type="text" class="form-control" id="exampleFormControlInput17" name="ttAddress" value="${teacherBQT.address}" placeholder="name@example.com">
@@ -290,12 +293,12 @@
 
                     <!--sv-->
                     <c:if test = "${studentBQT != null}">
-                        <span>${erroFirstNameUpdate}</span>
+                        <span style="color: red">${erroFirstNameUpdate}</span>
                         <div class="mb-3">
                             <label for="exampleFormControlInput11" class="form-label">First Name</label>
                             <input required type="text" class="form-control" id="exampleFormControlInput11" name="txtFirstName" value="${studentBQT.firstName}" >
                         </div>
-                        <span>${errolastNameUpdate}</span>
+                        <span style="color: red">${errolastNameUpdate}</span>
                         <div class="mb-3">
                             <label for="exampleFormControlInput12" class="form-label">Last Name</label>
                             <input required type="text" class="form-control" id="exampleFormControlInput12" name="txtLastName" value="${studentBQT.lastName}">
@@ -318,7 +321,7 @@
 
 
                         </div>
-                         <span>${erroEmailUpdate}</span>
+                        <span style="color: red">${erroEmailUpdate}</span>
                         <div class="mb-3">
                             <label for="exampleFormControlInput13" class="form-label">Email</label>
                             <input required type="email" class="form-control" id="exampleFormControlInput13" name="txtEmail" value="${studentBQT.gmail}" placeholder="name@example.com">
@@ -340,12 +343,12 @@
                             <label for="exampleFormControlInput15" class="form-label">Date Of End</label>
                             <input  type="date" name="dobEnd" value="${studentBQT.dateOfEnd}"/> <br/>
                         </div>
-                        <span>${erroPhoneUpdate}</span>
+                        <span style="color: red">${erroPhoneUpdate}</span>
                         <div class="mb-3">
                             <label for="exampleFormControlInput16" class="form-label">Number Phone</label>
                             <input required type="text" class="form-control" id="exampleFormControlInput16" name="txtPhone" value="${studentBQT.phone}" placeholder="name@example.com">
                         </div> 
-                        <span>${erroAddressUpdate}</span>
+                        <span style="color: red">${erroAddressUpdate}</span>
                         <div class="mb-3">
                             <label for="exampleFormControlInput17" class="form-label">Address</label>
                             <input required type="text" class="form-control" id="exampleFormControlInput17" name="ttAddress" value="${studentBQT.address}" placeholder="name@example.com">
@@ -434,7 +437,7 @@
 
 
                         </div>
-                         <span>${erroEmailUpdate}</span>
+                        <span>${erroEmailUpdate}</span>
                         <div class="mb-3">
                             <label for="exampleFormControlInput13" class="form-label">Email</label>
                             <input required type="email" class="form-control" id="exampleFormControlInput13" name="txtEmail" value="${oficerFUBQT.gmail}" placeholder="name@example.com">
@@ -496,6 +499,8 @@
                 </div>
             </div>
         </div>
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
         <script>
             document.addEventListener('mousemove', function (e) {
                 let body = document.querySelector('body');

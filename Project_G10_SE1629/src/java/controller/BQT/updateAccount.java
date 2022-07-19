@@ -122,143 +122,229 @@ public class updateAccount extends HttpServlet {
                         countTrue++;
                     }
                 }
-                if (countTrue!=0) {
-                    
-                }
+                if (countTrue != 0) {
+                    user.setRole(new Role(2));
+                    student = new Student(Integer.parseInt(idAccount), firstName, lastName, gender, dob, phone, email, address,
+                            request.getParameter("dobStart"), request.getParameter("dobEnd"), specializedin, campus, status, "",user);
+                    request.setAttribute("studentBQT", student);
+                    request.setAttribute("updateID", 2);
 
+                }
             }
-            int coutCheckRole = 0;
-            String role = "";
-            String account = "Not Change";
-            if (slRole != roleId) {
-                if (password == null || password.equals("")) {
-                    password = RandomString.RandomStringg(8);
-                }
-                String[] userNameLast = lastName.split(" ");
-                String userName = firstName;
-                for (String name : userNameLast) {
-                    userName += name.charAt(0);
-                }
-                userName = userName.toLowerCase();
-                if (slRole == 2) {
-                    //sv
-                    specializedin = new Specializedin(1);
-                    Student student = new Student(roleId, firstName, lastName, gender, dob, phone, email, address, "", "", specializedin, campus, status, "", user);
-                    student.setCodeStudent(studentDao.getMssv(specializedinDao.getCodeSpecializedin(String.valueOf(specializedin.getId()))));
-                    userName += student.getCodeStudent();
-                    user = new User(String.valueOf(userDao.getIdAccount() + 1), userName, password);
-                    student.setUser(user);
 
-                    userDao.insertUser(user, "2"); // insert user vao datase
-                    studentDao.insertStudent(student); // insert student cao database
-                    coutCheckRole++;
-                    account = student.getUser().getUsername();
-                    role = "Student";
-                }
-                if (slRole == 3) {
-                    //gv
-                    String code = teacherDao.getCodeTeacher();
-                    userName += code;
-                    user = new User(String.valueOf(userDao.getIdAccount() + 1), userName, password);
-                    userDao.insertUser(user, "3"); // insert user vao datase
-                    Teacher teacher = new Teacher(roleId, firstName, lastName, gender, dob, "", "", phone, email, address, campus, user, code, true);
-                    teacherDao.insert(teacher); // nhap teacher
-                    role = "Teacher";
-                    account = teacher.getUser().getUsername();
-                    coutCheckRole++;
-                }
-                if (slRole == 4) {
-                    //cb
-                    String code = officerFUDao.getCodeofficerFU();
-                    userName += code;
-                    user = new User(String.valueOf(userDao.getIdAccount() + 1), userName, password);
-                    userDao.insertUser(user, "4"); // insert user vao datase
-                    OfficerFU officerFU = new OfficerFU(roleId, firstName, lastName, gender, dob, phone, email, address, campus, user, code, true);
-                    officerFUDao.insert(officerFU);
-                    role = "Officer FU";
-                    account = officerFU.getUser().getUsername();
-                    coutCheckRole++;
-                }
-
-                userDao.updateRoleById(user.getId(), slRole);
-            }
-            String dateOfStart = String.valueOf(java.time.LocalDate.now());
-
-            if (roleId == 2) {
-                if (slRole != roleId) {
-                    StudentParents studentParents1 = studentParentsDao1.getStudentParentsByIdStudent(String.valueOf(idAccount));
-                    if (studentParents1 != null) {
-                        studentParentsDao1.deleteByid(String.valueOf(studentParents1.getId()));
+            //gv
+            if (roleId == 3) {
+                Teacher teacher = teacherDao.getTeacherById(idAccount, "");
+                if (!email.equalsIgnoreCase(teacher.getGmail())) {
+                    if (dao.checkMailExit(email) == 1) {
+                        request.setAttribute("erroEmailUpdate", "Email đã tồn tại");
+                        countTrue++;
                     }
-                    studentDao.deleteByid(idAccount);
-                } else {
-                    Student student = new Student(Integer.parseInt(idAccount), firstName, lastName, gender, dob, phone, email, address, request.getParameter("dobStart"), request.getParameter("dobEnd") == null ? "" : request.getParameter("dobEnd"), specializedin, campus, status, "", user);
-                    studentDao.update(student);
-                    role = "Student";
+                }
+                if (!phone.equals(teacher.getPhone())) {
+                    if (dao.checkPhoneExit(phone) == 1) {
+                        request.setAttribute("erroPhoneUpdate", "Phone đã tồn tại");
+                        countTrue++;
+                    }
+                }
+                if (countTrue != 0) {
+                    user.setRole(new Role(3));
+                    teacher = new Teacher(Integer.parseInt(idAccount), firstName, lastName, gender, dob, request.getParameter("dobStart"), request.getParameter("dobEnd"),
+                            phone, email, address, campus, user, "", true);
+                    request.setAttribute("teacherBQT", teacher);
+                    request.setAttribute("updateID", 3);
                 }
             }
 
-            if (roleId == 3) { // done
-                if (slRole != roleId) {
-                    teacherDao.deleteByid(idAccount);
-                    if (slRole != 3) {
-                        userDao.deleteByid(idUser);
-                    }
-                } else {
-                    Teacher teacher = new Teacher(Integer.parseInt(idAccount), firstName, lastName, gender, dob, request.getParameter("dobStart"), request.getParameter("dobEnd") == null ? "" : request.getParameter("dobEnd"), phone, email, address, campus, user, "", true);
-                    teacherDao.update(teacher);
-                    role = "Teacher";
-                }
-            }
+            //cb
             if (roleId == 4) {
-                if (slRole != roleId) {
-                    officerFUDao.deleteByid(String.valueOf(idAccount));
-                    if (slRole != 4) {
-                        userDao.deleteByid(idUser);
+                OfficerFU officerFU = officerFUDao.getOfficerByID(idAccount, "");
+                if (!email.equalsIgnoreCase(officerFU.getGmail())) {
+                    if (dao.checkMailExit(email) == 1) {
+                        request.setAttribute("erroEmailUpdate", "Email đã tồn tại");
+                        countTrue++;
                     }
-                } else {
-                    OfficerFU officerFU = new OfficerFU(Integer.parseInt(idAccount), firstName, lastName, gender, dob, phone, email, address, campus, user, "", true);
-                    officerFUDao.update(officerFU);
-                    role = "Officer FU";
+                }
+                if (!phone.equals(officerFU.getPhone())) {
+                    if (dao.checkPhoneExit(phone) == 1) {
+                        request.setAttribute("erroPhoneUpdate", "Phone đã tồn tại");
+                        countTrue++;
+                    }
+                }
+                if (countTrue != 0) {
+                     user.setRole(new Role(4));
+                    officerFU = new OfficerFU(Integer.parseInt(idAccount), firstName, lastName, gender, dob,
+                            phone, email, address, campus, user, "", true);
+                    request.setAttribute("oficerFUBQT", officerFU);
+                    request.setAttribute("updateID", 4);
                 }
             }
+            //phu_huynh
             if (roleId == 5) {
-                StudentParents studentParents = new StudentParents(Integer.parseInt(idAccount), firstName, lastName, gender, dob, phone, email, address, campus, "", true);
-                studentParentsDao1.update(studentParents);
-                role = "Student Parents";
-            }
-
-            if (slRole == roleId) {
-                if (password != null && !password.equals("")) {
-                    user = new User(idUser, lastName, password);
-                    userDao.updateUserPass(user);
-                    coutCheckRole++;
+                StudentParents studentParents = studentParentsDao1.getStudentParentsByIdParent(idAccount, "");
+                if (!email.equalsIgnoreCase(studentParents.getGmail())) {
+                    if (dao.checkMailExit(email) == 1) {
+                        request.setAttribute("erroEmailUpdate", "Email đã tồn tại");
+                        countTrue++;
+                    }
+                }
+                if (!phone.equals(studentParents.getPhone())) {
+                    if (dao.checkPhoneExit(phone) == 1) {
+                        request.setAttribute("erroPhoneUpdate", "Phone đã tồn tại");
+                        countTrue++;
+                    }
+                }
+                if (countTrue != 0) {
+                     user.setRole(new Role(5));
+                    studentParents = new StudentParents(Integer.parseInt(idAccount), firstName, lastName, gender, dob,
+                            phone, email, address, campus, user,new Student(), "", true);
+                    request.setAttribute("studentParentsBQT", studentParents);
+                    request.setAttribute("updateID", 5);
                 }
             }
-            if (coutCheckRole != 0) {
-                String topic = "FPT-University";
-                String content = "<html lang=\"en\">\n"
-                        + "<head>\n"
-                        + "    <title></title>\n"
-                        + "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n"
-                        + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
-                        + "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n"
-                        + "</head>\n"
-                        + "<body>\n"
-                        + "Dear " + firstName + "<br/>\n <br/>"
-                        + "We have changed your account.<br/>\n"
-                        + "You can login to check account<br/>\n"
-                        + "You are a " + role + " now<br/>\n"
-                        + "Account: <span style='color: red;'> " + account + "</span><br/>\n"
-                        + "Password: <span style='color: red;'> " + password + "</span><br/>\n"
-                        + "</body>\n"
-                        + "</html>";
+            
 
-                String acc_TK_Mail_Send = "phongdaotaofbt@gmail.com";
-                String acc_MK_Mail_Send = "npmgjujnxbtswmit";
-                SendMail.SendMail(email, topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
+            if (countTrue != 0) {
+                request.setAttribute("userId", idUser);
+                request.setAttribute("sid", idAccount);
+                request.getRequestDispatcher("bqt/index/AccountUpdate.jsp").forward(request, response);
             }
-            response.sendRedirect("indexBQT?nextAccount=1&slRole=" + slRole);
+
+            if (countTrue == 0) {
+                int coutCheckRole = 0;
+                String role = "";
+                String account = "Not Change";
+                if (slRole != roleId) {
+                    if (password == null || password.equals("")) {
+                        password = RandomString.RandomStringg(8);
+                    }
+                    String[] userNameLast = lastName.split(" ");
+                    String userName = firstName;
+                    for (String name : userNameLast) {
+                        userName += name.charAt(0);
+                    }
+                    userName = userName.toLowerCase();
+                    if (slRole == 2) {
+                        //sv
+                        specializedin = new Specializedin(1);
+                        Student student = new Student(roleId, firstName, lastName, gender, dob, phone, email, address, "", "", specializedin, campus, status, "", user);
+                        student.setCodeStudent(studentDao.getMssv(specializedinDao.getCodeSpecializedin(String.valueOf(specializedin.getId()))));
+                        userName += student.getCodeStudent();
+                        user = new User(String.valueOf(userDao.getIdAccount() + 1), userName, password);
+                        student.setUser(user);
+
+                        userDao.insertUser(user, "2"); // insert user vao datase
+                        studentDao.insertStudent(student); // insert student cao database
+                        coutCheckRole++;
+                        account = student.getUser().getUsername();
+                        role = "Student";
+                    }
+                    if (slRole == 3) {
+                        //gv
+                        String code = teacherDao.getCodeTeacher();
+                        userName += code;
+                        user = new User(String.valueOf(userDao.getIdAccount() + 1), userName, password);
+                        userDao.insertUser(user, "3"); // insert user vao datase
+                        Teacher teacher = new Teacher(roleId, firstName, lastName, gender, dob, "", "", phone, email, address, campus, user, code, true);
+                        teacherDao.insert(teacher); // nhap teacher
+                        role = "Teacher";
+                        account = teacher.getUser().getUsername();
+                        coutCheckRole++;
+                    }
+                    if (slRole == 4) {
+                        //cb
+                        String code = officerFUDao.getCodeofficerFU();
+                        userName += code;
+                        user = new User(String.valueOf(userDao.getIdAccount() + 1), userName, password);
+                        userDao.insertUser(user, "4"); // insert user vao datase
+                        OfficerFU officerFU = new OfficerFU(roleId, firstName, lastName, gender, dob, phone, email, address, campus, user, code, true);
+                        officerFUDao.insert(officerFU);
+                        role = "Officer FU";
+                        account = officerFU.getUser().getUsername();
+                        coutCheckRole++;
+                    }
+
+                    userDao.updateRoleById(user.getId(), slRole);
+                }
+                String dateOfStart = String.valueOf(java.time.LocalDate.now());
+
+                if (roleId == 2) {
+                    if (slRole != roleId) {
+                        StudentParents studentParents1 = studentParentsDao1.getStudentParentsByIdStudent(String.valueOf(idAccount));
+                        if (studentParents1 != null) {
+                            studentParentsDao1.deleteByid(String.valueOf(studentParents1.getId()));
+                        }
+                        studentDao.deleteByid(idAccount);
+                    } else {
+                        Student student = new Student(Integer.parseInt(idAccount), firstName, lastName, gender, dob, phone, email, address, request.getParameter("dobStart"), request.getParameter("dobEnd") == null ? "" : request.getParameter("dobEnd"), specializedin, campus, status, "", user);
+                        studentDao.update(student);
+                        role = "Student";
+                    }
+                }
+
+                if (roleId == 3) { // done
+                    if (slRole != roleId) {
+                        teacherDao.deleteByid(idAccount);
+                        if (slRole != 3) {
+                            userDao.deleteByid(idUser);
+                        }
+                    } else {
+                        Teacher teacher = new Teacher(Integer.parseInt(idAccount), firstName, lastName, gender, dob, request.getParameter("dobStart"), request.getParameter("dobEnd") == null ? "" : request.getParameter("dobEnd"), phone, email, address, campus, user, "", true);
+                        teacherDao.update(teacher);
+                        role = "Teacher";
+                    }
+                }
+                if (roleId == 4) {
+                    if (slRole != roleId) {
+                        officerFUDao.deleteByid(String.valueOf(idAccount));
+                        if (slRole != 4) {
+                            userDao.deleteByid(idUser);
+                        }
+                    } else {
+                        OfficerFU officerFU = new OfficerFU(Integer.parseInt(idAccount), firstName, lastName, gender, dob, phone, email, address, campus, user, "", true);
+                        officerFUDao.update(officerFU);
+                        role = "Officer FU";
+                    }
+                }
+                if (roleId == 5) {
+                    StudentParents studentParents = new StudentParents(Integer.parseInt(idAccount), firstName, lastName, gender, dob, phone, email, address, campus, "", true);
+                    studentParentsDao1.update(studentParents);
+                    role = "Student Parents";
+                }
+
+                if (slRole == roleId) {
+                    if (password != null && !password.equals("")) {
+                        user = new User(idUser, lastName, password);
+                        userDao.updateUserPass(user);
+                        coutCheckRole++;
+                    }
+                }
+
+                if (coutCheckRole != 0) {
+                    String topic = "FPT-University";
+                    String content = "<html lang=\"en\">\n"
+                            + "<head>\n"
+                            + "    <title></title>\n"
+                            + "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n"
+                            + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
+                            + "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n"
+                            + "</head>\n"
+                            + "<body>\n"
+                            + "Dear " + firstName + "<br/>\n <br/>"
+                            + "We have changed your account.<br/>\n"
+                            + "You can login to check account<br/>\n"
+                            + "You are a " + role + " now<br/>\n"
+                            + "Account: <span style='color: red;'> " + account + "</span><br/>\n"
+                            + "Password: <span style='color: red;'> " + password + "</span><br/>\n"
+                            + "</body>\n"
+                            + "</html>";
+
+                    String acc_TK_Mail_Send = "phongdaotaofbt@gmail.com";
+                    String acc_MK_Mail_Send = "npmgjujnxbtswmit";
+                    SendMail.SendMail(email, topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
+                }
+                response.sendRedirect("indexBQT?nextAccount=1&slRole=" + slRole);
+            }
 
         }
     }

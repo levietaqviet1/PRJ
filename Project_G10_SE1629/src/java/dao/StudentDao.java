@@ -33,7 +33,7 @@ public class StudentDao {
                     + "  FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn "
                     + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId \n"
                     + "WHERE s.sinhVienId = ? AND cs.idCoSo = ? "
-                    + "AND  s.[acctiveSV] = "+a+"";
+                    + "AND  s.[acctiveSV] like '%" + a + "%'";
             PreparedStatement stm = cnn.prepareStatement(sql);
             stm.setInt(1, id);
             stm.setString(2, campusup_login);
@@ -55,13 +55,13 @@ public class StudentDao {
         return null;
     }
 
-    public Student getStudentByidStudent(int id , String a) {
+    public Student getStudentByidStudent(int id, String a) {
         try {
             String sql = "SELECT *\n"
                     + "  FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn "
                     + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId \n"
                     + "WHERE s.sinhVienId = ? "
-                    + "AND  s.[acctiveSV] ="+a+"";
+                    + "AND  s.[acctiveSV] like '%" + a + "%'";
             PreparedStatement stm = cnn.prepareStatement(sql);
             stm.setInt(1, id);
             ResultSet rs = stm.executeQuery();
@@ -82,13 +82,13 @@ public class StudentDao {
         return null;
     }
 
-    public Student getStudentByidUser(int id, String campusup_login,String a) {
+    public Student getStudentByidUser(int id, String campusup_login, String a) {
         try {
             String sql = "SELECT *\n"
                     + "  FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn "
                     + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId \n"
                     + "WHERE s.taiKhoanId = ? AND cs.idCoSo = ? "
-                    + "AND  s.[acctiveSV] = "+a+"";
+                    + "AND  s.[acctiveSV] like '%" + a + "%'";
             PreparedStatement stm = cnn.prepareStatement(sql);
             stm.setInt(1, id);
             stm.setString(2, campusup_login);
@@ -116,7 +116,7 @@ public class StudentDao {
             String sql = " SELECT *\n"
                     + "FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn \n"
                     + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId "
-                    + " WHERE  s.[acctiveSV] = "+active+"";
+                    + " WHERE  s.[acctiveSV] like '%" + active + "%'";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -146,7 +146,7 @@ public class StudentDao {
                     + "FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn \n"
                     + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId "
                     + "WHERE  s.trangThaiId like '%" + st + "%'  AND cs.idCoSo like '%" + cam + "%' "
-                    + "AND s.[acctiveSV] = "+a+"";
+                    + "AND s.[acctiveSV] like '%" + a + "%'";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -176,7 +176,7 @@ public class StudentDao {
                     + "FROM [PRJ_G10].[dbo].[sinhVien] s JOIN chuyenNganh cn \n"
                     + "ON s.idChuyenNganh = cn.idChuyenNganh JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN trangThai tt ON s.trangThaiId = tt.trangThaiId "
                     + "WHERE s.firstName like '%" + frist + "%' AND s.lastName like '%" + last + "%'  AND s.trangThaiId like '%" + st + "%'  AND cs.idCoSo like '%" + cam + "%' "
-                    + "AND  s.[acctiveSV] = "+a+"";
+                    + "AND  s.[acctiveSV] like '%" + a + "%'";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -329,7 +329,7 @@ public class StudentDao {
             stm.setBytes(12, s.getImgStudent());
             stm.setString(13, s.getCodeStudent());
             stm.executeUpdate();
-            
+
         } catch (Exception e) {
             System.out.println("Loi StudentDao insertStudent(Student s)  " + e);
         }

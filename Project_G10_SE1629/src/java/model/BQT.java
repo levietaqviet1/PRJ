@@ -16,11 +16,12 @@ public class BQT {
     private String date, phone, gmail, address;
     private Campus campus;
     private User user;
+    private String code;
 
     public BQT() {
     }
 
-    public BQT(int id, String firstName, String lastName, boolean gender, String date, String phone, String gmail, String address, Campus campus, User user) {
+    public BQT(int id, String firstName, String lastName, boolean gender, String date, String phone, String gmail, String address, Campus campus, User user, String code) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -31,6 +32,17 @@ public class BQT {
         this.address = address;
         this.campus = campus;
         this.user = user;
+        this.code = code;
+    }
+
+
+
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getDate() {

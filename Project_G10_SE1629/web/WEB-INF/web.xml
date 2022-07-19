@@ -72,6 +72,10 @@
         <servlet-name>recycleBinBQT</servlet-name>
         <servlet-class>controller.BQT.recycleBinBQT</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>listAccountBQTAdmin</servlet-name>
+        <servlet-class>controller.BQT.listAccountBQTAdmin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>testAdd</servlet-name>
         <url-pattern>/testAdd</url-pattern>
@@ -143,6 +147,10 @@
     <servlet-mapping>
         <servlet-name>recycleBinBQT</servlet-name>
         <url-pattern>/recycleBinBQT</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>listAccountBQTAdmin</servlet-name>
+        <url-pattern>/listAccountBQT-Admin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

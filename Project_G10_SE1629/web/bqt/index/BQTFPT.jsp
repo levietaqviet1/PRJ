@@ -1,7 +1,7 @@
 <%-- 
-    Document   : adminAccountPage
-    Created on : Jun 22, 2022, 11:14:47 PM
-    Author     : win
+    Document   : BQTFPT
+    Created on : Jul 18, 2022, 9:00:25 PM
+    Author     : NCC
 --%>
 
 
@@ -78,7 +78,7 @@
 
     <body>
 
-        <nav>
+         <nav>
             <div class="logo-name">
                 <div class="logo-image">
                     <img src="https://s3.ap-northeast-1.amazonaws.com/h.files/images/1655654596490_Cn6PveFXv2.png" alt="khong co internet">
@@ -89,12 +89,11 @@
 
             <div class="menu-items">
                 <ul class="nav-links">
-
-                    <li><a href="indexBQT?nextAccount=1" >
+                    <li><a href="indexBQT?nextAccount=1" class="">
                             <i class="uil uil-estate"></i>
                             <span class="link-name">Account</span>
                         </a></li>
-                    <li><a href="indexBQT?nextClass=1" class="ac">
+                    <li><a href="indexBQT?nextClass=1">
                             <i class="uil uil-thumbs-up"></i>
                             <span class="link-name">Class</span>
                         </a></li>
@@ -123,13 +122,90 @@
 
             </div>
 
+            <form action="listAccountBQT-Admin" method="POST" >
+                <div class="dash-bottom">
+                    <input class="form-control me-2" type="search" name="search" placeholder="Search: EX le viet or l v" value="${Tsearch}" aria-label="Search">
+                    <button class="btn btn-outline-success" name="subSearch"value="2" type="submit">Search</button>
+                </div>
+                <div class="sl-id" style="display: flex;">
+                    <div>
+                        <select name="slRole"  style="width: auto;margin-left: 70px;margin-top: 20px;">
+                            <option value="1" >BQT</option>
+                        </select>
+                    </div>
+                    <div>
+                        <select name="slCampusSearch"  style="width: auto;margin-left: 70px;margin-top: 20px;">
+                            <option value="">All Campus</option>
+                            <c:forEach items="${listCampus}"  var="campus">
+                                <option value="${campus.id}" 
+                                        <c:if test="${campusID == campus.id }" >selected</c:if>
+                                        >FU-${campus.name}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div>
+                        <input type="submit" value="Add new BQT" name="addSubAccou" style="width: auto;margin-left: 70px;margin-top: 20px;"/>
+                    </div>
+                </div>
 
-            <div class="dash-bottom">
-                <h4 class="ac" style="margin: auto">Chức năng này chưa phát triển xong. Vui lòng chọn cái khác</h4>
-            </div>
-            <div class="dash-bottom">
-                <img  style="margin: auto" src="img/thuFI.jpg" alt=""/>
-            </div>
+                <div class="dash-bottomtable">
+                    <table class="table" >
+                        <!--BQT-->
+
+                        <thead>
+                            <tr> 
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Gender</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Dob</th>
+                                <th scope="col">Phone Number</th>
+                                <th scope="col">Address</th>
+                                <th scope="col">Role</th>
+                                <th scope="col">Update</th>
+                                <th scope="col">Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${requestScope.listBqt}" var="t"  >
+                                <tr>
+                                    <td>${t.firstName}</td>
+                                    <td>${t.lastName}</td>
+                                    <td>${t.lastName} ${t.firstName} </td>
+
+                                    <td>
+                                        <c:if test="${t.gender == true}" >
+                                            Male
+                                        </c:if>    
+                                        <c:if test="${t.gender == false}" >
+                                            FeMale
+                                        </c:if>  
+                                    </td>
+                                    <td>${t.gmail}</td>
+                                    <td>${t.date}</td>
+                                    <td>${t.phone}</td>
+                                    <td>${t.address}</td>
+                                    <td>
+                                        ${t.user.role.name}
+                                    </td>
+                                    <td><a href="listAccountBQT-Admin?sid=${t.id}&update=0&tkid=${t.user.id}">Update</a></td>
+                                    <c:if test="${t.id != bqt_login_successful.id}">
+                                        <td><a href="listAccountBQT-Admin?sid=${t.id}&delete=0&tkid=${t.user.id}">Delete</a></td>
+                                    </c:if>
+                                    <c:if test="${t.id == bqt_login_successful.id}">
+                                        <td></td>
+                                    </c:if>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+
+                        </form>
+
+                    </table>
+
+                </div>
+
         </div>
         <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

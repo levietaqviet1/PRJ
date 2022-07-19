@@ -38,7 +38,7 @@ public class TeacherDao {
             String sql = "SELECT * \n"
                     + "FROM [PRJ_G10].[dbo].[giangVien] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
                     + "ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
-                    + "WHERE gv.activeGv= "+a+"";
+                    + "WHERE gv.activeGv like '%" + a + "%'";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -66,7 +66,7 @@ public class TeacherDao {
                     + "FROM [PRJ_G10].[dbo].[giangVien] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
                     + "ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
                     + "WHERE gv.firstName like '%" + firt + "%' AND lastName like '%" + last + "%'  AND cs.idCoSo like '%" + cam + "%' "
-                    + "AND gv.activeGv= "+a+"";
+                    + "AND gv.activeGv like '%" + a + "%'";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -106,7 +106,7 @@ public class TeacherDao {
                     + "FROM [PRJ_G10].[dbo].[giangVien] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
                     + "ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
                     + "WHERE gv.giangVienId = " + id + " "
-                    + "AND gv.activeGv=  "+a+"";
+                    + "AND gv.activeGv like '%" + a + "%'";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {

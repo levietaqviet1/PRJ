@@ -84,7 +84,7 @@
                     <img src="https://s3.ap-northeast-1.amazonaws.com/h.files/images/1655654596490_Cn6PveFXv2.png" alt="khong co internet">
                 </div>
 
-                <span class="logo_name"><a href="#" style="text-decoration: none;color: black">BQT FPT</a></span>
+                <span class="logo_name"><a href="indexBQT?nextListBQT=1" style="text-decoration: none;color: black">BQT FPT</a></span>
             </div>
 
             <div class="menu-items">
@@ -100,7 +100,7 @@
                     <li><a href="indexBQT?recycleBin=1">
                             <i><ion-icon name="archive-outline"></ion-icon></i> 
                             <span class="link-name">Recycle Bin</span>
-                        </a></li>
+                        </a></li> 
                     <li><a href="changePassworBQT?id=1">
                             <i><ion-icon name="git-compare-outline"></ion-icon></i> 
                             <span class="link-name">Change Password</span>

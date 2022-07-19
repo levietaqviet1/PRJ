@@ -89,7 +89,7 @@ public class nextForgotPass extends HttpServlet {
                             Campus campus = new Campus(Integer.parseInt(campusFor));
                             User user = new User(String.valueOf(idAccount));
                             BQT bqt = new BQT(-1, firstNameFor, lastNameFor, genderinFor.equals("1") ? true : false, dateOfBirthinFor,
-                                    telephoneFor, emailFor, "", campus, user);
+                                    telephoneFor, emailFor, "", campus, user,"");
                             if (bqtDao.checkInforBQT(bqt) == 1) {
                                 pass = RandomString.RandomStringg(12);
                                 user = new User(String.valueOf(idAccount), accountFor, pass);
