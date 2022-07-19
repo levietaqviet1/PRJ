@@ -10,12 +10,12 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Move Class With Other Student</title>
-       <style>
+        <style>
             *{
                 font-family: "Verdana",sans-serif;
             }
             body{
-               margin: auto;
+                margin: auto;
                 align-items: center;
                 justify-content: center;
             }
@@ -47,73 +47,78 @@
         </style>
     </head>
     <body>
-        <div class="move">
-            
-            <div class="title">
-                <h1> Move Class With Other Student </h1>
-            </div>
-            <div class="table">
+        <form action="MoveWith" method="post">
+            <div class="move">
 
-                <table>
-                    <tr>
-                        <td>
-                            Campus:
-                        </td>
-                        <td>
-                            <select style="border-radius: 10px; padding: 5px">
-                                <c:forEach var="t" items="${listCampus}">
-                                    <option value="${t.id}"
-                                            <c:if test="${campusin_signup == t.id}" >
-                                        selected
-                                        </c:if>>FU-${t.name}
-                                    </option>
-                                </c:forEach>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Subject Code:
-                        </td>
-                        <td>
-                            <input style="border-radius: 10px; padding: 5px" type="text" name="subject">  
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            Student A:
-                        </td>
-                        <td>
-                            <input style="border-radius: 10px; padding: 5px" type="text" name="nameA">
-                        </td>
-                        <td>
-                            Exchange With Student B:
-                        </td>
-                        <td>
-                            <input style="border-radius: 10px; padding: 5px" type="text" name="nameB">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            From Class:
-                        </td>
-                        <td>
-                            <input style="border-radius: 10px; padding: 5px" type="text" name="ClassA">
-                        </td>
-                        <td>
-                            To Class:
-                        </td>
-                        <td>
-                            <input style="border-radius: 10px; padding: 5px" type="text" name="ClassB">
-                        </td>
-                    </tr>
-                        
-                </table>
-            </div>
+                <div class="title">
+                    <h1> Move Class With Other Student </h1>
+                </div>
+                <div class="table">
+
+                    <table>
+                        <tr>
+                            <td>
+                                Campus:
+                            </td>
+                            <td>
+                                <select style="border-radius: 10px; padding: 5px">
+                                    <c:forEach var="t" items="${listCampus}">
+                                        <option value="${t.id}"
+                                                <c:if test="${campusin_signup == t.id}" >
+                                            selected
+                                            </c:if>>FU-${t.name}
+                                        </option>
+                                    </c:forEach>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Subject Code:
+                            </td>
+                            <td>
+                                <input style="border-radius: 10px; padding: 5px" type="text" name="subject" required="">  
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Student A:
+                            </td>
+                            <td>
+                                <input style="border-radius: 10px; padding: 5px" type="text" name="nameA" required="">
+                            </td>
+                            <td>
+                                Exchange With Student B:
+                            </td>
+                            <td>
+                                <input style="border-radius: 10px; padding: 5px" type="text" name="nameB" required="">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                From Class:
+                            </td>
+                            <td>
+                                <input style="border-radius: 10px; padding: 5px" type="text" name="ClassA" required="">
+                            </td>
+                            <td>
+                                To Class:
+                            </td>
+                            <td>
+                                <input style="border-radius: 10px; padding: 5px" type="text" name="ClassB" required="">
+                            </td>
+                        </tr>
+
+                    </table>
+                </div>
                 <div style="text-align: center">
                     <input style="background-color: beige;border-radius: 10px; padding: 5px" type="submit" name="OK" value="Send"> 
                     <input style="background-color:gainsboro;border-radius: 10px; padding: 5px " type="reset" name="cancel" value="Cancel">  
                 </div>
-        </div>
+                <div style=" text-align: center">
+                    ${message}
+                </div> 
+            </div>
+        </form>
     </body>
 </html>

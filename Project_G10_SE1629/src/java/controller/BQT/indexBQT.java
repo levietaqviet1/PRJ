@@ -160,6 +160,9 @@ public class indexBQT extends HttpServlet {
                     if (request.getParameter("recycleBin") != null) {
                         response.sendRedirect("recycleBinBQT?nextAccount=1");
                     }
+                    if (request.getParameter("view") != null) {
+                        response.sendRedirect("ViewApplicationBQT");
+                    }
 
                     if (request.getParameter("nextListBQT") != null) {
                         if (request.getParameter("remoAdd") != null) {

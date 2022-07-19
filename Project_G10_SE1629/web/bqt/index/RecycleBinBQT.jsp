@@ -78,7 +78,7 @@
 
     <body>
 
-         <nav>
+        <nav>
             <div class="logo-name">
                 <div class="logo-image">
                     <img src="https://s3.ap-northeast-1.amazonaws.com/h.files/images/1655654596490_Cn6PveFXv2.png" alt="khong co internet">
@@ -97,13 +97,17 @@
                             <i class="uil uil-thumbs-up"></i>
                             <span class="link-name">Class</span>
                         </a></li>
-                        <li><a href="indexBQT?recycleBin=1" class="ac">
+                    <li><a href="indexBQT?recycleBin=1" class="ac">
                             <i><ion-icon name="archive-outline"></ion-icon></i> 
                             <span class="link-name">Recycle Bin</span>
                         </a></li> 
                     <li><a href="changePassworBQT?id=1">
                             <i><ion-icon name="git-compare-outline"></ion-icon></i> 
                             <span class="link-name">Change Password</span>
+                        </a></li>
+                    <li><a href="indexBQT?view=1">
+                            <i class="uil uil-thumbs-up"></i>
+                            <span class="link-name">View Application</span>
                         </a></li>
                 </ul>
 
@@ -119,7 +123,7 @@
 
         <div class="dashboard">
             <div class="dash-lefttop"> 
-                
+
             </div>
 
             <form action="recycleBinBQT" method="POST" >

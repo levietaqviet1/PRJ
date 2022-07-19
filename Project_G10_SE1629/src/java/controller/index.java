@@ -47,15 +47,19 @@ public class index extends HttpServlet {
                                 giaodien = 1;
                             }
                         }
-                        if (giaodien > 7) {
+                        if (giaodien > 8) {
                             giaodien = 1;
                         }
                     } catch (Exception e) {
                         request.getRequestDispatcher("student/index/home.jsp").forward(request, response);
                     }
                 }
-                session.setAttribute("giaoDien", giaodien);
-                request.getRequestDispatcher("student/index/indexStudent.jsp").forward(request, response);
+                if (giaodien == 8) {
+                    response.sendRedirect("view");
+                } else {
+                    session.setAttribute("giaoDien", giaodien);
+                    request.getRequestDispatcher("student/index/indexStudent.jsp").forward(request, response);
+                }
             }
             if (session.getAttribute("st_login_tam_thoi") != null) {
                 int giaodien = 0;

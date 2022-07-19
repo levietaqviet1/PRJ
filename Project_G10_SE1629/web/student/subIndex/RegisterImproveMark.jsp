@@ -11,7 +11,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Register To Improve Mark</title>
         <style>
-             *{
+            *{
                 font-family: "Verdana",sans-serif;
             }
             body{
@@ -35,7 +35,7 @@
                 background-color: #fff;
                 border-radius: 10px;
                 padding: 2rem 1rem;
-                  margin: auto;
+                margin: auto;
             }
             .title{
                 text-align: center;
@@ -45,68 +45,74 @@
                 align-items: center;
                 justify-content: center;
             }
-         
+
         </style>
     </head>
     <body>
-        <div class="regis">
-            <div class="title">
+        <form action="RegisterImprove" method="post">
 
-                <h1> Register To Improve Mark </h1>
-            </div>
-            <div class="table">
+            <div class="regis">
+                <div class="title">
 
-                <table>
-                    <div class="input">
-                        
-                        <tr>
-                            <td>
-                                Campus:
-                            </td>
-                            <td>
-                                <select style="border-radius: 10px; padding: 5px">
-                                    <c:forEach var="t" items="${listCampus}">
-                                    <option value="${t.id}"
-                                            <c:if test="${campusin_signup == t.id}" >
-                                        selected
-                                        </c:if>>FU-${t.name}
-                                    </option>
-                                </c:forEach>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Subject Code:
-                            </td>
-                            <td>
-                                <input style="border-radius: 10px; padding: 5px" type="text" name="subject">  
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Class:
-                            </td>
-                            <td>
-                                <input style="border-radius: 10px; padding: 5px" type="text" name="class">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Thời gian học:
-                            </td>
-                            <td>
-                                <input style="border-radius: 10px; padding: 5px" type="date" name="time">
-                            </td>
-                        </tr>
-                        
-                    </div>
-                </table>
-            </div>
-            <div style="text-align: center">
+                    <h1> Register To Improve Mark </h1>
+                </div>
+                <div class="table">
+
+                    <table>
+                        <div class="input">
+
+                            <tr>
+                                <td>
+                                    Campus:
+                                </td>
+                                <td>
+                                    <select style="border-radius: 10px; padding: 5px">
+                                        <c:forEach var="t" items="${listCampus}">
+                                            <option value="${t.id}"
+                                                    <c:if test="${campusin_signup == t.id}" >
+                                                selected
+                                                </c:if>>FU-${t.name}
+                                            </option>
+                                        </c:forEach>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Subject Code:
+                                </td>
+                                <td>
+                                    <input style="border-radius: 10px; padding: 5px" type="text" name="subject">  
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Class:
+                                </td>
+                                <td>
+                                    <input style="border-radius: 10px; padding: 5px" type="text" name="class">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Thời gian học:
+                                </td>
+                                <td>
+                                    <input style="border-radius: 10px; padding: 5px" type="date" name="time">
+                                </td>
+                            </tr>
+
+                        </div>
+                    </table>
+                </div>
+                <div style="text-align: center">
                     <input style="background-color: beige;border-radius: 10px; padding: 5px" type="submit" name="OK" value="Send"> 
                     <input style="background-color:gainsboro;border-radius: 10px; padding: 5px " type="reset" name="cancel" value="Cancel">  
                 </div>
-        </div>
+            <div style=" text-align: center">
+                ${message}
+            </div>                                 
+            </div>
+        </form>
     </body>
 </html>

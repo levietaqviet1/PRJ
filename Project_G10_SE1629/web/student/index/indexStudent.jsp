@@ -139,7 +139,8 @@ if (request.getSession().getAttribute("dalogin") == null) {
                      <a <c:if test="${giaoDien == 1}" var="t">
                             class="acti10"
                         </c:if> href="index?sid=1">Home</a>
-                    <c:if test="${st_login_successful.getStatus().id!=1 && st_login_successful.getStatus().id!=3 }" var="t">
+                     
+                    <c:if test="${st_login_successful.getStatus().id != 1 && st_login_successful.getStatus().id != 3 }" var="t">
                         <a <c:if test="${giaoDien == 2}" var="t">
                                 class="acti10"
                             </c:if> href="index?sid=2">MoveClass
@@ -156,6 +157,9 @@ if (request.getSession().getAttribute("dalogin") == null) {
                         <a <c:if test="${giaoDien == 6}" var="t">
                                 class="acti10"
                             </c:if> href="index?sid=6">SendApplication</a>
+                         <a <c:if test="${giaoDien == 8}" var="t">
+                            class="acti10"
+                        </c:if> href="index?sid=8">ViewApplication</a>
                     </c:if>
                 </c:if>
 
@@ -176,7 +180,6 @@ if (request.getSession().getAttribute("dalogin") == null) {
                 <span id="p" style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776</span>
             </div>
             <div id="right">
-
                 <div class="hearder">
                     <c:choose>
                         <c:when test="${giaoDien == 0}">
@@ -202,6 +205,9 @@ if (request.getSession().getAttribute("dalogin") == null) {
                         </c:when>
                         <c:when test="${giaoDien == 7}"> 
                             <%@include file="../subIndex/changePassword.jsp" %>
+                        </c:when>
+                         <c:when test="${giaoDien == 8}"> 
+                            <%@include file="../subIndex/ViewApplication.jsp" %>
                         </c:when>
                     </c:choose>
 

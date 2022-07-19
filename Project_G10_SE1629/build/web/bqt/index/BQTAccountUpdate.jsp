@@ -100,6 +100,10 @@
                                 <i><ion-icon name="git-compare-outline"></ion-icon></i> 
                                 <span class="link-name">Change Password</span>
                             </a></li>
+                        <li><a href="indexBQT?view=1">
+                                <i class="uil uil-thumbs-up"></i>
+                                <span class="link-name">View Application</span>
+                            </a></li>
                     </ul>
 
                     <ul class="logout-mode">

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <!--s-->
     <servlet>
         <servlet-name>testAdd</servlet-name>
         <servlet-class>test.testAdd</servlet-class>
@@ -19,6 +20,34 @@
     <servlet>
         <servlet-name>ConfirmEmail</servlet-name>
         <servlet-class>controller.sendEmail.ConfirmEmail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MoveClass</servlet-name>
+        <servlet-class>controller.application.MoveClass</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MoveClassWith</servlet-name>
+        <servlet-class>controller.application.MoveClassWith</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterExtra</servlet-name>
+        <servlet-class>controller.application.RegisterExtra</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RegisterImprove</servlet-name>
+        <servlet-class>controller.application.RegisterImprove</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SendApplication</servlet-name>
+        <servlet-class>controller.application.SendApplication</servlet-class>
+    </servlet>
+      <servlet>
+        <servlet-name>ViewApplication</servlet-name>
+        <servlet-class>controller.application.ViewApplication</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ViewApplicationBQT</servlet-name>
+        <servlet-class>controller.BQT.ViewApplicationBQT</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>NextConfirmEmail</servlet-name>
@@ -59,6 +88,10 @@
     <servlet>
         <servlet-name>updateAccount</servlet-name>
         <servlet-class>controller.BQT.updateAccount</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>middleFORM</servlet-name>
+        <servlet-class>controller.BQT.middleFORM</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>addAccountBQT</servlet-name>
@@ -107,6 +140,39 @@
     <servlet-mapping>
         <servlet-name>print</servlet-name>
         <url-pattern>/print</url-pattern>
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>MoveClass</servlet-name>
+        <url-pattern>/MoveClass</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MoveClassWith</servlet-name>
+        <url-pattern>/MoveWith</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterImprove</servlet-name>
+        <url-pattern>/RegisterImprove</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SendApplication</servlet-name>
+        <url-pattern>/SendApplication</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewApplication</servlet-name>
+        <url-pattern>/view</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ViewApplicationBQT</servlet-name>
+        <url-pattern>/ViewApplicationBQT</url-pattern>
+    </servlet-mapping>
+      <servlet-mapping>
+        <servlet-name>middleFORM</servlet-name>
+        <url-pattern>/middle</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterExtra</servlet-name>
+        <url-pattern>/RegisterExtra</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>index</servlet-name>

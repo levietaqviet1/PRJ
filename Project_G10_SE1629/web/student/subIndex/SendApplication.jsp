@@ -50,7 +50,7 @@
         </style>
     </head>
     <body>
-        <form>
+        <form action="SendApplication" method="post">
             <div class="move">
                 <div class="title">
                     <h1 > Send An Application  </h1>
@@ -62,11 +62,11 @@
                                 Application type
                             </td>
                             <td>
-                                <select style="background: #fff; font-size: 18px; border-color: orange; border-radius: 10px; padding: 5px">
-                                    <option>Đăng kí thi cải thiện điểm</option>
-                                    <option>Chuyển đổi tín chỉ</option>
-                                    <option>Đề nghị chuyển cơ sở</option>
-                                    <option>Đề nghị chuyển ngành</option>
+                                <select style="background: #fff; font-size: 18px; border-color: orange; border-radius: 10px; padding: 5px" name="option">
+                                    <option value="Đăng kí thi cải thiện điểm">Đăng kí thi cải thiện điểm</option>
+                                    <option value="Chuyển đổi tín chỉ">Chuyển đổi tín chỉ</option>
+                                    <option value="Đề nghị chuyển cơ sở">Đề nghị chuyển cơ sở</option>
+                                    <option value="Đề nghị chuyển ngành">Đề nghị chuyển ngành</option>
                                 </select>
                             </td>
                         </tr>
@@ -75,14 +75,16 @@
                                 Purpose:
                             </td>
                             <td>
-                                <textarea style="border-radius: 10px; padding: 5px" id="id" name="purpose" rows="25" cols="100"></textarea>
+                                <textarea style="border-radius: 10px; padding: 5px" id="id" name="purpose" rows="25" cols="100" required=""></textarea>
                             </td>
                         </tr>
                     </table>
                 </div>
                 <div class="submit" style="text-align: center">
                     <br><input style="background-color: beige; font-size: 18px; border-radius: 10px;padding: 5px" type="submit" name="OK" value="Send">
-
+                </div>
+                <div style="margin: 5px">
+                    ${message}
                 </div>
             </div>
         </form>
