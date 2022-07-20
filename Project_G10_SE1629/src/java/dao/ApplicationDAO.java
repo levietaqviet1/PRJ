@@ -1,4 +1,4 @@
-package DAO_Thu;
+package dao;
 
 import connect.DBContext;
 import java.sql.Connection;
@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import modelTHU.Application;
+import model.Application;
 
 /**
  *

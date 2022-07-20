@@ -125,7 +125,7 @@ public class updateAccount extends HttpServlet {
                 if (countTrue != 0) {
                     user.setRole(new Role(2));
                     student = new Student(Integer.parseInt(idAccount), firstName, lastName, gender, dob, phone, email, address,
-                            request.getParameter("dobStart"), request.getParameter("dobEnd"), specializedin, campus, status, "",user);
+                            request.getParameter("dobStart"), request.getParameter("dobEnd"), specializedin, campus, status, "", user);
                     request.setAttribute("studentBQT", student);
                     request.setAttribute("updateID", 2);
 
@@ -172,7 +172,7 @@ public class updateAccount extends HttpServlet {
                     }
                 }
                 if (countTrue != 0) {
-                     user.setRole(new Role(4));
+                    user.setRole(new Role(4));
                     officerFU = new OfficerFU(Integer.parseInt(idAccount), firstName, lastName, gender, dob,
                             phone, email, address, campus, user, "", true);
                     request.setAttribute("oficerFUBQT", officerFU);
@@ -195,14 +195,13 @@ public class updateAccount extends HttpServlet {
                     }
                 }
                 if (countTrue != 0) {
-                     user.setRole(new Role(5));
+                    user.setRole(new Role(5));
                     studentParents = new StudentParents(Integer.parseInt(idAccount), firstName, lastName, gender, dob,
-                            phone, email, address, campus, user,new Student(), "", true);
+                            phone, email, address, campus, user, new Student(), "", true);
                     request.setAttribute("studentParentsBQT", studentParents);
                     request.setAttribute("updateID", 5);
                 }
             }
-            
 
             if (countTrue != 0) {
                 request.setAttribute("userId", idUser);
@@ -320,31 +319,30 @@ public class updateAccount extends HttpServlet {
                     }
                 }
 
-                if (coutCheckRole != 0) {
-                    String topic = "FPT-University";
-                    String content = "<html lang=\"en\">\n"
-                            + "<head>\n"
-                            + "    <title></title>\n"
-                            + "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n"
-                            + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
-                            + "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n"
-                            + "</head>\n"
-                            + "<body>\n"
-                            + "Dear " + firstName + "<br/>\n <br/>"
-                            + "We have changed your account.<br/>\n"
-                            + "You can login to check account<br/>\n"
-                            + "You are a " + role + " now<br/>\n"
-                            + "Account: <span style='color: red;'> " + account + "</span><br/>\n"
-                            + "Password: <span style='color: red;'> " + password + "</span><br/>\n"
-                            + "</body>\n"
-                            + "</html>";
-
-                    String acc_TK_Mail_Send = "phongdaotaofbt@gmail.com";
-                    String acc_MK_Mail_Send = "npmgjujnxbtswmit";
-                    SendMail sen = new SendMail();
-                    sen.sendFuncition(email, topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
-                 
-                }
+//                if (coutCheckRole != 0) {
+//                    String topic = "FPT-University";
+//                    String content = "<html lang=\"en\">\n"
+//                            + "<head>\n"
+//                            + "    <title></title>\n"
+//                            + "    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\" />\n"
+//                            + "    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">\n"
+//                            + "    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\" />\n"
+//                            + "</head>\n"
+//                            + "<body>\n"
+//                            + "Dear " + firstName + "<br/>\n <br/>"
+//                            + "We have changed your account.<br/>\n"
+//                            + "You can login to check account<br/>\n"
+//                            + "You are a " + role + " now<br/>\n"
+//                            + "Account: <span style='color: red;'> " + account + "</span><br/>\n"
+//                            + "Password: <span style='color: red;'> " + password + "</span><br/>\n"
+//                            + "</body>\n"
+//                            + "</html>";
+//
+//                    String acc_TK_Mail_Send = "phongdaotaofbt@gmail.com";
+//                    String acc_MK_Mail_Send = "npmgjujnxbtswmit";
+//                    SendMail sen = new SendMail();
+//                    sen.sendFuncition(email, topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
+//                }
                 response.sendRedirect("indexBQT?nextAccount=1&slRole=" + slRole);
             }
 

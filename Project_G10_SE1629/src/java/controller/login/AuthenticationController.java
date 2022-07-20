@@ -84,17 +84,35 @@ public class AuthenticationController extends HttpServlet {
                         if (teacher != null) {
                             countCheck++;
                             session.setAttribute("dalogin", teacher);
-                            session.setAttribute("st_login_teacher", teacher);
+                            session.setAttribute("st_login_Chua_Xong", teacher);
                             session.setMaxInactiveInterval(60 * 60 * 60);
                             response.sendRedirect("index");
                         }
 
                     }
                     if (roleup_login.equals("4")) {
-                        countCheck++;
+                        OfficerFUDao officerFUDao = new OfficerFUDao();
+                        OfficerFU officerFU = officerFUDao.getOfficerFUByIdUser(checkU, campusup_login, "1");
+                        if (officerFU != null) {
+                            countCheck++;
+                            session.setAttribute("dalogin", officerFU);
+                            session.setAttribute("st_login_Chua_Xong", officerFU);
+                            session.setMaxInactiveInterval(60 * 60 * 60);
+                            response.sendRedirect("index");
+                        }
+
                     }
                     if (roleup_login.equals("5")) {
-                        countCheck++;
+                        studentParentsDao studentParentsDao = new studentParentsDao();
+                        StudentParents studentParents = studentParentsDao.getStudentParentsByIdUser(checkU, campusup_login, "1");
+                        if (studentParents != null) {
+                            countCheck++;
+                            session.setAttribute("dalogin", studentParents);
+                            session.setAttribute("st_login_Chua_Xong", studentParents);
+                            session.setMaxInactiveInterval(60 * 60 * 60);
+                            response.sendRedirect("index");
+                        }
+
                     }
                 }
                 if (countCheck == 0) {

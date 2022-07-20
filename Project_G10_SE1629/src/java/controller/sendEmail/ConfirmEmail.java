@@ -106,7 +106,7 @@ public class ConfirmEmail extends HttpServlet {
                     String codeXm = (String) request.getSession().getAttribute("codeXacMinhHome0");
                     String codeHome0 = request.getParameter("codeHome0");
                     if (!codeXm.equals(codeHome0)) {
-                        response.sendRedirect("index?erroMaill=codeHome0");
+                        response.sendRedirect("index?erroMaill="+codeHome0);
                     } else {
                         StudentParents studentParents = (StudentParents) request.getSession().getAttribute("parentStudenthome0");
                         studentParentsDao studentParentsDao = new studentParentsDao();

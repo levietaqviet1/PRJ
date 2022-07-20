@@ -84,32 +84,9 @@ public class index extends HttpServlet {
                 session.setAttribute("giaoDien", giaodien);
                 request.getRequestDispatcher("student/index/indexStudent.jsp").forward(request, response);
             }
-            // gv
-            if (session.getAttribute("st_login_teacher") != null) {
-                Student student = (Student) session.getAttribute("st_login_successful");
-
-                int giaodien = 1;
-                if (request.getParameter("sid") != null) {
-                    try {
-                        giaodien = Integer.parseInt((String) request.getParameter("sid"));
-                        if (student.getStatus().getId() == 1 || student.getStatus().getId() == 3) {
-                            if (giaodien != 1 && giaodien != 7) {
-                                giaodien = 1;
-                            }
-                        }
-                        if (giaodien > 8) {
-                            giaodien = 1;
-                        }
-                    } catch (Exception e) {
-                         request.getRequestDispatcher("teacher/index.jsp").forward(request, response);
-                    }
-                }
-//                if (giaodien == 8) {
-//                    response.sendRedirect("view");
-//                } else {
-                session.setAttribute("giaoDien", giaodien);
-                request.getRequestDispatcher("teacher/index.jsp").forward(request, response);
-//                }
+            // --------------------
+            if (session.getAttribute("st_login_Chua_Xong") != null) {
+                request.getRequestDispatcher("VTH/index.jsp").forward(request, response);
             }
 
         }
@@ -252,7 +229,8 @@ public class index extends HttpServlet {
 
         String acc_TK_Mail_Send = "phongdaotaofbt@gmail.com";
         String acc_MK_Mail_Send = "npmgjujnxbtswmit";
-        SendMail.SendMail(studentParents.getGmail(), topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
+        SendMail sen = new SendMail();
+        sen.sendFuncition(studentParents.getGmail(), topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
         return code;
     }
 

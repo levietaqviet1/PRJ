@@ -4,7 +4,7 @@
  */
 package controller.application;
 
-import DAO_Thu.ApplicationDAO;
+import dao.ApplicationDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -12,7 +12,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Student;
-import modelTHU.Application;
+import model.Application;
 
 /**
  *

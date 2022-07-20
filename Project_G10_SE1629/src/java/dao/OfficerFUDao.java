@@ -19,7 +19,7 @@ import model.*;
 public class OfficerFUDao {
 
     Connection cnn; //Kết nối CSDL
-    String sql ="";
+    String sql = "";
 
     public OfficerFUDao() {
         try {
@@ -34,7 +34,7 @@ public class OfficerFUDao {
         ArrayList<OfficerFU> listOfficerFU = new ArrayList<OfficerFU>();
 
         try {
-             sql = "  SELECT *\n"
+            sql = "  SELECT *\n"
                     + "  FROM [PRJ_G10].[dbo].[canBo] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
                     + "  ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
                     + "WHERE  cs.idCoSo like '%" + cam + "%'"
@@ -61,7 +61,7 @@ public class OfficerFUDao {
     public ArrayList<OfficerFU> getAllByInfo(String firt, String last, String cam, String ac) {
         ArrayList<OfficerFU> listOfficerFU = new ArrayList<OfficerFU>();
         try {
-             sql = "  SELECT *\n"
+            sql = "  SELECT *\n"
                     + "  FROM [PRJ_G10].[dbo].[canBo] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
                     + "  ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
                     + "WHERE gv.firstName like '%" + firt + "%' AND lastName like '%" + last + "%'   AND cs.idCoSo like '%" + cam + "%' "
@@ -81,27 +81,27 @@ public class OfficerFUDao {
 
         } catch (SQLException ex) {
             System.out.println("Loi OfficerFUDao getAll() " + ex);
-             System.out.println(sql);
+            System.out.println(sql);
         }
         return listOfficerFU;
     }
 
     public void deleteByid(String id) {
         try {
-             sql = "DELETE \n"
+            sql = "DELETE \n"
                     + "FROM canBo \n"
                     + "WHERE canBoId = " + id + "";
             PreparedStatement stm = cnn.prepareStatement(sql);
             stm.executeUpdate();
         } catch (SQLException ex) {
             System.out.println("Loi OfficerFUDao  deleteByid(String parameter) " + ex);
-             System.out.println(sql);
+            System.out.println(sql);
         }
     }
 
     public void update(OfficerFU officerFU) {
         try {
-             sql = "UPDATE [dbo].[canBo]\n"
+            sql = "UPDATE [dbo].[canBo]\n"
                     + "   SET [firstName] = '" + officerFU.getFirstName() + "' \n"
                     + "      ,[lastName] =  '" + officerFU.getLastName() + "' \n"
                     + "      ,[gioiTinh] =  ? \n"
@@ -119,14 +119,14 @@ public class OfficerFUDao {
 
         } catch (SQLException ex) {
             System.out.println("Loi OfficerFUDao  update(OfficerFU officerFU)  " + ex);
-             System.out.println(sql);
+            System.out.println(sql);
         }
     }
 
     public OfficerFU getOfficerByID(String id, String a) {
         OfficerFU officerFU = new OfficerFU();
         try {
-             sql = "SELECT * \n"
+            sql = "SELECT * \n"
                     + "FROM [PRJ_G10].[dbo].[canBo] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
                     + "ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
                     + "WHERE gv.canBoId = " + id + " "
@@ -145,13 +145,13 @@ public class OfficerFUDao {
             return officerFU;
         } catch (SQLException ex) {
             System.out.println("Loi OfficerFUDao getOfficerByID(String id)  " + ex);
-             System.out.println(sql);
+            System.out.println(sql);
         }
         return null;
     }
 
     public void insert(OfficerFU s) {
-         sql = "INSERT INTO [dbo].[canBo]\n"
+        sql = "INSERT INTO [dbo].[canBo]\n"
                 + "           ([firstName],[lastName],[gioiTinh],[ngaySinh],[soDienThoai],[gmail],[diaChi],[idCoSo],[taiKhoanId],[codeCB],[activeCB])\n"
                 + "  VALUES(?,?,?,?,?,?,?,?,?,?,1);";
         try {
@@ -170,7 +170,7 @@ public class OfficerFUDao {
             stm.executeUpdate();
         } catch (Exception e) {
             System.out.println("Loi OfficerFUDao insert(OfficerFU s)  " + e);
-             System.out.println(sql);
+            System.out.println(sql);
         }
     }
 
@@ -180,7 +180,7 @@ public class OfficerFUDao {
         String t = "CB";
         try {
 
-             sql = "SELECT TOP 1 [codeCB]\n"
+            sql = "SELECT TOP 1 [codeCB]\n"
                     + "  FROM [PRJ_G10].[dbo].[canBo]\n"
                     + "  ORDER BY [codeCB] DESC";
             PreparedStatement stm = cnn.prepareStatement(sql);
@@ -199,7 +199,7 @@ public class OfficerFUDao {
 
         } catch (SQLException ex) {
             System.out.println("Loi TeacherDao getCodeTeacher()" + ex);
-             System.out.println(sql);
+            System.out.println(sql);
         }
 
         return relust;
@@ -207,7 +207,7 @@ public class OfficerFUDao {
 
     public void updateActive(OfficerFU officerFU) {
         try {
-             sql = "UPDATE [dbo].[canBo]\n"
+            sql = "UPDATE [dbo].[canBo]\n"
                     + "   SET [activeCB] =  ? \n"
                     + " WHERE [canBoId] = " + officerFU.getId() + " ";
             PreparedStatement stm = cnn.prepareStatement(sql);
@@ -217,12 +217,42 @@ public class OfficerFUDao {
 
         } catch (SQLException ex) {
             System.out.println("Loi TeacherDao   updateActive(Teacher teacher)  " + ex);
-             System.out.println(sql);
+            System.out.println(sql);
         }
     }
 
     public static void main(String[] args) {
         OfficerFUDao o = new OfficerFUDao();
         System.out.println(o.getCodeofficerFU());
+    }
+
+    public OfficerFU getOfficerFUByIdUser(int id, String campusup_login, String a) {
+        OfficerFU officerFU = new OfficerFU();
+        try {
+            sql = "SELECT * \n"
+                    + "FROM [PRJ_G10].[dbo].[canBo] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
+                    + "ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
+                    + "WHERE gv.taiKhoanId = " + id + " "
+                    + "AND gv.idCoSo = " + campusup_login + " "
+                    + "AND gv.activeCB like '%" + a + "%' ";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            System.out.println(sql);
+            while (rs.next()) {
+                Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"));
+                Role role = new Role(rs.getInt("vaiTroId"), rs.getNString("tenVaiTro"));
+                User user = new User(String.valueOf(rs.getInt("taiKhoanId")), role);
+                officerFU = new OfficerFU(rs.getInt("canBoId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
+                        rs.getNString("ngaySinh"), rs.getNString("soDienThoai"), rs.getNString("gmail"), rs.getNString("diaChi"),
+                        campus, user, rs.getString("codeCB"), rs.getBoolean("activeCB"));
+                 return officerFU;
+            }
+           
+           
+        } catch (SQLException ex) {
+            System.out.println("Loi OfficerFUDao getOfficerFUByIdUser(int id, String campusup_login, String a)" + ex);
+            System.out.println(sql);
+        }
+        return null;
     }
 }

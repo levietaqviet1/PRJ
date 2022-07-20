@@ -4,7 +4,7 @@
  */
 package controller.application;
 
-import DAO_Thu.ApplicationDAO;
+import dao.ApplicationDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -16,7 +16,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.Date;
 import model.Student;
-import modelTHU.Application;
+import model.Application;
 
 /**
  *

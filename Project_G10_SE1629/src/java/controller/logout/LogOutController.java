@@ -45,8 +45,8 @@ public class LogOutController extends HttpServlet {
                     if (request.getSession().getAttribute("st_login_successful") != null) {
                         session.removeAttribute("st_login_successful");
                     }
-                    if (request.getSession().getAttribute("st_login_teacher") != null) {
-                        session.removeAttribute("st_login_teacher");
+                    if (request.getSession().getAttribute("st_login_Chua_Xong") != null) {
+                        session.removeAttribute("st_login_Chua_Xong");
                     }
                     if (request.getSession().getAttribute("st_login_tam_thoi") != null) {
                         session.removeAttribute("st_login_tam_thoi");

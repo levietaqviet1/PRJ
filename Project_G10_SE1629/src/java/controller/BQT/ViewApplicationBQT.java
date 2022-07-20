@@ -4,7 +4,7 @@
  */
 package controller.BQT;
 
-import DAO_Thu.ApplicationDAO;
+import dao.ApplicationDAO;
 import dao.OfficerFUDao;
 import dao.StudentDao;
 import dao.TeacherDao;
@@ -22,7 +22,7 @@ import model.OfficerFU;
 import model.Student;
 import model.StudentParents;
 import model.Teacher;
-import modelTHU.Application;
+import model.Application;
 
 /**
  *
