@@ -89,7 +89,7 @@ public class nextForgotPass extends HttpServlet {
                             Campus campus = new Campus(Integer.parseInt(campusFor));
                             User user = new User(String.valueOf(idAccount));
                             BQT bqt = new BQT(-1, firstNameFor, lastNameFor, genderinFor.equals("1") ? true : false, dateOfBirthinFor,
-                                    telephoneFor, emailFor, "", campus, user,"");
+                                    telephoneFor, emailFor, "", campus, user, "");
                             if (bqtDao.checkInforBQT(bqt) == 1) {
                                 pass = RandomString.RandomStringg(12);
                                 user = new User(String.valueOf(idAccount), accountFor, pass);
@@ -140,7 +140,8 @@ public class nextForgotPass extends HttpServlet {
 
             String acc_TK_Mail_Send = "phongdaotaofbt@gmail.com";
             String acc_MK_Mail_Send = "npmgjujnxbtswmit";
-            SendMail.SendMail(emailFor, topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
+            SendMail sen = new SendMail();
+            sen.sendFuncition(emailFor, topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
             HttpSession session = request.getSession();
             session.setAttribute("suDungsendMall", "aa");
             session.removeAttribute("confirmEmail_st");

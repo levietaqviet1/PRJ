@@ -208,7 +208,7 @@
                     </table>
 
                     <c:forEach begin="${1}" end="${numpage}" var="i">
-                        <a href="ViewApplicationBQT?xpage=${i}">${i}</a>
+                        <a href="ViewApplicationBQT?xpage=${i}&loai=${loai}&OK=1"><button style="padding: 5px; margin: auto">${i}</button> </a>
                     </c:forEach>
                 </c:if>  
             </div>

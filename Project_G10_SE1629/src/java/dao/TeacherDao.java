@@ -32,7 +32,7 @@ public class TeacherDao {
         }
     }
 
-    public ArrayList<Teacher> getAll( String a) {
+    public ArrayList<Teacher> getAll(String a) {
         ArrayList<Teacher> listTeacher = new ArrayList<Teacher>();
         try {
             String sql = "SELECT * \n"
@@ -59,7 +59,7 @@ public class TeacherDao {
 
     }
 
-    public ArrayList<Teacher> getAllByInfo(String firt, String last, String cam , String a) {
+    public ArrayList<Teacher> getAllByInfo(String firt, String last, String cam, String a) {
         ArrayList<Teacher> listTeacher = new ArrayList<Teacher>();
         try {
             String sql = "SELECT * \n"
@@ -171,7 +171,7 @@ public class TeacherDao {
                     + " WHERE [giangVienId] = " + teacher.getId() + " ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             stm.setBoolean(1, teacher.isGender());
-           
+
             System.out.println(sql);
             stm.executeUpdate();
 
@@ -179,8 +179,8 @@ public class TeacherDao {
             System.out.println("Loi TeacherDao   update(Teacher teacher)  " + ex);
         }
     }
-    
-      public void updateActive(Teacher teacher) {
+
+    public void updateActive(Teacher teacher) {
         try {
             String sql = "UPDATE [dbo].[giangVien]\n"
                     + "   SET [activeGV] =  ? \n"
@@ -206,7 +206,7 @@ public class TeacherDao {
                     + "  ORDER BY maGiangVien DESC";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
-           while (rs.next()) {
+            while (rs.next()) {
                 relust = rs.getString(1);
             }
             if (relust.equals("")) {
@@ -223,5 +223,33 @@ public class TeacherDao {
         }
 
         return relust;
+    }
+
+    public Teacher getTeacherByIdUser(int checkU, String campusup_login, String a) {
+        Teacher teacher = new Teacher();
+        try {
+            String sql = "SELECT * \n"
+                    + "FROM [PRJ_G10].[dbo].[giangVien] gv JOIN coSo cs ON gv.idCoSo = cs.idCoSo JOIN taiKhoan tk \n"
+                    + "ON gv.taiKhoanId = tk.taiKhoanId JOIN vaiTro vt ON tk.vaiTroId = vt.vaiTroId "
+                    + "WHERE gv.taiKhoanId = " + checkU + " "
+                    + "AND gv.idCoSo = " + campusup_login + " "
+                    + "AND gv.activeGv like '%" + a + "%'";
+            PreparedStatement stm = cnn.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo").trim(), rs.getNString("diaChiCoSo"));
+                Role role = new Role(rs.getInt("vaiTroId"), rs.getNString("tenVaiTro").trim());
+                User user = new User(String.valueOf(rs.getInt("taiKhoanId")), role);
+                teacher = new Teacher(rs.getInt("giangVienId"), rs.getNString("firstName").trim(), rs.getNString("lastName").trim(), rs.getBoolean("gioiTinh"),
+                        rs.getNString("ngaySinh"), rs.getNString("ngayBatDauLamViec"), rs.getNString("ngayNghiLam"),
+                        rs.getNString("soDienThoai").trim(), rs.getNString("gmail"), rs.getNString("diaChi").trim(),
+                        campus, user, rs.getString("maGiangVien").trim(), rs.getBoolean("activeGV"));
+                return teacher;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("Loi getTeacherByIdUser(int checkU, String campusup_login, String a)  " + ex);
+        }
+        return null;
     }
 }

@@ -13,6 +13,7 @@ public class SendMail {
 
     public static void SendMail(String to, String sub,
             String msg, final String user, final String pass) {
+
         Properties props = new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com");
         props.put("mail.smtp.port", "587");
@@ -37,14 +38,20 @@ public class SendMail {
             e.printStackTrace();
         }
     }
- 
-    public static void main(String[] args) {
-        String subject = "Confirm Your email !";
-        String message = "This is your Code:" + 123;
-        for (int i = 0; i < 1; i++) {
-            SendMail.SendMail("levietaqviet2001@gmail.com", subject, "<!DOCTYPE html>\n"
-                    + "viet", "phongdaotaofbt@gmail.com", "npmgjujnxbtswmit");
-//            SendMail.SendMail("bsd03rd@gmail.com", subject, message, "bachjavaweb@gmail.com", "Songduc&*78");
-        }
+
+    public void sendFuncition(String to, String sub,
+            String msg, String user, String pass) {
+        SendMail.SendMail(to, sub, msg, "phong.ept.edu@gmail.com", "vupmhnxwexgzvcsw");
     }
+
+    public static void main(String[] args) {
+        String subject = "Confirm Your email Test!! !";
+        String message = "This is your Code:" + 123;
+        SendMail sen = new SendMail();
+        sen.sendFuncition("levietaqbangbang1@gmail.com", subject, "<!DOCTYPE html>\n"
+                + "viet", "phong.ept.edu@gmail.com", "vupmhnxwexgzvcsw");
+
+//            SendMail.SendMail("bsd03rd@gmail.com", subject, message, "bachjavaweb@gmail.com", "Songduc&*78");
+    }
+
 }

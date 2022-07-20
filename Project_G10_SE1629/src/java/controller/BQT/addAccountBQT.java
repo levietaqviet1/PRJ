@@ -185,7 +185,8 @@ public class addAccountBQT extends HttpServlet {
 
         String acc_TK_Mail_Send = "phongdaotaofbt@gmail.com";
         String acc_MK_Mail_Send = "npmgjujnxbtswmit";
-        SendMail.SendMail(studentParents.getGmail(), topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
+        SendMail sen = new SendMail();
+        sen.sendFuncition(studentParents.getGmail(), topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
         return code;
     }
 

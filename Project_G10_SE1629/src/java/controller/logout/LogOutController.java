@@ -39,8 +39,14 @@ public class LogOutController extends HttpServlet {
                     if (request.getSession().getAttribute("giaoDien") != null) {
                         session.removeAttribute("giaoDien");
                     }
+                    if (request.getSession().getAttribute("giaoDien") != null) {
+                        session.removeAttribute("giaoDien");
+                    }
                     if (request.getSession().getAttribute("st_login_successful") != null) {
                         session.removeAttribute("st_login_successful");
+                    }
+                    if (request.getSession().getAttribute("st_login_teacher") != null) {
+                        session.removeAttribute("st_login_teacher");
                     }
                     if (request.getSession().getAttribute("st_login_tam_thoi") != null) {
                         session.removeAttribute("st_login_tam_thoi");
@@ -48,18 +54,17 @@ public class LogOutController extends HttpServlet {
                     response.sendRedirect("index");
                 }
             }
-            
+
             if (request.getSession().getAttribute("dalogin_bqt") != null) {
                 if (request.getParameter("LogId") != null && request.getParameter("LogId").equals("2")) {
-                    session.removeAttribute("dalogin_bqt");                    
+                    session.removeAttribute("dalogin_bqt");
                     if (request.getSession().getAttribute("bqt_login_successful") != null) {
                         session.removeAttribute("bqt_login_successful");
                     }
                     response.sendRedirect("indexBQT");
                 }
             }
-           
-            
+
         }
     }
 

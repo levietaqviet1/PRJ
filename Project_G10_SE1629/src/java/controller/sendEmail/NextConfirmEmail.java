@@ -48,7 +48,8 @@ public class NextConfirmEmail extends HttpServlet {
 
             String acc_TK_Mail_Send = "phongdaotaofbt@gmail.com";
             String acc_MK_Mail_Send = "npmgjujnxbtswmit";
-            SendMail.SendMail(student.getGmail(), topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
+            SendMail sen = new SendMail();
+            sen.sendFuncition(student.getGmail(), topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
 
             HttpSession session = request.getSession();
             session.setAttribute("suDungsendMall", code);

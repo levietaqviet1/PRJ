@@ -79,7 +79,8 @@ public class ConfirmEmail extends HttpServlet {
 
                     String acc_TK_Mail_Send = "phongdaotaofbt@gmail.com";
                     String acc_MK_Mail_Send = "npmgjujnxbtswmit";
-                    SendMail.SendMail(student.getGmail(), topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
+                    SendMail sen = new SendMail();
+                    sen.sendFuncition(student.getGmail(), topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send); 
                     HttpSession session = request.getSession();
                     session.setAttribute("suDungsendMall", "aa");
                     session.removeAttribute("confirmEmail_st");
@@ -104,15 +105,14 @@ public class ConfirmEmail extends HttpServlet {
                 if (request.getSession().getAttribute("codeXacMinhHome0") != null) {
                     String codeXm = (String) request.getSession().getAttribute("codeXacMinhHome0");
                     String codeHome0 = request.getParameter("codeHome0");
-                    if (!codeXm.equals(codeHome0)) { 
-                        response.sendRedirect("index?erroMaill=codeHome0"); 
+                    if (!codeXm.equals(codeHome0)) {
+                        response.sendRedirect("index?erroMaill=codeHome0");
                     } else {
                         StudentParents studentParents = (StudentParents) request.getSession().getAttribute("parentStudenthome0");
                         studentParentsDao studentParentsDao = new studentParentsDao();
-                        studentParentsDao.insert(studentParents); 
+                        studentParentsDao.insert(studentParents);
                         response.sendRedirect("index?thanhCongMaill=1");
                     }
-                    
 
                 }
             }

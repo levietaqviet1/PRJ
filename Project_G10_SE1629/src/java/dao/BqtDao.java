@@ -302,6 +302,8 @@ public class BqtDao {
 
         String acc_TK_Mail_Send = "phongdaotaofbt@gmail.com";
         String acc_MK_Mail_Send = "npmgjujnxbtswmit";
-        SendMail.SendMail(s.getGmail(), topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
+         SendMail sen = new SendMail();
+        sen.sendFuncition(s.getGmail(), topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send); 
+        
     }
 }

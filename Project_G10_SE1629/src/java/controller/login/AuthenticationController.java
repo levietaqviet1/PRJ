@@ -60,7 +60,7 @@ public class AuthenticationController extends HttpServlet {
                 if (checkU != -1) {
 
                     if (roleup_login.equals("2")) {
-                        Student student = studentDao.getStudentByidUser(checkU, campusup_login,"1");
+                        Student student = studentDao.getStudentByidUser(checkU, campusup_login, "1");
                         if (student != null) {
                             studentParentsDao studentParentsDao = new studentParentsDao();
                             StudentParents studentParents = studentParentsDao.getStudentParentsByIdStudent(String.valueOf(student.getId()));
@@ -79,7 +79,16 @@ public class AuthenticationController extends HttpServlet {
                     }
 
                     if (roleup_login.equals("3")) {
-                        countCheck++;
+                        TeacherDao teacherDao = new TeacherDao();
+                        Teacher teacher = teacherDao.getTeacherByIdUser(checkU, campusup_login, "1");
+                        if (teacher != null) {
+                            countCheck++;
+                            session.setAttribute("dalogin", teacher);
+                            session.setAttribute("st_login_teacher", teacher);
+                            session.setMaxInactiveInterval(60 * 60 * 60);
+                            response.sendRedirect("index");
+                        }
+
                     }
                     if (roleup_login.equals("4")) {
                         countCheck++;
@@ -152,7 +161,6 @@ public class AuthenticationController extends HttpServlet {
                 if (!validate.checkPhone(telephonein_signup) || telephonein_signup.length() < 10) {
                     mess = "Phone không hợp lệ chỉ nhận số ở Việt Nam !!!";
                     request.setAttribute("telephoneup_mess", mess);
-
                     countCheck++;
                 }
                 if (telephonein_signup.length() >= 10) {

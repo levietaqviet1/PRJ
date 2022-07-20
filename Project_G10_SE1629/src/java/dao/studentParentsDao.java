@@ -39,14 +39,14 @@ public class studentParentsDao {
                     + "FROM [PRJ_G10].[dbo].[phuHuynh] s \n"
                     + " JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN taiKhoan tk ON s.taiKhoanId = tk.taiKhoanId JOIN sinhVien sv ON s.sinhVienId = sv.sinhVienId "
                     + "WHERE  cs.idCoSo like '%" + idCam + "%' "
-                    + "AND s.acctivePH like '%"+a+"%' ";
+                    + "AND s.acctivePH like '%" + a + "%' ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"),
                         rs.getDate("dateStartCS") == null ? "null" : String.valueOf(rs.getDate("dateStartCS")), rs.getDate("dateEndCS") == null ? "null" : String.valueOf(rs.getDate("dateEndCS")));
                 User user = new User(String.valueOf(rs.getInt("taiKhoanId")));
-                Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"),""+a+"");
+                Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"), "" + a + "");
                 StudentParents studentParents = new StudentParents(rs.getInt("phuHuynhId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChiSV"), campus, user, student, rs.getString("codePH"), rs.getBoolean("acctivePH"));
                 listStudentParents.add(studentParents);
@@ -88,14 +88,14 @@ public class studentParentsDao {
                     + "FROM [PRJ_G10].[dbo].[phuHuynh] s\n"
                     + " JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN taiKhoan tk ON s.taiKhoanId = tk.taiKhoanId JOIN sinhVien sv ON s.sinhVienId = sv.sinhVienId "
                     + "WHERE s.firstName like '%" + firt + "%' AND s.lastName like '%" + last + "%'   AND cs.idCoSo like '%" + cam + "%' "
-                    + "AND s.acctivePH  like '%"+a+"%' ";
+                    + "AND s.acctivePH  like '%" + a + "%' ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"),
                         rs.getDate("dateStartCS") == null ? "null" : String.valueOf(rs.getDate("dateStartCS")), rs.getDate("dateEndCS") == null ? "null" : String.valueOf(rs.getDate("dateEndCS")));
                 User user = new User(String.valueOf(rs.getInt("taiKhoanId")));
-                Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"),""+a+"");
+                Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"), "" + a + "");
                 StudentParents studentParents = new StudentParents(rs.getInt("phuHuynhId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChiSV"), campus, user, student, rs.getString("codePH"), rs.getBoolean("acctivePH"));
                 listStudentParents.add(studentParents);
@@ -122,7 +122,7 @@ public class studentParentsDao {
                 Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"),
                         rs.getDate("dateStartCS") == null ? "null" : String.valueOf(rs.getDate("dateStartCS")), rs.getDate("dateEndCS") == null ? "null" : String.valueOf(rs.getDate("dateEndCS")));
                 User user = new User(String.valueOf(rs.getInt("taiKhoanId")));
-                Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"),"1");
+                Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"), "1");
                 StudentParents studentParents = new StudentParents(rs.getInt("phuHuynhId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChi"), campus, user, student, rs.getString("codePH"), rs.getBoolean("acctivePH"));
                 return studentParents;
@@ -141,7 +141,7 @@ public class studentParentsDao {
                     + "FROM [PRJ_G10].[dbo].[phuHuynh] s\n"
                     + " JOIN coSo cs ON s.idCoSo = cs.idCoSo JOIN taiKhoan tk ON s.taiKhoanId = tk.taiKhoanId "
                     + "WHERE s.phuHuynhId = " + id + ""
-                    + "AND s.acctivePH like '%"+a+"%' ";
+                    + "AND s.acctivePH like '%" + a + "%' ";
             PreparedStatement stm = cnn.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             System.out.println(sql);
@@ -149,7 +149,7 @@ public class studentParentsDao {
                 Campus campus = new Campus(rs.getInt("idCoSo"), rs.getNString("tenCoSo"), rs.getNString("diaChiCoSo"),
                         rs.getDate("dateStartCS") == null ? "null" : String.valueOf(rs.getDate("dateStartCS")), rs.getDate("dateEndCS") == null ? "null" : String.valueOf(rs.getDate("dateEndCS")));
                 User user = new User(String.valueOf(rs.getInt("taiKhoanId")));
-                Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"),""+a+"");
+                Student student = studentDao.getStudentByidStudent(rs.getInt("sinhVienId"), "" + a + "");
                 StudentParents studentParents = new StudentParents(rs.getInt("phuHuynhId"), rs.getNString("firstName"), rs.getNString("lastName"), rs.getBoolean("gioiTinh"),
                         rs.getString("ngaySinh"), rs.getString("soDienThoai"), rs.getString("gmail"), rs.getString("diaChi"), campus, user, student, rs.getString("codePH"), rs.getBoolean("acctivePH"));
                 return studentParents;
@@ -241,7 +241,7 @@ public class studentParentsDao {
             while (rs.next()) {
                 relust = rs.getString(1).trim();
             }
-            if (relust.equals("")|| relust == null) {
+            if (relust.equals("") || relust == null) {
                 return t + "1";
             } else {
                 int i = Integer.parseInt(relust.substring(2, relust.length()));
@@ -280,8 +280,10 @@ public class studentParentsDao {
 
         String acc_TK_Mail_Send = "phongdaotaofbt@gmail.com";
         String acc_MK_Mail_Send = "npmgjujnxbtswmit";
-        SendMail.SendMail(s.getGmail(), topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send);
+        SendMail sen = new SendMail();
+        sen.sendFuncition(s.getGmail(), topic, content, acc_TK_Mail_Send, acc_MK_Mail_Send); 
     }
+
     public static void main(String[] args) {
         studentParentsDao s = new studentParentsDao();
         System.out.println(s.getCode());

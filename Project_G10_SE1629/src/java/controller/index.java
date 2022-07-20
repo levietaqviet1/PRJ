@@ -84,6 +84,33 @@ public class index extends HttpServlet {
                 session.setAttribute("giaoDien", giaodien);
                 request.getRequestDispatcher("student/index/indexStudent.jsp").forward(request, response);
             }
+            // gv
+            if (session.getAttribute("st_login_teacher") != null) {
+                Student student = (Student) session.getAttribute("st_login_successful");
+
+                int giaodien = 1;
+                if (request.getParameter("sid") != null) {
+                    try {
+                        giaodien = Integer.parseInt((String) request.getParameter("sid"));
+                        if (student.getStatus().getId() == 1 || student.getStatus().getId() == 3) {
+                            if (giaodien != 1 && giaodien != 7) {
+                                giaodien = 1;
+                            }
+                        }
+                        if (giaodien > 8) {
+                            giaodien = 1;
+                        }
+                    } catch (Exception e) {
+                         request.getRequestDispatcher("teacher/index.jsp").forward(request, response);
+                    }
+                }
+//                if (giaodien == 8) {
+//                    response.sendRedirect("view");
+//                } else {
+                session.setAttribute("giaoDien", giaodien);
+                request.getRequestDispatcher("teacher/index.jsp").forward(request, response);
+//                }
+            }
 
         }
     }
